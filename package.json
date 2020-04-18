@@ -1,16 +1,23 @@
 {
-  "name": "corona-food",
-  "description": "Our sample Node to Heroku app",
+  "name": "ls",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "dependencies": {
-    "ejs": "^1.0.0",
-    "express": "^4.17.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoonJiao123/corona-food-app.git"
   },
-  "engines": {
-    "node": "12.16.1"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoonJiao123/corona-food-app/issues"
+  },
+  "homepage": "https://github.com/MoonJiao123/corona-food-app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
