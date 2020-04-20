@@ -1,0 +1,10 @@
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Landing page animation rules
+--------------------------------------------------------------------- */
+@keyframes transform-fade{
+  to{
+    transform: none;
+    opacity: 1;
+  }
+}
