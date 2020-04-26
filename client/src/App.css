@@ -1,3 +1,8 @@
+/* 
+* This file holds the CSS commentary for App.js
+* It sets the style guidelines for the Log In/Sign Up page.
+*/
+
 .App {
   text-align: center;
 }
@@ -25,7 +30,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: rgb(103, 211, 103);
 }
 
 @keyframes App-logo-spin {
@@ -36,3 +41,12 @@
     transform: rotate(360deg);
   }
 }
+
+/* puts Log In and Sign Up pages side by side */
+.main-display{
+  display:flex;
+  flex-direction: row;
+  margin-left: 10%;
+
+}
+

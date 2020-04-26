@@ -4,12 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-/* -----------------------------------------------------------
- TODO: 
- - Get login data
- - If good login/signup: load customer/business app
- - If bad login: redirect to 404 page
------------------------------------------------------------ */
 ReactDOM.render(
   <React.StrictMode>
     <App />
