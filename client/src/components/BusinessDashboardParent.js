@@ -19,7 +19,9 @@ class BusinessDashboardParent extends React.Component{
     super(props);
 
     // TODO: Design the state
-    this.state = {};
+    this.state = {
+      
+    };
   }
 
 
@@ -38,7 +40,13 @@ class BusinessDashboardParent extends React.Component{
   --------------------------------------------------------------------- */
   render(){
     return(
-      // TODO: get sub component names
+      // TODO: Get sub component names
+      // TODO: Pass in props
+      <div>
+        {/*left*/}
+        {/*center*/}
+        {/*right*/}
+      </div>
     );
   }
 
