@@ -10,16 +10,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 class LocationInfo extends React.Component{
 
   /* ---------------------------------------------------------------------
-  Constructor
-  --------------------------------------------------------------------- */
-  constructor(props){
-    super(props);
-
-    this.state = {};
-  }
-
-
-  /* ---------------------------------------------------------------------
   Render: Will display Address, products, product list, and an upload icon
   --------------------------------------------------------------------- */
   render(){
@@ -31,8 +21,13 @@ class LocationInfo extends React.Component{
           <h3>{this.props.data.totalProducts}</h3>
           <p>Listings</p>
         </div>
+
+        <div id="locationInfo-list">
+          {/* TODO: Map products list here  */}
+        </div>
         
         <Button
+        onClick={this.props.data.updateProducts()}
         variant="contained"
         color="primary"
         size="large"
