@@ -4,6 +4,7 @@ High level component for business dashboard.
 --------------------------------------------------------------------- */
 
 import React from 'react';
+import LocationInfo from './LocationInfo'
 // TODO: import sub-components
 
 /* ---------------------------------------------------------------------
@@ -18,12 +19,45 @@ class BusinessDashboardParent extends React.Component{
   constructor(props){
     super(props);
 
-    // TODO: Design the state
+    // TODO: Fill state functions
     this.state = {
       
+      //Left Sidebar Props
+      left: {
+        companyName: "",
+        totalLocations: 0,
+        addLocation: {},
+        logout: {}
+      },
+
+      //Center Search Props
+      center: {
+        locations: [
+          {
+            address: '',
+            totalProducts: {},
+            select: {}
+        }
+        ],
+        seach: {},
+      },
+
+      //Right Sidebar Props
+      right: {
+        address: '',
+        totalProducts: 0,
+        productsList: [
+          {
+            name: '',
+            price: 0,
+            expiration: ''
+          }
+        ],
+        updateProducts: {}
+      }
+
     };
   }
-
 
   /* ---------------------------------------------------------------------
   Before Render
@@ -45,7 +79,7 @@ class BusinessDashboardParent extends React.Component{
       <div>
         {/*left*/}
         {/*center*/}
-        {/*right*/}
+        <LocationInfo data={this.state.right}/>
       </div>
     );
   }

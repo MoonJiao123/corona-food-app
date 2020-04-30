@@ -1,0 +1,8 @@
+{
+  "powermode.enabled": true,
+  "powermode.comboThreshold": 5,
+  "powermode.comboTimeout": 1,
+  "powermode.explosionFrequency": 1,
+  "powermode.maxExplosions": 5,
+  "powermode.shakeIntensity": 7
+}
