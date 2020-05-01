@@ -7,15 +7,20 @@
 
 import React from 'react';
 import './App.css';
-import BusinessDashboardParent from './components/BusinessDashboardParent'
-
+import Header from './components/Header';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 
 // function to create the Log In/Sign Up page
-// THIS BRANCH ONLY SHOWS THE BUSINESS PAGE
 function App() {
   return (
     <div>
-      <BusinessDashboardParent/>
+      <Header />
+      {/* LogIn and SignUp will appear side by side */}
+      <div className="main-display">
+        <LogIn />
+        <SignUp />
+      </div>
     </div>
   )
 }
