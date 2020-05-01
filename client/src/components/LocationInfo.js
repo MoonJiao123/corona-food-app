@@ -24,7 +24,7 @@ class LocationInfo extends React.Component{
         </div>
 
         <div id="locationInfo-list">
-          {/* TODO: Map products list here  */}
+          {this.props.list}
         </div>
 
         <Button
