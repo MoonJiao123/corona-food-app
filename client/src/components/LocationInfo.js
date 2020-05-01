@@ -13,6 +13,7 @@ class LocationInfo extends React.Component{
   Render: Will display Address, products, product list, and an upload icon
   --------------------------------------------------------------------- */
   render(){
+
     return(
       <div id="locationInfo">
         <h1 id="locationInfo-address">{this.props.data.address}</h1>
@@ -25,13 +26,13 @@ class LocationInfo extends React.Component{
         <div id="locationInfo-list">
           {/* TODO: Map products list here  */}
         </div>
-        
+
         <Button
-        onClick={this.props.data.updateProducts()}
+        onClick={this.props.data.updateProducts}
+        className="update-listing-button"
         variant="contained"
         color="primary"
         size="large"
-        className={classes.button}
         startIcon={<ArrowUpwardIcon/>}
         >
         Update Listing
@@ -40,3 +41,5 @@ class LocationInfo extends React.Component{
     );
   }
 }
+
+export default LocationInfo;

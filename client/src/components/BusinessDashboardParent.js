@@ -26,8 +26,8 @@ class BusinessDashboardParent extends React.Component{
       left: {
         companyName: "",
         totalLocations: 0,
-        addLocation: {},
-        logout: {}
+        addLocation: () => alert("add location"),
+        logout: () => alert("log out")
       },
 
       //Center Search Props
@@ -35,11 +35,11 @@ class BusinessDashboardParent extends React.Component{
         locations: [
           {
             address: '',
-            totalProducts: {},
-            select: {}
+            totalProducts: 0,
+            select: () => alert("location selected")
         }
         ],
-        seach: {},
+        search: () => alert("search"),
       },
 
       //Right Sidebar Props
@@ -53,7 +53,7 @@ class BusinessDashboardParent extends React.Component{
             expiration: ''
           }
         ],
-        updateProducts: {}
+        updateProducts: () => alert("update products")
       }
 
     };
@@ -61,10 +61,24 @@ class BusinessDashboardParent extends React.Component{
 
   /* ---------------------------------------------------------------------
   Before Render
-  TODO: Add or pass in database connection
+  TODO: Add or pass in database connection, verify authentication
   --------------------------------------------------------------------- */
   componentWillMount(){
-
+    //Testing right bar with fake data
+    this.setState({
+      right: {
+        address: '110 William St 28th Floor, New York',
+        totalProducts: 800,
+        productsList: [
+          {
+            name: '',
+            price: 0,
+            expiration: ''
+          }
+        ],
+        updateProducts: () => alert("update products")
+      }
+    });
   }
 
 

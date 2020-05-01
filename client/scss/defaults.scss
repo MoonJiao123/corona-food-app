@@ -5,19 +5,6 @@ Overriding styles for every page
 @import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
 
 /* ---------------------------------------------------------------------
-Colors
---------------------------------------------------------------------- */
-:root{
-  --bg-green: rgb(103, 211, 103);
-  --bg-light-green: rgb(162, 226, 162);
-  --bg-white: #eeeeee;
-  --button-green: rgb(23, 82, 23);
-  --button-hover: rgb(30, 107, 30);
-  --button-active: rgb(19, 68, 19);
-}
-
-
-/* ---------------------------------------------------------------------
 Override Scrollbar
 --------------------------------------------------------------------- */
 *{
