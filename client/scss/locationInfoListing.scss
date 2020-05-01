@@ -1,0 +1,23 @@
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar listings
+--------------------------------------------------------------------- */
+
+.locationInfo-listing{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  background: $bg-white;
+  padding: 1% 0;
+  border-bottom: 2px solid $bg-green;
+
+  p{
+    text-align: right;
+    width: 33%;
+    padding: 0 1em;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

@@ -7,10 +7,10 @@ import React from 'react'
 
 function LocationInfoListing(props){
   return(
-    <div>
-      <p className="LocationInfoName">{this.props.name}</p>
-      <p className="LocationInfoPrice">{this.props.price}</p>
-      <p className="LocationInfoDate">{this.props.expiration}</p>
+    <div className="locationInfo-listing">
+      <p className="locationInfo-name">{props.name}</p>
+      <p className="locationInfo-price">{props.price}</p>
+      <p className="locationInfo-date">{props.expire}</p>
     </div>
   );
 }

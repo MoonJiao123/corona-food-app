@@ -18,5 +18,6 @@ $button-active: rgb(19, 68, 19);
 Compilation
 --------------------------------------------------------------------- */
 @import './defaults',
-        './accounts',
-        './businessRightBar';
+        './app',
+        './locationInfo',
+        './locationInfoListing';

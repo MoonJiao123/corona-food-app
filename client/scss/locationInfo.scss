@@ -54,4 +54,6 @@ Styles for the business dashboard right sidebar
   margin: auto;
   background: $bg-light-green;
   border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }

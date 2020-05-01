@@ -6,6 +6,7 @@ Right sidebar of Business Dashboard - shows information for select location
 import React from 'react'
 import Button from '@material-ui/core/Button';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import LocationInfoListing from './LocationInfoListing';
 
 class LocationInfo extends React.Component{
 
@@ -13,6 +14,16 @@ class LocationInfo extends React.Component{
   Render: Will display Address, products, product list, and an upload icon
   --------------------------------------------------------------------- */
   render(){
+    //Map products list to listing components
+    let keyIdx = 0;
+    const LocationInfoListings = this.props.data.productsList.map(
+      (item)=> <LocationInfoListing
+      key={item.name + keyIdx++}
+      name={item.name}
+      price={item.price}
+      expire={item.expiration}
+      ></LocationInfoListing>
+    );
 
     return(
       <div id="locationInfo">
@@ -24,7 +35,7 @@ class LocationInfo extends React.Component{
         </div>
 
         <div id="locationInfo-list">
-          {this.props.list}
+          {LocationInfoListings}
         </div>
 
         <Button

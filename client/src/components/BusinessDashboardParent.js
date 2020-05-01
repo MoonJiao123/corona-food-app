@@ -5,7 +5,6 @@ High level component for business dashboard.
 
 import React from 'react';
 import LocationInfo from './LocationInfo'
-import LocationInfoListing from './LocationInfoListing';
 // TODO: import sub-components
 
 /* ---------------------------------------------------------------------
@@ -99,24 +98,13 @@ class BusinessDashboardParent extends React.Component{
   TODO: Pass props
   --------------------------------------------------------------------- */
   render(){
-    //Map products list to listing components
-    let keyIdx = 0;
-    const LocationInfoListings = this.state.right.productsList.map(
-      (item)=> {<LocationInfoListing
-                  key={name + keyIdx++}
-                  name={item.name}
-                  price={item.price}
-                  expire={item.expiration}
-                />}
-    );
-
     return(
       // TODO: Get sub component names
       // TODO: Pass in props
       <div>
         {/*left*/}
         {/*center*/}
-        <LocationInfo data={this.state.right} list={LocationInfoListings}/>
+        <LocationInfo data={this.state.right}/>
       </div>
     );
   }

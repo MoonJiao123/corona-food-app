@@ -125,6 +125,30 @@ Styles for the business dashboard right sidebar
   margin: auto;
   background: #a2e2a2;
   border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar listings
+--------------------------------------------------------------------- */
+.locationInfo-listing {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  background: #eeeeee;
+  padding: 1% 0;
+  border-bottom: 2px solid #67d367;
+}
+.locationInfo-listing p {
+  text-align: right;
+  width: 33%;
+  padding: 0 1em;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /*# sourceMappingURL=App.css.map */
