@@ -19,8 +19,8 @@ const LeftSidebarDiv = styled.div`
     padding-top: 10px; 
     display: inline-block;
     overflow:auto;
-    max-width: 30%; /* stops div from resizing */
-    min-width: 30%;
+    max-width: 200px; /* stops div from resizing */
+    min-width: 200px;
 `;
 
 const ButtonsDiv = styled.div`
@@ -37,6 +37,7 @@ const CompanyName = styled.h2`
 `
 const CompanyMission = styled.p`
     margin-left: 5%;
+    margin-right: 5%;
     font-size: 17px;
     margin-bottom: 30px;
 `
