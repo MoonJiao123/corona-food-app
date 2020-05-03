@@ -10,17 +10,20 @@ import './App.css';
 import Header from './components/Header';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
+import LeftSideBar from "./components/LeftSideBar";
+
 
 
 // function to create the Log In/Sign Up page
 function App() {
   return (
     <div>
-      <Header />
+      {/*<Header />*/}
       {/* LogIn and SignUp will appear side by side */}
       <div className="main-display">
-        <LogIn />
-        <SignUp />
+        {/*<LogIn />*/}
+        <LeftSideBar/>
+        {/*<SignUp />*/}
       </div>
     </div>
   )
