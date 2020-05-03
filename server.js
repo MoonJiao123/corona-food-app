@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path'); 
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 app.use(cors(corsOptions));
 
