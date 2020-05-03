@@ -7,6 +7,9 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
