@@ -21,11 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 db.sequelize.sync();
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to FUO." });
-});
-
 require("./routes/business.routes")(app);
 
 const port = process.env.PORT || 5000;
