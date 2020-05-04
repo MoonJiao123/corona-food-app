@@ -64,7 +64,7 @@ class BusinessDashboardParent extends React.Component{
   Before Render
   TODO: Add or pass in database connection, verify authentication
   --------------------------------------------------------------------- */
-  componentWillMount(){
+  componentDidMount(){
     //Testing right bar with fake data
     this.setState({
       right: {
@@ -95,7 +95,9 @@ class BusinessDashboardParent extends React.Component{
     this.setState({
       left: {
         companyName: "FUO-mart",
-        totalLocations: 3.1415926535
+        totalLocations: 3.1415926535,
+        addLocation: () => alert("add location"),
+        logout: () => alert("log out")
       }
     });
   }
@@ -116,16 +118,6 @@ class BusinessDashboardParent extends React.Component{
       </div>
     );
   }
-
-
-  /* ---------------------------------------------------------------------
-  After Render
-  TODO: Add event listeners if necessary
-  --------------------------------------------------------------------- */
-  componentDidMount(){
-
-  }
-
 
   /* ---------------------------------------------------------------------
   Before user logout or session expiration

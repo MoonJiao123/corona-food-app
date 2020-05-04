@@ -17,5 +17,4 @@ function LocationInfoListing(props){
     </div>
   );
 }
-
 export default LocationInfoListing;

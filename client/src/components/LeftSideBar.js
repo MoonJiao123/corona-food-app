@@ -34,20 +34,19 @@ const ButtonsDiv = styled.div`
 const CompanyName = styled.h2`
     text-align: center;
     margin-bottom: 30px;
-`
+`;
 const CompanyMission = styled.p`
     margin-left: 5%;
     margin-right: 5%;
     font-size: 17px;
     margin-bottom: 30px;
-`
+`;
 
 class SideNav extends React.Component {
     render() {
-        console.log(this.props);
         return(
             <LeftSidebarDiv>
-             <img src={"media/mascot.jpg"} width={200}/>
+             <img src={"media/mascot.jpg"} alt="mascot" width={200}/>
               <CompanyName> {this.props.data.CompanyName} </CompanyName>
         <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
              <ButtonsDiv>
@@ -55,7 +54,6 @@ class SideNav extends React.Component {
                 type="submit"
                 size={"small"}
                 variant="contained"
-                color="default  "
                 onClick={this.props.data.logout}
                 >
                 Log Out
@@ -65,7 +63,6 @@ class SideNav extends React.Component {
                  type="submit"
                  variant="contained"
                  size = "small"
-                 color="default  "
                  onClick={this.props.data.addLocation}>
                   Add Location
              </Button>
@@ -75,12 +72,7 @@ class SideNav extends React.Component {
     }
 }
 export default class LeftSideBar extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
-        console.log(this.props);
         return (
             <SideNav data={this.props.data}></SideNav>
         );

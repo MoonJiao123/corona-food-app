@@ -9,7 +9,7 @@ import React from 'react';
 import {Grid, Container, Button, CssBaseline, TextField}
  from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 /** style guidelines for the Customer Sign Up component */
