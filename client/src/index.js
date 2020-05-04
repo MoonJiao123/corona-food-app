@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './App.css';
 import App from './App';
 import ErrorPage from './components/ErrorPage';
 import BusinessDashboardParent from './components/BusinessDashboardParent';
