@@ -73,18 +73,6 @@ export default function SignUpBusiness() {
                 />
             </Grid>
 
-            {/** textfield to enter business type */}
-            <Grid item xs={12}>
-                <CssTextField
-                    autoComplete="fname"
-                    name="businessType"
-                    required
-                    fullWidth
-                    id="businessType"
-                    label="Business Type"
-                />
-            </Grid>
-
             {/** textfield to enter email */}
             <Grid item xs={12} sm={6}>
                 <CssTextField
@@ -108,21 +96,6 @@ export default function SignUpBusiness() {
                     autoComplete="phone"
                 />
             </Grid>
-
-            {/** textfield to enter website */}
-            <Grid item xs={12}>
-                <CssTextField
-                    required
-                    fullWidth
-                    name="link"
-                    label="Website"
-                    type="link"
-                    id="link"
-                    autoComplete="link"
-                />
-            </Grid>
-
-            {/* do we upload files? */}
 
             {/** textfield to enter password */}
             <Grid item xs={12}>

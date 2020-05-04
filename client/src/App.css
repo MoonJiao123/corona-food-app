@@ -52,12 +52,18 @@
   margin-left: 10%;
   margin-right: 10%;
   box-align: center;
-  position: absolute;
+  position: relative;
 }
 
 .image-display {
   margin-top: 10%;
+  display: flex;
+  position: relative;
+}
+
+.tab-display {
   display: inline;
   position: relative;
+  margin: 0 auto;
 }
 
