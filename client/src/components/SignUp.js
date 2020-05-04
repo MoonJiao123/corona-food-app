@@ -8,16 +8,12 @@
  */
 
 import React from 'react';
-import SignUpCustomer from './SigUpCustomer';
-import SignUpBusiness from './SignUpBusiness';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import {Tabs, Tab, Typography, Box, Container, CssBaseline} 
+from '@material-ui/core';
+import SignUpCustomer from './SigUpCustomer';
+import SignUpBusiness from './SignUpBusiness';
 
 /** function to display information based on which tab is open */
 function TabPanel(props) {
@@ -56,7 +52,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
     /** guielines for the div component */
     paper: {
-      marginTop: theme.spacing(7),
+      marginTop: theme.spacing(0),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -84,8 +80,8 @@ export default function SignUp() {
         <CssBaseline />
         <div className={classes.paper}>
 
-            {/** title for the Sign Up component */}
-            <h2> Sign Up </h2> 
+            {/** title for the Sign Up component 
+            <h3> choose between </h3> */}
 
             {/** to create two tabs  */}
             <Tabs value={value}
