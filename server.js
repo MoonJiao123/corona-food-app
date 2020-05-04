@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path'); 
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 app.use(cors(corsOptions));
 
@@ -16,11 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./models");
 db.sequelize.sync();
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to FUO." });
-});
 
 require("./routes/business.routes")(app);
 
