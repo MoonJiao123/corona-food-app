@@ -14,16 +14,18 @@ class ShoppingListItem extends React.Component{
 Reusable list item: indidual user saved shopping items
 --------------------------------------------------------------------- */
   render(){
+
+    //TODO: fill props
     return(
       <div className="shopping-list-item">
 
-        <div classname="shopping-list-item-left">
-          <p>
-            <span>category icon</span>
+        <div className="shopping-list-item-left">
+          <p className="shopping-list-item-name">
+            <span className="shopping-list-item-icon">category icon</span>
             Item name
           </p>
-          <p>Address</p>
-          <p>Business name</p>
+          <p className="shopping-list-item-address">Address</p>
+          <p className="shopping-list-item-business">Business</p>
         </div>
 
         <div classname="shopping-list-item-mid">
@@ -31,11 +33,11 @@ Reusable list item: indidual user saved shopping items
             <p>Price</p>
             <p>Savings</p>
           </div>
-          <img/>
+          {/** TODO: Add generated coupon here */}}
         </div>
 
         <div className="shopping-list-item-right">
-          <button onClick={/*TODO */}>X</button>
+          <button onClick={null}>X</button>
         </div>
 
       </div>

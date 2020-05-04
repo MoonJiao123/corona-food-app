@@ -5,15 +5,18 @@ import App from './App';
 import ErrorPage from './components/ErrorPage';
 import BusinessDashboardParent from './components/BusinessDashboardParent';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import ShoppingListParent from './components/ShoppingListParent';
 
 export const routing = (
+  /*
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/ErrorPage" component={ErrorPage} />
         <Route path="/BusinessDashboardParent" component={BusinessDashboardParent} /> 
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter>*/
+    <ShoppingListParent/>
 )
 
 ReactDOM.render(
