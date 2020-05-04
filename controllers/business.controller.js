@@ -9,11 +9,13 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "No accounts!"
     });
+    console.log('Got body:', req.body);
     return;
   }
 
   // Create a Business
   const business = {
+    business_id: req.body.business_id,
     account: req.body.account,
     password: req.body.password,
     email: req.body.email,
