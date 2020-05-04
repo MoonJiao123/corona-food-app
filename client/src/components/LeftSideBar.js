@@ -8,15 +8,15 @@ import styled from 'styled-components';
 import Button from "@material-ui/core/Button";
 
 const LeftSidebarDiv = styled.div`
-    position: fixed; /* stay in place on scroll and position relative to view */
+    position: absolute; /* stay in place on scroll and position relative to view */
     left: 0;
+    top: 0;
     height: 100%;
     width: 400 px;
     z-index: 1;  /* stay on top of everything */
     color: white;
     background-color: #67d367;
     overflow-x: hidden; /* disable horizontal scroll */
-    padding-top: 10px; 
     display: inline-block;
     overflow:auto;
     max-width: 200px; /* stops div from resizing */
