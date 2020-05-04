@@ -5,6 +5,9 @@ Reusable listing for the business location info sidebar
 
 import React from 'react'
 
+/** --------------------------------------------------------------------
+Will render strictly from props passed in from parent
+--------------------------------------------------------------------- */
 function LocationInfoListing(props){
   return(
     <div className="locationInfo-listing">

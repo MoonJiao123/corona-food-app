@@ -1,7 +1,7 @@
 /**
  * This file contains code for the left side bar component once used is logged in
  *
- * Contributors: Thuyet Ta
+ * Contributors: Thuyet Ta, Darien
  */
 import React from 'react';
 import styled from 'styled-components';
@@ -44,17 +44,20 @@ const CompanyMission = styled.p`
 
 class SideNav extends React.Component {
     render() {
+        console.log(this.props);
         return(
             <LeftSidebarDiv>
              <img src={"media/mascot.jpg"} width={200}/>
-              <CompanyName> Company Name </CompanyName>
-             <CompanyMission> This is where company would insert their mission statement. </CompanyMission>
+              <CompanyName> {this.props.data.CompanyName} </CompanyName>
+        <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
              <ButtonsDiv>
              <Button
                 type="submit"
                 size={"small"}
                 variant="contained"
-                color="default  ">
+                color="default  "
+                onClick={this.props.data.logout}
+                >
                 Log Out
             </Button>
             {"  "}
@@ -62,7 +65,8 @@ class SideNav extends React.Component {
                  type="submit"
                  variant="contained"
                  size = "small"
-                 color="default  ">
+                 color="default  "
+                 onClick={this.props.data.addLocation}>
                   Add Location
              </Button>
              </ButtonsDiv>
@@ -71,9 +75,14 @@ class SideNav extends React.Component {
     }
 }
 export default class LeftSideBar extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
     render(){
+        console.log(this.props);
         return (
-            <SideNav></SideNav>
+            <SideNav data={this.props.data}></SideNav>
         );
     }
 }

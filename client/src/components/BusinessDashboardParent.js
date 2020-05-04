@@ -91,6 +91,13 @@ class BusinessDashboardParent extends React.Component{
       }
     });
 
+    //Testing left bar with fake data
+    this.setState({
+      left: {
+        companyName: "FUO-mart",
+        totalLocations: 3.1415926535
+      }
+    });
   }
 
 
