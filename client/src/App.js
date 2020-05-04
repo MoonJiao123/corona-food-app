@@ -13,7 +13,6 @@ import SignUp from './components/SignUp';
 import LeftSideBar from "./components/LeftSideBar";
 
 
-
 // function to create the Log In/Sign Up page
 function App() {
   return (

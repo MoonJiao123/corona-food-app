@@ -1,52 +1,154 @@
-/* 
-* This file holds the CSS commentary for App.js
-* It sets the style guidelines for the Log In/Sign Up page.
-*/
-
-.App {
-  text-align: center;
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Compiled doc with all scss
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Colors
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Compilation
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Overriding styles for every page
+--------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+/* ---------------------------------------------------------------------
+Override Scrollbar
+--------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "PT Sans", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  width: 100vw;
+  height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+  color: black;
+  text-decoration: none;
+  font-style: none;
+  white-space: nowrap;
+  cursor: pointer;
+  display: block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* ---------------------------------------------------------------------
+Override Scrollbar
+--------------------------------------------------------------------- */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.App-link {
-  color: rgb(103, 211, 103);
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+  background-color: white;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb {
+  background-color: #28bd3f;
+}
+
+/* ---------------------------------------------------------------------
+Override Highlight
+--------------------------------------------------------------------- */
+::-moz-selection {
+  background: #92f8a0;
+}
+
+::selection {
+  background: #92f8a0;
 }
 
 /* puts Log In and Sign Up pages side by side */
-.main-display{
-  display:flex;
+.main-display {
+  display: flex;
   flex-direction: row;
   margin-left: 10%;
-
 }
 
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar
+--------------------------------------------------------------------- */
+#locationInfo {
+  height: 100%;
+  width: 25%;
+  background: #67d367;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#locationInfo button.update-listing-button {
+  padding: 2%;
+  background: #175217;
+  border-radius: 0;
+  width: 100%;
+}
+
+#locationInfo-address {
+  text-align: center;
+  font-size: 1.5em;
+  width: 100%;
+  margin: auto;
+}
+
+#locationInfo-listing-count {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: fit-content;
+  margin: auto;
+}
+#locationInfo-listing-count h3 {
+  font-size: 2.5em;
+}
+#locationInfo-listing-count p {
+  font-size: 2em;
+  padding: 0 0.3em;
+}
+
+#locationInfo-list {
+  width: 90%;
+  height: 75%;
+  margin: auto;
+  background: #a2e2a2;
+  border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar listings
+--------------------------------------------------------------------- */
+.locationInfo-listing {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  background: #eeeeee;
+  padding: 1% 0;
+  border-bottom: 2px solid #67d367;
+}
+.locationInfo-listing p {
+  text-align: right;
+  width: 33%;
+  padding: 0 1em;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=App.css.map */
