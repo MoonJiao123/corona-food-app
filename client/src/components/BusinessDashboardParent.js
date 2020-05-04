@@ -39,6 +39,7 @@ class BusinessDashboardParent extends React.Component{
   render(){
     return(
       // TODO: get sub component names
+      <h1> welcome, business </h1>
     );
   }
 

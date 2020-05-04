@@ -6,12 +6,9 @@
  */
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import {Container, CssBaseline, TextField, Grid, Button} from '@material-ui/core';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 /** style guidelines for the Sign Up Business componenet */
 const useStyles = makeStyles((theme) => ({
@@ -155,6 +152,7 @@ export default function SignUpBusiness() {
         </Grid>
 
             {/** button to sign up new business account after form is filled out */}
+            <Link to="/BusinessDashboardParent">
             <Button
                 type="submit"
                 fullWidth
@@ -163,6 +161,7 @@ export default function SignUpBusiness() {
                 className={classes.submit}>
                 Sign Up
             </Button>
+            </Link>
 
         </form>
       </div>

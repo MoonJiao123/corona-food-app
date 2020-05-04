@@ -1,6 +1,8 @@
 /* 
 * This file holds the CSS commentary for App.js
 * It sets the style guidelines for the Log In/Sign Up page.
+*
+* Contributors: Tabassum Alam
 */
 
 .App {
@@ -46,7 +48,16 @@
 .main-display{
   display:flex;
   flex-direction: row;
+  margin: 0 auto;
   margin-left: 10%;
+  margin-right: 10%;
+  box-align: center;
+  position: absolute;
+}
 
+.image-display {
+  margin-top: 10%;
+  display: inline;
+  position: relative;
 }
 

@@ -1,8 +1,7 @@
 /**
- * This file creates the Sign Up component for the Log In/Sign Up page.
- * It allows users to choose between a customer account and business account.
- * The component renders the two different options based on which tab
- * is open.
+ * This file creates the tabs for users to choose between logging in or 
+ * signing up with a new account. It shows two different tabs from which 
+ * users can select which option they would like to choose to fill out. 
  * 
  * Contributors: Tabassum Alam
  */
@@ -10,10 +9,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {Tabs, Tab, Typography, Box, Container, CssBaseline} 
+import {Tabs, Tab, Typography, Box, Container, CssBaseline } 
 from '@material-ui/core';
-import SignUpCustomer from './SigUpCustomer';
-import SignUpBusiness from './SignUpBusiness';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
 
 /** function to display information based on which tab is open */
 function TabPanel(props) {
@@ -52,7 +51,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
     /** guielines for the div component */
     paper: {
-      marginTop: theme.spacing(0),
+      marginTop: theme.spacing(7),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -66,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   /** function to create the Sign Up component */
-export default function SignUp() {
+export default function MainLogInSignUp() {
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -80,8 +79,8 @@ export default function SignUp() {
         <CssBaseline />
         <div className={classes.paper}>
 
-            {/** title for the Sign Up component 
-            <h3> choose between </h3> */}
+            {/** title for the Sign Up component */}
+            <h2> Log In or Sign Up </h2> 
 
             {/** to create two tabs  */}
             <Tabs value={value}
@@ -93,16 +92,16 @@ export default function SignUp() {
                 aria-label="simple tabs example"
                 classes= {{indicator: classes.indicator}}>
                 {/** label for the two different tab options */}
-                <Tab label="Customer" {...a11yProps(0)}/>
-                <Tab label="Business"  {...a11yProps(1)}/>
+                <Tab label="Log In" {...a11yProps(0)}/>
+                <Tab label="Sign Up"  {...a11yProps(1)}/>
             </Tabs>
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <SignUpCustomer /> {/** customer option */}
+                <LogIn /> {/** log in option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUpBusiness /> {/** business option */}
+                <SignUp /> {/** sign up option */}
             </TabPanel>
 
         </div>

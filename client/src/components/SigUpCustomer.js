@@ -6,12 +6,11 @@
  */
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import {Grid, Container, Button, CssBaseline, TextField}
+ from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
 
 /** style guidelines for the Customer Sign Up component */
 const useStyles = makeStyles((theme) => ({
@@ -128,14 +127,18 @@ export default function SignUpCustomer() {
             </Grid>
 
                 {/** signup button after entering all information */}
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="default"
-                    className={classes.submit}>
-                    Sign Up
-                </Button>
+                <Link to="/ErrorPage"> {/** should route to a customer page */}
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="default"
+                        className={classes.submit}
+                        >
+                        Sign Up
+                    </Button>
+                </Link>    
+
 
             </form>
         </div>
