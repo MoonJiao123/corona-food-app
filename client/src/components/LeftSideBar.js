@@ -7,7 +7,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from "@material-ui/core/Button";
 
-
 const LeftSidebarDiv = styled.div`
     position: fixed; /* stay in place on scroll and position relative to view */
     left: 0;
