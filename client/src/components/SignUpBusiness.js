@@ -6,12 +6,9 @@
  */
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import {Container, CssBaseline, TextField, Grid, Button} from '@material-ui/core';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 /** style guidelines for the Sign Up Business componenet */
 const useStyles = makeStyles((theme) => ({
@@ -76,18 +73,6 @@ export default function SignUpBusiness() {
                 />
             </Grid>
 
-            {/** textfield to enter business type */}
-            <Grid item xs={12}>
-                <CssTextField
-                    autoComplete="fname"
-                    name="businessType"
-                    required
-                    fullWidth
-                    id="businessType"
-                    label="Business Type"
-                />
-            </Grid>
-
             {/** textfield to enter email */}
             <Grid item xs={12} sm={6}>
                 <CssTextField
@@ -111,21 +96,6 @@ export default function SignUpBusiness() {
                     autoComplete="phone"
                 />
             </Grid>
-
-            {/** textfield to enter website */}
-            <Grid item xs={12}>
-                <CssTextField
-                    required
-                    fullWidth
-                    name="link"
-                    label="Website"
-                    type="link"
-                    id="link"
-                    autoComplete="link"
-                />
-            </Grid>
-
-            {/* do we upload files? */}
 
             {/** textfield to enter password */}
             <Grid item xs={12}>
@@ -155,6 +125,7 @@ export default function SignUpBusiness() {
         </Grid>
 
             {/** button to sign up new business account after form is filled out */}
+            <Link to="/BusinessDashboardParent">
             <Button
                 type="submit"
                 fullWidth
@@ -163,6 +134,7 @@ export default function SignUpBusiness() {
                 className={classes.submit}>
                 Sign Up
             </Button>
+            </Link>
 
         </form>
       </div>

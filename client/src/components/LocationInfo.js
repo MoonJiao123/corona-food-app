@@ -25,6 +25,7 @@ class LocationInfo extends React.Component{
       ></LocationInfoListing>
     );
 
+    // Return the right sidebar, render data with passed in props
     return(
       <div id="locationInfo">
         <h1 id="locationInfo-address">{this.props.data.address}</h1>
