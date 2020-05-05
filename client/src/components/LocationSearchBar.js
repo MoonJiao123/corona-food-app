@@ -56,6 +56,12 @@ export default function LocationSearchBar(props) {
         setValue(event.target.value);
     };
 
+    function handle(e){
+        if(e.key ==="Enter"){
+            props.data.search();
+        }
+    }
+
     return (
         <Paper className={classes.bar} style={{ /**  properties of the paper background effect */
             position: 'absolute', left: '20%', top: '7%',
@@ -67,7 +73,7 @@ export default function LocationSearchBar(props) {
                 inputProps={{ 'aria-label': 'id no.', className: classes.inputField }} /** label ids */
                 disabled={disabled}
                 onChange={onChange}
-
+                onKeyPress={handle}
             />
             <IconButton className={classes.iconButton} aria-label="search" onClick={props.data.search}>
                 <LocationSearchingIcon />
