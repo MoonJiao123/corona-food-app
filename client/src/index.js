@@ -8,7 +8,6 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ShoppingListParent from './components/ShoppingListParent';
 
 export const routing = (
-  
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} />
@@ -16,7 +15,6 @@ export const routing = (
         <Route path="/BusinessDashboardParent" component={BusinessDashboardParent} /> 
       </Switch>
     </BrowserRouter>
-    
 )
 
 ReactDOM.render(
