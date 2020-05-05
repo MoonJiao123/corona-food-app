@@ -6,7 +6,8 @@ High level component for business dashboard.
 import React from 'react';
 import LocationInfo from './LocationInfo';
 import LeftSideBar from './LeftSideBar';
-// TODO: import sub-components
+import LocationSearchBar from "./LocationSearchBar";
+import Locations from "./Locations";
 
 /* ---------------------------------------------------------------------
 Component Object: will contain the left/center/right components that make
@@ -113,7 +114,8 @@ class BusinessDashboardParent extends React.Component{
       // TODO: Pass in props
       <div>
         <LeftSideBar data={this.state.left}/>
-        {/*center*/}
+        <LocationSearchBar data = {this.state.center}/>
+        <Locations data = {this.state.center}/>
         <LocationInfo data={this.state.right}/>
       </div>
     );
