@@ -21,23 +21,23 @@ Reusable list item: indidual user saved shopping items
 
         <div className="shopping-list-item-left">
           <p className="shopping-list-item-name">
-            <span className="shopping-list-item-icon">category icon</span>
+            <span className="shopping-list-item-icon">icon </span>
             Item name
           </p>
           <p className="shopping-list-item-address">Address</p>
           <p className="shopping-list-item-business">Business</p>
         </div>
 
-        <div classname="shopping-list-item-mid">
+        <div className="shopping-list-item-mid">
           <div>
-            <p>Price</p>
-            <p>Savings</p>
+            <p className="shopping-list-price">$3.00</p>
+            <p className="shopping-list-discount">-20%</p>
           </div>
-          {/** TODO: Add generated coupon here */}}
+          {/** TODO: Add generated coupon here */}
         </div>
 
         <div className="shopping-list-item-right">
-          <button onClick={null}>X</button>
+          <button title="Remove" onClick={null}>X</button>
         </div>
 
       </div>
