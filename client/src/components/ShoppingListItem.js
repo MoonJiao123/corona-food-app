@@ -6,10 +6,7 @@ Reusable component for a shopping list item
 import React from 'react';
 
 class ShoppingListItem extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
+  
 /* ---------------------------------------------------------------------
 Reusable list item: indidual user saved shopping items
 --------------------------------------------------------------------- */

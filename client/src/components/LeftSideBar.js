@@ -12,15 +12,13 @@ const LeftSidebarDiv = styled.div`
     left: 0;
     top: 0;
     height: 100%;
-    width: 400 px;
+    width: 15%;
     z-index: 1;  /* stay on top of everything */
     color: white;
     background-color: #67d367;
     overflow-x: hidden; /* disable horizontal scroll */
     display: inline-block;
     overflow:auto;
-    max-width: 200px; /* stops div from resizing */
-    min-width: 200px;
 `;
 
 const ButtonsDiv = styled.div`
@@ -36,8 +34,8 @@ const CompanyName = styled.h2`
     margin-bottom: 30px;
 `;
 const CompanyMission = styled.p`
-    margin-left: 5%;
-    margin-right: 5%;
+    text-align: center;
+    width: 100%;
     font-size: 17px;
     margin-bottom: 30px;
 `;
@@ -46,8 +44,8 @@ class SideNav extends React.Component {
     render() {
         return(
             <LeftSidebarDiv>
-             <img src={"media/mascot.jpg"} alt="mascot" width={200}/>
-              <CompanyName> {this.props.data.CompanyName} </CompanyName>
+             <img src={"media/mascot.jpg"} alt="mascot" width={200} style={{display: 'block', margin: 'auto'}}/>
+              <CompanyName> {this.props.data.companyName} </CompanyName>
         <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
              <ButtonsDiv>
              <Button
