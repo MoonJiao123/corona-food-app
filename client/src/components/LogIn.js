@@ -7,9 +7,9 @@
 
 import React from 'react';
 import {Button, CssBaseline, TextField, Grid, Container, FormControlLabel, 
-    FormHelperText, Radio, RadioGroup} from '@material-ui/core';
+    Radio, RadioGroup} from '@material-ui/core';
 import { withStyles, makeStyles, } from '@material-ui/core/styles';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 /** style guidelines for the Log In compoenent */
 const useStyles = makeStyles((theme) => ({
@@ -128,7 +128,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small"/>}
+                                control={<Radio color="default" size="small" checked="true"/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
