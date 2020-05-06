@@ -8,7 +8,7 @@ import LocationInfo from './LocationInfo';
 import LeftSideBar from './LeftSideBar';
 import LocationSearchBar from "./LocationSearchBar";
 import Locations from "./Locations";
-
+import AddLocation from './AddLocation';
 /* ---------------------------------------------------------------------
 Component Object: will contain the left/center/right components that make
 up the business dashboard.
@@ -28,7 +28,9 @@ class BusinessDashboardParent extends React.Component{
       left: {
         companyName: "",
         totalLocations: 0,
-        addLocation: () => alert("add location"),
+        addLocation: () => {
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
         logout: () => alert("log out")
       },
 
@@ -57,6 +59,16 @@ class BusinessDashboardParent extends React.Component{
           }
         ],
         updateProducts: () => alert("update products")
+      },
+
+      formClass: "off",
+
+      form: {
+        submitNewLocation: () => alert("add new location"),
+        closeForm: (e) => {
+          e.preventDefault();
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
       }
 
     };
@@ -115,13 +127,14 @@ class BusinessDashboardParent extends React.Component{
       left: {
         companyName: "FUO-mart",
         totalLocations: 3.1415926535,
-        addLocation: () => alert("add location"),
+        addLocation: () => {
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
         logout: () => alert("log out")
       }
     });
 
   }
-
 
   /* ---------------------------------------------------------------------
   Render
@@ -136,6 +149,7 @@ class BusinessDashboardParent extends React.Component{
         <LocationSearchBar data = {this.state.center}/>
         <Locations data = {this.state.center}/>
         <LocationInfo data={this.state.right}/>
+        <AddLocation data={this.state.form} toggle={this.state.formClass}/>
       </div>
     );
   }
