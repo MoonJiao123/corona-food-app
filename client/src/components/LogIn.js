@@ -72,7 +72,7 @@ export default function LogIn() {
         linkTo = "/ErrorPage"   // take to customer page
     } 
     else if (value === 'Business') { // if business
-        linkTo = "/BusinessDashboardParent" // take to business page
+        linkTo = "/Business" // take to business page
     }
     else {
         linkTo =""
