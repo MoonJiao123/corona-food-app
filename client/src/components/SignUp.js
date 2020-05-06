@@ -76,7 +76,7 @@ export default function SignUp() {
 
   return (
       /** use container to allow horizontal alignment */
-    <Container component="main" maxWidth="m">
+    <Container component="main">
         <CssBaseline />
         <div className={classes.paper}>
 
@@ -86,10 +86,7 @@ export default function SignUp() {
             {/** to create two tabs  */}
             <Tabs value={value}
                 onChange={handleChange}
-                indicatorColor="default"
-                textColor="default"
                 centered
-                fullWidth
                 aria-label="simple tabs example"
                 classes= {{indicator: classes.indicator}}>
                 {/** label for the two different tab options */}
