@@ -128,7 +128,6 @@ export default function SignUpBusiness() {
             <Link to="/Business">
             <Button
                 type="submit"
-                fullWidth
                 variant="contained"
                 color="default"
                 className={classes.submit}>

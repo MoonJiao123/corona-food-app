@@ -12,7 +12,7 @@ function LocationInfoListing(props){
   return(
     <div className="locationInfo-listing">
       <p className="locationInfo-name">{props.name}</p>
-      <p className="locationInfo-price">{props.price}</p>
+      <p className="locationInfo-price">${props.price}</p>
       <p className="locationInfo-date">{props.expire}</p>
     </div>
   );

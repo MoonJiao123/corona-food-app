@@ -128,7 +128,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small" checked="true"/>}
+                                control={<Radio color="default" size="small" checked/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
