@@ -12,7 +12,7 @@ export const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/ErrorPage" component={ErrorPage} />
-        <Route path="/BusinessDashboardParent" component={BusinessDashboardParent} /> 
+        <Route path="/Business" component={BusinessDashboardParent} /> 
       </Switch>
     </BrowserRouter>
 )
