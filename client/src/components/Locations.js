@@ -154,6 +154,7 @@ const sample = [
     'Mishawaka, IN 46544'],
 
 ];
+
 /** Create Data*/
 function createData(id, location, address) {
     return { id, location, address };
