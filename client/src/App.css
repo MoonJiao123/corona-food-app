@@ -270,11 +270,19 @@ Styles for the login/signup
 Contributors: Darien Tsai
 Styles for the location addition form
 --------------------------------------------------------------------- */
+/*form fade in*/
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+/*form styles*/
 #addLocation-form.off {
   display: none;
 }
 
 #addLocation-form.on {
+  opacity: 0;
   position: absolute;
   left: 0;
   top: 0;
@@ -282,6 +290,7 @@ Styles for the location addition form
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.507);
+  animation: fade 0.1s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
 }
 #addLocation-form.on h1 {
   color: #175217;
