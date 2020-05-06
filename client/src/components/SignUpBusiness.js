@@ -130,6 +130,7 @@ export default function SignUpBusiness() {
                 type="submit"
                 variant="contained"
                 color="default"
+                fullWidth
                 className={classes.submit}>
                 Sign Up
             </Button>

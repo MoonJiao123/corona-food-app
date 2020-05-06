@@ -266,4 +266,76 @@ Styles for the login/signup
   align-items: center;
 }
 
+/** --------------------------------------------------------------------
+Contributors: Darien Tsai
+Styles for the location addition form
+--------------------------------------------------------------------- */
+#addLocation-form.off {
+  display: none;
+}
+
+#addLocation-form.on {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.507);
+}
+#addLocation-form.on h1 {
+  color: #175217;
+}
+#addLocation-form.on #addLocation {
+  position: absolute;
+  top: 25%;
+  left: 37.5%;
+  width: 25%;
+  height: 50%;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 1%;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#addLocation-form.on #addLocation .MuiFormLabel-root.Mui-focused {
+  color: #175217;
+}
+#addLocation-form.on #addLocation #addLocation-smalls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+#addLocation-form.on #addLocation #addLocation-smalls .MuiTextField-root {
+  width: 30%;
+}
+#addLocation-form.on #addLocation .MuiInput-underline:after {
+  border-bottom: #175217;
+}
+#addLocation-form.on #addLocation button {
+  background: #175217;
+  color: white;
+}
+#addLocation-form.on #addLocation #addLocation-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#addLocation-form.on #addLocation #addLocation-buttons #addLocation-cancel {
+  background: none;
+  color: black;
+  border: none;
+  outline: none;
+  padding: 0.1em;
+}
+#addLocation-form.on #addLocation #addLocation-buttons #addLocation-cancel:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=App.css.map */
