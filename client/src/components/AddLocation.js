@@ -26,8 +26,8 @@ class AddLocation extends React.Component{
           <TextField fullWidth label="Zip" />
         </div>
         <div id="addLocation-buttons">
-          <Button variant="contained">Add Location</Button>
-          <button id="addLocation-cancel">cancel</button>
+          <Button onClick={this.props.data.submitNewLocation} variant="contained">Add Location</Button>
+          <button onClick={this.props.data.closeForm} id="addLocation-cancel">cancel</button>
         </div>
       </form>
     </div>  

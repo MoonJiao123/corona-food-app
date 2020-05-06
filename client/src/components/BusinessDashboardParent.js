@@ -61,7 +61,15 @@ class BusinessDashboardParent extends React.Component{
         updateProducts: () => alert("update products")
       },
 
-      formClass: "off"
+      formClass: "off",
+
+      form: {
+        submitNewLocation: () => alert("add new location"),
+        closeForm: (e) => {
+          e.preventDefault();
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
+      }
 
     };
   }
@@ -141,7 +149,7 @@ class BusinessDashboardParent extends React.Component{
         <LocationSearchBar data = {this.state.center}/>
         <Locations data = {this.state.center}/>
         <LocationInfo data={this.state.right}/>
-        <AddLocation toggle={this.state.formClass}/>
+        <AddLocation data={this.state.form} toggle={this.state.formClass}/>
       </div>
     );
   }
