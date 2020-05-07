@@ -133,22 +133,42 @@ Styles for the business dashboard right sidebar
 Contributors: Darien
 Styles for the business dashboard right sidebar listings
 --------------------------------------------------------------------- */
-.locationInfo-listing {
-  width: 100%;
+#location-results {
+  background: #eeeeee;
+  width: 50%;
+  height: 75%;
+  position: absolute;
+  left: 20%;
+  border-radius: 10px;
+  top: 17%;
+  box-sizing: border-box;
+}
+#location-results .location-row {
   display: flex;
+  width: 100%;
+  margin: auto;
   justify-content: space-around;
   flex-wrap: nowrap;
-  background: #eeeeee;
-  padding: 1% 0;
-  border-bottom: 2px solid #67d367;
+  padding: 1.5% 0;
+  border-bottom: 1px solid #aaaaaa;
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
-.locationInfo-listing p {
-  text-align: right;
-  width: 33%;
-  padding: 0 1em;
-  box-sizing: border-box;
-  text-overflow: ellipsis;
+#location-results .location-row .location-name, #location-results .location-row .location-address {
   white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  padding: 0 2%;
+}
+#location-results .location-row .location-address {
+  width: 60%;
+}
+#location-results .location-row .location-name {
+  width: 40%;
+}
+#location-results .location-row:hover {
+  background: white;
 }
 
 /* ---------------------------------------------------------------------

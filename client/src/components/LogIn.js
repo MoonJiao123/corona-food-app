@@ -128,7 +128,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small" checked/>}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
@@ -136,7 +136,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Business"
-                                control={<Radio color="default" size="small" />}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Business </p>}
                             />
                         </Grid>
