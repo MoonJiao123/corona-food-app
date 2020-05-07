@@ -7,9 +7,6 @@
  */
 
 import React from 'react';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-
 
 /** A single location search result */
 class LocationRow extends React.PureComponent {

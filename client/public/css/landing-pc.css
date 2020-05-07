@@ -164,10 +164,17 @@ Mission Statement
   width: 50%;
 }
 
-/*TODO ---------------------------------*/
 #mission-visual{
-  width: 50vh;
-  height: 50vh;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mission-visual video{
+  height: 80%;
+  padding-top: 7vh;
+  transform: translateX(2em);
 }
 
 #mission-content{
@@ -204,7 +211,7 @@ Features
   height: -moz-fit-content;
   height: fit-content;
   background: var(--bg-green);
-  padding: 1% 0;
+  padding: 1% 0 2%;
 }
 
 #landing-features h1{
@@ -232,10 +239,8 @@ Features
   box-shadow: 3px 3px 24px -5px rgba(0,0,0,0.48);
 }
 
-/**TODO ----------------------------*/
-.feature-card img{
-  width: 8em;
-  height: 8em;
+.feature-card video{
+  width: 100%;
 }
 
 .feature-card figcaption{
