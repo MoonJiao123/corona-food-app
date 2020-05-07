@@ -1,25 +1,16 @@
-module.exports = app => {
-    const business = require("../controllers/business.controller.js");
-  
-    var router = require("express").Router();
-  
-    // Create a new business
-    router.post("/", business.create);
-  
-    // Retrieve all business
-    router.get("/", business.findAll);
-  
-    // Retrieve a single business with id
-    router.get("/:id", business.findOne);
-  
-    // Update a business with id
-    router.put("/:id", business.update);
-  
-    // Delete a business with id
-    router.delete("/:id", business.delete);
-  
-    // Create a new business
-    router.delete("/", business.deleteAll);
-  
-    app.use('/api/business', router);
-  };
+const authJwt = require('./verifyJwtToken');
+const verifySignUp = require('./verifySignUp');
+
+module.exports = function(app) {
+ 
+  const controller = require('../controller/business.controller.js');
+
+app.post('/business/signup', [verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted], controller.signup);
+
+app.post('/business/signin', controller.signin);
+
+app.get('/business/user', [authJwt.verifyToken], controller.userContent);
+
+app.get('/business', [authJwt.verifyToken, authJwt.isPmOrAdmin], controller.managementBoard);
+
+}
