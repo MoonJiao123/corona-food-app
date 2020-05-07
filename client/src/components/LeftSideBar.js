@@ -46,7 +46,7 @@ class SideNav extends React.Component {
             <LeftSidebarDiv>
              <img src={"media/mascot.jpg"} alt="mascot" width={200} style={{display: 'block', margin: 'auto'}}/>
               <CompanyName> {this.props.data.companyName} </CompanyName>
-        <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
+              <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
              <ButtonsDiv>
              <Button
                 type="submit"

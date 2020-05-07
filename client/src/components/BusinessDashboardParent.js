@@ -110,7 +110,7 @@ class BusinessDashboardParent extends React.Component{
       locations: [
         {id: 0, location: "Location 1", address: "9927 Alderwood Lane Conway, SC 29526"},
         {id: 1, location: "Location 2", address: "332 Marvon St. Loveland, OH 45140"},
-        {id: 2, location: "Location 3", address: "7380 Sherman Court↵Alexandria, VA 22304"},
+        {id: 2, location: "Location 3", address: "7380 Sherman Court Alexandria, VA 22304"},
         {id: 3, location: "Location 4", address: "332 Marvon St. Loveland, OH 45140"},
         {id: 4, location: "Location 5", address: "366 Wild Horse Drive Lansing, MI 48910"},
         {id: 5, location: "Location 6", address: "1 Creek Ave. Lebanon, PA 17042"},
