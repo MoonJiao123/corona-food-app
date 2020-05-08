@@ -9,7 +9,7 @@ var corsOptions = {
 };
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static('./client'));
 
 app.use(cors(corsOptions));
 
@@ -17,17 +17,16 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const db = require("./models");
-db.sequelize.sync();
-
-// simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to FUO." });
+  res.json({ message: "Welcome to fuo application." });
 });
+const db = require("./config/db.config");
+db.sequelize.sync();
 
 require("./routes/business.routes")(app);
 
 const port = process.env.PORT || 5000;
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
+// Hello there :D 
+// Hello

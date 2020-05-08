@@ -1,13 +1,24 @@
-module.exports = {
-    HOST: "us-cdbr-iron-east-01.cleardb.net",
-    USER: "bd778a3ba469c4",
-    PASSWORD: "1641b41b",
-    DB: "heroku_90f3403bf02fffe",
-    dialect: "mysql",
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    }
-  };
+const dbConfig = require("./env.js");
+
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+  host: dbConfig.HOST,
+  dialect: dbConfig.dialect,
+  operatorsAliases: false,
+
+  pool: {
+    max: dbConfig.pool.max,
+    min: dbConfig.pool.min,
+    acquire: dbConfig.pool.acquire,
+    idle: dbConfig.pool.idle
+  }
+});
+
+const db = {};
+
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+db.business = require("../models/business.model.js")(sequelize, Sequelize);
+
+module.exports = db;

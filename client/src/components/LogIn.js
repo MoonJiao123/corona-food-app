@@ -7,9 +7,9 @@
 
 import React from 'react';
 import {Button, CssBaseline, TextField, Grid, Container, FormControlLabel, 
-    FormHelperText, Radio, RadioGroup} from '@material-ui/core';
+    Radio, RadioGroup} from '@material-ui/core';
 import { withStyles, makeStyles, } from '@material-ui/core/styles';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 /** style guidelines for the Log In compoenent */
 const useStyles = makeStyles((theme) => ({
@@ -69,15 +69,14 @@ export default function LogIn() {
     /** to change where the log in button routes to based on identity */
     var linkTo;
     if (value === 'Customer') { // if customer
-        linkTo = "/CustomerDashboardParent"   // take to customer page
+        linkTo = "/Customer"   // take to customer page
     } 
     else if (value === 'Business') { // if business
-        linkTo = "/BusinessDashboardParent" // take to business page
+        linkTo = "/Business" // take to business page
     }
     else {
         linkTo =""
     } 
-
 
     return (
        /** use container to allow horizontal alignment  */
@@ -126,7 +125,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small"/>}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
@@ -134,7 +133,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Business"
-                                control={<Radio color="default" size="small" />}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Business </p>}
                             />
                         </Grid>

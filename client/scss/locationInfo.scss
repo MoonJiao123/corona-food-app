@@ -1,0 +1,59 @@
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar
+--------------------------------------------------------------------- */
+
+#locationInfo{
+  height: 100%;
+  width: 25%;
+  background: $bg-green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  button.update-listing-button{
+    padding: 2%;
+    background: $button-green;
+    border-radius: 0;
+    width: 100%;
+  }
+}
+
+#locationInfo-address{
+  text-align: center;
+  font-size: 1.5em;
+  width: 100%;
+  margin: auto;
+}
+
+#locationInfo-listing-count{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: fit-content;
+  margin: auto;
+
+  h3{
+    font-size: 2.5em;
+  }
+
+  p{
+    font-size: 2em;
+    padding: 0 .3em;
+  }
+}
+
+#locationInfo-list{
+  width: 90%;
+  height: 75%;
+  margin: auto;
+  background: $bg-light-green;
+  border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

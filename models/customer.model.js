@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-    const Business = sequelize.define("businesses", {
-      business_id: {
+    const Customer = sequelize.define("customers", {
+      customer_id: {
         type: Sequelize.INTEGER,
         primaryKey: true
       },
@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
       email: {
         type: Sequelize.STRING
       },
-      mobile: {
+      location: {
         type: Sequelize.STRING
       }
     });

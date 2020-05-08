@@ -8,7 +8,7 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {Container, CssBaseline, TextField, Grid, Button} from '@material-ui/core';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 /** style guidelines for the Sign Up Business componenet */
 const useStyles = makeStyles((theme) => ({
@@ -125,12 +125,12 @@ export default function SignUpBusiness() {
         </Grid>
 
             {/** button to sign up new business account after form is filled out */}
-            <Link to="/BusinessDashboardParent">
+            <Link to="/Business">
             <Button
                 type="submit"
-                fullWidth
                 variant="contained"
                 color="default"
+                fullWidth
                 className={classes.submit}>
                 Sign Up
             </Button>

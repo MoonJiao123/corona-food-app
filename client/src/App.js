@@ -15,6 +15,9 @@ import hi from './media/hi.jpg';
 // function to create the Log In/Sign Up page
 function App() {
 
+  function disable(e){
+    e.preventDefault();
+  }
   return (
     <div>
       <Header />
@@ -22,13 +25,13 @@ function App() {
       <div className="main-display">
         <div className="image-display">
           <video className="image-display" id="welcome-video" muted autoPlay poster={hi} loop 
-          src={hi_anim} width="400" height="400">
+          src={hi_anim} width="400" height="400" onContextMenu={disable}>
           </video> 
         </div>
         <div className="tab-display">  
           <MainLogInSignUp />
         </div>  
-    </div>
+      </div>
     </div>
   )
 }
