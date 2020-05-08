@@ -6,7 +6,7 @@ checkDuplicateUserNameOrNameOrEmailOrMobile = (req, res, next) => {
   // -> Check Username is already in use
     Business.findOne({
         where: {
-            username: req.body.username
+            username: req.body.account
         } 
     }).then(business => {
         if(business){
@@ -48,6 +48,8 @@ checkDuplicateUserNameOrNameOrEmailOrMobile = (req, res, next) => {
         }
         
     next();
+    });
+    });
     });
   });
 }
