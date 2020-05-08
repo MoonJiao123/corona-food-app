@@ -69,10 +69,10 @@ export default function LogIn() {
     /** to change where the log in button routes to based on identity */
     var linkTo;
     if (value === 'Customer') { // if customer
-        linkTo = "/ErrorPage"   // take to customer page
+        linkTo = "/ProductFilter"   // take to customer page
     } 
     else if (value === 'Business') { // if business
-        linkTo = "/BusinessDashboardParent" // take to business page
+        linkTo = "/Business" // take to business page
     }
     else {
         linkTo =""
@@ -128,7 +128,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small" checked="true"/>}
+                                control={<Radio color="default" size="small" checked/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>

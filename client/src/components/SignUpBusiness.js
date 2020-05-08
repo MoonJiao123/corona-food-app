@@ -125,10 +125,9 @@ export default function SignUpBusiness() {
         </Grid>
 
             {/** button to sign up new business account after form is filled out */}
-            <Link to="/BusinessDashboardParent">
+            <Link to="/Business">
             <Button
                 type="submit"
-                fullWidth
                 variant="contained"
                 color="default"
                 className={classes.submit}>

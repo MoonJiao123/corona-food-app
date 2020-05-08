@@ -151,4 +151,119 @@ Styles for the business dashboard right sidebar listings
   white-space: nowrap;
 }
 
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles shopping list and items
+--------------------------------------------------------------------- */
+/* Styles for parent */
+#shopping-list {
+  position: absolute;
+  left: 25%;
+  top: 15%;
+  z-index: 1;
+  width: 50%;
+  height: 65%;
+  background: #eeeeee;
+  border-radius: 10px;
+}
+#shopping-list button {
+  outline: none;
+  border: none;
+  background: #175217;
+  color: white;
+  cursor: pointer;
+}
+#shopping-list button:hover {
+  background: #1e6b1e;
+}
+#shopping-list button:active {
+  background: #134413;
+}
+
+#close-shopping-list {
+  position: absolute;
+  top: -1.5em;
+  right: -1.5em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  padding: 1%;
+}
+
+#shopping-list-container {
+  width: 100%;
+  height: 95%;
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+#clear-shopping-list {
+  width: 100%;
+  height: 5%;
+}
+
+/* Styles for items */
+.shopping-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  padding: 1%;
+  transition-duration: 0.2s;
+  border-top: 1px solid #a2e2a2;
+  border-bottom: 1px solid #a2e2a2;
+}
+.shopping-list-item .shopping-list-item-name {
+  font-size: 1.7em;
+  font-weight: 500;
+}
+.shopping-list-item .shopping-list-item-address {
+  font-size: 1em;
+  color: #949494;
+}
+.shopping-list-item .shopping-list-item-business {
+  font-size: 1.2em;
+  color: #3f3f3f;
+}
+.shopping-list-item .shopping-list-item-left {
+  width: 50%;
+}
+.shopping-list-item .shopping-list-price {
+  font-size: 1.7em;
+}
+.shopping-list-item .shopping-list-discount {
+  font-size: 1em;
+  color: #3f3f3f;
+}
+.shopping-list-item .shopping-list-item-mid {
+  text-align: right;
+}
+.shopping-list-item .shopping-list-item-right button {
+  width: 3em;
+  height: 3em;
+}
+
+.shopping-list-item:hover {
+  background: white;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the login/signup
+--------------------------------------------------------------------- */
+.main-display {
+  width: 100%;
+  max-width: 1250px;
+  height: 90vh;
+  padding: 0;
+  margin: 0;
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
 /*# sourceMappingURL=App.css.map */

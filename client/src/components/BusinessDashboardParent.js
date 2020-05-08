@@ -8,6 +8,8 @@ import LocationInfo from './LocationInfo';
 import LeftSideBar from './LeftSideBar';
 import LocationSearchBar from "./LocationSearchBar";
 import Locations from "./Locations";
+import CustomerHeader from "./CustomerHeader";
+import ShopItems from "./ShopItems"
 
 /* ---------------------------------------------------------------------
 Component Object: will contain the left/center/right components that make
@@ -36,9 +38,10 @@ class BusinessDashboardParent extends React.Component{
       center: {
         locations: [
           {
-            address: '',
-            totalProducts: 0,
-            select: () => alert("location selected")
+            id: '',
+            location: '',
+            address: ''
+            //select: () => alert("location selected") TODO
         }
         ],
         search: () => alert("search"),
@@ -92,6 +95,23 @@ class BusinessDashboardParent extends React.Component{
       }
     });
 
+    //Testing center bar with fake data
+    this.setState({center: {
+      locations: [
+        {id: 0, location: "Location 1", address: "9927 Alderwood Lane Conway, SC 29526"},
+        {id: 1, location: "Location 2", address: "332 Marvon St. Loveland, OH 45140"},
+        {id: 2, location: "Location 3", address: "7380 Sherman Court↵Alexandria, VA 22304"},
+        {id: 3, location: "Location 4", address: "332 Marvon St. Loveland, OH 45140"},
+        {id: 4, location: "Location 5", address: "366 Wild Horse Drive Lansing, MI 48910"},
+        {id: 5, location: "Location 6", address: "1 Creek Ave. Lebanon, PA 17042"},
+        {id: 6, location: "Location 7", address: "92 Theatre Ave. Southaven, MS 38671"},
+        {id: 7, location: "Location 8", address: "7441 W. Shadow Ave. Moines, IA 502650"},
+        {id: 8, location: "Location 9", address: "716 Meadowbrook Street Mishawaka, IN 46544"}
+      ],
+      search: () => alert("search")
+      }
+    });
+
     //Testing left bar with fake data
     this.setState({
       left: {
@@ -101,6 +121,7 @@ class BusinessDashboardParent extends React.Component{
         logout: () => alert("log out")
       }
     });
+
   }
 
 

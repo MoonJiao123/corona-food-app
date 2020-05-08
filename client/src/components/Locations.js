@@ -3,9 +3,8 @@
  * Dashboard, it allows the business user to look at results for the
  * locations
  *
- * Contributors: Jeet Vachhani
+ * Contributors: Jeet Vachhani, Darien
  */
-
 
 import React from 'react';
 import clsx from 'clsx';
@@ -38,10 +37,7 @@ const styles = (theme) => ({
     },
     tableCell: {
         flex: 1,
-    },
-    noClick: {
-        cursor: 'initial',
-    },
+    }
 });
 
 /**  Class which alllows table to be virtual and movable, and able to add ad many items as needed */
@@ -56,21 +52,21 @@ class MuiVirtualizedTable extends React.PureComponent {
             [classes.tableRowHover]: index !== -1 && onRowClick != null,
         });
     };
+
     cellRenderer = ({ cellData, columnIndex }) => {
         const { columns, classes, rowHeight, onRowClick } = this.props;
         return (
             <TableCell
                 component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, {
-                    [classes.noClick]: onRowClick == null,
-                })}
+                className={clsx(classes.tableCell, classes.flexContainer)}
                 variant="body"
                 style={{ height: rowHeight }}
                 align={(columnIndex != null && columns[columnIndex].numeric) || false ? 'right' : 'left'}
+                onClick={(e)=>alert(e)}
             >
                 {cellData}
             </TableCell>
-        );
+        ); //TODO: hook up listener
     };
 
     headerRenderer = ({ label, columnIndex }) => {
@@ -79,7 +75,7 @@ class MuiVirtualizedTable extends React.PureComponent {
         return (
             <TableCell
                 component="div"
-                className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
+                className={clsx(classes.tableCell, classes.flexContainer)}
                 variant="head"
                 style={{ height: headerHeight }}
                 align={columns[columnIndex].numeric || false ? 'right' : 'left'}
@@ -128,59 +124,29 @@ class MuiVirtualizedTable extends React.PureComponent {
             </AutoSizer>
         );
     }
+
 }
 
 const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
 
-/** Sample Data*/
-const sample = [
-    ['Location 1', '9927 Alderwood Lane\n' +
-    'Conway, SC 29526'],
-    ['Location 2', '332 Marvon St.\n' +
-    'Loveland, OH 45140'],
-    ['Location 3', '7380 Sherman Court\n' +
-    'Alexandria, VA 22304'],
-    ['Location 4', '332 Marvon St.\n' +
-    'Loveland, OH 45140'],
-    ['Location 5', '366 Wild Horse Drive\n' +
-    'Lansing, MI 48910'],
-    ['Location 6', '1 Creek Ave.\n' +
-    'Lebanon, PA 17042'],
-    ['Location 7', '92 Theatre Ave.\n' +
-    'Southaven, MS 38671'],
-    ['Location 8', '7441 W. Shadow Ave.\n' +
-    'Moines, IA 502650'],
-    ['Location 9', '716 Meadowbrook Street\n' +
-    'Mishawaka, IN 46544'],
+export default function Locations(props) {
 
-];
+    let rows = props.data.locations;
 
-/** Create Data*/
-function createData(id, location, address) {
-    return { id, location, address };
-}
-
-const rows = [];
-/** Insert data into the array*/
-for (let i = 0; i < 9; i = i + 1) {
-    const selection = sample[i];
-    rows.push(createData(i, ...selection));
-}
-
-export default function Locations() {
     return (/** Dimensions and adding info into the table*/
-        <Paper style={{ height: 400, width: 600,  position: 'absolute', left: '24%', top: '30%', background: "#eeeeee" }}>
+        <Paper style={{ height: '75%', width: '56%',  position: 'absolute', left: '17%', top: '20%', background: "#eeeeee" }}>
             <VirtualizedTable
+                data={props}
                 rowCount={rows.length}
                 rowGetter={({ index }) => rows[index]}
                 columns={[
                     {
-                        width: 600,
+                        width: 450,
                         label: 'Location',
                         dataKey: 'location',
                     },
                     {
-                        width: 300,
+                        width: 600,
                         label: 'Address',
                         dataKey: 'address',
 
