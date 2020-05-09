@@ -3,7 +3,6 @@ const Business = db.business;
 const Op = db.Sequelize.Op;
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-const Business = db.business;
 
 exports.signup = (req, res) => {
   // Save Business to Database
@@ -76,7 +75,7 @@ exports.signin = (req, res) => {
   
   Business.findOne({
     where: {
-      username: req.body.username
+      name: req.body.name
     }
   }).then(user => {
     if (!user) {

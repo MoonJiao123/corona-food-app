@@ -1,16 +1,16 @@
-const authJwt = require('./verifyJwtToken');
+const authJwt = require('./verifyToken');
 const verifySignUp = require('./verifySignUp');
 
 module.exports = function(app) {
  
-  const controller = require('../controller/business.controller.js');
+  const controller = require('../controllers/business.controller.js');
 
-app.post('/business/signup', [verifySignUp.checkDuplicateUserNameOrEmail, verifySignUp.checkRolesExisted], controller.signup);
+app.post('/api/auth/reg', [verifySignUp.checkDuplicateUserNameOrNameOrEmailOrMobile], controller.signup);
 
-app.post('/business/signin', controller.signin);
+app.post('/api/auth/login', controller.signin);
 
-app.get('/business/user', [authJwt.verifyToken], controller.userContent);
+// app.get('/business/user', [authJwt.verifyToken], controller.userContent);
 
-app.get('/business', [authJwt.verifyToken, authJwt.isPmOrAdmin], controller.managementBoard);
+// app.get('/business', [authJwt.verifyToken, authJwt.isPmOrAdmin], controller.managementBoard);
 
 }

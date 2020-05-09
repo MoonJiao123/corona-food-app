@@ -127,7 +127,7 @@ export default function SignUpCustomer() {
             </Grid>
 
                 {/** signup button after entering all information */}
-                <Link to="/ErrorPage"> {/** should route to a customer page */}
+                <Link to="/Customer"> {/** should route to a customer page */}
                     <Button
                         type="submit"
                         fullWidth
