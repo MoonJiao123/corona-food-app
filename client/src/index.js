@@ -12,7 +12,6 @@ import ErrorPage from './components/ErrorPage';
 import BusinessDashboardParent from './components/BusinessDashboardParent';
 import CustomerDashboardParent from './components/CustomerDashboardParent';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ShoppingListParent from './components/ShoppingListParent';
 
 /** creates routing to different pages */
 export const routing = (

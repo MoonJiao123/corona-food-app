@@ -5,7 +5,7 @@ Right sidebar of Business Dashboard - shows information for select location
 
 import React from 'react'
 import Button from '@material-ui/core/Button';
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import CreateIcon from '@material-ui/icons/Create';
 import LocationInfoListing from './LocationInfoListing';
 
 class LocationInfo extends React.Component{
@@ -45,7 +45,7 @@ class LocationInfo extends React.Component{
         variant="contained"
         color="primary"
         size="large"
-        startIcon={<ArrowUpwardIcon/>}
+        startIcon={<CreateIcon/>}
         >
         Update Listing
         </Button>
