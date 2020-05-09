@@ -1,32 +1,21 @@
-const express = require('express');
-const app = express();
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require('path'); 
+var express = require('express')
+var cors = require('cors')
+var bodyParser = require('body-parser')
+var app = express()
+var port = process.env.PORT || 5000
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+app.use(bodyParser.json())
+app.use(cors())
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+)
 
-// Serve static files from the React app
-app.use(express.static('./client'));
+var Users = require('./routes/business.routes.js')
 
-app.use(cors(corsOptions));
+app.use('/users', Users)
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to fuo application." });
-});
-const db = require("./config/db.config");
-db.sequelize.sync();
-
-require("./routes/business.routes")(app);
-
-const port = process.env.PORT || 5000;
-// console.log that your server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
-// Hello there :D 
-// Hello
+app.listen(port, function() {
+  console.log('Server is running on port: ' + port)
+})
