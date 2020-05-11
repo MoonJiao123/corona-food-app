@@ -1,5 +1,5 @@
 /**
- * This file is to get the requested data of login/signup from the business.model.js
+ * This file is to get the requested data of login/signup from the BusinessModel.js
  * Comparing the requested data with the data we have in database.
  * Return the result of comparison to FE.
  *
@@ -7,18 +7,18 @@
  */
 
 const express = require('express')
-const users = express.Router()
+const businessUsers = express.Router()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-const User = require('../models/business.model.js')
-users.use(cors())
+const BUser = require('../models/BusinessModel.js')
+businessUsers.use(cors())
 
 process.env.SECRET_KEY = 'secret'
 
 //SIGNUP
-users.post('/register', (req, res) => {
+businessUsers.post('/register', (req, res) => {
 
   console.log(req.body.name); //for testing, can be deleted
   console.log(req.body); //for testing, can be deleted
@@ -33,7 +33,7 @@ users.post('/register', (req, res) => {
   }
 
   //since we only use email and password for login, so we only compare email here
-  User.findOne({
+  BUser.findOne({
     where: {
       email: req.body.email
     }
@@ -45,7 +45,7 @@ users.post('/register', (req, res) => {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           userData.password = hash
           //it generate its own token after it created the user
-          User.create(userData)
+          BUser.create(userData)
             .then(user => {
               res.json({ status: user.email + 'Registered!' })
             })
@@ -63,8 +63,8 @@ users.post('/register', (req, res) => {
 })
 
 //LOGIN
-users.post('/login', (req, res) => {
-  User.findOne({
+businessUsers.post('/login', (req, res) => {
+  BUser.findOne({
     where: {
       email: req.body.email
     }
@@ -91,12 +91,12 @@ users.post('/login', (req, res) => {
 
 //PROFILE
 //to fetch profile from FE.
-users.get('/business', (req, res) => {
+businessUsers.get('/business', (req, res) => {
   //to verify authorization sent from FE with secret key
   //it converts token back to the object we created
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
-  User.findOne({
+  BUser.findOne({
     where: {
       id: decoded.id
     }
@@ -113,7 +113,7 @@ users.get('/business', (req, res) => {
     })
 })
 
-module.exports = users
+module.exports = businessUsers
 
 
 // const authJwt = require('./verifyToken');
