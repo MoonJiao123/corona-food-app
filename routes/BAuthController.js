@@ -1,4 +1,8 @@
 /**
+ * This file is to get the requested data of login/signup from the business.model.js
+ * Comparing the requested data with the data we have in database.
+ * Return the result of comparison to FE.
+ *
  * Contributors: Yue Jiao, Yunning Yang
  */
 
@@ -13,19 +17,22 @@ users.use(cors())
 
 process.env.SECRET_KEY = 'secret'
 
+//SIGNUP
 users.post('/register', (req, res) => {
-  console.log(req.body.name);
-  console.log(req.body);
-  console.log(req.body.email);
+
+  console.log(req.body.name); //for testing, can be deleted
+  console.log(req.body); //for testing, can be deleted
+  console.log(req.body.email); //for testing, can be deleted
+
   const userData = {
     account: req.body.account,
     password: bcrypt.hashSync(req.body.password, 8),
     email: req.body.email,
     mobile: req.body.mobile,
     name: req.body.name
-    
   }
 
+  //since we only use email and password for login, so we only compare email here
   User.findOne({
     where: {
       email: req.body.email
@@ -34,8 +41,10 @@ users.post('/register', (req, res) => {
     //TODO bcrypt
     .then(user => {
       if (!user) {
+        //if the user does not exist, there is no user with the same email, we will create the user here
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           userData.password = hash
+          //it generate its own token after it created the user
           User.create(userData)
             .then(user => {
               res.json({ status: user.email + 'Registered!' })
@@ -53,6 +62,7 @@ users.post('/register', (req, res) => {
     })
 })
 
+//LOGIN
 users.post('/login', (req, res) => {
   User.findOne({
     where: {
@@ -61,9 +71,12 @@ users.post('/login', (req, res) => {
   })
     .then(user => {
       if (user) {
+        //if the email exists, compare the password from database
+        //first password comes from FE, second password comes from database
         if (bcrypt.compareSync(req.body.password, user.password)) {
+          //jwt will generate a token that will be passing to FE
           let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-            expiresIn: 1440
+            expiresIn: 1440 //lifetime of token
           })
           res.send(token)
         }
@@ -76,7 +89,11 @@ users.post('/login', (req, res) => {
     })
 })
 
+//PROFILE
+//to fetch profile from FE.
 users.get('/business', (req, res) => {
+  //to verify authorization sent from FE with secret key
+  //it converts token back to the object we created
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOne({
@@ -97,6 +114,8 @@ users.get('/business', (req, res) => {
 })
 
 module.exports = users
+
+
 // const authJwt = require('./verifyToken');
 // const verifySignUp = require('./verifySignUp');
 
