@@ -13,12 +13,12 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const CUser = require('../models/CustomerModel.js')
-consumerUsers.use(cors())
+customerUsers.use(cors())
 
 process.env.SECRET_KEY = 'secret'
 
 //SIGNUP
-consumerUsers.post('/register', (req, res) => {
+customerUsers.post('/register', (req, res) => {
 
     console.log(req.body.name); //for testing, can be deleted
     console.log(req.body); //for testing, can be deleted
@@ -37,7 +37,6 @@ consumerUsers.post('/register', (req, res) => {
             email: req.body.email
         }
     })
-        //TODO bcrypt
         .then(user => {
             if (!user) {
                 //if the user does not exist, there is no user with the same email, we will create the user here
@@ -62,7 +61,7 @@ consumerUsers.post('/register', (req, res) => {
 })
 
 //LOGIN
-consumerUsers.post('/login', (req, res) => {
+customerUsers.post('/login', (req, res) => {
     CUser.findOne({
         where: {
             email: req.body.email
@@ -90,7 +89,7 @@ consumerUsers.post('/login', (req, res) => {
 
 //PROFILE
 //to fetch profile from FE.
-consumerUsers.get('/customer', (req, res) => {
+customerUsers.get('/customer', (req, res) => {
     //to verify authorization sent from FE with secret key
     //it converts token back to the object we created
     var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
@@ -112,4 +111,4 @@ consumerUsers.get('/customer', (req, res) => {
         })
 })
 
-module.exports = consumerUsers
+module.exports = customerUsers

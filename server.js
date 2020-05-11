@@ -22,11 +22,15 @@ app.use(
   })
 )
 
-//access BE from FE
-var Users = require('./routes/BAuthController.js')
+//access bueisness route
+var Business = require('./controllers/businessAuthController.js')
 
-app.use('/users', Users)
+app.use('/business', Business)
 
+//access customer route
+var Customer = require('./controllers/customerAuthController.js')
+
+app.use('/customer', Customer)
 //access API to listen to a port
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)

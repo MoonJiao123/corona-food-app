@@ -38,7 +38,6 @@ businessUsers.post('/register', (req, res) => {
       email: req.body.email
     }
   })
-    //TODO bcrypt
     .then(user => {
       if (!user) {
         //if the user does not exist, there is no user with the same email, we will create the user here
