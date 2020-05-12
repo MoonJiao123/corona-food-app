@@ -2,6 +2,26 @@
 Contributors: Darien
 Styles for the login/signup
 --------------------------------------------------------------------- */
+
+/* Styles for small screens */
+.main-display{
+  flex-direction: column;
+  font-size: 0.9em;
+  height: fit-content;
+  align-items: center;
+
+  .image-display{
+    width: fit-content;
+  }
+
+  #welcome-video{
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Styles for large screens */
+@media only screen and (min-width: 501px) {
 .main-display{
   width: 100%;
   max-width: 1250px;
@@ -11,6 +31,13 @@ Styles for the login/signup
   margin: auto;
   display: flex;
   flex-wrap: nowrap;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
+  #welcome-video{
+    width: 400px;
+    height: 400px;
+  }
+}
 }
