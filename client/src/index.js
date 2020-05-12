@@ -12,11 +12,9 @@ import ErrorPage from './components/ErrorPage';
 import BusinessDashboardParent from './components/BusinessDashboardParent';
 import CustomerDashboardParent from './components/CustomerDashboardParent';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ShoppingListParent from './components/ShoppingListParent';
 
 /** creates routing to different pages */
 export const routing = (
-  /*
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} />
@@ -25,8 +23,6 @@ export const routing = (
         <Route path="/Customer" component={CustomerDashboardParent} />
       </Switch>
     </BrowserRouter>
-    */
-   <ShoppingListParent/>
 )
 
 /** render */
