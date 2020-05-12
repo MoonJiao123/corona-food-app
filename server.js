@@ -23,12 +23,12 @@ app.use(
 )
 
 //access bueisness route
-var Business = require('./controllers/businessAuthController.js')
+var Business = require('./controllers/BusinessAuthController.js')
 
 app.use('/business', Business)
 
 //access customer route
-var Customer = require('./controllers/customerAuthController.js')
+var Customer = require('./controllers/CustomerAuthController.js')
 
 app.use('/customer', Customer)
 //access API to listen to a port
