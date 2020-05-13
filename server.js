@@ -9,7 +9,11 @@ var express = require('express') //set up middleware for API and allow dynamic r
 var cors = require('cors') // handle the cors domain requests
 var bodyParser = require('body-parser') //allow us to extract the data sent from the FE
 var app = express()
-var port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
+
+// Serve static files from the React app
+app.use(express.static('./client'));
+
 
 //app.use mounts the middleware function at a specific path
 app.use(bodyParser.json())
@@ -31,6 +35,7 @@ app.use('/business', Business)
 var Customer = require('./controllers/customerAuthController.js')
 
 app.use('/customer', Customer)
+
 //access API to listen to a port
 app.listen(port, function() {
   console.log('Server is running on port: ' + port)
