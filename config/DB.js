@@ -7,10 +7,6 @@
 const Sequelize = require('sequelize')
 const DB = {}
 
-//HOST: "us-cdbr-iron-east-01.cleardb.net"
-//     USER: "bd778a3ba469c4"
-//     PASSWORD: "1641b41b"
-//     DB: "heroku_90f3403bf02fffe"
 //set up connection: Sequelize(database name, user name of local host, password,{})
 const sequelize = new Sequelize('heroku_90f3403bf02fffe', 'bd778a3ba469c4', '1641b41b', {
     host: 'us-cdbr-iron-east-01.cleardb.net',
