@@ -4,6 +4,10 @@ Styles for the login/signup
 --------------------------------------------------------------------- */
 
 /* Styles for small screens */
+body{
+  overflow-x: hidden;
+}
+
 .main-display{
   flex-direction: column;
   font-size: 0.9em;

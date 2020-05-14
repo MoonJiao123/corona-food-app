@@ -21,11 +21,11 @@ function App() {
     e.preventDefault();
   }
 
-  //Video JSX
+  //Videos JSX
   let loginVid = <video className="image-display" id="welcome-video" muted autoPlay poster={hi} loop 
   src={hi_anim} onContextMenu={disable}>
   </video> ;
-  let signVid = <video className="image-display" id="login-video" muted autoPlay poster={nametag} loop 
+  let signVid = <video className="image-display" id="welcome-video" muted autoPlay poster={nametag} loop 
   src={nametag_anim} onContextMenu={disable}>
   </video> ;
 
@@ -36,7 +36,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div id="account-parent">
       <Header />
       {/* LogIn and SignUp will appear side by side */}
       <div className="main-display">
