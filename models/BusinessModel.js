@@ -30,6 +30,9 @@ module.exports = db.sequelize.define(
     },
     mobile: {
       type: Sequelize.STRING
+    },
+    api: {
+      type: Sequelize.STRING
     }
   },
   {

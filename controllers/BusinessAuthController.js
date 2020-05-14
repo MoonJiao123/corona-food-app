@@ -3,7 +3,7 @@
  * Comparing the requested data with the data we have in database.
  * Return the result of comparison to FE.
  *
- * Contributors: Yue Jiao, Yunning Yang
+ * Contributors: Yue Jiao, Yunning Yang, Derek Ta
  */
 
 const express = require('express')
@@ -11,6 +11,10 @@ const businessUsers = express.Router()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+
+/* Includes necessary for the API generation */
+const axios = require('axios')
+
 
 const BUser = require('../models/BusinessModel.js')
 businessUsers.use(cors())
@@ -110,6 +114,32 @@ businessUsers.get('/business', (req, res) => {
     .catch(err => {
       res.send('error: ' + err)
     })
+})
+
+/* Description: 
+ * POST endpoint to which the user can generate the API secret
+ * Client will have its ClientID and ClientSecret stored in the database, these will be 
+ * used with the OAuth2.0 server as a request token to get an access token which will expire after not 
+ * being used for a certain amount of time. 
+ * 
+ * We will use the client ID as the request token, the api_key field in the model will be the secret 
+ *  Link to tutorial: https://www.sohamkamani.com/blog/javascript/2018-06-24-oauth-with-node-js/
+ * 
+ * Request format: 
+ *   - session: the session from which the api key generation is being routed (generated from the front end)
+ *              we will use the session to infer which business user the api key is being generated for 
+ * 
+ * Parameters: 
+ *    req: the request received via the POST request
+ *    res: the response the server will send back 
+ * Return Values: 
+ *    201 (Created) - "Successfully generated API secret" - Indicates successful generation and storage into DB of api secret
+ *    401 (Unauthorized) - "Invalid business user session" - Indicates that api key generation was unsuccessful due to the user
+ *                                                           requesting from an invalid session (not logged in)
+ *    404 (Not Found) -  "Invalid request parameter" - Database wasn't able to find the corresponding business user 
+ */
+businessUsers.post('/business/api/generate_api_key', (req, res) => {
+  const requestToken = req.query
 })
 
 module.exports = businessUsers

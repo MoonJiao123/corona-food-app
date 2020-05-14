@@ -6,13 +6,21 @@ Compiled doc with all scss
 Colors
 --------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------
+Animations
+--------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+/* ---------------------------------------------------------------------
 Compilation
 --------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------
 Contributors: Darien
 Overriding styles for every page
 --------------------------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
 /* ---------------------------------------------------------------------
 Override Scrollbar
 --------------------------------------------------------------------- */
@@ -266,6 +274,10 @@ Contributors: Darien
 Styles for the login/signup
 --------------------------------------------------------------------- */
 /* Styles for small screens */
+body {
+  overflow-x: hidden;
+}
+
 .main-display {
   flex-direction: column;
   font-size: 0.9em;
@@ -276,8 +288,11 @@ Styles for the login/signup
   width: fit-content;
 }
 .main-display #welcome-video {
+  margin-top: 20px;
   width: 200px;
   height: 200px;
+  opacity: 0;
+  animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
 }
 
 /* Styles for large screens */
@@ -304,12 +319,6 @@ Styles for the login/signup
 Contributors: Darien Tsai
 Styles for the location addition form
 --------------------------------------------------------------------- */
-/*form fade in*/
-@keyframes fade {
-  to {
-    opacity: 1;
-  }
-}
 /*form styles*/
 #addLocation-form.off {
   display: none;

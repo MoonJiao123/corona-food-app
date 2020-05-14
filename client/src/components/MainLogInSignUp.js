@@ -3,7 +3,7 @@
  * signing up with a new account. It shows two different tabs from which 
  * users can select which option they would like to choose to fill out. 
  * 
- * Contributors: Tabassum Alam
+ * Contributors: Tabassum Alam, Darien
  */
 
 import React from 'react';
@@ -65,12 +65,13 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   /** function to create the Sign Up component */
-export default function MainLogInSignUp() {
+export default function MainLogInSignUp(props) {
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    props.vid(newValue);
   };
 
   return (

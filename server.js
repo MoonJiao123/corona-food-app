@@ -30,19 +30,22 @@ const db = require("./config/DB.js");
 db.sequelize.sync();
 
 //access bueisness route
-var Business = require('./controllers/BusinessAuthController.js')
+var Users = require('./controllers/AuthController.js')
 
-app.use('/business', Business)
+app.use('/users', Users)
 
-//access customer route
-var Customer = require('./controllers/CustomerAuthController.js')
 
-app.use('/customer', Customer)
+
+//access product_upload route
+var Product = require('./controllers/BusinessController.js')
+
+app.use('/product', Product)
 
 app.get('/api/getList', (req,res) => {
   var list = ["item1", "item2", "item3"];
   res.json(list);
-  console.log('Sent list of items');
+  res.status(200).json({message : 'Sent list of items'});
+  //console.log('Sent list of items');
 });
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, './client/public'));
