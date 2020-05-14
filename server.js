@@ -30,17 +30,14 @@ const db = require("./config/DB.js");
 db.sequelize.sync();
 
 //access bueisness route
-var Business = require('./controllers/BusinessAuthController.js')
+var Users = require('./controllers/AuthController.js')
 
-app.use('/business', Business)
+app.use('/users', Users)
 
-//access customer route
-var Customer = require('./controllers/CustomerAuthController.js')
 
-app.use('/customer', Customer)
 
 //access product_upload route
-var Product = require('./controllers/BusinessUploadController')
+var Product = require('./controllers/BusinessController.js')
 
 app.use('/product', Product)
 
