@@ -432,4 +432,141 @@ Styles for location search results
   background: white;
 }
 
+/** --------------------------------------------------------------------
+Contributors: Darien Tsai
+Styles for the update listings form
+--------------------------------------------------------------------- */
+/*Form parent styles*/
+#updateWrapper.off {
+  display: none;
+}
+
+#updateWrapper {
+  background: rgba(0, 0, 0, 0.473);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#updateListings {
+  opacity: 0;
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #eeeeee;
+  box-sizing: border-box;
+  padding: 1%;
+  border-radius: 15px;
+  transition-duration: 0.3s;
+  animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
+}
+#updateListings .updatableListing:hover {
+  background: white;
+}
+#updateListings #updateList {
+  width: 100%;
+  height: 85%;
+  overflow: auto;
+}
+#updateListings #updateControls {
+  width: fit-content;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#updateListings #updateControls button {
+  background: #175217;
+  color: white;
+  outline: none;
+  border: none;
+}
+#updateListings #updateControls #addListing {
+  font-size: 2em;
+  text-align: center;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  position: absolute;
+  top: 80%;
+  right: 2em;
+}
+#updateListings #updateControls #addListing:hover {
+  background: #1e6b1e;
+}
+#updateListings #updateControls #addListing:active {
+  background: #134413;
+}
+#updateListings #updateControls #cancelUpdate {
+  background: none;
+  color: black;
+  box-shadow: none;
+  font-size: 0.8em;
+}
+#updateListings #updateControls #cancelUpdate:hover {
+  text-decoration: underline;
+}
+
+/*Listing styles*/
+.updatableListing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 1% 0;
+}
+.updatableListing .updateFile {
+  width: 0;
+  height: 0;
+}
+.updatableListing .updateSelect {
+  width: 6em;
+}
+.updatableListing .updateField {
+  min-width: 6em;
+}
+.updatableListing .MuiInput-underline:after {
+  border-bottom-color: #175217;
+}
+.updatableListing .MuiFormLabel-root.Mui-focused {
+  color: #175217;
+}
+.updatableListing .removeListing, .updatableListing .updateFileWrap {
+  background: #175217;
+  outline: none;
+  border: none;
+  color: white;
+  text-align: center;
+}
+.updatableListing .updateFileWrap {
+  padding: 1%;
+  border-radius: 4px;
+  white-space: nowrap;
+  width: fit-content;
+}
+.updatableListing .removeListing {
+  width: 1.7em;
+  height: 1.7em;
+  font-size: 1.1em;
+  border-radius: 50%;
+}
+.updatableListing .removeListing:hover, .updatableListing .updateFileWrap:hover {
+  background-color: #1e6b1e;
+}
+.updatableListing .removeListing:active, .updatableListing .updateFileWrap:active {
+  background-color: #134413;
+}
+
 /*# sourceMappingURL=App.css.map */

@@ -32,7 +32,7 @@ function App() {
   // Logic for switching illustration displayed
   const [vid, setVid] = React.useState(loginVid);
   function mediaWrapper(tabIdx){
-    setVid(tabIdx==0?loginVid:signVid);
+    setVid(tabIdx===0?loginVid:signVid);
   }
 
   return (
