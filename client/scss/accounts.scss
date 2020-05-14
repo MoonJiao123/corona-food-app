@@ -4,6 +4,10 @@ Styles for the login/signup
 --------------------------------------------------------------------- */
 
 /* Styles for small screens */
+body{
+  overflow-x: hidden;
+}
+
 .main-display{
   flex-direction: column;
   font-size: 0.9em;
@@ -15,8 +19,11 @@ Styles for the login/signup
   }
 
   #welcome-video{
+    margin-top: 20px;
     width: 200px;
     height: 200px;
+    opacity: 0;
+    animation: fade 0.2s cubic-bezier(.18,.1,.18,1) 1 forwards;
   }
 }
 
