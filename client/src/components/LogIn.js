@@ -69,7 +69,7 @@ export default function LogIn() {
     /** to change where the log in button routes to based on identity */
     var linkTo;
     if (value === 'Customer') { // if customer
-        linkTo = "/ProductFilter"   // take to customer page
+        linkTo = "/Customer"   // take to customer page
     } 
     else if (value === 'Business') { // if business
         linkTo = "/Business" // take to business page
@@ -84,14 +84,12 @@ export default function LogIn() {
         <CssBaseline />
         <div className={classes.paper}>
 
-            {/** title for the Log In component
-            <h2> Log in </h2> */}
-
             {/** the log in form to fill out  */}
             <form className={classes.form} noValidate >
 
                 {/** textfield to enter user email address */}
                 <CssTextField
+                    autoFocus
                     variant="outlined"
                     margin="normal"
                     required
@@ -100,7 +98,6 @@ export default function LogIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    autoFocus
                 />
 
                 {/** textfield to enter user password */}
@@ -128,7 +125,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small" checked/>}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
@@ -136,7 +133,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Business"
-                                control={<Radio color="default" size="small" />}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Business </p>}
                             />
                         </Grid>

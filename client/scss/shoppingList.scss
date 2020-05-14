@@ -102,6 +102,7 @@ Styles shopping list and items
   .shopping-list-item-right button{
     width: 3em;
     height: 3em;
+    border-radius: 50%;
   }
 
 }
@@ -110,3 +111,14 @@ Styles shopping list and items
   background: white;
 }
 
+/* Styles for small screens */
+@media only screen and (max-width: 501px) {
+/* Styles for small screens */
+#shopping-list{
+  width: 90%;
+  height: 80%;
+  top: 10%;
+  left: 5%;
+  font-size: 0.7em;
+}
+}

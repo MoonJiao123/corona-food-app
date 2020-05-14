@@ -8,9 +8,8 @@ import LocationInfo from './LocationInfo';
 import LeftSideBar from './LeftSideBar';
 import LocationSearchBar from "./LocationSearchBar";
 import Locations from "./Locations";
-import CustomerHeader from "./CustomerHeader";
-import ShopItems from "./ShopItems"
-
+import AddLocation from './AddLocation';
+import UpdateListings from './UpdateListings';
 /* ---------------------------------------------------------------------
 Component Object: will contain the left/center/right components that make
 up the business dashboard.
@@ -30,7 +29,9 @@ class BusinessDashboardParent extends React.Component{
       left: {
         companyName: "",
         totalLocations: 0,
-        addLocation: () => alert("add location"),
+        addLocation: () => {
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
         logout: () => alert("log out")
       },
 
@@ -58,7 +59,29 @@ class BusinessDashboardParent extends React.Component{
             expiration: ''
           }
         ],
-        updateProducts: () => alert("update products")
+        updateProducts: () => {
+          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+        }
+      },
+
+      formClass: "off",
+
+      form: {
+        submitNewLocation: () => alert("add new location"),
+        closeForm: (e) => {
+          e.preventDefault();
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
+      },
+
+      updateClass: "off",
+      
+      update: {
+        submitUpdate: () => alert("listings updated"),
+        closeForm: (e) => {
+          e.preventDefault();
+          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+        },
       }
 
     };
@@ -91,7 +114,9 @@ class BusinessDashboardParent extends React.Component{
             expiration: '11/11/2020'
           }
         ],
-        updateProducts: () => alert("update products")
+        updateProducts: () => {
+          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+        }
       }
     });
 
@@ -100,7 +125,7 @@ class BusinessDashboardParent extends React.Component{
       locations: [
         {id: 0, location: "Location 1", address: "9927 Alderwood Lane Conway, SC 29526"},
         {id: 1, location: "Location 2", address: "332 Marvon St. Loveland, OH 45140"},
-        {id: 2, location: "Location 3", address: "7380 Sherman Court↵Alexandria, VA 22304"},
+        {id: 2, location: "Location 3", address: "7380 Sherman Court Alexandria, VA 22304"},
         {id: 3, location: "Location 4", address: "332 Marvon St. Loveland, OH 45140"},
         {id: 4, location: "Location 5", address: "366 Wild Horse Drive Lansing, MI 48910"},
         {id: 5, location: "Location 6", address: "1 Creek Ave. Lebanon, PA 17042"},
@@ -117,13 +142,14 @@ class BusinessDashboardParent extends React.Component{
       left: {
         companyName: "FUO-mart",
         totalLocations: 3.1415926535,
-        addLocation: () => alert("add location"),
+        addLocation: () => {
+          this.setState({formClass: this.state.formClass==="off"?"on":"off"});
+        },
         logout: () => alert("log out")
       }
     });
 
   }
-
 
   /* ---------------------------------------------------------------------
   Render
@@ -138,6 +164,8 @@ class BusinessDashboardParent extends React.Component{
         <LocationSearchBar data = {this.state.center}/>
         <Locations data = {this.state.center}/>
         <LocationInfo data={this.state.right}/>
+        <AddLocation data={this.state.form} toggle={this.state.formClass}/>
+        <UpdateListings data={this.state.update} toggle={this.state.updateClass}/>
       </div>
     );
   }

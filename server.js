@@ -1,28 +1,55 @@
-const express = require('express');
-const app = express();
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require('path'); 
+/**
+ * This is the file to start our server.
+ * It contains the main back-end logic for our server.
+ *
+ * Contributors: Yue Jiao, Yunning Yang
+ */
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+var express = require('express') //set up middleware for API and allow dynamic rendering of pages
+var cors = require('cors') // handle the cors domain requests
+var bodyParser = require('body-parser') //allow us to extract the data sent from the FE
+var app = express()
+var path = require('path')
+const port = process.env.PORT || 5000;
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static('./client/public'));
 
-app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use mounts the middleware function at a specific path
+app.use(bodyParser.json())
+app.use(cors())
 
-const db = require("./models");
+//parse the data with json, the query string library
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+)
+const db = require("./config/DB.js");
 db.sequelize.sync();
 
-require("./routes/business.routes")(app);
+//access bueisness route
+var Business = require('./controllers/BusinessAuthController.js')
 
-const port = process.env.PORT || 5000;
-// console.log that your server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use('/business', Business)
+
+//access customer route
+var Customer = require('./controllers/CustomerAuthController.js')
+
+app.use('/customer', Customer)
+
+app.get('/api/getList', (req,res) => {
+  var list = ["item1", "item2", "item3"];
+  res.json(list);
+  console.log('Sent list of items');
+});
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, './client/public'));
+});
+
+//access API to listen to a port
+app.listen(port, function() {
+  console.log('Server is running on port: ' + port)
+})
+

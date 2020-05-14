@@ -25,7 +25,7 @@ function App() {
       <div className="main-display">
         <div className="image-display">
           <video className="image-display" id="welcome-video" muted autoPlay poster={hi} loop 
-          src={hi_anim} width="400" height="400" onContextMenu={disable}>
+          src={hi_anim} onContextMenu={disable}>
           </video> 
         </div>
         <div className="tab-display">  

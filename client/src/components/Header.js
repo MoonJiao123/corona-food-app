@@ -8,10 +8,7 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-
+import {AppBar, Toolbar} from '@material-ui/core';
 
 
 /** style guidelines for the Header componenet */
