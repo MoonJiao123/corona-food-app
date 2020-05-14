@@ -163,19 +163,10 @@ const SubA = styled.a`
 
 /** function to create the Header component */
 class CustomerHeader extends Component {
-    state = {show: false};
     handleClick = action => {
         if (!action) return;
 
         if (this.props.onClick) this.props.onClick(action);
-     };
-
-     showShoppingList = () => {
-        this.setState({show:true});
-     };
-
-     hideShoppingList = () => {
-        this.setState({show:false});
      };
 
     render = () => {
@@ -204,10 +195,8 @@ class CustomerHeader extends Component {
             <SearchButton> <SearchIcon/> </SearchButton>
             </SearchBar>
 
-
             <TextButton type="submit" size={"small"}> Log Out </TextButton>
-            <ShoppingListParent show={this.state.show} handleClose={this.hideShoppingList}> </ShoppingListParent>
-            <CartButton type="button" onClick={this.showShoppingList}> <ShoppingCartIcon fontSize='large'/> </CartButton>
+            <CartButton type="button" onClick={this.props.handleClick}> <ShoppingCartIcon fontSize='large'/> </CartButton>
       </Header>
     );
     };

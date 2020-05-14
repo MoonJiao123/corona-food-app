@@ -50,6 +50,7 @@ class CustomerDashboardParent extends React.Component {
 
             },
 
+            show: false
         };
     }
 
@@ -57,11 +58,20 @@ class CustomerDashboardParent extends React.Component {
 
     }
 
+    showShoppingList = () => {
+        this.setState({show:true});
+    };
+
+    hideShoppingList = () => {
+        this.setState({show:false});
+    };
+
     render () {
         return (
             <div>
-                <CustomerHeader/>
+                <CustomerHeader handleClick={this.showShoppingList}/>
                 <ShopItems/>
+                <ShoppingListParent show={this.state.show} handleClose={this.hideShoppingList}> </ShoppingListParent>
             </div>
 
         );
