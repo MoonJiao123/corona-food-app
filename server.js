@@ -39,6 +39,11 @@ var Customer = require('./controllers/CustomerAuthController.js')
 
 app.use('/customer', Customer)
 
+//access product_upload route
+var Product = require('./controllers/BusinessUploadController')
+
+app.use('/product', Product)
+
 app.get('/api/getList', (req,res) => {
   var list = ["item1", "item2", "item3"];
   res.json(list);
