@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ShoppingListParent from './ShoppingListParent';
 import SortIcon from '@material-ui/icons/Sort';
 
 const Header = styled.div`
@@ -162,10 +163,19 @@ const SubA = styled.a`
 
 /** function to create the Header component */
 class CustomerHeader extends Component {
+    state = {show: false};
     handleClick = action => {
         if (!action) return;
 
         if (this.props.onClick) this.props.onClick(action);
+     };
+
+     showShoppingList = () => {
+        this.setState({show:true});
+     };
+
+     hideShoppingList = () => {
+        this.setState({show:false});
      };
 
     render = () => {
@@ -180,9 +190,10 @@ class CustomerHeader extends Component {
                        </Dropbtn>
                        <DropDownContent>
                           {" "}
-                          <SubA onClick={() => this.handleClick("Link1")}>Sort A</SubA>
-                          <SubA onClick={() => this.handleClick("Link2")}>Sort B</SubA>
-                          <SubA onClick={() => this.handleClick("Link3")}>Sort C</SubA>
+                          <SubA onClick={() => this.handleClick("Link1")}>Meat</SubA>
+                          <SubA onClick={() => this.handleClick("Link2")}>Seafood</SubA>
+                          <SubA onClick={() => this.handleClick("Link3")}>Dairy</SubA>
+                          <SubA onClick={() => this.handleClick("Link4")}>Vegetables</SubA>
                         </DropDownContent>
             </DropDownLi>
 
@@ -195,7 +206,8 @@ class CustomerHeader extends Component {
 
 
             <TextButton type="submit" size={"small"}> Log Out </TextButton>
-            <CartButton> <ShoppingCartIcon fontSize='large'/> </CartButton>
+            <ShoppingListParent show={this.state.show} handleClose={this.hideShoppingList}> </ShoppingListParent>
+            <CartButton type="button" onClick={this.showShoppingList}> <ShoppingCartIcon fontSize='large'/> </CartButton>
       </Header>
     );
     };

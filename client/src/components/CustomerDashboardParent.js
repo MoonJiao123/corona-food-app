@@ -3,10 +3,14 @@
  * dashboard page. It renders all other subcomponents needed to 
  * display all information to the user approproately.
  * 
- * Contributors: Tabassum Alam
+ * Contributors: Tabassum Alam, Thuyet Ta
  */
 
 import React from 'react';
+import CustomerHeader from './CustomerHeader'
+import ShopItems from './ShopItems'
+import ShoppingListItem from './ShoppingListItem'
+import ShoppingListParent from './ShoppingListParent'
 
 class CustomerDashboardParent extends React.Component {
     constructor(props) {
@@ -55,8 +59,10 @@ class CustomerDashboardParent extends React.Component {
 
     render () {
         return (
-
-            <h1> welcome, customer </h1>
+            <div>
+                <CustomerHeader/>
+                <ShopItems/>
+            </div>
 
         );
     }

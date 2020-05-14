@@ -166,6 +166,12 @@ Styles shopping list and items
   background: #eeeeee;
   border-radius: 10px;
 }
+
+/* Modal */
+#display-none {
+  display: none;
+}
+
 #shopping-list button {
   outline: none;
   border: none;
