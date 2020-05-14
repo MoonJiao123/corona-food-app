@@ -45,7 +45,64 @@ const CssTextField = withStyles({
 /** functin to create the SignUpBusiness component */
 export default function SignUpBusiness() {
 
-  const classes = useStyles();
+    // to call style guidelines
+    const classes = useStyles();
+    // used to store customer information from the form
+    const [buissnessName, setBusinessName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [phone, setPhone] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [confirmPW, setConfirmPW] = React.useState('');
+
+    /** to change business name variable when entered */
+    const handleBuisnessName = (event) => {
+        setBusinessName(event.target.value)
+    }
+
+    /** to change the email variable when entered */
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
+    }
+
+    /** to change the phone variable when entered */
+    const handlePhone = (event) => {
+        setPhone(event.target.value);
+    }
+
+    /** to change the password variable when entered */
+    const handlePassword = (event) => {
+        setPassword(event.target.value);
+    }
+
+    /** to change the password variable when entered */
+    const handleConfirmPW = (event) => {
+        setConfirmPW(event.target.value);
+    }
+
+    /** to do when form is complete and submitted */
+    const handleSubmit = (event) => {
+        /** need backend to work for all of this to work i think so */
+        event.preventDefault();
+        fetch('/api/authenticate', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            if (res.status === 200) {
+            this.props.history.push('/');
+            } else {
+            const error = new Error(res.error);
+            throw error;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Error logging in please try again');
+        });
+    }
 
   return (
       /** use container to allow horizontal alignement */
@@ -57,19 +114,22 @@ export default function SignUpBusiness() {
         <p> Create a Business Account </p>
 
         {/** create the sign up form for businesses */}
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate
+        onSubmit={handleSubmit}>
         <Grid container spacing={2}>
 
              {/** textfield to enter business name */}
             <Grid item xs={12}>
                 <CssTextField
-                    autoComplete="fname"
-                    name="businessName"
+                    autoFocus
                     required
                     fullWidth
                     id="businessName"
+                    name="businessName"
                     label="Business Name"
-                    autoFocus
+                    autoComplete="name"
+                    value={buissnessName}
+                    onChange={handleBuisnessName}
                 />
             </Grid>
 
@@ -79,9 +139,11 @@ export default function SignUpBusiness() {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
                     name="email"
+                    label="Email Address"
                     autoComplete="email"
+                    value={email}
+                    onChange={handleEmail}
                 />
             </Grid>
 
@@ -91,9 +153,11 @@ export default function SignUpBusiness() {
                     required
                     fullWidth
                     id="phone"
-                    label="Phone"
                     name="phone"
+                    label="Phone"
                     autoComplete="phone"
+                    value={phone}
+                    onChange={setPhone}
                 />
             </Grid>
 
@@ -102,11 +166,13 @@ export default function SignUpBusiness() {
                 <CssTextField
                     required
                     fullWidth
+                    id="password"
                     name="password"
                     label="New Password"
                     type="password"
-                    id="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={handlePassword}
                 />
             </Grid>
 
@@ -115,25 +181,27 @@ export default function SignUpBusiness() {
                 <CssTextField
                     required
                     fullWidth
+                    id="password"
                     name="password"
                     label="Confirm Password"
                     type="password"
-                    id="password"
                     autoComplete="current-password"
+                    value={confirmPW}
+                    onChange={handleConfirmPW}
                 />
             </Grid>
         </Grid>
 
             {/** button to sign up new business account after form is filled out */}
             <Link to="/Business">
-            <Button
-                type="submit"
-                variant="contained"
-                color="default"
-                fullWidth
-                className={classes.submit}>
-                Sign Up
-            </Button>
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="default"
+                    fullWidth
+                    className={classes.submit}>
+                    Sign Up
+                </Button>
             </Link>
 
         </form>
