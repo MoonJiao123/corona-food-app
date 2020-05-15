@@ -40,14 +40,19 @@ class ListingForm extends React.Component{
     this.imgFile.click();
   }
 
-  render(){
-    
+  //render
+  render(){    
     return(
       <form className="updatableListing">
+
+        {/** Image upload */}
         <button className="updateFileWrap" onClick={this.handleImg}>Image</button>
         {this.state.fileInput}
 
+        {/** Dropdown selection for category */}
         <FormControl>
+
+          {/** Dropdown Button */}
           <InputLabel className="category-select">Category</InputLabel>
           <Select
             labelId="demo-simple-select-filled-label"
@@ -55,6 +60,8 @@ class ListingForm extends React.Component{
             value={this.state.category}
             onChange={this.handleSelect}
           >
+
+            {/** Dropdown Options */}
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -67,11 +74,13 @@ class ListingForm extends React.Component{
           </Select>
         </FormControl>
 
+        {/** Text inputs */}
         <TextField className="updateField" label="Name" />
         <TextField className="updateField" label="Amount" />
         <TextField className="updateField" label="Price" />
         <TextField className="updateField" label="min - max%" />
 
+        {/** Expiration Date input */}
         <TextField
           id="date"
           label="Expiration"
@@ -82,6 +91,7 @@ class ListingForm extends React.Component{
           }}
         />
 
+        {/** Remove button */}
         <button className="removeListing">-</button>
       </form>
     );
@@ -96,19 +106,24 @@ class UpdateListings extends React.Component{
   //TODO: load in props
 
   render(){
-    //Map to updatable listings
+    //TODO: Map to updatable listings
 
     //return popup form
     return(
       <div id="updateWrapper" className={this.props.toggle}>
+
+        {/** Popup body */}
         <div id="updateListings">
 
+          {/** Contains all listings */}
+          {/** TODO: Keys */}
           <div id="updateList">
             <ListingForm/>
             <ListingForm/>
             <ListingForm/>
           </div>
 
+          {/** Submit, Add, Cancel buttons */}
           <div id="updateControls">
             <button id="addListing">+</button>
             <Button variant="contained" onClick={this.props.data.submitUpdate}>Save</Button>

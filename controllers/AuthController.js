@@ -4,6 +4,7 @@
  * Return the result of comparison to FE.
  *
  * Contributors: Yue Jiao, Yunning Yang
+ * Shawn - just added res.status().json({}) messages
  */
 
 const express = require('express')
@@ -49,15 +50,18 @@ users.post('/business/register', (req, res) => {
               res.json({ status: user.email + 'Registered!' })
             })
             .catch(err => {
-              res.send('error: ' + err)
+              //res.send('error: ' + err)
+              res.status(400).json({Error: 'Bad request'}) /* Added by Shawn */
             })
         })
       } else {
         res.json({ error: 'User already exists' })
+        res.status(400).json({Error: 'User already exists'}) /* Added by Shawn */ 
       }
     })
     .catch(err => {
-      res.send('error: ' + err)
+      //res.send('error: ' + err)
+      res.status(400).json({Error: err}) /* Added by Shawn */
     })
 })
 
@@ -77,7 +81,8 @@ users.post('/business/login', (req, res) => {
           let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
             expiresIn: 1440 //lifetime of token
           })
-          res.send(token)
+          //res.send(token)
+          res.status(200).json({message: 'User found, authenticated'}) /* Added by Shawn */
         }
       } else {
         res.status(400).json({ error: 'User does not exist' })
@@ -103,12 +108,15 @@ users.get('/business', (req, res) => {
     .then(user => {
       if (user) {
         res.json(user)
+        res.status(200).json({message: 'User found, authenticated'}) /* Added by Shawn */
       } else {
-        res.send('User does not exist')
+        //res.send('User does not exist')
+        res.status(400).json({error: 'User does not exist'}) /* Added by Shawn */
       }
     })
     .catch(err => {
-      res.send('error: ' + err)
+      //res.send('error: ' + err)
+      res.status(400).json({error: err}) /* Added by Shawn */
     })
 })
 
@@ -141,17 +149,21 @@ users.post('/customer/register', (req, res) => {
                   CUser.create(userData)
                       .then(user => {
                           res.json({ status: user.email + 'Registered!' })
+                          res.status(200).json({message: 'Registered!'}) /* added by Shawn*/
                       })
                       .catch(err => {
                           res.send('error: ' + err)
+                          res.status(400).json({error: err}) /* added by Shawn*/
                       })
               })
           } else {
-              res.json({ error: 'User already exists' })
+              //res.json({ error: 'User already exists' })
+              res.status(400).json({error: 'User already exists'}) /* added by Shawn*/
           }
       })
       .catch(err => {
-          res.send('error: ' + err)
+          //res.send('error: ' + err)
+          res.status(400).json({error: err}) /* added by Shawn*/
       })
 })
 
@@ -197,12 +209,15 @@ users.get('/customer', (req, res) => {
       .then(user => {
           if (user) {
               res.json(user)
+              res.status(200).json({message : 'User found'}); /* added by Shawn */
           } else {
-              res.send('User does not exist')
+              //res.send('User does not exist')
+              res.status(400).json({error : 'User does not exist'}); /* added by Shawn */
           }
       })
       .catch(err => {
-          res.send('error: ' + err)
+          //res.send('error: ' + err)
+          res.status(400).json({error:  err}); /* added by Shawn */
       })
 })
 module.exports = users

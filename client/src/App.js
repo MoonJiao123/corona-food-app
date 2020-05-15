@@ -21,22 +21,22 @@ function App() {
     e.preventDefault();
   }
 
-  //Video JSX
+  //Videos JSX
   let loginVid = <video className="image-display" id="welcome-video" muted autoPlay poster={hi} loop 
   src={hi_anim} onContextMenu={disable}>
   </video> ;
-  let signVid = <video className="image-display" id="login-video" muted autoPlay poster={nametag} loop 
+  let signVid = <video className="image-display" id="welcome-video" muted autoPlay poster={nametag} loop 
   src={nametag_anim} onContextMenu={disable}>
   </video> ;
 
   // Logic for switching illustration displayed
   const [vid, setVid] = React.useState(loginVid);
   function mediaWrapper(tabIdx){
-    setVid(tabIdx==0?loginVid:signVid);
+    setVid(tabIdx===0?loginVid:signVid);
   }
 
   return (
-    <div>
+    <div id="account-parent">
       <Header />
       {/* LogIn and SignUp will appear side by side */}
       <div className="main-display">
