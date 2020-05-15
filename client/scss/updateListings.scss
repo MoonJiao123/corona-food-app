@@ -1,0 +1,157 @@
+/** --------------------------------------------------------------------
+Contributors: Darien Tsai
+Styles for the update listings form
+--------------------------------------------------------------------- */
+
+/*Form parent styles*/
+#updateWrapper.off{
+  display: none;
+}
+
+#updateWrapper{
+  background: rgba(0, 0, 0, 0.473);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#updateListings{
+  opacity: 0;
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: $bg-white;
+  box-sizing: border-box;
+  padding: 1%;
+  border-radius: 15px;
+  transition-duration: 0.3s;
+  animation: fade 0.2s cubic-bezier(.18,.1,.18,1) 1 forwards;
+
+  .updatableListing:hover{
+    background: white;
+  }
+
+  #updateList{
+    width: 100%;
+    height: 85%;
+    overflow: auto;
+  }
+
+  #updateControls{
+    width: fit-content;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+    button{
+      background: $button-green;
+      color: white;
+      outline: none;
+      border: none;
+    }
+
+    #addListing{
+      font-size: 2em;
+      text-align: center;
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      position: absolute;
+      top: 80%;
+      right: 2em;
+    }
+
+    #addListing:hover{
+      background: $button-hover;
+    }
+
+    #addListing:active{
+      background: $button-active;
+    }
+
+    #cancelUpdate{
+      background: none;
+      color: black;
+      box-shadow: none;
+      font-size: 0.8em;
+    }
+
+    #cancelUpdate:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+/*Listing styles*/
+
+.updatableListing{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 1% 0;
+
+  .updateFile{
+    width: 0;
+    height: 0;
+  }
+
+  .updateSelect{
+    width: 6em;
+  }
+
+  .updateField{
+    min-width: 6em;
+  }
+
+  .MuiInput-underline:after{
+    border-bottom-color: $button-green;
+  }
+
+  .MuiFormLabel-root.Mui-focused{
+    color: $button-green;
+  }
+
+  .removeListing, .updateFileWrap{
+    background: $button-green;
+    outline: none;
+    border: none;
+    color: white;
+    text-align: center;
+  }
+
+  .updateFileWrap{
+    padding: 1%;
+    border-radius: 4px;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  .removeListing{
+    width: 1.7em;
+    height: 1.7em;
+    font-size: 1.1em;
+    border-radius: 50%;
+  }
+
+  .removeListing:hover, .updateFileWrap:hover{
+    background-color: $button-hover;
+  }
+
+  .removeListing:active, .updateFileWrap:active{
+    background-color: $button-active;
+  }
+}

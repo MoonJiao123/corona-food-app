@@ -1,0 +1,6 @@
+/* puts Log In and Sign Up pages side by side */
+.main-display{
+  display:flex;
+  flex-direction: row;
+  margin-left: 10%;
+}

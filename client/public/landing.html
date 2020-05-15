@@ -1,7 +1,7 @@
 <!Doctype html>
 <!-- ---------------------------------------------------------------------------
 Contributors: Darien
-Landing page for _NAME_. Primary audience are busniesses
+Landing page for FUO. Primary audience are busniesses
 ---------------------------------------------------------------------------- -->
 
 <html lang="en"></html>
@@ -9,7 +9,6 @@ Landing page for _NAME_. Primary audience are busniesses
 <head>
   <!-- -------------------------------------------------------------------------
   Meta Tags
-  TODO app name
   -------------------------------------------------------------------------- -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Free Web tutorials"/>
@@ -18,10 +17,11 @@ Landing page for _NAME_. Primary audience are busniesses
 
 
   <!-- -------------------------------------------------------------------------
-  Title, CSS
+  Title, favicon, css
   CSS: Browser reset styles, PC, Mobile
   -------------------------------------------------------------------------- -->
   <title>FOOD WASTE</title>
+  <link rel="icon" href="favicon.png" />
   <link rel="stylesheet" type="text/css" href="css/defaults.css"/>
   <link rel="stylesheet" type="text/css" href="css/landing-anim.css"/>
   <link rel="stylesheet" type="text/css" href="css/landing-pc.css"/>
@@ -44,7 +44,7 @@ Landing page for _NAME_. Primary audience are busniesses
     </div>
 
     <div id="nav-links">
-      <a href="index.html">Sign up</a>
+      <a href="/">Sign up</a>
     </div>
 
   </nav>
@@ -52,20 +52,21 @@ Landing page for _NAME_. Primary audience are busniesses
 
   <!-- -------------------------------------------------------------------------
   Page Header
-  TODO: image
   -------------------------------------------------------------------------- -->
   <header>
 
     <div id="header-content">
       <h1>Sell Produce Before it Expires.</h1>
       <div id="header-content-links">
-        <a href="index.html" id="header-sign-up">Start Listing</a>
-        <a href="index.html" id="header-login">Already Selling? Sign in.</a>
+        <a href="/" id="header-sign-up">Start Listing</a>
+        <a href="/" id="header-login">Already Selling? Sign in.</a>
       </div>
     </div>
 
-    <div id="header-visual">
-      <img src="#" alt="Mascot"/>
+    <div id="header-visual" oncontextmenu="return false;">
+      <video id="header-video" muted autoplay poster="media/mascot.jpg" loop>
+        <source src="media/mascot_anim.mp4">
+      </video>
     </div>
 
   </header>
@@ -73,12 +74,13 @@ Landing page for _NAME_. Primary audience are busniesses
 
   <!-- -------------------------------------------------------------------------
   Mission Statement
-  TODO: image
   -------------------------------------------------------------------------- -->
   <section id="landing-mission">
 
     <div id="mission-visual">
-      <img src="#" alt="Mission-Mascot"/>
+      <video muted autoplay poster="media/waste.jpg" loop>
+        <source src="media/waste_anim.mp4">
+      </video>
     </div>
 
     <div id="mission-content">
@@ -87,7 +89,7 @@ Landing page for _NAME_. Primary audience are busniesses
         <h3>Not on Your Watch.</h3>
       </div>
       <p>
-        App provides an online directory for goods that are close to expiration 
+        Fuo provides an online directory for goods that are close to expiration 
         at a generous discount. People get food, you make revenue.
       </p>
     </div>
@@ -106,21 +108,27 @@ Landing page for _NAME_. Primary audience are busniesses
     <div id="features-list">
 
       <figure class="feature-card">
-        <img src="#" alt="Feature"/>
+        <video muted autoplay poster="media/list.jpg" loop>
+          <source src="media/list_anim.mp4">
+        </video>
         <figcaption>
           Add Listings
         </figcaption>
       </figure>
 
       <figure class="feature-card">
-        <img src="#" alt="Feature"/>
+        <video muted autoplay poster="media/buy.jpg" loop>
+          <source src="media/buy_anim.mp4">
+        </video>
         <figcaption>
           People Buy
         </figcaption>
       </figure>
 
       <figure class="feature-card">
-        <img src="#" alt="Feature"/>
+        <video muted autoplay poster="media/sell.jpg" loop>
+          <source src="media/sell_anim.mp4">
+        </video>
         <figcaption>
           You Sell
         </figcaption>
@@ -133,13 +141,14 @@ Landing page for _NAME_. Primary audience are busniesses
 
   <!-- -------------------------------------------------------------------------
   Call to Action
-  TODO: image
   -------------------------------------------------------------------------- -->
   <section id="landing-action">
 
-    <img src="#" alt="Sign up">
+    <video id="mission-video" muted autoplay poster="media/fixFoodWaste.jpg" loop oncontextmenu="return false">
+      <source src="media/fixFoodWaste_anim.mp4">
+    </video>
     <h3>Let's Fix Food Waste.</h3>
-    <a href="index.html">Start Listing</a>
+    <a href="/">Start Listing</a>
 
   </section>
 

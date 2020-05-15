@@ -1,0 +1,48 @@
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for location search results
+--------------------------------------------------------------------- */
+
+#location-results{
+  background: #eeeeee;
+  width: 50%;
+  height: 75%;
+  position: absolute;
+  left: 20%;
+  border-radius: 10px;
+  top: 17%;
+  box-sizing: border-box;
+
+  .location-row{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    padding: 1.5% 0;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    cursor: pointer;
+    transition-duration: 0.2s;
+  
+    .location-name, .location-address{
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 1.1em;
+      box-sizing: border-box;
+      padding: 0 2%;
+    }
+
+    .location-address{
+      width: 60%;
+    }
+
+    .location-name{
+      width: 40%;
+    }
+  }
+
+  .location-row:hover{
+    background: white;
+  }
+}

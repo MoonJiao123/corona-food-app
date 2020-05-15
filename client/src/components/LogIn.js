@@ -6,22 +6,16 @@
  */
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import {Button, CssBaseline, TextField, Grid, Container, FormControlLabel, 
+    Radio, RadioGroup} from '@material-ui/core';
 import { withStyles, makeStyles, } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import {Link} from 'react-router-dom';
 
 /** style guidelines for the Log In compoenent */
 const useStyles = makeStyles((theme) => ({
     /** guidelines for the div componenet */
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(0),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -55,10 +49,34 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
+
 /** function to create the Log In component  */
 export default function LogIn() {
 
-    const classes = useStyles();
+    // to call style guidelines
+    const classes = useStyles(); 
+    // used to set where the login button will link to
+    const [value, setValue] = React.useState(''); 
+    const [helperText, setHelperText] = React.useState('Please select an option above.');
+
+
+    /** to change the variable value when radio handle is used */
+    const handleRadioChange = (event) => {
+        setValue(event.target.value);
+        setHelperText('')
+    };
+
+    /** to change where the log in button routes to based on identity */
+    var linkTo;
+    if (value === 'Customer') { // if customer
+        linkTo = "/Customer"   // take to customer page
+    } 
+    else if (value === 'Business') { // if business
+        linkTo = "/Business" // take to business page
+    }
+    else {
+        linkTo =""
+    } 
 
     return (
        /** use container to allow horizontal alignment  */
@@ -66,14 +84,12 @@ export default function LogIn() {
         <CssBaseline />
         <div className={classes.paper}>
 
-            {/** title for the Log In component */}
-            <h2> Log in </h2>
-
             {/** the log in form to fill out  */}
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate >
 
                 {/** textfield to enter user email address */}
                 <CssTextField
+                    autoFocus
                     variant="outlined"
                     margin="normal"
                     required
@@ -82,7 +98,6 @@ export default function LogIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    autoFocus
                 />
 
                 {/** textfield to enter user password */}
@@ -99,7 +114,7 @@ export default function LogIn() {
                 />
 
                 {/** grid to identify customer/business accounts */}
-                <RadioGroup aria-label="identity" name="identifier" >
+                <RadioGroup aria-label="identity" name="identifier" onChange={handleRadioChange}>
 
                     {/** subtitle indicating user to choose*/}
                     <p> I am a ... </p>
@@ -110,7 +125,7 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Customer"
-                                control={<Radio color="default" size="small"/>}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Customer </p>}
                             />
                         </Grid>
@@ -118,28 +133,34 @@ export default function LogIn() {
                         <Grid item>
                             <FormControlLabel
                                 value="Business"
-                                control={<Radio color="default" size="small" />}
+                                control={<Radio color="default" size="small" name="id"/>}
                                 label={<p> Business </p>}
                             />
                         </Grid>
                     </Grid>
                 </RadioGroup>
+                {/** text to indicate user did not select identity option */}
+                <p><small>{helperText}</small></p>
+
 
                 {/** log in button after enterring email & password */}
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="default"
-                    className={classes.submit}>
-                    Log In
-                </Button>
+                <Link to={linkTo}> 
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="default"
+                        className={classes.submit}
+                        >
+                        Log In
+                    </Button>
+                </Link>
 
                 {/** allow users to retrieve password if forgotten */}
                 <Grid container>
                     <Grid item xs>
                         {/** link to resetting password */}
-                        <Link href="#" variant="p">
+                        <Link to="/ErrorPage" variant="p" style={{color: '#1401ee'}}>
                         Forgot password?
                         </Link>
                     </Grid>
