@@ -12,6 +12,9 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
+/*We will reference the business API singleton*/
+const BAPI = require('Classes/BusinessAPI.js')
+
 const BUser = require('../models/BusinessModel.js')
 businessUsers.use(cors())
 
@@ -148,16 +151,11 @@ businessUsers.post('/business/api/generate_api_key', (req, res) => {
     }
   })
     .then(user => {
-      if (user) {
-        res.json(user)
-      } else {
-        //res.send('User does not exist')
-        res.status(400).jason({error: 'User does not exist'}) //Shawn
-      }
+      BAPI.generateApiKey(req,res)
     })
     .catch(err => {
       //res.send('error: ' + err)
-      res.status(400).jason({error: err}) //Shawn
+      res.status(400).json({error: err}) //Shawn
     })
 })
 
