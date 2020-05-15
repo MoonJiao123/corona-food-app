@@ -24,12 +24,7 @@ product.post('/upload', (req, res) => {
     //it generate its own token after it created the user
     item.create(userData)
         .then(user => {
-<<<<<<< HEAD
-            //res.json({ status:user.product_name + 'Added coupon to db' })
-            res.status(200).jason({message: user.product_name + 'Added coupon to db'}) //Shawn
-=======
             res.json({ status: user.product_name + 'Added coupon to db' })
->>>>>>> product
         })
         .catch(err => {
             res.send('error: ' + err)
