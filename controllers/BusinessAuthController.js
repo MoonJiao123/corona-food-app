@@ -108,11 +108,13 @@ businessUsers.get('/business', (req, res) => {
       if (user) {
         res.json(user)
       } else {
-        res.send('User does not exist')
+        //res.send('User does not exist')
+        res.status(400).jason({error: 'User does not exist'}) //Shawn
       }
     })
     .catch(err => {
-      res.send('error: ' + err)
+      //res.send('error: ' + err)
+      res.status(400).jason({error: err}) //Shawn
     })
 })
 
