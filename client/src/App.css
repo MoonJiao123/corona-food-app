@@ -392,16 +392,49 @@ Styles for the location addition form
 
 /* ---------------------------------------------------------------------
 Contributors: Darien
-Styles for location search results
+Styles for location search  and results
 --------------------------------------------------------------------- */
+/*Search*/
+#location-search-wrapper {
+  position: absolute;
+  top: 2%;
+  left: 20%;
+  width: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#location-search {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 25%;
+}
+.search-input input {
+  width: 100%;
+  font-size: 1.5em;
+}
+.search-input .MuiFormLabel-root.Mui-focused {
+  color: #67d367;
+}
+.search-input .MuiInput-underline:after {
+  border-color: #175217;
+}
+
+/*Results*/
 #location-results {
   background: #eeeeee;
   width: 50%;
-  height: 75%;
+  height: 83%;
   position: absolute;
   left: 20%;
   border-radius: 10px;
-  top: 17%;
+  top: 15%;
   box-sizing: border-box;
 }
 #location-results .location-row {

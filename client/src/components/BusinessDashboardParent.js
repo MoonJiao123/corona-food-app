@@ -45,7 +45,7 @@ class BusinessDashboardParent extends React.Component{
             //select: () => alert("location selected") TODO
         }
         ],
-        search: () => alert("search"),
+        search: (e) => alert("search for " + e)
       },
 
       //Right Sidebar Props
@@ -133,7 +133,7 @@ class BusinessDashboardParent extends React.Component{
         {id: 7, location: "Location 8", address: "7441 W. Shadow Ave. Moines, IA 502650"},
         {id: 8, location: "Location 9", address: "716 Meadowbrook Street Mishawaka, IN 46544"}
       ],
-      search: () => alert("search")
+      search: (e) => console.log("search for " + e)
       }
     });
 
