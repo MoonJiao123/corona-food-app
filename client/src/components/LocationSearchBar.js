@@ -56,6 +56,7 @@ export default function LocationSearchBar(props) {
         setValue(event.target.value);
     };
 
+    //handler for pressing enter
     function handle(e){
         if(e.key ==="Enter"){
             props.data.search();
