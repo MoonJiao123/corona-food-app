@@ -26,20 +26,20 @@ module.exports = db.sequelize.define(
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.STRING
+        type: Sequelize.DOUBLE
       },
       expire_date: {
         type: Sequelize.STRING
       },
       stock_amount: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       coupon: {
         type: Sequelize.STRING
       },
       //foreign key
       store_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       }
     },
     {
