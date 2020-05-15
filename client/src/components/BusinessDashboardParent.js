@@ -53,7 +53,7 @@ class BusinessDashboardParent extends React.Component{
         address: '',
         totalProducts: 0,
         productsList: [
-          {
+          { 
             name: '',
             price: 0,
             expiration: ''
@@ -88,7 +88,7 @@ class BusinessDashboardParent extends React.Component{
   }
 
   /* ---------------------------------------------------------------------
-  Before Render
+  After Render
   TODO: Add or pass in database connection, verify authentication
   --------------------------------------------------------------------- */
   componentDidMount(){
@@ -177,7 +177,6 @@ class BusinessDashboardParent extends React.Component{
   componentWillUnmount(){
 
   }
-
 
 }
 export default BusinessDashboardParent;

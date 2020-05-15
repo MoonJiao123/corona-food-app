@@ -17,7 +17,11 @@ class AddLocation extends React.Component{
     return(
     <div id="addLocation-form" className={this.props.toggle}>
       <form id="addLocation">
+
+        {/** Form Title */}
         <h1>Add a location</h1>
+
+        {/** Form Text inputs */}
         <TextField fullWidth label="Location Name" />
         <TextField fullWidth label="Street" />
         <div id="addLocation-smalls">
@@ -25,6 +29,8 @@ class AddLocation extends React.Component{
           <TextField label="State" />
           <TextField fullWidth label="Zip" />
         </div>
+
+        {/** Form Submission */}
         <div id="addLocation-buttons">
           <Button onClick={this.props.data.submitNewLocation} variant="contained">Add Location</Button>
           <button onClick={this.props.data.closeForm} id="addLocation-cancel">cancel</button>

@@ -18,13 +18,18 @@ class ShoppingListParent extends React.Component{
     //TODO: fill props
     return(
       <div id="shopping-list">
+
+        {/** Button to close shopping list */}
         <button id="close-shopping-list" onClick={null}>X</button>
+
+        {/** List of saved coupons */}
         <div id="shopping-list-container">
-          {/* TODO list goes here */}
           <ShoppingListItem/>
           <ShoppingListItem/>
           <ShoppingListItem/>
         </div>
+
+        {/** Button to clear shopping list */}
         <button id="clear-shopping-list" onClick={null}>Clear</button>
       </div>
     );

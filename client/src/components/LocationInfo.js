@@ -28,17 +28,21 @@ class LocationInfo extends React.Component{
     // Return the right sidebar, render data with passed in props
     return(
       <div id="locationInfo">
+        {/** Business address */}
         <h1 id="locationInfo-address">{this.props.data.address}</h1>
 
+        {/** Number of listings for selected location*/}
         <div id="locationInfo-listing-count">
           <h3>{this.props.data.totalProducts}</h3>
           <p>Listings</p>
         </div>
 
+        {/** Simplified list of items */}
         <div id="locationInfo-list">
           {LocationInfoListings}
         </div>
 
+        {/** Button that opens UpdateListings form*/}
         <Button
         onClick={this.props.data.updateProducts}
         className="update-listing-button"
