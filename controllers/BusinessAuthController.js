@@ -12,10 +12,6 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
-/* Includes necessary for the API generation */
-const axios = require('axios')
-
-
 const BUser = require('../models/BusinessModel.js')
 businessUsers.use(cors())
 
@@ -130,6 +126,8 @@ businessUsers.get('/business', (req, res) => {
  * Request format: 
  *   - session: the session from which the api key generation is being routed (generated from the front end)
  *              we will use the session to infer which business user the api key is being generated for 
+ *              - email 
+ *              - business id 
  * 
  * Parameters: 
  *    req: the request received via the POST request
@@ -141,8 +139,28 @@ businessUsers.get('/business', (req, res) => {
  *    404 (Not Found) -  "Invalid request parameter" - Database wasn't able to find the corresponding business user 
  */
 businessUsers.post('/business/api/generate_api_key', (req, res) => {
-  const requestToken = req.query
+  /* Should have the email stored in the session for now*/
+  var session = req.session 
+
+  BUser.findOne({
+    where: {
+      email: session.email
+    }
+  })
+    .then(user => {
+      if (user) {
+        res.json(user)
+      } else {
+        //res.send('User does not exist')
+        res.status(400).jason({error: 'User does not exist'}) //Shawn
+      }
+    })
+    .catch(err => {
+      //res.send('error: ' + err)
+      res.status(400).jason({error: err}) //Shawn
+    })
 })
+
 
 module.exports = businessUsers
 
