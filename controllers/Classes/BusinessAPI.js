@@ -1,4 +1,11 @@
 
+/**
+ * This file encapsulate all of the BusinessAPI functionality, web calls that would be important to the front end 
+ *
+ * Contributors: Derek Ta
+ */
+
+
 const express = require('express')
 const businessUsers = express.Router()
 /*Used for API Key generation
