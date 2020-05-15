@@ -9,7 +9,7 @@ const search = express.Router()
 const cors = require('cors')
 const query = require('../models/ProductModel.js')
 search.use(cors())
-re
+
  //search
 search.get('/:category', (req, res, next) => {
     query.findAll({
