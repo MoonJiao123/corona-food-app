@@ -7,80 +7,62 @@
  */
 
 import React, {useState} from 'react';
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import InputBase from "@material-ui/core/InputBase";
-import Paper from "@material-ui/core/Paper";
-import IconButton from '@material-ui/core/IconButton';
-import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
-
-
-/** style guidelines for the LocationSearchBar object */
-const useStyles = makeStyles((theme) => ({
-    bar: {
-
-        borderRadius: 30, /**  Dimensions for the object*/
-        width: '50%',
-        height: 60,
-        display: 'flex',
-        backgroundColor: "#eeeeee", /**  Background color of the search bar*/
-
-    },
-    input: { /**  input props*/
-        color: 'black',
-        marginLeft: theme.spacing(1),
-        flex: 1,
-    },
-    inputField: { /** input field props */
-        paddingLeft: theme.spacing(2),
-        fontSize: 17,
-    },
-
-    iconButton: { /**  Location Icon Props*/
-        color: '#67d367;',
-        padding: theme.spacing(2),
-        marginLeft: theme.spacing(0.5),
-    },
-
-}));
-
-
+import TextField from '@material-ui/core/TextField';
 
 export default function LocationSearchBar(props) {
-    const classes = useStyles(); /**  Styles rules imported for the object*/
-    const { disabled } = props;
 
-    //Maintain a state to store search value
-    const [value, setValue] = useState("");
+    // Maintain state for current values
+    const [name, changeName] = useState('');
+    const [street, changeStreet] = useState('');
+    const [state, changeState] = useState('');
+    const [zip, changeZip] = useState('');
 
-    const onChange = (event) => {
-        setValue(event.target.value);
-    };
+    // Search function on field change
+    function search(idx, value){
+        // Prepare the search array
+        let search = [name, street, state, zip];
+        search[idx] = value;
 
-    //handler for pressing enter
-    function handle(e){
-        if(e.key ==="Enter"){
-            props.data.search();
-        }
+        // Call parent search method
+        props.data.search(search);
     }
 
+    // Handlers: Each handler calls after state change
+    const handleName = (e) => {
+        changeName(e.target.value);
+        search(0, e.target.value);
+    }
+
+    const handleStreet = (e) => {
+        changeStreet(e.target.value);
+        search(1, e.target.value);
+    }
+
+    const handleState = (e) => {
+        changeState(e.target.value);
+        search(2, e.target.value);
+    }
+
+    const handleZip = (e) => {
+        changeZip(e.target.value);
+        search(3, e.target.value);
+    }
+
+    // Return component to render
     return (
-        <Paper className={classes.bar} style={{ /**  properties of the paper background effect */
-            position: 'absolute', left: '20%', top: '7%',
-        }}>
-            <InputBase
+        <div id="location-search-wrapper">
 
-                className={classes.input}
-                placeholder = "Enter a Store Location *" /**  Default writing in the search box*/
-                inputProps={{ 'aria-label': 'id no.', className: classes.inputField }} /** label ids */
-                disabled={disabled}
-                onChange={onChange}
-                onKeyPress={handle}
-            />
-            <IconButton className={classes.iconButton} aria-label="search" onClick={props.data.search}>
-                <LocationSearchingIcon />
-            </IconButton>
-        </Paper>
+            {/**Search bar title */}
+            <p>Search by</p>
 
+            {/**Contains all text fields */}
+            <div id="location-search">
+                <TextField label="Name" className="search-input" onChange={handleName}/>
+                <TextField label="Street" className="search-input" onChange={handleStreet}/>
+                <TextField label="State" className="search-input" onChange={handleState}/>
+                <TextField label="Zip" className="search-input" onChange={handleZip}/>
+            </div>
+        </div>
     );
 }
 
