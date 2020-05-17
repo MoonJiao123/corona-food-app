@@ -13,6 +13,7 @@ import {Tabs, Tab, Typography, Box, Container, CssBaseline }
 from '@material-ui/core';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
+import LogIn2 from './LogIn2';
 
 /** function to display information based on which tab is open */
 function TabPanel(props) {
@@ -95,7 +96,7 @@ export default function MainLogInSignUp() {
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <LogIn /> {/** log in option */}
+                <LogIn2 /> {/** log in option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <SignUp /> {/** sign up option */}

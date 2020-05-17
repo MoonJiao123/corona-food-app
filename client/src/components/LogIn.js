@@ -10,6 +10,7 @@ import {Button, CssBaseline, TextField, Grid, Container, FormControlLabel,
     Radio, RadioGroup} from '@material-ui/core';
 import { withStyles, makeStyles, } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
 /** style guidelines for the Log In compoenent */
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +62,8 @@ export default function LogIn() {
     // used to set where the login button will link to
     const [identity, setIdentity] = React.useState(''); 
     const [helperText, setHelperText] = React.useState('Please select an option above.');
+    // used for form validation
+    const {register, errors} = useForm();
 
     /** to change the email variable when entered */
     const handleEmail = (event) => {
@@ -92,7 +95,7 @@ export default function LogIn() {
 
     /** to do when form is complete and submitted */
     const handleSubmit = (event) => {
-        /** need backend to work for all of this to work i think so */
+        /** private routing need backend to work for all of this to work i think so */
         event.preventDefault();
         fetch('/api/authenticate', {
             method: 'POST',
@@ -138,7 +141,16 @@ export default function LogIn() {
                     autoComplete="email"
                     value={email}
                     onChange={handleEmail}
+                    inputRef={register({
+                        required: 'email is required',
+                        pattern: {
+                            value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                            message: 'not a valid email entry'
+                        }
+                    })}
+                    error={errors.firstName ? true : false}
                 />
+                {errors.firstName && <p><small>pls enter email</small></p>}
 
                 {/** textfield to enter user password */}
                 <CssTextField
@@ -153,7 +165,15 @@ export default function LogIn() {
                     autoComplete="current-password"
                     value={password}
                     onChange={handlePassword}
+                    inputRef={register({
+                        required: 'password is required',
+                        minLength: {
+                            value: 6,
+                            message: 'password is too short'
+                        }
+                    })}  
                 />
+                {errors.firstName && <p><small>pls enter pw</small></p>}
 
                 {/** grid to identify customer/business accounts */}
                 <RadioGroup aria-label="identity" name="identifier" onChange={handleRadioChange}>

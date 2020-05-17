@@ -10,7 +10,7 @@ import {Grid, Container, Button, CssBaseline, TextField}
  from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
-
+import {useForm} from 'react-hook-form';
 
 /** style guidelines for the Customer Sign Up component */
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +49,11 @@ export default function SignUpCustomer() {
 
     // to call style guidelines
     const classes = useStyles();
+    // used to do form validation
+    const {register, errors, control} = useForm({
+        mode: "onChange",
+        reValidateMode: "onChange",
+    });
     // used to store customer information from the form
     const [fName, setFName] = React.useState('');
     const [lName, setLName] = React.useState('');
@@ -123,6 +128,7 @@ export default function SignUpCustomer() {
                 {/** textfield to enter first name */}
                 <Grid item xs={12} sm={6}>
                     <CssTextField
+                        autoFocus
                         required
                         fullWidth
                         id="fname"
@@ -131,7 +137,8 @@ export default function SignUpCustomer() {
                         autoComplete="fname"
                         value={fName}
                         onChange={handleFName}
-                        autoFocus
+                        //error={!!errors.firstName}
+                        inputRef={register( {required:true} )}
                     />
                 </Grid>
 
@@ -146,6 +153,7 @@ export default function SignUpCustomer() {
                         autoComplete="lname"
                         value={lName}
                         onChange={handleLName}
+                        ref={register( {required:true} )}
                     />
                 </Grid>
 
@@ -160,6 +168,10 @@ export default function SignUpCustomer() {
                         autoComplete="email"
                         value={email}
                         onChange={handleEmail}
+                        ref={register({
+                            required: true,
+                            pattern:  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        })}
                     />
                 </Grid>
 
@@ -175,6 +187,7 @@ export default function SignUpCustomer() {
                         autoComplete="current-password"
                         value={password}
                         onChange={handlePassword}
+                        ref={register( {required:true} )}
                     />
                 </Grid>
 
@@ -190,6 +203,7 @@ export default function SignUpCustomer() {
                         autoComplete="current-password"
                         value={confirmPW}
                         onChange={handleConfirmPW}
+                        ref={register( {required:true} )}
                     />
                 </Grid>
             </Grid>
