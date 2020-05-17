@@ -1,0 +1,615 @@
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Compiled doc with all scss
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Colors
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Animations
+--------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css?family=PT+Sans&display=swap");
+@keyframes fade {
+  to {
+    opacity: 1;
+  }
+}
+/* ---------------------------------------------------------------------
+Compilation
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Overriding styles for every page
+--------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------
+Override Scrollbar
+--------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "PT Sans", sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-style: none;
+  white-space: nowrap;
+  cursor: pointer;
+  display: block;
+}
+
+/* ---------------------------------------------------------------------
+Override Scrollbar
+--------------------------------------------------------------------- */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+  background-color: white;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #28bd3f;
+}
+
+/* ---------------------------------------------------------------------
+Override Highlight
+--------------------------------------------------------------------- */
+::-moz-selection {
+  background: #92f8a0;
+}
+
+::selection {
+  background: #92f8a0;
+}
+
+/* puts Log In and Sign Up pages side by side */
+.main-display {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10%;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar
+--------------------------------------------------------------------- */
+#locationInfo {
+  height: 100%;
+  width: 25%;
+  background: #67d367;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+#locationInfo button.update-listing-button {
+  padding: 2%;
+  background: #175217;
+  border-radius: 0;
+  width: 100%;
+}
+
+#locationInfo-address {
+  text-align: center;
+  font-size: 1.5em;
+  width: 100%;
+  margin: auto;
+}
+
+#locationInfo-listing-count {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: fit-content;
+  margin: auto;
+}
+#locationInfo-listing-count h3 {
+  font-size: 2.5em;
+}
+#locationInfo-listing-count p {
+  font-size: 2em;
+  padding: 0 0.3em;
+}
+
+#locationInfo-list {
+  width: 90%;
+  height: 75%;
+  margin: auto;
+  background: #a2e2a2;
+  border-radius: 7px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the business dashboard right sidebar listings
+--------------------------------------------------------------------- */
+.locationInfo-listing {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  background: #eeeeee;
+  padding: 1% 0;
+  border-bottom: 2px solid #67d367;
+}
+.locationInfo-listing p {
+  text-align: right;
+  width: 33%;
+  padding: 0 1em;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles shopping list and items
+--------------------------------------------------------------------- */
+/* Styles for parent */
+#shopping-list {
+  position: absolute;
+  left: 25%;
+  top: 15%;
+  z-index: 1;
+  width: 50%;
+  height: 65%;
+  background: #eeeeee;
+  border-radius: 10px;
+}
+#shopping-list button {
+  outline: none;
+  border: none;
+  background: #175217;
+  color: white;
+  cursor: pointer;
+}
+#shopping-list button:hover {
+  background: #1e6b1e;
+}
+#shopping-list button:active {
+  background: #134413;
+}
+
+#close-shopping-list {
+  position: absolute;
+  top: -1.5em;
+  right: -1.5em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  padding: 1%;
+}
+
+#shopping-list-container {
+  width: 100%;
+  height: 95%;
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+#clear-shopping-list {
+  width: 100%;
+  height: 5%;
+}
+
+/* Styles for items */
+.shopping-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  padding: 1%;
+  transition-duration: 0.2s;
+  border-top: 1px solid #a2e2a2;
+  border-bottom: 1px solid #a2e2a2;
+}
+.shopping-list-item .shopping-list-item-name {
+  font-size: 1.7em;
+  font-weight: 500;
+}
+.shopping-list-item .shopping-list-item-address {
+  font-size: 1em;
+  color: #949494;
+}
+.shopping-list-item .shopping-list-item-business {
+  font-size: 1.2em;
+  color: #3f3f3f;
+}
+.shopping-list-item .shopping-list-item-left {
+  width: 50%;
+}
+.shopping-list-item .shopping-list-price {
+  font-size: 1.7em;
+}
+.shopping-list-item .shopping-list-discount {
+  font-size: 1em;
+  color: #3f3f3f;
+}
+.shopping-list-item .shopping-list-item-mid {
+  text-align: right;
+}
+.shopping-list-item .shopping-list-item-right button {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+}
+
+.shopping-list-item:hover {
+  background: white;
+}
+
+/* Styles for small screens */
+@media only screen and (max-width: 501px) {
+  /* Styles for small screens */
+  #shopping-list {
+    width: 90%;
+    height: 80%;
+    top: 10%;
+    left: 5%;
+    font-size: 0.7em;
+  }
+}
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for the login/signup
+--------------------------------------------------------------------- */
+/* Styles for small screens */
+body {
+  overflow-x: hidden;
+}
+
+.main-display {
+  flex-direction: column;
+  font-size: 0.9em;
+  height: fit-content;
+  align-items: center;
+}
+.main-display .image-display {
+  width: fit-content;
+}
+.main-display #welcome-video {
+  margin-top: 20px;
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
+}
+
+.button {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.sign-up-subtitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Styles for large screens */
+@media only screen and (min-width: 501px) {
+  .main-display {
+    width: 100%;
+    max-width: 1250px;
+    height: 90vh;
+    padding: 0;
+    margin: 0;
+    margin: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .main-display #welcome-video {
+    width: 400px;
+    height: 400px;
+  }
+}
+/** --------------------------------------------------------------------
+Contributors: Darien Tsai
+Styles for the location addition form
+--------------------------------------------------------------------- */
+/*form styles*/
+#addLocation-form.off {
+  display: none;
+}
+
+#addLocation-form.on {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.507);
+  animation: fade 0.1s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
+}
+#addLocation-form.on h1 {
+  color: #175217;
+}
+#addLocation-form.on #addLocation {
+  position: absolute;
+  top: 25%;
+  left: 37.5%;
+  width: 25%;
+  height: 50%;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 1%;
+  background: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#addLocation-form.on #addLocation .MuiFormLabel-root.Mui-focused {
+  color: #175217;
+}
+#addLocation-form.on #addLocation #addLocation-smalls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+#addLocation-form.on #addLocation #addLocation-smalls .MuiTextField-root {
+  width: 30%;
+}
+#addLocation-form.on #addLocation .MuiInput-underline:after {
+  border-bottom: #175217;
+}
+#addLocation-form.on #addLocation button {
+  background: #175217;
+  color: white;
+}
+#addLocation-form.on #addLocation #addLocation-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#addLocation-form.on #addLocation #addLocation-buttons #addLocation-cancel {
+  background: none;
+  color: black;
+  border: none;
+  outline: none;
+  padding: 0.1em;
+}
+#addLocation-form.on #addLocation #addLocation-buttons #addLocation-cancel:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for location search  and results
+--------------------------------------------------------------------- */
+/*Search*/
+#location-search-wrapper {
+  position: absolute;
+  top: 2%;
+  left: 20%;
+  width: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#location-search {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.search-input {
+  width: 25%;
+}
+.search-input input {
+  width: 100%;
+  font-size: 1.5em;
+}
+.search-input .MuiFormLabel-root.Mui-focused {
+  color: #67d367;
+}
+.search-input .MuiInput-underline:after {
+  border-color: #175217;
+}
+
+/*Results*/
+#location-results {
+  background: #eeeeee;
+  width: 50%;
+  height: 83%;
+  position: absolute;
+  left: 20%;
+  border-radius: 10px;
+  top: 15%;
+  box-sizing: border-box;
+}
+#location-results .location-row {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  padding: 1.5% 0;
+  border-bottom: 1px solid #aaaaaa;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+#location-results .location-row .location-name, #location-results .location-row .location-address {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  padding: 0 2%;
+}
+#location-results .location-row .location-address {
+  width: 60%;
+}
+#location-results .location-row .location-name {
+  width: 40%;
+}
+#location-results .location-row:hover {
+  background: white;
+}
+
+/** --------------------------------------------------------------------
+Contributors: Darien Tsai
+Styles for the update listings form
+--------------------------------------------------------------------- */
+/*Form parent styles*/
+#updateWrapper.off {
+  display: none;
+}
+
+#updateWrapper {
+  background: rgba(0, 0, 0, 0.473);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#updateListings {
+  opacity: 0;
+  width: 90%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #eeeeee;
+  box-sizing: border-box;
+  padding: 1%;
+  border-radius: 15px;
+  transition-duration: 0.3s;
+  animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
+}
+#updateListings .updatableListing:hover {
+  background: white;
+}
+#updateListings #updateList {
+  width: 100%;
+  height: 85%;
+  overflow: auto;
+}
+#updateListings #updateControls {
+  width: fit-content;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#updateListings #updateControls button {
+  background: #175217;
+  color: white;
+  outline: none;
+  border: none;
+}
+#updateListings #updateControls #addListing {
+  font-size: 2em;
+  text-align: center;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  position: absolute;
+  top: 80%;
+  right: 2em;
+}
+#updateListings #updateControls #addListing:hover {
+  background: #1e6b1e;
+}
+#updateListings #updateControls #addListing:active {
+  background: #134413;
+}
+#updateListings #updateControls #cancelUpdate {
+  background: none;
+  color: black;
+  box-shadow: none;
+  font-size: 0.8em;
+}
+#updateListings #updateControls #cancelUpdate:hover {
+  text-decoration: underline;
+}
+
+/*Listing styles*/
+.updatableListing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 1% 0;
+}
+.updatableListing .updateFile {
+  width: 0;
+  height: 0;
+}
+.updatableListing .updateSelect {
+  width: 6em;
+}
+.updatableListing .updateField {
+  min-width: 6em;
+}
+.updatableListing .MuiInput-underline:after {
+  border-bottom-color: #175217;
+}
+.updatableListing .MuiFormLabel-root.Mui-focused {
+  color: #175217;
+}
+.updatableListing .removeListing, .updatableListing .updateFileWrap {
+  background: #175217;
+  outline: none;
+  border: none;
+  color: white;
+  text-align: center;
+}
+.updatableListing .updateFileWrap {
+  padding: 1%;
+  border-radius: 4px;
+  white-space: nowrap;
+  width: fit-content;
+}
+.updatableListing .removeListing {
+  width: 1.7em;
+  height: 1.7em;
+  font-size: 1.1em;
+  border-radius: 50%;
+}
+.updatableListing .removeListing:hover, .updatableListing .updateFileWrap:hover {
+  background-color: #1e6b1e;
+}
+.updatableListing .removeListing:active, .updatableListing .updateFileWrap:active {
+  background-color: #134413;
+}
+
+/*# sourceMappingURL=App.css.map */
