@@ -16,11 +16,22 @@ Styles for the business dashboard right sidebar
   right: 0;
   top: 0;
 
+  #LocationInfoControls{
+    width: 90%;
+    height: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   button.update-listing-button{
     padding: 2%;
     background: $button-green;
     border-radius: 0;
-    width: 100%;
+    width: 45%;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
   }
 }
 
