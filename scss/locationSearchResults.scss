@@ -49,6 +49,7 @@ Styles for location search  and results
   border-radius: 10px;
   top: 15%;
   box-sizing: border-box;
+  overflow-y: auto;
 
   .location-row{
     display: flex;

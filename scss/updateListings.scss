@@ -31,15 +31,20 @@ Styles for the update listings form
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: $bg-white;
+  background: white;
   box-sizing: border-box;
   padding: 1%;
   border-radius: 15px;
   transition-duration: 0.3s;
   animation: fade 0.2s cubic-bezier(.18,.1,.18,1) 1 forwards;
 
+  .updatableListing{
+    border-left: 5px solid white;
+    transition-duration: 0.2s;
+  }
+
   .updatableListing:hover{
-    background: white;
+    border-left: 5px solid $bg-green;
   }
 
   #updateList{
@@ -122,11 +127,11 @@ Styles for the update listings form
   }
 
   .MuiFormLabel-root.Mui-focused{
-    color: $button-green;
+    color: $bg-green;
   }
 
   .removeListing, .updateFileWrap{
-    background: $button-green;
+    background: $bg-green;
     outline: none;
     border: none;
     color: white;

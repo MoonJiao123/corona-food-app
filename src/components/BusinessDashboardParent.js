@@ -92,6 +92,11 @@ class BusinessDashboardParent extends React.Component{
   TODO: Add or pass in database connection, verify authentication
   --------------------------------------------------------------------- */
   componentDidMount(){
+    //Alert logins on small bad screen sizes
+    if(window.innerWidth <= window.innerHeight || window.innerWidth < 500 ){
+      alert("Layout has not been optimized for small screens. Please log in with a larger device.");
+    }
+
     //Testing right bar with fake data
     this.setState({
       right: {
