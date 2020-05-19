@@ -21,23 +21,82 @@ class ListingForm extends React.Component{
 
     //state design
     this.state = {
-      category: "none",
-      fileInput: <input type="file" accept=".jpg,.jpeg,.png" className="updateFile" ref={input => this.imgFile = input}/>
+      fileInput: <input type="file" accept=".jpg,.jpeg,.png" className="updateFile" ref={input => this.imgFile = input}/>,
+      category: this.props.data.category,
+      name: this.props.data.name,
+      amount: this.props.data.amout,
+      price: this.props.data.price,
+      discount: this.props.data.discount,
+      expiration: this.props.data.expiration
     }
 
     //bindings
-    this.handleSelect = this.handleSelect.bind(this);
     this.handleImg = this.handleImg.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleAmount = this.handleAmount.bind(this);
+    this.handlePrice = this.handlePrice.bind(this);
+    this.handleDiscount = this.handleDiscount.bind(this);
+    this.handleExpiration = this.handleExpiration.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.objectify = this.objectify.bind(this);
   }
 
   //event handlers
-  handleSelect = (event) => {
-    this.setState({category: event.target.value});
-  };
-
   handleImg = (e) => {
     e.preventDefault();
     this.imgFile.click();
+  }
+
+  handleSelect = (event) => {
+    this.setState({category: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("sel", event.target.value));
+  };
+
+  handleName = (event) => {
+    this.setState({name: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("nam", event.target.value));
+  }
+
+  handleAmount = (event) => {
+    this.setState({amount: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("amo", event.target.value));
+  }
+
+  handlePrice = (event) => {
+    this.setState({price: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("pri", event.target.value));
+  }
+
+  handleDiscount = (event) => {
+    this.setState({discount: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("dis", event.target.value));
+  }
+
+  handleExpiration = (event) => {
+    this.setState({expiration: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("exp", event.target.value));
+  }
+
+  handleRemove = (event) => {
+    event.preventDefault();
+    this.props.data.remove(this.props.data.idx);
+  }
+
+  objectify = (field, value) => {
+    let obj = {
+      image:'',
+      category: field==="sel"?value:this.state.category,
+      name: field==="nam"?value:this.state.name,
+      amount: field==="amo"?value:this.state.amount,
+      price: field==="pri"?value:this.state.price,
+      rate: field==="dis"?value:this.state.discount,
+      expiration: field==="exp"?value:this.state.expiration,
+      idx: this.props.data.idx,
+      remove: this.props.data.remove,
+      onChange: this.props.data.onChange
+    };
+    return(obj);
   }
 
   //render
@@ -62,37 +121,37 @@ class ListingForm extends React.Component{
           >
 
             {/** Dropdown Options */}
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>Vegetable</MenuItem>
-            <MenuItem value={20}>Meat</MenuItem>
-            <MenuItem value={30}>Grain</MenuItem>
-            <MenuItem value={40}>Fruit</MenuItem>
-            <MenuItem value={50}>Dairy</MenuItem>
-            <MenuItem value={60}>Snack</MenuItem>
+            <MenuItem value={"None"}>None</MenuItem>
+            <MenuItem value={"Vegetable"}>Vegetable</MenuItem>
+            <MenuItem value={"Meat"}>Meat</MenuItem>
+            <MenuItem value={"Grain"}>Grain</MenuItem>
+            <MenuItem value={"Fruit"}>Fruit</MenuItem>
+            <MenuItem value={"Dairy"}>Dairy</MenuItem>
+            <MenuItem value={"Snack"}>Snack</MenuItem>
           </Select>
         </FormControl>
 
         {/** Text inputs */}
-        <TextField className="updateField" label="Name" />
-        <TextField className="updateField" label="Amount" />
-        <TextField className="updateField" label="Price" />
-        <TextField className="updateField" label="min - max%" />
+        <TextField className="updateField" label="Name" value={this.state.name} onChange={this.handleName}/>
+        <TextField className="updateField" label="Amount" value={this.state.amount} onChange={this.handleAmount}/>
+        <TextField className="updateField" label="Price" value={this.state.price} onChange={this.handlePrice}/>
+        <TextField className="updateField" label="min - max%" value={this.state.discount} onChange={this.handleDiscount}/>
 
         {/** Expiration Date input */}
         <TextField
-          id="date"
+          className="date"
           label="Expiration"
           type="date"
           className="upDate"
+          value={this.state.expiration}
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={this.handleExpiration}
         />
 
         {/** Remove button */}
-        <button className="removeListing">-</button>
+        <button className="removeListing" onClick={this.handleRemove}>-</button>
       </form>
     );
   }
@@ -103,11 +162,82 @@ Popup for editting listings
 --------------------------------------------------------------------- */
 class UpdateListings extends React.Component{
 
-  //TODO: load in props
+  constructor(props){
+    super(props);
+
+    //state design
+    this.state = {
+      listings: [],
+      list: '',
+      idx: -1,
+      key: 0
+    }
+
+    //parse props into state
+
+    //bindings
+    this.remove = this.remove.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.addListing = this.addListing.bind(this);
+  }
+
+  //remove a listing at an index
+  remove = (idx) => {
+    console.log("rem: " + idx);
+    console.log(this.state);
+    //find and remove by idx
+    let listings = this.state.listings;
+    let list = this.state.list;
+    let rem = 0;
+    
+    for(let i = 0; i < listings.length; i++){
+      if(listings[i].idx == idx){
+        rem = i;
+        break;
+      }
+    }
+
+    console.log("remove: " + rem);
+    listings.splice(rem, 1);
+    list.splice(rem, 1);
+
+    //reset state
+    this.setState({listings: listings, list: list});
+    console.log("done");
+    console.log(this.state);
+  }
+
+  //field change handler by index
+  onChange = (idx, obj) => {
+    console.log(idx);
+    let listings = this.state.listings;
+    listings[idx] = obj;
+    this.setState({listings: listings});
+  }
+
+  //add a listing
+  addListing = (e) => {
+    let listings = this.state.listings;
+    let list = this.state.list;
+    let newListing = {
+      image:'',
+      category:'',
+      name: '',
+      amount: '',
+      price: '',
+      rate: '',
+      expiration: '',
+      idx: this.state.idx,
+      remove: this.remove,
+      onChange: this.onChange
+    }
+    let newList = (<ListingForm data={newListing} key={this.state.key}/>)
+    listings.push(newListing);
+    list.push(newList);
+    this.setState({listings: listings, list: list, key: this.state.key+1, idx: this.state.idx-1});
+  }
 
   render(){
-    //TODO: Map to updatable listings
-
     //return popup form
     return(
       <div id="updateWrapper" className={this.props.toggle}>
@@ -118,20 +248,28 @@ class UpdateListings extends React.Component{
           {/** Contains all listings */}
           {/** TODO: Keys */}
           <div id="updateList">
-            <ListingForm/>
-            <ListingForm/>
-            <ListingForm/>
+            {this.state.list}
           </div>
 
           {/** Submit, Add, Cancel buttons */}
           <div id="updateControls">
-            <button id="addListing">+</button>
+            <button id="addListing" onClick={this.addListing}>+</button>
             <Button variant="contained" onClick={this.props.data.submitUpdate}>Save</Button>
             <Button variant="contained" id="cancelUpdate" onClick={this.props.data.closeForm}>Cancel</Button>
           </div>
         </div>  
       </div>
     );
+  }
+
+  componentDidMount(){
+    //Map all listings to ListingForms
+    let list = this.state.listings.map(
+      (obj)=>{
+        return(<ListingForm data={obj} key={this.state.key}/>);
+      }
+    );
+    this.setState({list: list, key: this.state.key+1});
   }
 }
 export default UpdateListings;
