@@ -78,7 +78,7 @@ class BusinessDashboardParent extends React.Component{
       
       update: {
         submitUpdate: (listings) => {
-          //Repackage listings for BE
+          //Repackage listings for HTTP request
           for(let i = 0; i < listings.length; i++){
             delete listings[i].idx;
             delete listings[i].onChange;
@@ -86,7 +86,7 @@ class BusinessDashboardParent extends React.Component{
           }
 
           //BE Call: On products Updated
-          //listings below is the object for the fetch body
+          //'listings' below is the object for the fetch body
           console.log(listings);
         },
         closeForm: (e) => {
@@ -149,7 +149,19 @@ class BusinessDashboardParent extends React.Component{
         {id: 7, location: "Location 8", address: "7441 W. Shadow Ave. Moines, IA 502650"},
         {id: 8, location: "Location 9", address: "716 Meadowbrook Street Mishawaka, IN 46544"}
       ],
-      search: (e) => console.log("search for " + e)
+      search: (e) => {
+        //pack e array into object for HTTP request
+        let locationSearch = {
+          name: e[0],
+          street: e[1],
+          state: e[2],
+          zip: e[3]
+        }
+
+        //BE Call: On location search
+        //'locationSearch' below is the object for the fetch body
+        console.log(locationSearch);
+      }
       }
     });
 
