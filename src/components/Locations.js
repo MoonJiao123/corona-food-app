@@ -31,10 +31,7 @@ export default function Locations(props) {
     //Genereate component
     return (
         <div id="location-results">
-            <div className="location-row">
-                <p className="location-name" >Location</p>
-                <p className="location-address" >Address</p>
-            </div>
+            <LocationRow data={{location: "Location", address: "Address"}}/>
             {rows}
         </div>
     );

@@ -45,7 +45,19 @@ class BusinessDashboardParent extends React.Component{
             //select: () => alert("location selected") TODO
         }
         ],
-        search: (e) => alert("search for " + e)
+        search: (e) => {
+          //pack e array into object for HTTP request
+          let locationSearch = {
+            name: e[0],
+            street: e[1],
+            state: e[2],
+            zip: e[3]
+          }
+  
+          //BE Call: On location search
+          //'locationSearch' below is the object for the fetch body
+          console.log(locationSearch);
+          }
       },
 
       //Right Sidebar Props
@@ -161,7 +173,7 @@ class BusinessDashboardParent extends React.Component{
         //BE Call: On location search
         //'locationSearch' below is the object for the fetch body
         console.log(locationSearch);
-      }
+        }
       }
     });
 
@@ -196,14 +208,6 @@ class BusinessDashboardParent extends React.Component{
         <UpdateListings data={this.state.update} toggle={this.state.updateClass}/>
       </div>
     );
-  }
-
-  /* ---------------------------------------------------------------------
-  Before user logout or session expiration
-  TODO: Cut database connection, save all data
-  --------------------------------------------------------------------- */
-  componentWillUnmount(){
-
   }
 
 }
