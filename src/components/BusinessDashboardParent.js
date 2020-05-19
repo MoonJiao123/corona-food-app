@@ -78,6 +78,15 @@ class BusinessDashboardParent extends React.Component{
       
       update: {
         submitUpdate: (listings) => {
+          //Repackage listings for BE
+          for(let i = 0; i < listings.length; i++){
+            delete listings[i].idx;
+            delete listings[i].onChange;
+            delete listings[i].remove
+          }
+
+          //BE Call: On products Updated
+          //listings below is the object for the fetch body
           console.log(listings);
         },
         closeForm: (e) => {

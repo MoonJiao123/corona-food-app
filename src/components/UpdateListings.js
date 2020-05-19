@@ -243,7 +243,6 @@ class UpdateListings extends React.Component{
 
   //save listings
   handleSave = (e) =>{
-    console.log(this.state.listings);
     this.props.data.submitUpdate(this.state.listings)
   }
 
