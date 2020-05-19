@@ -179,12 +179,11 @@ class UpdateListings extends React.Component{
     this.remove = this.remove.bind(this);
     this.onChange = this.onChange.bind(this);
     this.addListing = this.addListing.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   //remove a listing at an index
   remove = (idx) => {
-    console.log("rem: " + idx);
-    console.log(this.state);
     //find and remove by idx
     let listings = this.state.listings;
     let list = this.state.list;
@@ -197,21 +196,26 @@ class UpdateListings extends React.Component{
       }
     }
 
-    console.log("remove: " + rem);
     listings.splice(rem, 1);
     list.splice(rem, 1);
 
     //reset state
     this.setState({listings: listings, list: list});
-    console.log("done");
-    console.log(this.state);
   }
 
   //field change handler by index
   onChange = (idx, obj) => {
-    console.log(idx);
+    //find and change by index
     let listings = this.state.listings;
-    listings[idx] = obj;
+    let mod = 0;
+    
+    for(let i = 0; i < listings.length; i++){
+      if(listings[i].idx == idx){
+        mod = i;
+        break;
+      }
+    }
+    listings[mod] = obj;
     this.setState({listings: listings});
   }
 
@@ -237,6 +241,12 @@ class UpdateListings extends React.Component{
     this.setState({listings: listings, list: list, key: this.state.key+1, idx: this.state.idx-1});
   }
 
+  //save listings
+  handleSave = (e) =>{
+    console.log(this.state.listings);
+    this.props.data.submitUpdate(this.state.listings)
+  }
+
   render(){
     //return popup form
     return(
@@ -254,7 +264,7 @@ class UpdateListings extends React.Component{
           {/** Submit, Add, Cancel buttons */}
           <div id="updateControls">
             <button id="addListing" onClick={this.addListing}>+</button>
-            <Button variant="contained" onClick={this.props.data.submitUpdate}>Save</Button>
+            <Button variant="contained" onClick={this.handleSave}>Save</Button>
             <Button variant="contained" id="cancelUpdate" onClick={this.props.data.closeForm}>Cancel</Button>
           </div>
         </div>  

@@ -77,7 +77,9 @@ class BusinessDashboardParent extends React.Component{
       updateClass: "off",
       
       update: {
-        submitUpdate: () => alert("listings updated"),
+        submitUpdate: (listings) => {
+          console.log(listings);
+        },
         closeForm: (e) => {
           e.preventDefault();
           this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
