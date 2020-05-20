@@ -60,68 +60,40 @@ const AddToCartButton = styled.button`
     }
 `;
 
-export default function ShopItems() {
-    return (
-        <ItemsContainer>
-            {/* Item 1 */}
-            <Item>
-                <Image src="https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg"/>
-                <Description>
-                    <ItemName>Tomatoes</ItemName>
-                    <h5>Good by: 5/6/2020</h5>
-                    <h5>Quantity: 5</h5>
-                </Description>
+class ShopItem extends React.Component {
+    render() {
+       return (
+           <Item>
+               <Image src={this.props.data.src}/>
+               <Description>
+                   <ItemName>{this.props.data.name}</ItemName>
+                   <h5>Good by: {this.props.data.exp}</h5>
+                   <h5>Quantity: {this.props.data.qnt}</h5>
+               </Description>
 
-                <Price>
-                    <h3>$549</h3>
-                    <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
-                </Price>
-            </Item>
-            {/* Item 2 */}
-            <Item>
-                <Image src="https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg"/>
-                <Description>
-                    <ItemName>Tomatoes</ItemName>
-                    <h5>Good by: 5/6/2020</h5>
-                    <h5>Quantity: 5</h5>
-                </Description>
-
-                <Price>
-                    <h3>$549</h3>
-                    <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
-                </Price>
-            </Item>
-            {/* Item 3 */}
-            <Item>
-                <Image src="https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg"/>
-                <Description>
-                    <ItemName>Tomatoes</ItemName>
-                    <h5>Good by: 5/6/2020</h5>
-                    <h5>Quantity: 5</h5>
-                </Description>
-
-                <Price>
-                    <h3>$549</h3>
-                    <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
-                </Price>
-            </Item>
-            {/* Item 4 */}
-            <Item>
-                <Image src="https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg"/>
-                <Description>
-                    <ItemName>Tomatoes</ItemName>
-                    <h5>Good by: 5/6/2020</h5>
-                    <h5>Quantity: 5</h5>
-                </Description>
-
-                <Price>
-                    <h3>$549</h3>
-                    <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
-                </Price>
-            </Item>
-
-
-
-        </ItemsContainer>
-    );
+               <Price>
+                   <h3>${this.props.data.price}</h3>
+                   <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
+               </Price>
+           </Item>
+       );
+    }
 }
+
+class ShopItems extends React.Component{
+    render () {
+        console.log("Shop Items");
+        console.log(this.props);
+        let items = this.props.data.map(
+            (item) => <ShopItem data={item} key={item.id}/>
+        );
+
+        return (
+            <ItemsContainer>
+                {items}
+            </ItemsContainer>
+        );
+    }
+}
+
+export default ShopItems;

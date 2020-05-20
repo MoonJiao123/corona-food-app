@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ShoppingListParent from './ShoppingListParent';
 import SortIcon from '@material-ui/icons/Sort';
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 const Header = styled.div`
     position: absolute; /* stay in place on scroll and position relative to view */
@@ -147,6 +148,38 @@ const DropDownLi = styled.li`
   z-index:9;
 `;
 
+const DropDownLi2 = styled.li`
+   float:bottom;
+   display: inline-block;
+   position: absolute;
+   top: 160px;
+   left: 20px;
+   &:hover {
+    background-color: red;
+   }
+   &:hover ${DropDownContent} {
+    display: block;
+   }
+   z-index:8;
+`;
+
+const PriceRange = styled.div`
+    float:bottom;
+    display: inline-block;
+    position: absolute;
+    top: 220px;
+    left: 20px;
+    z-index:10;
+`;
+
+const PriceInput = styled.input`
+    outline: none;
+    margin-right: 4px;
+    border-radius: 2px;
+    font-size: 12px;
+    border-style: solid;
+    border-color: #67d367;
+`;
 const SubA = styled.a`
   color: black;
   position:relative;
@@ -160,6 +193,12 @@ const SubA = styled.a`
   z-index:99;
 `;
 
+const PriceP = styled.p`
+    text-align: left;
+    font-size: 16px;
+    color: #67d367;
+    z-index:1;
+`;
 
 /** function to create the Header component */
 class CustomerHeader extends Component {
@@ -177,7 +216,19 @@ class CustomerHeader extends Component {
             </Title>
             <DropDownLi>
                        <Dropbtn onClick={() => this.handleClick("DropDown")}>
-                                    Sort <SortIcon/>
+                                    Sort<SortIcon/>
+                       </Dropbtn>
+                       <DropDownContent>
+                          {" "}
+                          <SubA onClick={() => this.handleClick("Link1")}>Lowest Price</SubA>
+                          <SubA onClick={() => this.handleClick("Link2")}>Most Purchased</SubA>
+                          <SubA onClick={() => this.handleClick("Link3")}>Closest Expiration Date</SubA>
+                          <SubA onClick={() => this.handleClick("Link4")}>Closest Distance</SubA>
+                        </DropDownContent>
+            </DropDownLi>
+            <DropDownLi2>
+                       <Dropbtn onClick={() => this.handleClick("DropDown")}>
+                                    Filter<FilterListIcon/>
                        </Dropbtn>
                        <DropDownContent>
                           {" "}
@@ -186,7 +237,14 @@ class CustomerHeader extends Component {
                           <SubA onClick={() => this.handleClick("Link3")}>Dairy</SubA>
                           <SubA onClick={() => this.handleClick("Link4")}>Vegetables</SubA>
                         </DropDownContent>
-            </DropDownLi>
+            </DropDownLi2>
+
+            <PriceRange>
+                <PriceP>Price</PriceP>
+                <PriceInput placeholder="min" size="3"/>
+                <PriceInput placeholder="max" size="3"/>
+            </PriceRange>
+
 
             <SearchBar>
                         <SearchInput
