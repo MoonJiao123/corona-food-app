@@ -77,7 +77,12 @@ Constructor is used for state design, modularized to pass as props
           zip: ''
       }],
 
-      selectionLocation: (idx) => {/**TODO */},
+      selectLocation: (sel) => {
+        //BE Call: On location select
+        //'sel' below is the location selected
+        //Then: update LocationInfoListings
+        console.log(sel);
+      },
 
 
       //Props for LocationInfo -------------------------------------------------
