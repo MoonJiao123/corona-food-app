@@ -24,17 +24,14 @@ class LocationRow extends React.PureComponent {
 export default function Locations(props) {
 
     //Map data to components
-    let rows = props.data.locations.map(
+    let rows = props.data.map(
         (location)=> <LocationRow data={location} key="location.id"/>
     );
 
     //Genereate component
     return (
         <div id="location-results">
-            <div className="location-row">
-                <p className="location-name" >Location</p>
-                <p className="location-address" >Address</p>
-            </div>
+            <LocationRow data={{location: "Location", address: "Address"}}/>
             {rows}
         </div>
     );

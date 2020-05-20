@@ -24,9 +24,9 @@ class ListingForm extends React.Component{
       fileInput: <input type="file" accept=".jpg,.jpeg,.png" className="updateFile" ref={input => this.imgFile = input}/>,
       category: this.props.data.category,
       name: this.props.data.name,
-      amount: this.props.data.amout,
+      amount: this.props.data.amount,
       price: this.props.data.price,
-      discount: this.props.data.discount,
+      discount: this.props.data.rate,
       expiration: this.props.data.expiration
     }
 
@@ -167,8 +167,8 @@ class UpdateListings extends React.Component{
 
     //state design
     this.state = {
-      listings: [],
-      list: '',
+      listings: this.props.initial,
+      list: [],
       idx: -1,
       key: 0
     }
@@ -179,39 +179,44 @@ class UpdateListings extends React.Component{
     this.remove = this.remove.bind(this);
     this.onChange = this.onChange.bind(this);
     this.addListing = this.addListing.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   //remove a listing at an index
   remove = (idx) => {
-    console.log("rem: " + idx);
-    console.log(this.state);
     //find and remove by idx
     let listings = this.state.listings;
     let list = this.state.list;
     let rem = 0;
     
-    for(let i = 0; i < listings.length; i++){
-      if(listings[i].idx == idx){
+    for(let i = 0; i < list.length; i++){
+      if(list[i].props.data.idx === idx){
         rem = i;
         break;
       }
     }
 
-    console.log("remove: " + rem);
     listings.splice(rem, 1);
     list.splice(rem, 1);
 
     //reset state
     this.setState({listings: listings, list: list});
-    console.log("done");
-    console.log(this.state);
   }
 
   //field change handler by index
   onChange = (idx, obj) => {
-    console.log(idx);
+    //find and change by index
     let listings = this.state.listings;
-    listings[idx] = obj;
+    let list = this.state.list;
+    let mod = 0;
+    
+    for(let i = 0; i < listings.length; i++){
+      if(list[i].props.data.idx === idx){
+        mod = i;
+        break;
+      }
+    }
+    listings[mod] = obj;
     this.setState({listings: listings});
   }
 
@@ -221,7 +226,7 @@ class UpdateListings extends React.Component{
     let list = this.state.list;
     let newListing = {
       image:'',
-      category:'',
+      category:'None',
       name: '',
       amount: '',
       price: '',
@@ -237,10 +242,16 @@ class UpdateListings extends React.Component{
     this.setState({listings: listings, list: list, key: this.state.key+1, idx: this.state.idx-1});
   }
 
+  //save listings
+  handleSave = (e) =>{
+    let list = this.state.listings;
+    this.props.action.submitUpdate(list);
+  }
+
   render(){
     //return popup form
     return(
-      <div id="updateWrapper" className={this.props.toggle}>
+      <div id="updateWrapper" className={this.props.data}>
 
         {/** Popup body */}
         <div id="updateListings">
@@ -254,8 +265,8 @@ class UpdateListings extends React.Component{
           {/** Submit, Add, Cancel buttons */}
           <div id="updateControls">
             <button id="addListing" onClick={this.addListing}>+</button>
-            <Button variant="contained" onClick={this.props.data.submitUpdate}>Save</Button>
-            <Button variant="contained" id="cancelUpdate" onClick={this.props.data.closeForm}>Cancel</Button>
+            <Button variant="contained" onClick={this.handleSave}>Save</Button>
+            <Button variant="contained" id="cancelUpdate" onClick={this.props.action.closeForm}>Cancel</Button>
           </div>
         </div>  
       </div>
