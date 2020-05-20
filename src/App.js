@@ -23,11 +23,11 @@ function App() {
 
   //Videos JSX
   let loginVid = <video className="image-display" id="welcome-video" muted autoPlay poster={hi} loop 
-  src={hi_anim} onContextMenu={disable}>
-  </video> ;
+                  src={hi_anim} onContextMenu={disable}>
+                 </video> ;
   let signVid = <video className="image-display" id="welcome-video" muted autoPlay poster={nametag} loop 
-  src={nametag_anim} onContextMenu={disable}>
-  </video> ;
+                  src={nametag_anim} onContextMenu={disable}>
+                </video> ;
 
   // Logic for switching illustration displayed
   const [vid, setVid] = React.useState(loginVid);

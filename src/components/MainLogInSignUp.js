@@ -66,9 +66,9 @@ const useStyles = makeStyles((theme) => ({
 
   /** function to create the Sign Up component */
 export default function MainLogInSignUp(props) {
-
+  //init states
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(init);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     props.vid(newValue);

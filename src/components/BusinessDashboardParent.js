@@ -172,11 +172,11 @@ Initial | Starter data that may get changed
   render(){
     return(
       <div>
-        <LeftSideBar       action={this.state.addLocation}    data={this.state.left}/>
-        <LocationSearchBar action={this.state.search}/>
-        <Locations         action={this.state.selectLocation} data={this.state.locations}/>
-        <LocationInfo      action={this.state.rightControls}  data={this.state.right}       />
-        <AddLocation       action={this.state.form}           data={this.state.formClass}/>
+        <LeftSideBar       action={this.state.addLocation}    data={this.state.left}      />
+        <LocationSearchBar action={this.state.search}                                     />
+        <Locations         action={this.state.selectLocation} data={this.state.locations} />
+        <LocationInfo      action={this.state.rightControls}  data={this.state.right}     />
+        <AddLocation       action={this.state.form}           data={this.state.formClass} />
         <UpdateListings    action={this.state.update}         data={this.state.updateClass} initial={this.state.updateListings}/>
       </div>
     );
@@ -190,7 +190,7 @@ TODO: Add or pass in database connection, verify authentication
   componentDidMount(){
     //Alert logins on small bad screen sizes
     if(window.innerWidth <= window.innerHeight || window.innerWidth < 500 ){
-      alert("Layout has not been optimized for small screens. Please log in with a larger device.");
+      alert("Layout has not been optimized for small screens.Please log in with a larger device.");
     }
 
     //BE Call: On page load
