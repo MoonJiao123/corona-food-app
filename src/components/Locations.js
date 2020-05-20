@@ -10,11 +10,25 @@ import React from 'react';
 
 /** A single location search result */
 class LocationRow extends React.PureComponent {
+
+    constructor(props){
+        super(props);
+
+        //bindings
+        this.handleSelect = this.handleSelect.bind(this);
+    }
+
+    //Handler for selection
+    handleSelect = (e) => {
+        this.props.action(this.props.data.location.k);
+    }
+
+    //Return row component
     render(){
         return(
-            <div className="location-row">
-                <p className="location-name" >{this.props.data.location}</p>
-                <p className="location-address" >{this.props.data.address}</p>
+            <div className="location-row" onClick={this.handleSelect}>
+                <p className="location-name" >{this.props.data.location.name}</p>
+                <p className="location-address" >{this.props.data.location.address}</p>
             </div>
         );
     }
@@ -23,10 +37,42 @@ class LocationRow extends React.PureComponent {
 /** Parent for all location search results */
 export default function Locations(props) {
 
-    //Map data to components
-    let rows = props.data.map(
-        (location)=> <LocationRow data={location} key="location.id"/>
+    //Maintain var for row keys
+    let key = 0;
+
+    //Map addresses, update keys
+    let addresses = props.data.map(
+        (location)=> {
+            return{
+                name: location.name,
+                address: location.street + '. ' +
+                         location.city + ', ' +
+                         location.state + ' ' +
+                         location.zip,
+                k: key++
+            }
+        }
     );
+
+    //Handler for row selection
+    const select = (key) => {
+        //find by key 
+        let searchLocation = null;
+        for(let i = 0; i < addresses.length; i++){
+            if(key === addresses[i].k){
+                searchLocation = i;
+                break;
+            }
+        }
+        props.action(props.data[searchLocation]);
+    }
+
+    //Map rows
+    let rows = addresses.map(
+        (location)=> {
+            return (<LocationRow data={{location: location}} action={select} key={location.k}/>)
+        }
+    )
 
     //Genereate component
     return (
