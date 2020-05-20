@@ -32,13 +32,19 @@ Constructor is used for state design, modularized to pass as props
   constructor(props){
     super(props);
     this.state = {
+
+      // Values for the parent
+      currentLocation: {
+        name: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: ""
+      },
+
   
       // Props for LeftSideBar -------------------------------------------------
-      left: {
-        companyName: "",
-        totalLocations: 0,
-        logout: () => alert("log out")
-      },
+      left: '',
 
       addLocation: () => {
         this.setState({formClass: this.state.formClass==="off"?"on":"off"});
@@ -51,8 +57,9 @@ Constructor is used for state design, modularized to pass as props
         let locationSearch = {
           name: e[0],
           street: e[1],
-          state: e[2],
-          zip: e[3]
+          city: e[2],
+          state: e[3],
+          zip: e[4]
         }
 
         //BE Call: On location search
@@ -63,10 +70,11 @@ Constructor is used for state design, modularized to pass as props
 
       // Props for Location ----------------------------------------------------
       locations: [{ //Template for location
-          id: '',
-          location: '',
-          address: ''
-          //select: () => alert("location selected") TODO
+          name: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: ''
       }],
 
       selectionLocation: (idx) => {/**TODO */},
@@ -74,27 +82,41 @@ Constructor is used for state design, modularized to pass as props
 
       //Props for LocationInfo -------------------------------------------------
       right: {
-        address: '',
+        address: 'No Selection',
         totalProducts: 0,
         productsList: [
           { 
             name: '',
-            price: 0,
+            price: '',
             expiration: ''
           }
-        ],
-        updateProducts: () => {
-          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
-        }
+        ]
       },
 
-      deleteLocation: (e) => {/**TODO */},
+      rightControls: {
+        updateProducts: () => {
+          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+        },
+
+        deleteLocation: (e) => {
+          let del = this.state.currentLocation;
+
+          //BE Call: On location Delete
+          //'del' below is the location to delete
+          //Then: Select another location to display or display empty
+          console.log(del);
+        },
+      },
 
 
-      // AddLocation -----------------------------------------------------------
+      // Props for AddLocation--------------------------------------------------
       formClass: "off",
       form: {
-        submitNewLocation: () => alert("add new location"),
+        submitNewLocation: (e) => {
+          //package e array for HTTP request
+
+        },
+
         closeForm: (e) => {
           e.preventDefault();
           this.setState({formClass: this.state.formClass==="off"?"on":"off"});
@@ -153,7 +175,7 @@ Initial | Starter data that may get changed
         <LeftSideBar       action={this.state.addLocation}    data={this.state.left}/>
         <LocationSearchBar action={this.state.search}/>
         <Locations         action={this.state.selectLocation} data={this.state.locations}/>
-        <LocationInfo      action={this.state.deleteLocation} data={this.state.right}/>
+        <LocationInfo      action={this.state.rightControls}  data={this.state.right}       />
         <AddLocation       action={this.state.formClass}      data={this.state.form}/>
         <UpdateListings    action={this.state.update}         data={this.state.updateClass} initial={this.state.updateListings}/>
       </div>
@@ -170,8 +192,19 @@ TODO: Add or pass in database connection, verify authentication
     if(window.innerWidth <= window.innerHeight || window.innerWidth < 500 ){
       alert("Layout has not been optimized for small screens. Please log in with a larger device.");
     }
-  }
 
+    //BE Call: On page load
+    //Body should have session details
+
+    //Set values for LeftSidebar
+    this.setState({
+      left: {
+        companyName: "Error: Business Name",
+        totalLocations: 0,
+        logout: () => alert("log out")
+      }
+    });
+  }
 
 }
 export default BusinessDashboardParent;

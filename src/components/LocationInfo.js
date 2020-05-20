@@ -46,7 +46,7 @@ class LocationInfo extends React.Component{
         {/** Buttons for updating and deleting location*/}
         <div id="LocationInfoControls">
           <Button
-          onClick={this.props.data.updateProducts}
+          onClick={this.props.action.updateProducts}
           className="update-listing-button"
           variant="contained"
           color="primary"
@@ -56,7 +56,7 @@ class LocationInfo extends React.Component{
           Update Listing
           </Button>
           <Button
-          onClick={this.props.data.updateProducts}
+          onClick={this.props.action.deleteLocation}
           className="update-listing-button"
           variant="contained"
           color="primary"
