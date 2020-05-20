@@ -61,7 +61,7 @@ class SideNav extends React.Component {
                  type="submit"
                  variant="contained"
                  size = "small"
-                 onClick={this.props.data.addLocation}>
+                 onClick={this.props.action}>
                   Add Location
              </Button>
              </ButtonsDiv>
@@ -72,7 +72,7 @@ class SideNav extends React.Component {
 export default class LeftSideBar extends React.Component{
     render(){
         return (
-            <SideNav data={this.props.data}></SideNav>
+            <SideNav data={this.props.data} action={this.props.action}></SideNav>
         );
     }
 }

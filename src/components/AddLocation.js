@@ -15,7 +15,7 @@ class AddLocation extends React.Component{
   //TODO: load in props
   render(){
     return(
-    <div id="addLocation-form" className={this.props.toggle}>
+    <div id="addLocation-form" className={this.props.action}>
       <form id="addLocation">
 
         {/** Form Title */}

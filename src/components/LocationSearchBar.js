@@ -24,7 +24,7 @@ export default function LocationSearchBar(props) {
         search[idx] = value;
 
         // Call parent search method
-        props.data.search(search);
+        props.action(search);
     }
 
     // Handlers: Each handler calls after state change

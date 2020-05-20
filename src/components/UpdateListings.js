@@ -24,9 +24,9 @@ class ListingForm extends React.Component{
       fileInput: <input type="file" accept=".jpg,.jpeg,.png" className="updateFile" ref={input => this.imgFile = input}/>,
       category: this.props.data.category,
       name: this.props.data.name,
-      amount: this.props.data.amout,
+      amount: this.props.data.amount,
       price: this.props.data.price,
-      discount: this.props.data.discount,
+      discount: this.props.data.rate,
       expiration: this.props.data.expiration
     }
 
@@ -167,8 +167,8 @@ class UpdateListings extends React.Component{
 
     //state design
     this.state = {
-      listings: [],
-      list: '',
+      listings: this.props.initial,
+      list: [],
       idx: -1,
       key: 0
     }
@@ -189,8 +189,8 @@ class UpdateListings extends React.Component{
     let list = this.state.list;
     let rem = 0;
     
-    for(let i = 0; i < listings.length; i++){
-      if(listings[i].idx == idx){
+    for(let i = 0; i < list.length; i++){
+      if(list[i].props.data.idx === idx){
         rem = i;
         break;
       }
@@ -207,10 +207,11 @@ class UpdateListings extends React.Component{
   onChange = (idx, obj) => {
     //find and change by index
     let listings = this.state.listings;
+    let list = this.state.list;
     let mod = 0;
     
     for(let i = 0; i < listings.length; i++){
-      if(listings[i].idx == idx){
+      if(list[i].props.data.idx === idx){
         mod = i;
         break;
       }
@@ -225,7 +226,7 @@ class UpdateListings extends React.Component{
     let list = this.state.list;
     let newListing = {
       image:'',
-      category:'',
+      category:'None',
       name: '',
       amount: '',
       price: '',
@@ -243,13 +244,14 @@ class UpdateListings extends React.Component{
 
   //save listings
   handleSave = (e) =>{
-    this.props.data.submitUpdate(this.state.listings)
+    let list = this.state.listings;
+    this.props.action.submitUpdate(list);
   }
 
   render(){
     //return popup form
     return(
-      <div id="updateWrapper" className={this.props.toggle}>
+      <div id="updateWrapper" className={this.props.data}>
 
         {/** Popup body */}
         <div id="updateListings">
@@ -264,7 +266,7 @@ class UpdateListings extends React.Component{
           <div id="updateControls">
             <button id="addListing" onClick={this.addListing}>+</button>
             <Button variant="contained" onClick={this.handleSave}>Save</Button>
-            <Button variant="contained" id="cancelUpdate" onClick={this.props.data.closeForm}>Cancel</Button>
+            <Button variant="contained" id="cancelUpdate" onClick={this.props.action.closeForm}>Cancel</Button>
           </div>
         </div>  
       </div>
