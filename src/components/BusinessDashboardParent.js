@@ -78,6 +78,11 @@ Constructor is used for state design, modularized to pass as props
       }],
 
       selectLocation: (sel) => {
+        //Error when selection not found
+        if(sel === null){
+          alert("Select Location failed");
+          return
+        }
         //BE Call: On location select
         //'sel' below is the location selected
         //Then: update LocationInfoListings

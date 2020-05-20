@@ -187,7 +187,7 @@ class UpdateListings extends React.Component{
     //find and remove by idx
     let listings = this.state.listings;
     let list = this.state.list;
-    let rem = 0;
+    let rem = null;
     
     for(let i = 0; i < list.length; i++){
       if(list[i].props.data.idx === idx){
@@ -196,6 +196,13 @@ class UpdateListings extends React.Component{
       }
     }
 
+    //Not found error
+    if(rem === null){
+      alert("Remove failed: could not find item");
+      return;
+    }
+
+    //Remove
     listings.splice(rem, 1);
     list.splice(rem, 1);
 
@@ -208,7 +215,7 @@ class UpdateListings extends React.Component{
     //find and change by index
     let listings = this.state.listings;
     let list = this.state.list;
-    let mod = 0;
+    let mod = null;
     
     for(let i = 0; i < listings.length; i++){
       if(list[i].props.data.idx === idx){
@@ -216,6 +223,14 @@ class UpdateListings extends React.Component{
         break;
       }
     }
+
+    //Not found error
+    if(mod !== null){
+      alert("Change failed: could not find item");
+      return;
+    }
+
+    //Modify
     listings[mod] = obj;
     this.setState({listings: listings});
   }
