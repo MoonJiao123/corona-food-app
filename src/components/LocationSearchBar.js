@@ -65,7 +65,7 @@ export default function LocationSearchBar(props) {
             <div id="location-search">
                 <TextField label="Name" className="search-input" onChange={handleName}/>
                 <TextField label="Street" className="search-input" onChange={handleStreet}/>
-                <TextField label="City" className="search-input" onChange={handleStreet}/>
+                <TextField label="City" className="search-input" onChange={handleCity}/>
                 <TextField label="State" className="search-input" onChange={handleState}/>
                 <TextField label="Zip" className="search-input" onChange={handleZip}/>
             </div>

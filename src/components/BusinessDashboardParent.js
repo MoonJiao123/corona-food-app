@@ -63,7 +63,7 @@ Constructor is used for state design, modularized to pass as props
         }
 
         //BE Call: On location search
-        //'locationSearch' below is the object for the fetch body
+        //'locationSearch' below is the search object
         console.log(locationSearch);
       },
 
@@ -112,13 +112,13 @@ Constructor is used for state design, modularized to pass as props
       // Props for AddLocation--------------------------------------------------
       formClass: "off",
       form: {
-        submitNewLocation: (e) => {
-          //package e array for HTTP request
-
+        submitNewLocation: (location) => {
+          //BE Call: On location add
+          //'location' below is the location to add
+          console.log(location);
         },
 
         closeForm: (e) => {
-          e.preventDefault();
           this.setState({formClass: this.state.formClass==="off"?"on":"off"});
         },
       },
@@ -176,7 +176,7 @@ Initial | Starter data that may get changed
         <LocationSearchBar action={this.state.search}/>
         <Locations         action={this.state.selectLocation} data={this.state.locations}/>
         <LocationInfo      action={this.state.rightControls}  data={this.state.right}       />
-        <AddLocation       action={this.state.formClass}      data={this.state.form}/>
+        <AddLocation       action={this.state.form}           data={this.state.formClass}/>
         <UpdateListings    action={this.state.update}         data={this.state.updateClass} initial={this.state.updateListings}/>
       </div>
     );
