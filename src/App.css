@@ -580,15 +580,12 @@ Styles for the update listings form
   flex-wrap: nowrap;
   padding: 1% 0;
 }
-.updatableListing .updateFile {
-  width: 0;
-  height: 0;
-}
 .updatableListing .updateSelect {
   width: 6em;
 }
 .updatableListing .updateField {
-  min-width: 6em;
+  max-width: 16%;
+  min-width: 14%;
 }
 .updatableListing .MuiInput-underline:after {
   border-bottom-color: #175217;

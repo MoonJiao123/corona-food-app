@@ -21,7 +21,7 @@ class ListingForm extends React.Component{
 
     //state design
     this.state = {
-      fileInput: <input type="file" accept=".jpg,.jpeg,.png" className="updateFile" ref={input => this.imgFile = input}/>,
+      image: this.props.data.image,
       category: this.props.data.category,
       name: this.props.data.name,
       amount: this.props.data.amount,
@@ -43,9 +43,9 @@ class ListingForm extends React.Component{
   }
 
   //event handlers
-  handleImg = (e) => {
-    e.preventDefault();
-    this.imgFile.click();
+  handleImg = (event) => {
+    this.setState({image: event.target.value});
+    this.props.data.onChange(this.props.data.idx, this.objectify("img", event.target.value));
   }
 
   handleSelect = (event) => {
@@ -85,7 +85,7 @@ class ListingForm extends React.Component{
 
   objectify = (field, value) => {
     let obj = {
-      image:'',
+      image: field==="img"?value:this.state.image,
       category: field==="sel"?value:this.state.category,
       name: field==="nam"?value:this.state.name,
       amount: field==="amo"?value:this.state.amount,
@@ -104,9 +104,8 @@ class ListingForm extends React.Component{
     return(
       <form className="updatableListing">
 
-        {/** Image upload */}
-        <button className="updateFileWrap" onClick={this.handleImg}>Image</button>
-        {this.state.fileInput}
+        {/** Image link */}
+        <TextField className="updateField" label="Img Link" value={this.state.image} onChange={this.handleImg}/>
 
         {/** Dropdown selection for category */}
         <FormControl>
@@ -225,7 +224,7 @@ class UpdateListings extends React.Component{
     }
 
     //Not found error
-    if(mod !== null){
+    if(mod === null){
       alert("Change failed: could not find item");
       return;
     }
