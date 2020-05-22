@@ -16,6 +16,7 @@ class LocationRow extends React.PureComponent {
 
         //bindings
         this.handleSelect = this.handleSelect.bind(this);
+        console.log(this.props);
     }
 
     //Handler for selection
@@ -44,7 +45,7 @@ export default function Locations(props) {
     let addresses = props.data.map(
         (location)=> {
             return{
-                name: "Location Name", //TODO
+                name: location.store_name,
                 address: location.address,
                 k: key++
             }

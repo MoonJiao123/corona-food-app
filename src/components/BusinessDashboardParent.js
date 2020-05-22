@@ -55,11 +55,10 @@ Constructor is used for state design, modularized to pass as props
       search: (e) => {
         //pack e array into object for HTTP request
         let loc = {
-          name: e[0],
-          street: e[1],
-          city: e[2],
-          state: e[3],
-          zip: e[4]
+          street: e[0],
+          city: e[1],
+          state: e[2],
+          zip: e[3]
         }
 
         // CHECK STATUSES
@@ -69,12 +68,15 @@ Constructor is used for state design, modularized to pass as props
         let arg = loc.street +
                   (loc.city !== ''?('.'+loc.city):'') +
                   (loc.state !== ''?','+loc.state:'') +
-                  loc.zip;
+                  (loc.zip !== ''?' '+loc.zip:'');
 
         let url = base + id + arg;
         fetch(url)
         .then(res => res.json())
-        .then(data => this.setState({locations: data}));
+        .then(data => {
+          this.setState({locations: data});
+          console.log(data);
+        });
       },
 
 
@@ -132,7 +134,7 @@ Constructor is used for state design, modularized to pass as props
           let arg = del.street +
                   (del.city !== ''?('.'+del.city):'') +
                   (del.state !== ''?','+del.state:'') +
-                  del.zip;
+                  (del.zip !== ''?' '+del.zip:'');
 
           let url = base + id + arg;
           fetch(url, method)
