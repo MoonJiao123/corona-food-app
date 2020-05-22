@@ -41,6 +41,7 @@ Constructor is used for state design, modularized to pass as props
         state: "",
         zip: ""
       },
+      businessId: '1/',
 
   
       // Props for LeftSideBar -------------------------------------------------
@@ -54,28 +55,37 @@ Constructor is used for state design, modularized to pass as props
       // Props for LocationSearchBar -------------------------------------------
       search: (e) => {
         //pack e array into object for HTTP request
-        let locationSearch = {
-          name: e[0],
-          street: e[1],
-          city: e[2],
-          state: e[3],
-          zip: e[4]
+        let loc = {
+          street: e[0],
+          city: e[1],
+          state: e[2],
+          zip: e[3]
         }
 
+        // CHECK STATUSES
         //BE Call: On location search
-        //'locationSearch' below is the search object
-        console.log(locationSearch);
+        let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
+        let id = this.state.businessId;
+        let arg = loc.street +
+                  (loc.city !== ''?('.'+loc.city):'') +
+                  (loc.state !== ''?','+loc.state:'') +
+                  (loc.zip !== ''?' '+loc.zip:'');
+
+        let url = base + id + arg;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({locations: data, locationBg: (data.length===0?'empty':'')});
+        })
+        .catch(error => {
+          this.setState({locations: [], locationBg: 'empty'});
+        });
       },
 
 
       // Props for Location ----------------------------------------------------
-      locations: [{ //Template for location
-          name: '',
-          street: '',
-          city: '',
-          state: '',
-          zip: ''
-      }],
+      locations: [],
+      locationBg: 'empty',
 
       selectLocation: (sel) => {
         //Error when selection not found
@@ -83,10 +93,22 @@ Constructor is used for state design, modularized to pass as props
           alert("Select Location failed");
           return
         }
+        
+        // CHECK STATUSES
         //BE Call: On location select
-        //'sel' below is the location selected
         //Then: update LocationInfoListings
         console.log(sel);
+        let base = 'https://fuo-backend.herokuapp.com/business/selectlocation/';
+        let id = this.state.businessId;
+        let arg = sel.street + '.' + sel.city + ',' +  sel.state + ' ' + sel.zip;
+        let url = base + id + arg;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => {
+          console.log('caught select');
+          console.log(error);
+        });
       },
 
 
@@ -112,9 +134,24 @@ Constructor is used for state design, modularized to pass as props
           let del = this.state.currentLocation;
 
           //BE Call: On location Delete
-          //'del' below is the location to delete
           //Then: Select another location to display or display empty
-          console.log(del);
+          const method = {method: 'DELETE'};
+          let base = 'https://fuo-backend.herokuapp.com/business/deletelocation/';
+          let id = this.state.businessId;
+
+          let arg = del.street +
+                  (del.city !== ''?('.'+del.city):'') +
+                  (del.state !== ''?','+del.state:'') +
+                  (del.zip !== ''?' '+del.zip:'');
+
+          let url = base + id + arg;
+          fetch(url, method)
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught delete');
+            console.log(error);
+          });
         },
       },
 
@@ -124,8 +161,18 @@ Constructor is used for state design, modularized to pass as props
       form: {
         submitNewLocation: (location) => {
           //BE Call: On location add
-          //'location' below is the location to add
-          console.log(location);
+          const method = {method: 'POST'};
+          let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
+          let id = this.state.businessId;
+          let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
+          let url = base + id + arg;
+          fetch(url, method)
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught add');
+            console.log(error);
+          });
         },
 
         closeForm: (e) => {
@@ -143,22 +190,48 @@ Constructor is used for state design, modularized to pass as props
           this.setState({updateListings: save});
 
           //Repackage listings for HTTP request
-          let listings = save;
-          for(let i = 0; i < listings.length; i++){
-            delete listings[i].idx;
-            delete listings[i].onChange;
-            delete listings[i].remove
+          let list = JSON.parse(JSON.stringify(save))[0];
+          for(let i = 0; i < list.length; i++){
+            delete list[i].idx;
+            delete list[i].onChange;
+            delete list[i].remove
           }
 
           //Close the form
           this.state.update.closeForm();
 
-          //BE Call: On products updated
-          //'listings' below is the object for the fetch body
-          //Then: Get current location again to get visual updates
-          console.log(listings);
+          //BE Call: On products upload
+          //Then: Get current location again to get visual updates?
+          let body = {
+            product_name: list.name,
+            product_img: list.image,
+            category: list.category,
+            price: list.price,
+            expire_date: list.expiration,
+            stock_amount: list.amount,
+            coupon: list.rate,
+            store_id: ''                 //Somehow get this
+          };
+
+          const method = {
+            method: 'POST',
+            body: JSON.stringify(body)
+          };
+
+          let base = 'https://fuo-backend.herokuapp.com/product/upload/';
+          let id = this.state.businessId;
+
+          let url = base + id ;
+          fetch(url, method)
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught upload');
+            console.log(error);
+          });
 
         },
+
         closeForm: (e) => {
           try{
             e.preventDefault();
@@ -184,7 +257,7 @@ Initial | Starter data that may get changed
       <div>
         <LeftSideBar       action={this.state.addLocation}    data={this.state.left}      />
         <LocationSearchBar action={this.state.search}                                     />
-        <Locations         action={this.state.selectLocation} data={this.state.locations} />
+        <Locations         action={this.state.selectLocation} data={this.state.locations}   initial={this.state.locationBg}    />
         <LocationInfo      action={this.state.rightControls}  data={this.state.right}     />
         <AddLocation       action={this.state.form}           data={this.state.formClass} />
         <UpdateListings    action={this.state.update}         data={this.state.updateClass} initial={this.state.updateListings}/>
@@ -203,7 +276,18 @@ TODO: Add or pass in database connection, verify authentication
       alert("Layout has not been optimized for small screens.Please log in with a larger device.");
     }
 
-    //BE Call: On page load
+    //BE Call: On page load TODO TODO TODO
+    let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
+    let id = this.state.businessId;
+    
+    let url = base + id;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => {
+      console.log('caught load');
+      console.log(error);
+    });
     //Body should have session details
 
     //Set values for LeftSidebar

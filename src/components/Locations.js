@@ -41,14 +41,12 @@ export default function Locations(props) {
     let key = 0;
 
     //Map addresses, update keys
+    console.log(props);
     let addresses = props.data.map(
         (location)=> {
             return{
-                name: location.name,
-                address: location.street + '. ' +
-                         location.city + ', ' +
-                         location.state + ' ' +
-                         location.zip,
+                name: location.store_name,
+                address: location.address,
                 k: key++
             }
         }
@@ -76,7 +74,7 @@ export default function Locations(props) {
 
     //Genereate component
     return (
-        <div id="location-results">
+        <div id="location-results" className={props.initial}>
             <LocationRow data={{location: "Location", address: "Address"}}/>
             {rows}
         </div>
