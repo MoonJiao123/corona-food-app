@@ -138,10 +138,9 @@ class ListingForm extends React.Component{
 
         {/** Expiration Date input */}
         <TextField
-          className="date"
           label="Expiration"
           type="date"
-          className="upDate"
+          className="upDate date"
           value={this.state.expiration}
           InputLabelProps={{
             shrink: true,

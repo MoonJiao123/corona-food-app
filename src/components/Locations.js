@@ -44,11 +44,8 @@ export default function Locations(props) {
     let addresses = props.data.map(
         (location)=> {
             return{
-                name: location.name,
-                address: location.street + '. ' +
-                         location.city + ', ' +
-                         location.state + ' ' +
-                         location.zip,
+                name: "Location Name", //TODO
+                address: location.address,
                 k: key++
             }
         }
