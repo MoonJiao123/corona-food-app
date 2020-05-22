@@ -120,7 +120,7 @@ class SignUpCustomer2 extends React.Component {
         }
 
         // if password and confirm password are not the same
-        if (this.state.password != this.state.confirmPW) {
+        if (this.state.password !== this.state.confirmPW) {
             confirmPWError= "Passwords do not match";
         }
 

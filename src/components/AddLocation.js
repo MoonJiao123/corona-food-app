@@ -1,10 +1,10 @@
 /** --------------------------------------------------------------------
-Contributors: Darien Tsai
+Contributors: Darien Tsai , Tabassum (validation)
 High level component for business dashboard.
 --------------------------------------------------------------------- */
 
 import React from 'react'
-import {TextField} from '@material-ui/core';
+import {TextField, FormHelperText} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
 /* ---------------------------------------------------------------------
@@ -21,7 +21,13 @@ class AddLocation extends React.Component{
       street: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+
+      nameError: '',
+      streetError: '',
+      cityError: '',
+      stateError: '',
+      zipError: ''
     };
 
     //bindings
@@ -54,11 +60,50 @@ class AddLocation extends React.Component{
     this.setState({zip: e.target.value});
   }
 
+  validate = () => { 
+    let nameError = "";
+    let streetError = "";
+    let cityError = "";
+    let stateError = "";
+    let zipError = "";
+
+    if (!this.state.name) {
+      nameError = "Please enter a location name";
+    }
+
+    if (!this.state.street) {
+      streetError = "Please enter a street";
+    }
+
+    if (this.state.city.length < 2) {
+      cityError = "Invalid City";
+    }
+
+    if (this.state.state.length < 2) {
+      stateError = "Invalid State";
+    }
+
+    if (isNaN(this.state.zip) || this.state.zip.length < 5) {
+      zipError = "Invalid Zip Code";
+    }
+
+    if (nameError || streetError || cityError || stateError || zipError) {
+      this.setState({nameError, streetError, cityError, stateError, zipError})
+      return false;
+    }
+
+    return true;
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    let location = this.state;
-    this.props.action.submitNewLocation(location);
-    this.props.action.closeForm();
+
+    const isValid = this.validate();
+    if (isValid) {
+      let location = this.state;
+      this.props.action.submitNewLocation(location);
+      this.props.action.closeForm();
+    }
   }
 
   handleCancel = () => {
@@ -83,11 +128,45 @@ class AddLocation extends React.Component{
 
         {/** Form Text inputs */}
         <TextField fullWidth label="Location Name" value={this.state.name} onChange={this.handleName}/>
+        <div id="addLocation-errors">
+          {this.state.nameError ? 
+                  <FormHelperText style={{fontSize: 10, color: "red"}}>
+                      {this.state.nameError}
+                  </FormHelperText> 
+          : null }
+        </div>
+
         <TextField fullWidth label="Street" value={this.state.street} onChange={this.handleStreet}/>
+        <div id="addLocation-errors">
+          {this.state.streetError ? 
+                  <FormHelperText style={{fontSize: 10, color: "red"}}>
+                      {this.state.streetError}
+                  </FormHelperText> 
+          : null }
+        </div>
+
         <div id="addLocation-smalls">
           <TextField label="City" value={this.state.city} onChange={this.handleCity}/>
           <TextField label="State" value={this.state.state} onChange={this.handleState}/>
-          <TextField fullWidth label="Zip" value={this.state.zip} onChange={this.handleZip}/>
+          <TextField fullWidth label="Zip" value={this.state.zip} onChange={this.handleZip}/>    
+        </div>
+
+        <div id="addLocation-errors">
+          {this.state.cityError ? 
+                <FormHelperText style={{fontSize: 10, color: "red"}}>
+                    {this.state.cityError}
+                </FormHelperText> 
+          : null }
+          {this.state.stateError ? 
+                <FormHelperText style={{fontSize: 10, color: "red"}}>
+                    {this.state.stateError}
+                </FormHelperText> 
+          : null }
+          {this.state.zipError ? 
+                <FormHelperText style={{fontSize: 10, color: "red"}}>
+                    {this.state.zipError}
+                </FormHelperText> 
+          : null }
         </div>
 
         {/** Form Submission */}

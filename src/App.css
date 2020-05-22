@@ -389,6 +389,14 @@ Styles for the location addition form
 #addLocation-form.on #addLocation #addLocation-smalls .MuiTextField-root {
   width: 30%;
 }
+#addLocation-form.on  #addLocation-errors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+#addLocation-form.on  #addLocation-errors .MuiTextField-root {
+  width: 1000%;
+}
 #addLocation-form.on #addLocation .MuiInput-underline:after {
   border-bottom: #175217;
 }
