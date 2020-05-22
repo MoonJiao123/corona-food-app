@@ -6,6 +6,7 @@ Right sidebar of Business Dashboard - shows information for select location
 import React from 'react'
 import Button from '@material-ui/core/Button';
 import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 import LocationInfoListing from './LocationInfoListing';
 
 class LocationInfo extends React.Component{
@@ -42,17 +43,29 @@ class LocationInfo extends React.Component{
           {LocationInfoListings}
         </div>
 
-        {/** Button that opens UpdateListings form*/}
-        <Button
-        onClick={this.props.data.updateProducts}
-        className="update-listing-button"
-        variant="contained"
-        color="primary"
-        size="large"
-        startIcon={<CreateIcon/>}
-        >
-        Update Listing
-        </Button>
+        {/** Buttons for updating and deleting location*/}
+        <div id="LocationInfoControls">
+          <Button
+          onClick={this.props.action.updateProducts}
+          className="update-listing-button"
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<CreateIcon/>}
+          >
+          Update Listing
+          </Button>
+          <Button
+          onClick={this.props.action.deleteLocation}
+          className="update-listing-button"
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<DeleteIcon/>}
+          >
+          Delete Location
+          </Button>
+        </div>
       </div>
     );
   }

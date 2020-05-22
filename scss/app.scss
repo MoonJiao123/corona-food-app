@@ -4,3 +4,8 @@
   flex-direction: row;
   margin-left: 10%;
 }
+
+/* overwrite overflow for business left sidebar*/
+.bcMPWx {
+  overflow-x: hidden;
+}

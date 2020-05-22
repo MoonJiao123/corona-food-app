@@ -81,6 +81,11 @@ Override Highlight
   margin-left: 10%;
 }
 
+/* overwrite overflow for business left sidebar*/
+.bcMPWx {
+  overflow-x: hidden;
+}
+
 /* ---------------------------------------------------------------------
 Contributors: Darien
 Styles for the business dashboard right sidebar
@@ -98,11 +103,21 @@ Styles for the business dashboard right sidebar
   right: 0;
   top: 0;
 }
+#locationInfo #LocationInfoControls {
+  width: 90%;
+  height: 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 #locationInfo button.update-listing-button {
   padding: 2%;
   background: #175217;
   border-radius: 0;
-  width: 100%;
+  width: 45%;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 5px;
 }
 
 #locationInfo-address {
@@ -364,7 +379,7 @@ Styles for the location addition form
   align-items: center;
 }
 #addLocation-form.on #addLocation .MuiFormLabel-root.Mui-focused {
-  color: #175217;
+  color: #67d367;
 }
 #addLocation-form.on #addLocation #addLocation-smalls {
   display: flex;
@@ -423,7 +438,7 @@ Styles for location search  and results
 }
 
 .search-input {
-  width: 25%;
+  width: 20%;
 }
 .search-input input {
   width: 100%;
@@ -446,6 +461,7 @@ Styles for location search  and results
   border-radius: 10px;
   top: 15%;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 #location-results .location-row {
   display: flex;
@@ -507,15 +523,19 @@ Styles for the update listings form
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #eeeeee;
+  background: white;
   box-sizing: border-box;
   padding: 1%;
   border-radius: 15px;
   transition-duration: 0.3s;
   animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
 }
+#updateListings .updatableListing {
+  border-left: 5px solid white;
+  transition-duration: 0.2s;
+}
 #updateListings .updatableListing:hover {
-  background: white;
+  border-left: 5px solid #67d367;
 }
 #updateListings #updateList {
   width: 100%;
@@ -570,24 +590,21 @@ Styles for the update listings form
   flex-wrap: nowrap;
   padding: 1% 0;
 }
-.updatableListing .updateFile {
-  width: 0;
-  height: 0;
-}
 .updatableListing .updateSelect {
   width: 6em;
 }
 .updatableListing .updateField {
-  min-width: 6em;
+  max-width: 16%;
+  min-width: 14%;
 }
 .updatableListing .MuiInput-underline:after {
   border-bottom-color: #175217;
 }
 .updatableListing .MuiFormLabel-root.Mui-focused {
-  color: #175217;
+  color: #67d367;
 }
 .updatableListing .removeListing, .updatableListing .updateFileWrap {
-  background: #175217;
+  background: #67d367;
   outline: none;
   border: none;
   color: white;
