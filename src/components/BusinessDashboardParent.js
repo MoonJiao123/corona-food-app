@@ -104,7 +104,11 @@ Constructor is used for state design, modularized to pass as props
         let url = base + id + arg;
         fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => console.log(data))
+        .catch(error => {
+          console.log('caught select');
+          console.log(error);
+        });
       },
 
 
@@ -143,7 +147,11 @@ Constructor is used for state design, modularized to pass as props
           let url = base + id + arg;
           fetch(url, method)
           .then(res => res.json())
-          .then(data => console.log(data));
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught delete');
+            console.log(error);
+          });
         },
       },
 
@@ -160,7 +168,11 @@ Constructor is used for state design, modularized to pass as props
           let url = base + id + arg;
           fetch(url, method)
           .then(res => res.json())
-          .then(data => console.log(data));
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught add');
+            console.log(error);
+          });
         },
 
         closeForm: (e) => {
@@ -189,7 +201,7 @@ Constructor is used for state design, modularized to pass as props
           this.state.update.closeForm();
 
           //BE Call: On products upload
-          //Then: Get current location again to get visual updates
+          //Then: Get current location again to get visual updates?
           let body = {
             product_name: list.name,
             product_img: list.image,
@@ -212,7 +224,11 @@ Constructor is used for state design, modularized to pass as props
           let url = base + id ;
           fetch(url, method)
           .then(res => res.json())
-          .then(data => console.log(data));
+          .then(data => console.log(data))
+          .catch(error => {
+            console.log('caught upload');
+            console.log(error);
+          });
 
         },
 
@@ -267,7 +283,11 @@ TODO: Add or pass in database connection, verify authentication
     let url = base + id;
     fetch(url)
     .then(res => res.json())
-    .then(data => console.log(data));
+    .then(data => console.log(data))
+    .catch(error => {
+      console.log('caught load');
+      console.log(error);
+    });
     //Body should have session details
 
     //Set values for LeftSidebar
