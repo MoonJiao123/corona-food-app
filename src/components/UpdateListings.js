@@ -134,7 +134,7 @@ class ListingForm extends React.Component{
         <TextField className="updateField" label="Name" value={this.state.name} onChange={this.handleName}/>
         <TextField className="updateField" label="Amount" value={this.state.amount} onChange={this.handleAmount}/>
         <TextField className="updateField" label="Price" value={this.state.price} onChange={this.handlePrice}/>
-        <TextField className="updateField" label="min - max%" value={this.state.discount} onChange={this.handleDiscount}/>
+        <TextField className="updateField" label="% Discount" value={this.state.discount} onChange={this.handleDiscount}/>
 
         {/** Expiration Date input */}
         <TextField
