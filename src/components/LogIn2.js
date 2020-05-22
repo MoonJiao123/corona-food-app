@@ -51,45 +51,53 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
-
+/** LogIn Class/Component render */
 class LogIn2 extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            /** states of the login form */
             email: '',
             password: '',
             identity: '',
+            /** correction errors for login form */
+            emailError: '',
+            passwordError: '',
         }
-        this.helperText="Please choose an option above."
+        this.identityError="Please choose an option above."
         this.link=""
         this.linkTo='/'
+
     }
 
+    /** sets email state */
     handleEmail = email => event => {
         this.setState({
             [email]: event.target.value,
         });
     };
 
+    /** sets password state */
     handlePassword = password => event => {
         this.setState({
             [password]: event.target.value,
         });
     };
 
+    /** sets identity state */
     handleRadioChange = identity => event => {
         this.setState({
             [identity]: event.target.value,
         });
-        this.helperText="";
+        this.identityError="";
         this.link = event.target.value;
         //this.handleLink()
     };
 
-
-   handleLink () {
-        if (this.link == 'Customer') {
+    /** to change route link based on identity */
+    handleLink () {
+        if (this.link === 'Customer') {
             this.linkTo= "/Customer";
         }
         else if (this.link === 'Business') {
@@ -100,38 +108,69 @@ class LogIn2 extends React.Component {
         }
     } 
 
+    /** function to check is email and password are of valid type */
+    /** BE: need a way to check if email & password types are found in database */
+    validate = () => {
+        let emailError= "";
+        let passwordError= "";
+
+        // if entered email does not include @ or .
+        if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
+            emailError= "Invalid email";
+        }
+
+        // if entered password does not reach min length requirement
+        if (this.state.password.length < 6) {
+            passwordError= "Invalid password";
+        }
+
+        // set validation false because email or password error 
+        if (emailError || passwordError) {
+            this.setState({emailError, passwordError});
+            return false; // return not valid
+        }
+
+        return true;    // return valid 
+    };
+
+    /** handles where to navigate and private routing and session only if 
+     * password and email are valid 
+     */
     handleSubmit = (event) => {
         // api calls???
         event.preventDefault();
-        if (this.link == 'Customer') {
-            window.location.assign("/Customer");
-        }
-        else if (this.link === 'Business') {
-            window.location.assign("/Business")
-        }
-
-        /** PRIVATE ROUTING need backend to work for all of this to work i think so 
-         * feel free to edit or change it up as needed
-
-        fetch('/api/authenticate', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: {
-              'Content-Type': 'application/json'
+        // checks if input is valid email and password
+        const isValid = this.validate();
+        if (isValid) {
+            if (this.link === 'Customer') {
+                window.location.assign("/Customer");
             }
-          })
-          .then(res => {
-            if (res.status === 200) {
-              this.props.history.push('/');
-            } else {
-              const error = new Error(res.error);
-              throw error;
+            else if (this.link === 'Business') {
+                window.location.assign("/Business")
             }
-          })
-          .catch(err => {
-            console.error(err);
-            alert('Error logging in please try again');
-          }); */
+
+            /** BE: PRIVATE ROUTING: need backend's help to fix fetch
+
+            fetch('/api/authenticate', {
+                method: 'POST',
+                body: JSON.stringify(this.state),
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (res.status === 200) {
+                this.props.history.push('/');
+                } else {
+                const error = new Error(res.error);
+                throw error;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Error logging in please try again');
+            }); */
+        }
     }
 
 render () {
@@ -145,7 +184,8 @@ render () {
     <div className={classes.paper}>
 
         {/** the log in form to fill out  */}
-        <form className={classes.form} noValidate >
+        <form className={classes.form}  >
+        <Grid container>    
 
             {/** textfield to enter user email address */}
             <CssTextField
@@ -155,12 +195,20 @@ render () {
                 required
                 fullWidth
                 id="email"
+                type="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 value={this.state.email}
-                onChange={this.handleEmail('email')}
+                onChange={this.handleEmail('email')} 
             />
+
+            {/** text to indicate user did not input valid email */}
+            {this.state.emailError ? 
+                <FormHelperText style={{fontSize: 12, color: "red"}}>
+                    {this.state.emailError}
+                </FormHelperText> 
+            : null }
 
             {/** textfield to enter user password */}
             <CssTextField
@@ -174,37 +222,49 @@ render () {
                 id="password"
                 autoComplete="current-password"
                 value={this.state.password}
-                onChange={this.handlePassword('password')}
+                onChange={this.handlePassword('password')} 
             />
 
-            {/** grid to identify customer/business accounts */}
-            <RadioGroup aria-label="identity" name="identifier" onChange={this.handleRadioChange('identity')}>
-
-                {/** subtitle indicating user to choose*/}
-                <p> I am a ... </p>
-
-                {/** grid to create options for identity */}
-                <Grid container>
-                    {/** option to identify as customer */}
-                    <Grid item>
-                        <FormControlLabel
-                            value="Customer"
-                            control={<Radio color="default" size="small"/>}
-                            label={<p> Customer </p>}
-                        />
-                    </Grid>
-                    {/** option to identify as a business */}
-                    <Grid item>
-                        <FormControlLabel
-                            value="Business"
-                            control={<Radio color="default" size="small" />}
-                            label={<p> Business </p>}
-                        />
-                    </Grid>
-                </Grid>
-            </RadioGroup>
             {/** text to indicate user did not select identity option */}
-            <p><small>{this.helperText}</small></p>
+            {this.state.passwordError ? 
+                <FormHelperText style={{fontSize: 12, color: "red"}}>       
+                    {this.state.passwordError}
+                </FormHelperText> 
+            : null}
+
+            {/** grid to identify customer/business accounts */}
+            <Grid container>
+                <RadioGroup aria-label="identity" name="identifier" onChange={this.handleRadioChange('identity')}>
+
+                    {/** subtitle indicating user to choose*/}
+                    <p> I am a ... </p>
+
+                    {/** grid to create options for identity */}
+                    <Grid container>
+                        {/** option to identify as customer */}
+                        <Grid item>
+                            <FormControlLabel
+                                value="Customer"
+                                control={<Radio color="default" size="small"/>}
+                                label={<p> Customer </p>}
+                            />
+                        </Grid>
+                        {/** option to identify as a business */}
+                        <Grid item>
+                            <FormControlLabel
+                                value="Business"
+                                control={<Radio color="default" size="small" />}
+                                label={<p> Business </p>}
+                            />
+                        </Grid>
+                    </Grid>
+                </RadioGroup>
+            </Grid>
+
+            {/** text to indicate user did not select identity option */}
+            <p><small>{this.identityError}</small></p>
+
+        </Grid>
 
             {/** log in button after enterring email & password */}
             <Link to={this.linkTo} onClick={this.handleSubmit}
@@ -221,7 +281,7 @@ render () {
 
             {/** allow users to retrieve password if forgotten */}
             <Grid container>
-                <Grid item xs>
+                <Grid item xs> 
                     {/** link to resetting password */}
                     <Link to="/ErrorPage" variant="p" style={{color: '#1401ee'}}>
                     Forgot password?
