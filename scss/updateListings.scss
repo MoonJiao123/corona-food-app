@@ -109,17 +109,13 @@ Styles for the update listings form
   flex-wrap: nowrap;
   padding: 1% 0;
 
-  .updateFile{
-    width: 0;
-    height: 0;
-  }
-
   .updateSelect{
     width: 6em;
   }
 
   .updateField{
-    min-width: 6em;
+    max-width: 16%;
+    min-width: 14%;
   }
 
   .MuiInput-underline:after{
