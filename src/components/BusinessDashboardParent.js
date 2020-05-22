@@ -41,6 +41,7 @@ Constructor is used for state design, modularized to pass as props
         state: "",
         zip: ""
       },
+      businessId: '1/',
 
   
       // Props for LeftSideBar -------------------------------------------------
@@ -64,7 +65,7 @@ Constructor is used for state design, modularized to pass as props
         // CHECK STATUSES
         //BE Call: On location search
         let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
-        let id = '1/'                      //SE this is as session thing
+        let id = this.state.businessId;
         let arg = loc.street +
                   (loc.city !== ''?('.'+loc.city):'') +
                   (loc.state !== ''?','+loc.state:'') +
@@ -74,14 +75,17 @@ Constructor is used for state design, modularized to pass as props
         fetch(url)
         .then(res => res.json())
         .then(data => {
-          this.setState({locations: data});
-          console.log(data);
+          this.setState({locations: data, locationBg: (data.length===0?'empty':'')});
+        })
+        .catch(error => {
+          this.setState({locations: [], locationBg: 'empty'});
         });
       },
 
 
       // Props for Location ----------------------------------------------------
       locations: [],
+      locationBg: 'empty',
 
       selectLocation: (sel) => {
         //Error when selection not found
@@ -95,7 +99,7 @@ Constructor is used for state design, modularized to pass as props
         //Then: update LocationInfoListings
         console.log(sel);
         let base = 'https://fuo-backend.herokuapp.com/business/selectlocation/';
-        let id = '1/'                          //SE this is as session thing
+        let id = this.state.businessId;
         let arg = sel.street + '.' + sel.city + ',' +  sel.state + ' ' + sel.zip;
         let url = base + id + arg;
         fetch(url)
@@ -129,7 +133,7 @@ Constructor is used for state design, modularized to pass as props
           //Then: Select another location to display or display empty
           const method = {method: 'DELETE'};
           let base = 'https://fuo-backend.herokuapp.com/business/deletelocation/';
-          let id = '1/'                          //SE this is as session thing
+          let id = this.state.businessId;
 
           let arg = del.street +
                   (del.city !== ''?('.'+del.city):'') +
@@ -151,7 +155,7 @@ Constructor is used for state design, modularized to pass as props
           //BE Call: On location add
           const method = {method: 'POST'};
           let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
-          let id = '1/'                          //SE this is as session thing
+          let id = this.state.businessId;
           let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
           let url = base + id + arg;
           fetch(url, method)
@@ -203,7 +207,7 @@ Constructor is used for state design, modularized to pass as props
           };
 
           let base = 'https://fuo-backend.herokuapp.com/product/upload/';
-          let id = '1/'                          //SE this is as session thing
+          let id = this.state.businessId;
 
           let url = base + id ;
           fetch(url, method)
@@ -237,7 +241,7 @@ Initial | Starter data that may get changed
       <div>
         <LeftSideBar       action={this.state.addLocation}    data={this.state.left}      />
         <LocationSearchBar action={this.state.search}                                     />
-        <Locations         action={this.state.selectLocation} data={this.state.locations} />
+        <Locations         action={this.state.selectLocation} data={this.state.locations}   initial={this.state.locationBg}    />
         <LocationInfo      action={this.state.rightControls}  data={this.state.right}     />
         <AddLocation       action={this.state.form}           data={this.state.formClass} />
         <UpdateListings    action={this.state.update}         data={this.state.updateClass} initial={this.state.updateListings}/>
@@ -258,7 +262,7 @@ TODO: Add or pass in database connection, verify authentication
 
     //BE Call: On page load TODO TODO TODO
     let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
-    let id = '1/'                      //SE this is as session thing
+    let id = this.state.businessId;
     
     let url = base + id;
     fetch(url)

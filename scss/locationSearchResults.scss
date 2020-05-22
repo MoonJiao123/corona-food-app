@@ -34,14 +34,20 @@ Styles for location search  and results
     color: $bg-green;
   }
 
-.MuiInput-underline:after{
-  border-color: $button-green;
+  .MuiInput-underline:after{
+    border-color: $button-green;
+  }
 }
+
+.empty{
+  background-image: url("media/error.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /*Results*/
 #location-results{
-  background: #eeeeee;
+  background-color: #eeeeee;
   width: 50%;
   height: 83%;
   position: absolute;
