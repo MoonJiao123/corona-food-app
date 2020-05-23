@@ -4,7 +4,7 @@ High level component for business dashboard.
 --------------------------------------------------------------------- */
 
 import React from 'react'
-import {TextField, FormHelperText} from '@material-ui/core';
+import {TextField} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
 /* ---------------------------------------------------------------------

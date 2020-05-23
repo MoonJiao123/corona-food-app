@@ -255,7 +255,6 @@ class SignUpCustomer2 extends React.Component {
                     <CssTextField
                         required
                         fullWidth
-                        id="password"
                         name="password"
                         label="New Password"
                         type="password"
@@ -278,7 +277,6 @@ class SignUpCustomer2 extends React.Component {
                     <CssTextField
                         required
                         fullWidth
-                        id="password"
                         name="password"
                         label="Confirm Password"
                         type="password"
