@@ -81,43 +81,111 @@ export default function MainLogInSignUp(props) {
       let body = {
         account: 'business',
         name: name,
-        email: email,
+        email: email, 
         mobile: phone,
-        pass: pass
+        password: pass
       };
       //fetch
-      fetch('/users/business/register', {
+      fetch('https://fuo-backend.herokuapp.com/users/business/register', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
         'Content-Type': 'application/json'
         }
-    })
-    .then(res => {
-        if (res.status === 200) {
-        this.props.history.push('/');
-        } else {
-        const error = new Error(res.error);
-        throw error;
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Error logging in please try again');
-    });
+      })
+      .then(res => {
+          if (res.status === 200) {
+          res.json();
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
     },
     
     signupCustomer: (first, last, email, pass) => {
+      let body = {
+        account: 'customer',
+        email: email, 
+        password: pass
+      };
       //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
     }
   }
 
   let login = {
     loginBusiness: (email, pass) => {
+      let body = {
+        email: email, 
+        password: pass
+      };
       //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/business/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
     },
     loginCustomer: (email, pass) => {
+      let body = {
+        email: email, 
+        password: pass
+      };
       //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
     }
   }
 

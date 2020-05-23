@@ -389,11 +389,14 @@ TODO: Add or pass in database connection, verify authentication
 ----------------------------------------------------------------------------- */
   componentDidMount(){
     //Alert logins on small bad screen sizes
-    if(window.innerWidth <= window.innerHeight || window.innerWidth < 500 ){
+    if(window.innerWidth / window.innerHeight < 1.7 || window.innerHeight < 760){
       alert("Layout has not been optimized for small screens.Please log in with a larger device.");
     }
 
     //BE Call: On page load TODO TODO TODO
+    let session = window.location.hash;
+    window.location.hash = '';
+    console.log(session);
     let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
     let id = this.state.session.businessId;
     

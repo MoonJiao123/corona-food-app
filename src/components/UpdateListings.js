@@ -5,7 +5,6 @@ Components for updating items
 
 import React from 'react'
 import Button from '@material-ui/core/Button';
-import ListingForm from './ListingForm';
 
 /* ---------------------------------------------------------------------
 Popup for editting listings
