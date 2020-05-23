@@ -102,17 +102,35 @@ class AddLocation extends React.Component{
     if (isValid) {
       let location = this.state;
       this.props.action.submitNewLocation(location);
+      this.setState({
+        name: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        nameError: '',
+        streetError: '',
+        cityError: '',
+        stateError: '',
+        zipError: ''
+      });
       this.props.action.closeForm();
     }
   }
 
   handleCancel = () => {
+    //Form result
     this.setState({
       name: '',
       street: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      nameError: '',
+      streetError: '',
+      cityError: '',
+      stateError: '',
+      zipError: ''
     });
     this.props.action.closeForm();
   }
@@ -127,46 +145,13 @@ class AddLocation extends React.Component{
         <h1>Add a location</h1>
 
         {/** Form Text inputs */}
-        <TextField fullWidth label="Location Name" value={this.state.name} onChange={this.handleName}/>
-        <div id="addLocation-errors">
-          {this.state.nameError ? 
-                  <FormHelperText style={{fontSize: 10, color: "red"}}>
-                      {this.state.nameError}
-                  </FormHelperText> 
-          : null }
-        </div>
-
-        <TextField fullWidth label="Street" value={this.state.street} onChange={this.handleStreet}/>
-        <div id="addLocation-errors">
-          {this.state.streetError ? 
-                  <FormHelperText style={{fontSize: 10, color: "red"}}>
-                      {this.state.streetError}
-                  </FormHelperText> 
-          : null }
-        </div>
+        <TextField fullWidth label="Location Name" value={this.state.name} onChange={this.handleName} helperText={this.state.nameError}/>
+        <TextField fullWidth label="Street" value={this.state.street} onChange={this.handleStreet} helperText={this.state.streetError}/>
 
         <div id="addLocation-smalls">
-          <TextField label="City" value={this.state.city} onChange={this.handleCity}/>
-          <TextField label="State" value={this.state.state} onChange={this.handleState}/>
-          <TextField fullWidth label="Zip" value={this.state.zip} onChange={this.handleZip}/>    
-        </div>
-
-        <div id="addLocation-errors">
-          {this.state.cityError ? 
-                <FormHelperText style={{fontSize: 10, color: "red"}}>
-                    {this.state.cityError}
-                </FormHelperText> 
-          : null }
-          {this.state.stateError ? 
-                <FormHelperText style={{fontSize: 10, color: "red"}}>
-                    {this.state.stateError}
-                </FormHelperText> 
-          : null }
-          {this.state.zipError ? 
-                <FormHelperText style={{fontSize: 10, color: "red"}}>
-                    {this.state.zipError}
-                </FormHelperText> 
-          : null }
+          <TextField label="City" value={this.state.city} onChange={this.handleCity} helperText={this.state.cityError}/>
+          <TextField label="State" value={this.state.state} onChange={this.handleState} helperText={this.state.stateError}/>
+          <TextField label="Zip" value={this.state.zip} onChange={this.handleZip} helperText={this.state.zipError}/>    
         </div>
 
         {/** Form Submission */}

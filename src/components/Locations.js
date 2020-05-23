@@ -41,7 +41,6 @@ export default function Locations(props) {
     let key = 0;
 
     //Map addresses, update keys
-    console.log(props);
     let addresses = props.data.map(
         (location)=> {
             return{
