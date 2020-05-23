@@ -149,7 +149,12 @@ class SignUpBusiness2 extends React.Component {
         // check is signup business information is valid
         const isValid = this.validate();
         if (isValid) {
-            window.location.assign("/Business");
+            this.props.action.signupBusiness(
+                this.state.businessName, 
+                this.state.email, 
+                this.state.phone, 
+                this.state.password);
+            //window.location.assign("/Business");
 
             /** BE: PRIVATE ROUTING need backend's help to fix fetch
              
@@ -265,7 +270,6 @@ class SignUpBusiness2 extends React.Component {
                     <CssTextField
                         required
                         fullWidth
-                        id="password"
                         name="password"
                         label="New Password"
                         type="password"
@@ -289,7 +293,6 @@ class SignUpBusiness2 extends React.Component {
                     <CssTextField
                         required
                         fullWidth
-                        id="password"
                         name="password"
                         label="Confirm Password"
                         type="password"

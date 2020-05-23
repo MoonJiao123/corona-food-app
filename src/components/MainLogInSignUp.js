@@ -75,6 +75,120 @@ export default function MainLogInSignUp(props) {
     props.vid(newValue);
   };
 
+  //Define signup/login functions
+  let signup = {
+    signupBusiness: (name, email, phone, pass) => {
+      let body = {
+        account: 'business',
+        name: name,
+        email: email, 
+        mobile: phone,
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/business/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          res.json();
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
+    },
+    
+    signupCustomer: (first, last, email, pass) => {
+      let body = {
+        account: 'customer',
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
+    }
+  }
+
+  let login = {
+    loginBusiness: (email, pass) => {
+      let body = {
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/business/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
+    },
+    loginCustomer: (email, pass) => {
+      let body = {
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          if (res.status === 200) {
+          this.props.history.push('/');
+          } else {
+          const error = new Error(res.error);
+          throw error;
+          }
+      })
+      .catch(err => {
+          console.log("caught");
+          console.log(err);
+      });
+    }
+  }
+
   return (
       /** use container to allow horizontal alignment */
     <Container component="main">
@@ -97,10 +211,10 @@ export default function MainLogInSignUp(props) {
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <LogIn2 /> {/** log in option */}
+                <LogIn2 action={login} /> {/** log in option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUp /> {/** sign up option */}
+                <SignUp action={signup}/> {/** sign up option */}
             </TabPanel>
 
         </div>
