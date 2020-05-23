@@ -19,10 +19,10 @@ class LocationInfo extends React.Component{
     let keyIdx = 0;
     const LocationInfoListings = this.props.data.productsList.map(
       (item)=> <LocationInfoListing
-      key={item.name + keyIdx++}
-      name={item.name}
+      key={item.product_name + keyIdx++}
+      name={item.product_name}
       price={item.price}
-      expire={item.expiration}
+      expire={item.expire_date}
       ></LocationInfoListing>
     );
 

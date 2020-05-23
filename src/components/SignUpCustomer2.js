@@ -141,7 +141,13 @@ class SignUpCustomer2 extends React.Component {
         // checks if customer signup information is valid
         const isValid = this.validate();
         if (isValid) {
-            window.location.assign("/Customer");
+            this.props.action.signupCustomer(
+                this.state.firstName,
+                this.state.lastName,
+                this.state.email,
+                this.state.pass
+            );
+            //window.location.assign("/Customer");
 
             /** BE: PRIVATE ROUTING need backend's help to fix fetch
             

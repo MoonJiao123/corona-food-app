@@ -75,6 +75,52 @@ export default function MainLogInSignUp(props) {
     props.vid(newValue);
   };
 
+  //Define signup/login functions
+  let signup = {
+    signupBusiness: (name, email, phone, pass) => {
+      let body = {
+        account: 'business',
+        name: name,
+        email: email,
+        mobile: phone,
+        pass: pass
+      };
+      //fetch
+      fetch('/users/business/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+    .then(res => {
+        if (res.status === 200) {
+        this.props.history.push('/');
+        } else {
+        const error = new Error(res.error);
+        throw error;
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Error logging in please try again');
+    });
+    },
+    
+    signupCustomer: (first, last, email, pass) => {
+      //fetch
+    }
+  }
+
+  let login = {
+    loginBusiness: (email, pass) => {
+      //fetch
+    },
+    loginCustomer: (email, pass) => {
+      //fetch
+    }
+  }
+
   return (
       /** use container to allow horizontal alignment */
     <Container component="main">
@@ -97,10 +143,10 @@ export default function MainLogInSignUp(props) {
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <LogIn2 /> {/** log in option */}
+                <LogIn2 action={login} /> {/** log in option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUp /> {/** sign up option */}
+                <SignUp action={signup}/> {/** sign up option */}
             </TabPanel>
 
         </div>
