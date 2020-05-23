@@ -310,6 +310,16 @@ body {
   animation: fade 0.2s cubic-bezier(0.18, 0.1, 0.18, 1) 1 forwards;
 }
 
+.button {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.sign-up-subtitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 /* Styles for large screens */
 @media only screen and (min-width: 501px) {
   .main-display {
@@ -378,6 +388,14 @@ Styles for the location addition form
 }
 #addLocation-form.on #addLocation #addLocation-smalls .MuiTextField-root {
   width: 30%;
+}
+#addLocation-form.on  #addLocation-errors {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+#addLocation-form.on  #addLocation-errors .MuiTextField-root {
+  width: 1000%;
 }
 #addLocation-form.on #addLocation .MuiInput-underline:after {
   border-bottom: #175217;

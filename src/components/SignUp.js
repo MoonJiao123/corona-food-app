@@ -14,6 +14,8 @@ import {Tabs, Tab, Typography, Box, Container, CssBaseline}
 from '@material-ui/core';
 import SignUpCustomer from './SigUpCustomer';
 import SignUpBusiness from './SignUpBusiness';
+import SignUpCustomer2 from './SignUpCustomer2';
+import SignUpBusiness2 from './SignUpBusiness2';
 
 /** function to display information based on which tab is open */
 function TabPanel(props) {
@@ -96,10 +98,10 @@ export default function SignUp() {
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <SignUpCustomer /> {/** customer option */}
+                <SignUpCustomer2 /> {/** customer option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUpBusiness /> {/** business option */}
+                <SignUpBusiness2 /> {/** business option */}
             </TabPanel>
 
         </div>
