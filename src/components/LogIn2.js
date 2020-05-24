@@ -144,11 +144,11 @@ class LogIn2 extends React.Component {
         if (isValid) {
             if (this.link === 'Customer') {
                 
-                this.props.action.loginBusiness(this.state.email, this.state.password);
+                this.props.action.loginCustomer(this.state.email, this.state.password);
                 //window.location.assign("/Customer");
             }
             else if (this.link === 'Business') {
-                this.props.action.loginCustomer(this.state.email, this.state.password);
+                this.props.action.loginBusiness(this.state.email, this.state.password);
                 //window.location.assign("/Business")
             }
 
