@@ -13,6 +13,7 @@ import {Tabs, Tab, Typography, Box, Container, CssBaseline }
 from '@material-ui/core';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
+import LogIn2 from './LogIn2';
 
 /** function to display information based on which tab is open */
 function TabPanel(props) {
@@ -74,6 +75,111 @@ export default function MainLogInSignUp(props) {
     props.vid(newValue);
   };
 
+  //Define signup/login functions
+  let signup = {
+    signupBusiness: (name, email, phone, pass) => {
+      let body = {
+        account: 'business',
+        name: name,
+        email: email, 
+        mobile: phone,
+        password: pass
+      };
+      console.log(body);
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/business/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+        console.log(res);
+        res.json();
+      })
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught b signup");
+          console.log(err);
+      });
+    },
+    
+    signupCustomer: (first, last, email, pass) => {
+      let body = {
+        account: 'customer',
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      .then(res => {
+          console.log(res);
+          res.json();
+      })
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught c signup");
+          console.log(err);
+      });
+    }
+  }
+
+  let login = {
+    loginBusiness: (email, pass) => {
+      console.log(email + " " + pass);
+      let body = {
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/business/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(body)
+      })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught b login");
+          console.log(err);
+      });
+    },
+
+    loginCustomer: (email, pass) => {
+      console.log(email + " " + pass);
+      let body = {
+        email: email, 
+        password: pass
+      };
+      //fetch
+      fetch('https://fuo-backend.herokuapp.com/users/customer/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(body)
+      })
+      .then(res => {
+        console.log(res)
+        res.json()
+      })
+      .then(data => console.log(data))
+      .catch(err => {
+          console.log("caught c login");
+          console.log(err);
+      });
+    }
+  }
+
   return (
       /** use container to allow horizontal alignment */
     <Container component="main">
@@ -96,10 +202,10 @@ export default function MainLogInSignUp(props) {
 
             {/** material to be displayed on the different tabs */}
             <TabPanel value={value} index={0}>
-                <LogIn /> {/** log in option */}
+                <LogIn2 action={login} /> {/** log in option */}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <SignUp /> {/** sign up option */}
+                <SignUp action={signup}/> {/** sign up option */}
             </TabPanel>
 
         </div>

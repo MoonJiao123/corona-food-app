@@ -38,6 +38,10 @@ Styles for the location addition form
     justify-content: space-around;
     align-items: center;
 
+    .MuiFormHelperText-root{
+      color: red;
+    }
+
     .MuiFormLabel-root.Mui-focused{
       color: $bg-green;
     }

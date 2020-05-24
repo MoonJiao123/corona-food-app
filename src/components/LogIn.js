@@ -10,6 +10,7 @@ import {Button, CssBaseline, TextField, Grid, Container, FormControlLabel,
     Radio, RadioGroup} from '@material-ui/core';
 import { withStyles, makeStyles, } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
 /** style guidelines for the Log In compoenent */
 const useStyles = makeStyles((theme) => ({
@@ -55,28 +56,67 @@ export default function LogIn() {
 
     // to call style guidelines
     const classes = useStyles(); 
+    // used to retrieve email and password
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
     // used to set where the login button will link to
-    const [value, setValue] = React.useState(''); 
+    const [identity, setIdentity] = React.useState(''); 
     const [helperText, setHelperText] = React.useState('Please select an option above.');
+    // used for form validation
+    const {register, errors} = useForm();
 
+    /** to change the email variable when entered */
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
+    }
+
+    /** to change the password variable when entered */
+    const handlePassword = (event) => {
+        setPassword(event.target.value);
+    }
 
     /** to change the variable value when radio handle is used */
     const handleRadioChange = (event) => {
-        setValue(event.target.value);
+        setIdentity(event.target.value);
         setHelperText('')
     };
 
     /** to change where the log in button routes to based on identity */
     var linkTo;
-    if (value === 'Customer') { // if customer
+    if (identity === 'Customer') { // if customer
         linkTo = "/Customer"   // take to customer page
     } 
-    else if (value === 'Business') { // if business
+    else if (identity === 'Business') { // if business
         linkTo = "/Business" // take to business page
     }
     else {
         linkTo =""
     } 
+
+    /** to do when form is complete and submitted */
+    const handleSubmit = (event) => {
+        /** private routing need backend to work for all of this to work i think so */
+        event.preventDefault();
+        fetch('/api/authenticate', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(res => {
+            if (res.status === 200) {
+              this.props.history.push('/');
+            } else {
+              const error = new Error(res.error);
+              throw error;
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Error logging in please try again');
+          });
+    }
 
     return (
        /** use container to allow horizontal alignment  */
@@ -85,7 +125,8 @@ export default function LogIn() {
         <div className={classes.paper}>
 
             {/** the log in form to fill out  */}
-            <form className={classes.form} noValidate >
+            <form className={classes.form} noValidate 
+            onSubmit={handleSubmit}>
 
                 {/** textfield to enter user email address */}
                 <CssTextField
@@ -98,7 +139,18 @@ export default function LogIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={handleEmail}
+                    inputRef={register({
+                        required: 'email is required',
+                        pattern: {
+                            value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                            message: 'not a valid email entry'
+                        }
+                    })}
+                    error={errors.firstName ? true : false}
                 />
+                {errors.firstName && <p><small>pls enter email</small></p>}
 
                 {/** textfield to enter user password */}
                 <CssTextField
@@ -106,12 +158,22 @@ export default function LogIn() {
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
                     id="password"
+                    label="Password"
+                    name="password"
+                    type="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={handlePassword}
+                    inputRef={register({
+                        required: 'password is required',
+                        minLength: {
+                            value: 6,
+                            message: 'password is too short'
+                        }
+                    })}  
                 />
+                {errors.firstName && <p><small>pls enter pw</small></p>}
 
                 {/** grid to identify customer/business accounts */}
                 <RadioGroup aria-label="identity" name="identifier" onChange={handleRadioChange}>

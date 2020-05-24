@@ -368,6 +368,9 @@ Styles for the location addition form
   justify-content: space-around;
   align-items: center;
 }
+#addLocation-form.on #addLocation .MuiFormHelperText-root {
+  color: red;
+}
 #addLocation-form.on #addLocation .MuiFormLabel-root.Mui-focused {
   color: #67d367;
 }

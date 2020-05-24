@@ -1,5 +1,5 @@
 /** --------------------------------------------------------------------
-Contributors: Darien Tsai
+Contributors: Darien Tsai , Tabassum (validation)
 High level component for business dashboard.
 --------------------------------------------------------------------- */
 
@@ -21,7 +21,13 @@ class AddLocation extends React.Component{
       street: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+
+      nameError: '',
+      streetError: '',
+      cityError: '',
+      stateError: '',
+      zipError: ''
     };
 
     //bindings
@@ -54,20 +60,77 @@ class AddLocation extends React.Component{
     this.setState({zip: e.target.value});
   }
 
+  validate = () => { 
+    let nameError = "";
+    let streetError = "";
+    let cityError = "";
+    let stateError = "";
+    let zipError = "";
+
+    if (!this.state.name) {
+      nameError = "Please enter a location name";
+    }
+
+    if (!this.state.street) {
+      streetError = "Please enter a street";
+    }
+
+    if (this.state.city.length < 2) {
+      cityError = "Invalid City";
+    }
+
+    if (this.state.state.length < 2) {
+      stateError = "Invalid State";
+    }
+
+    if (isNaN(this.state.zip) || this.state.zip.length < 5) {
+      zipError = "Invalid Zip Code";
+    }
+
+    if (nameError || streetError || cityError || stateError || zipError) {
+      this.setState({nameError, streetError, cityError, stateError, zipError})
+      return false;
+    }
+
+    return true;
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    let location = this.state;
-    this.props.action.submitNewLocation(location);
-    this.props.action.closeForm();
+
+    const isValid = this.validate();
+    if (isValid) {
+      let location = this.state;
+      this.props.action.submitNewLocation(location);
+      this.setState({
+        name: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        nameError: '',
+        streetError: '',
+        cityError: '',
+        stateError: '',
+        zipError: ''
+      });
+      this.props.action.closeForm();
+    }
   }
 
   handleCancel = () => {
+    //Form result
     this.setState({
       name: '',
       street: '',
       city: '',
       state: '',
-      zip: ''
+      zip: '',
+      nameError: '',
+      streetError: '',
+      cityError: '',
+      stateError: '',
+      zipError: ''
     });
     this.props.action.closeForm();
   }
@@ -82,12 +145,13 @@ class AddLocation extends React.Component{
         <h1>Add a location</h1>
 
         {/** Form Text inputs */}
-        <TextField fullWidth label="Location Name" value={this.state.name} onChange={this.handleName}/>
-        <TextField fullWidth label="Street" value={this.state.street} onChange={this.handleStreet}/>
+        <TextField fullWidth label="Location Name" value={this.state.name} onChange={this.handleName} helperText={this.state.nameError}/>
+        <TextField fullWidth label="Street" value={this.state.street} onChange={this.handleStreet} helperText={this.state.streetError}/>
+
         <div id="addLocation-smalls">
-          <TextField label="City" value={this.state.city} onChange={this.handleCity}/>
-          <TextField label="State" value={this.state.state} onChange={this.handleState}/>
-          <TextField fullWidth label="Zip" value={this.state.zip} onChange={this.handleZip}/>
+          <TextField label="City" value={this.state.city} onChange={this.handleCity} helperText={this.state.cityError}/>
+          <TextField label="State" value={this.state.state} onChange={this.handleState} helperText={this.state.stateError}/>
+          <TextField label="Zip" value={this.state.zip} onChange={this.handleZip} helperText={this.state.zipError}/>    
         </div>
 
         {/** Form Submission */}
