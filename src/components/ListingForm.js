@@ -69,7 +69,8 @@ class ListingForm extends React.Component{
       expiration: field==="exp"?value:this.props.data.expiration,
       idx: this.props.data.idx,
       remove: this.props.data.remove,
-      onChange: this.props.data.onChange
+      onChange: this.props.data.onChange,
+      product_id: this.props.data.product_id
     };
     return(obj);
   }
