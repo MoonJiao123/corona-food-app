@@ -7,7 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 /* ---------------------------------------------------------------------
 An individual, editable listing
 --------------------------------------------------------------------- */
-class ListingForm extends React.Component{
+class 
+ListingForm extends React.Component{
 
   constructor(props){
     super(props);
