@@ -11,7 +11,7 @@ Component Object: will contain a list of user saved shopping items
 class ShoppingListParent extends React.Component{
 
   render(){
-      console.log("TTA");
+     console.log("TTA");
     console.log(this.props);
     // TODO map data to shopping list items, add keys
     const items = null;
