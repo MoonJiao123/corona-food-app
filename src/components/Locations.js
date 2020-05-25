@@ -64,6 +64,10 @@ export default function Locations(props) {
         props.action(props.data[searchLocation]);
     }
 
+    const doNothing = (e) => {
+        return 0;
+    }
+
     //Map rows
     let rows = addresses.map(
         (location)=> {
@@ -74,7 +78,7 @@ export default function Locations(props) {
     //Genereate component
     return (
         <div id="location-results" className={props.initial}>
-            <LocationRow data={{location: "Location", address: "Address"}}/>
+            <LocationRow data={{location: {name: "Location", address: "Address"}}} action={doNothing}/>
             {rows}
         </div>
     );
