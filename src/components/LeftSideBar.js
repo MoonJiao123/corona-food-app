@@ -45,14 +45,14 @@ class SideNav extends React.Component {
         return(
             <LeftSidebarDiv>
              <img src={"media/mascot.jpg"} alt="mascot" width={200} style={{display: 'block', margin: 'auto'}}/>
-              <CompanyName> {this.props.data.companyName} </CompanyName>
-              <CompanyMission> {this.props.data.totalLocations} Locations </CompanyMission>
+              <CompanyName> {this.props.name} </CompanyName>
+              <CompanyMission> {this.props.num} Locations </CompanyMission>
              <ButtonsDiv>
              <Button
                 type="submit"
                 size={"small"}
                 variant="contained"
-                onClick={this.props.data.logout}
+                onClick={this.props.data}
                 >
                 Log Out
             </Button>
@@ -72,7 +72,7 @@ class SideNav extends React.Component {
 export default class LeftSideBar extends React.Component{
     render(){
         return (
-            <SideNav data={this.props.data} action={this.props.action}></SideNav>
+            <SideNav data={this.props.data} action={this.props.action} name={this.props.name} num={this.props.num}></SideNav>
         );
     }
 }

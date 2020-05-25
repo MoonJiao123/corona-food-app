@@ -96,10 +96,7 @@ export default function MainLogInSignUp(props) {
         'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-        console.log(res);
-        res.json();
-      })
+      .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => {
           console.log("caught b signup");
@@ -116,15 +113,12 @@ export default function MainLogInSignUp(props) {
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',
-        body: JSON.stringify(body),
         headers: {
         'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(body)
       })
-      .then(res => {
-          console.log(res);
-          res.json();
-      })
+      .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => {
           console.log("caught c signup");
@@ -146,10 +140,13 @@ export default function MainLogInSignUp(props) {
         headers: {
           'Content-Type': 'application/json'
           },
-        body: JSON.stringify(body)
+      body: JSON.stringify(body)
       })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        window.location.assign("http://localhost:3000/business#" + data.business_id);
+      })
       .catch(err => {
           console.log("caught b login");
           console.log(err);
@@ -167,13 +164,10 @@ export default function MainLogInSignUp(props) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-          },
+        },
         body: JSON.stringify(body)
       })
-      .then(res => {
-        console.log(res)
-        res.json()
-      })
+      .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => {
           console.log("caught c login");
