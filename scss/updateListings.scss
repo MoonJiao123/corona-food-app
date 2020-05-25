@@ -146,13 +146,22 @@ Styles for the update listings form
     height: 1.7em;
     font-size: 1.1em;
     border-radius: 50%;
+    background-color: rgb(255, 90, 90);
   }
 
-  .removeListing:hover, .updateFileWrap:hover{
+  .removeListing:hover{
+    background-color: rgb(255, 151, 151);
+  }
+
+  .removeListing:active{
+    background-color: rgb(160, 43, 43);
+  }
+
+  .updateFileWrap:hover{
     background-color: $button-hover;
   }
 
-  .removeListing:active, .updateFileWrap:active{
+  .updateFileWrap:active{
     background-color: $button-active;
   }
 }

@@ -33,6 +33,10 @@ Styles for the business dashboard right sidebar
     text-align: center;
     border-radius: 5px;
   }
+
+  button.delete-location-button{
+    background-color: rgb(204, 48, 48);
+  }
 }
 
 #locationInfo-address{

@@ -57,7 +57,7 @@ class LocationInfo extends React.Component{
           </Button>
           <Button
           onClick={this.props.action.deleteLocation}
-          className="update-listing-button"
+          className="delete-location-button"
           variant="contained"
           color="primary"
           size="large"

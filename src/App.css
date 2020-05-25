@@ -119,6 +119,9 @@ Styles for the business dashboard right sidebar
   text-align: center;
   border-radius: 5px;
 }
+#locationInfo button.delete-location-button {
+  background-color: #cc3030;
+}
 
 #locationInfo-address {
   text-align: center;
@@ -624,11 +627,18 @@ Styles for the update listings form
   height: 1.7em;
   font-size: 1.1em;
   border-radius: 50%;
+  background-color: #ff5a5a;
 }
-.updatableListing .removeListing:hover, .updatableListing .updateFileWrap:hover {
+.updatableListing .removeListing:hover {
+  background-color: #ff9797;
+}
+.updatableListing .removeListing:active {
+  background-color: #a02b2b;
+}
+.updatableListing .updateFileWrap:hover {
   background-color: #1e6b1e;
 }
-.updatableListing .removeListing:active, .updatableListing .updateFileWrap:active {
+.updatableListing .updateFileWrap:active {
   background-color: #134413;
 }
 
