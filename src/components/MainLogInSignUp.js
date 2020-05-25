@@ -71,8 +71,10 @@ export default function MainLogInSignUp(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-    props.vid(newValue);
+    if(value !== newValue){
+      setValue(newValue);
+      props.vid(newValue);
+    }
   };
 
   //Define signup/login functions
