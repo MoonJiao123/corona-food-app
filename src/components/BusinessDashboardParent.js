@@ -34,15 +34,14 @@ Constructor is used for state design, modularized to pass as props
 
       // Values for the parent
       currentLocation: '',
-      session: {
-        businessId: '1/',
-        user: 'business'
-      },
+      session: '',
       currentStore: '',
 
   
       // Props for LeftSideBar -------------------------------------------------
-      left: {},
+      logout: () => {alert("logout")},
+      companyName: '',
+      totalLocations: '',
 
       addLocation: () => {
         this.setState({formClass: this.state.formClass==="off"?"on":"off"});
@@ -61,7 +60,7 @@ Constructor is used for state design, modularized to pass as props
 
         //BE Call: On location search
         let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
-        let id = this.state.session.businessId;
+        let id = this.state.session + '/';
         let arg = loc.street +
                   (loc.city !== ''?('.'+loc.city):'') +
                   (loc.state !== ''?','+loc.state:'') +
@@ -153,7 +152,7 @@ Constructor is used for state design, modularized to pass as props
           //Then: Select another location to display or display empty
           const method = {method: 'DELETE'};
           let base = 'https://fuo-backend.herokuapp.com/business/deletelocation/';
-          let id = this.state.session.businessId;
+          let id = this.state.session + '/';
           console.log(this.state.currentLocation);
 
           let arg = this.state.currentLocation;
@@ -178,7 +177,7 @@ Constructor is used for state design, modularized to pass as props
           //BE Call: On location add
           const method = {method: 'POST'};
           let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
-          let id = this.state.session.businessId;
+          let id = this.state.session + '/';
           let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
           let name = '/' + location.name;
           let url = base + id + arg + name;
@@ -395,13 +394,13 @@ Constructor is used for state design, modularized to pass as props
 Assemble page, pass state values into props
 
 Action  | Child functionality implemented in parent, then passed down
-Data    | Read only props
+Data    | Read only propss
 Initial | Starter data that may get changed
 ----------------------------------------------------------------------------- */
   render(){
     return(
       <div>
-        <LeftSideBar       action={this.state.addLocation}    data={this.state.left}      />
+        <LeftSideBar       action={this.state.addLocation}    data={this.state.logout}      name={this.state.companyName}   num={this.state.totalLocations}/>
         <LocationSearchBar action={this.state.search}                                     />
         <Locations         action={this.state.selectLocation} data={this.state.locations}   initial={this.state.locationBg}    />
         <LocationInfo      action={this.state.rightControls}  data={this.state.right}     />
@@ -422,14 +421,15 @@ TODO: Add or pass in database connection, verify authentication
       alert("Layout has not been optimized for small screens.Please log in with a larger device.");
     }
 
-    //BE Call: On page load TODO TODO TODO
-    let session = window.location.hash;
+    //Get business ID
+    let session = window.location.hash.substring(1);
     window.location.hash = '';
-    console.log(session);
+    this.setState({session: session});
+
+    //BE Call: On page load
     let base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
-    let id = this.state.session.businessId;
-    
-    let url = base + '1';
+    let id = session;
+    let url = base + id;
     fetch(url)
     .then(res => res.json())
     .then(data => {this.setState({locations: data, locationBg: ''})})
@@ -438,23 +438,21 @@ TODO: Add or pass in database connection, verify authentication
       console.log(error);
     });
     
-    let numLocations = 0;
     base = 'https://fuo-backend.herokuapp.com/business/numoflocations/';
-    url = base + '1';
+    url = base + id;
     fetch(url)
     .then(res => res.json())
-    .then(data => numLocations = data)
+    .then(data => this.setState({totalLocations: data}))
     .catch(error => {
       console.log('caught numLocations');
       console.log(error);
     });
 
-    let businessName = '';
     base = 'https://fuo-backend.herokuapp.com/business/getbusinessname/';
-    url = base + '1';
+    url = base + id;
     fetch(url)
     .then(res => res.json())
-    .then(data => businessName = data)
+    .then(data => this.setState({companyName: data.name}))
     .catch(error => {
       console.log('caught numLocations');
       console.log(error);
@@ -462,11 +460,7 @@ TODO: Add or pass in database connection, verify authentication
 
     //Set values for LeftSidebar
     this.setState({
-      left: {
-        companyName: businessName,
-        totalLocations: numLocations, 
-        logout: () => alert("log out")
-      }
+      logout: () => alert("log out")
     });
   }
 
