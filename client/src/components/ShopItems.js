@@ -1,6 +1,9 @@
-import React from 'react';
+import React,{Component} from 'react';
 import styled from 'styled-components'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+import {connect} from 'react-redux'
+import {addToCart} from './actions/cartActions'
 
 const ItemsContainer = styled.div`
     width: 80%;
@@ -60,35 +63,36 @@ const AddToCartButton = styled.button`
     }
 `;
 
-class ShopItem extends React.Component {
-    render() {
-       return (
-           <Item>
-               <Image src={this.props.data.src}/>
-               <Description>
-                   <ItemName>{this.props.data.name}</ItemName>
-                   <h5>Good by: {this.props.data.exp}</h5>
-                   <h5>Quantity: {this.props.data.qnt}</h5>
-               </Description>
-
-               <Price>
-                   <h3>${this.props.data.price}</h3>
-                   <AddToCartButton> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
-               </Price>
-           </Item>
-       );
+class ShopItems extends Component{
+    handleClick = (id)=>{
+        this.props.addToCart(id);
     }
-}
 
-class ShopItems extends React.Component{
     render () {
         console.log("Shop Items");
         console.log(this.props);
-        let items = this.props.data.map(
-            (item) => <ShopItem data={item} key={item.id}/>
-        );
+        // individual item
+        let items = this.props.items.map(
+            (item) => {
+                return (
+                    <Item>
+                        <Image src={item.img}/>
+                        <Description>
+                            <ItemName>{item.name}</ItemName>
+                            <h5>Good by: {item.exp}</h5>
+                            <h5>Quantity: {item.qnt}</h5>
+                        </Description>
+
+                        <Price>
+                            <h3>${item.price}</h3>
+                            <AddToCartButton onClick={()=>{this.handleClick(item.id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
+                        </Price>
+                    </Item>
+                )
+        });
 
         return (
+            //item list
             <ItemsContainer>
                 {items}
             </ItemsContainer>
@@ -96,4 +100,15 @@ class ShopItems extends React.Component{
     }
 }
 
-export default ShopItems;
+const mapStateToProps = (state)=>{
+    return {
+        items: state.items
+    }
+}
+const mapDispatchToProps= (dispatch)=>{
+
+    return{
+        addToCart: (id)=>{dispatch(addToCart(id))}
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ShopItems)
