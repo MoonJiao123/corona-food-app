@@ -37,9 +37,13 @@ Styles for the business dashboard right sidebar
 
 #locationInfo-address{
   text-align: center;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding: 0 1%;
   font-size: 1.5em;
   width: 100%;
   margin: auto;
+
 }
 
 #locationInfo-listing-count{

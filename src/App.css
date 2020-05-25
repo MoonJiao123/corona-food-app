@@ -122,6 +122,9 @@ Styles for the business dashboard right sidebar
 
 #locationInfo-address {
   text-align: center;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding: 0 1%;
   font-size: 1.5em;
   width: 100%;
   margin: auto;
@@ -298,6 +301,7 @@ body {
   font-size: 0.9em;
   height: fit-content;
   align-items: center;
+  margin: 0;
 }
 .main-display .image-display {
   width: fit-content;
@@ -312,7 +316,7 @@ body {
 
 /* Styles for large screens */
 @media only screen and (min-width: 501px) {
-  .main-display {
+  #main-display {
     width: 100%;
     max-width: 1250px;
     height: 90vh;
@@ -325,7 +329,7 @@ body {
     justify-content: space-around;
     align-items: center;
   }
-  .main-display #welcome-video {
+  #main-display #welcome-video {
     width: 400px;
     height: 400px;
   }

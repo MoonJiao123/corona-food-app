@@ -39,7 +39,7 @@ function App() {
     <div id="account-parent">
       <Header />
       {/* LogIn and SignUp will appear side by side */}
-      <div className="main-display">
+      <div className="main-display" id="main-display">
         <div className="image-display">
           {vid}
         </div>
