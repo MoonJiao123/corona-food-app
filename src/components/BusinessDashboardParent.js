@@ -173,7 +173,7 @@ Constructor is used for state design, modularized to pass as props
           let id = this.state.session + '/';
           this.setState({currentStatus:''});
 
-          let arg = this.state.currentLocation;
+          let arg = this.state.currentStore;
 
           let url = base + id + arg;
           console.log(url);
@@ -189,6 +189,13 @@ Constructor is used for state design, modularized to pass as props
                 .then(data => {
                   this.setState({locations: data, locationBg: ''})
                   this.setState({currentMessage: 'Success!', currentStatus:'good'});
+                  this.setState({
+                    right: {
+                      address: 'No Selection',
+                      totalProducts: 0,
+                      productsList: []
+                    }
+                  });
                 })
                 .catch(error => {
                   console.log('caught load');
@@ -515,7 +522,6 @@ Initial | Starter data that may get changed
 
 /* -----------------------------------------------------------------------------
 After Render
-TODO: Add or pass in database connection, verify authentication
 ----------------------------------------------------------------------------- */
   componentDidMount(){
     //Alert logins on small bad screen sizes
@@ -530,7 +536,7 @@ TODO: Add or pass in database connection, verify authentication
 
     //Renav if not authenticated
     if(session === ''){
-      //window.location.assign('http://localhost:3000/');
+      //window.location.assign('https://corona-food.herokuapp.com/');
     }
 
     //BE Call: On page load

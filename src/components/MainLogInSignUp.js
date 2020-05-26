@@ -97,11 +97,11 @@ export default function MainLogInSignUp(props) {
         }
       })
       .then(res => res.json())
-      .then(data => {
-      })
+      .then(data => {alert("Success!")})
       .catch(err => {
           console.log("caught b signup");
           console.log(err);
+          alert("Something went wrong...");
       });
     },
     
@@ -120,11 +120,11 @@ export default function MainLogInSignUp(props) {
         body: JSON.stringify(body)
       })
       .then(res => res.json())
-      .then(data => {
-      })
+      .then(data => {alert("Success!")})
       .catch(err => {
           console.log("caught c signup");
           console.log(err);
+          alert("Something went wrong...");
       });
     }
   }
@@ -151,6 +151,7 @@ export default function MainLogInSignUp(props) {
       .catch(err => {
           console.log("caught b login");
           console.log(err);
+          alert("Something went wrong...");
       });
     },
 
@@ -172,6 +173,7 @@ export default function MainLogInSignUp(props) {
       .catch(err => {
           console.log("caught c login");
           console.log(err);
+          alert("Something went wrong...");
       });
     }
   }
