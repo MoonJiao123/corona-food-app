@@ -97,7 +97,8 @@ export default function MainLogInSignUp(props) {
         }
       })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+      })
       .catch(err => {
           console.log("caught b signup");
           console.log(err);
@@ -119,7 +120,8 @@ export default function MainLogInSignUp(props) {
         body: JSON.stringify(body)
       })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+      })
       .catch(err => {
           console.log("caught c signup");
           console.log(err);
@@ -129,7 +131,6 @@ export default function MainLogInSignUp(props) {
 
   let login = {
     loginBusiness: (email, pass) => {
-      console.log(email + " " + pass);
       let body = {
         email: email, 
         password: pass
@@ -154,7 +155,6 @@ export default function MainLogInSignUp(props) {
     },
 
     loginCustomer: (email, pass) => {
-      console.log(email + " " + pass);
       let body = {
         email: email, 
         password: pass
