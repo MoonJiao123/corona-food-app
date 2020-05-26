@@ -74,6 +74,13 @@ Override Highlight
   background: #92f8a0;
 }
 
+/* ---------------------------------------------------------------------
+Overflow
+--------------------------------------------------------------------- */
+body {
+  overflow-y: hidden;
+}
+
 /* puts Log In and Sign Up pages side by side */
 .main-display {
   display: flex;
@@ -640,6 +647,50 @@ Styles for the update listings form
 }
 .updatableListing .updateFileWrap:active {
   background-color: #134413;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for status message
+--------------------------------------------------------------------- */
+#status {
+  position: absolute;
+  z-index: 10;
+  left: 35%;
+  width: 30vw;
+  padding: 1%;
+  border-radius: 15px;
+}
+#status h1 {
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+.good {
+  background-color: #67d367;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+.bad {
+  background-color: red;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+@keyframes status {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    bottom: -10%;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */
