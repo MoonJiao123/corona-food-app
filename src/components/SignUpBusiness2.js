@@ -127,7 +127,7 @@ class SignUpBusiness2 extends React.Component {
 
         // check for phone error 
         if (this.state.phone.length < 10 || !Number(this.state.phone)) {
-            phoneError= "Invalid phone number"
+            phoneError= "Invalid phone number (digits only)"
         }
 
         // set validation false because name or email error

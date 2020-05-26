@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------------------
-Contributors: Darien Tsai
+Contributors: Darien Tsai, Tabassum Alam (validation)
 High level container for business dashboard components.
 ----------------------------------------------------------------------------- */
 import React from 'react';
@@ -265,48 +265,54 @@ Constructor is used for state design, modularized to pass as props
 
       update: {
         submitUpdate: () => {
+
           //Repackage listings for HTTP request
           let list = JSON.parse(JSON.stringify(this.state.updateListings));
-          for(let i = 0; i < list.length; i++){
-            delete list[i].idx;
-            delete list[i].onChange;
-            delete list[i].remove
-          }
-          //Close the form
-          this.state.update.closeForm();
 
-          
-          let body = [];
-          for(let i = 0; i < list.length; i++){
-            body.push({
-              product_name: list[i].name,
-              product_img: list[i].image,
-              category: list[i].category,
-              price: list[i].price,
-              expire_date: list[i].expiration,
-              stock_amount: list[i].amount,
-              coupon: list[i].rate,
-              store_id: this.state.currentStore
+          const isValid = this.validate(list);
+
+          if (isValid) {
+            for(let i = 0; i < list.length; i++){
+              delete list[i].idx;
+              delete list[i].onChange;
+              delete list[i].remove
+            }
+            //Close the form
+            this.state.update.closeForm();
+
+            
+            let body = [];
+            for(let i = 0; i < list.length; i++){
+              body.push({
+                product_name: list[i].name,
+                product_img: list[i].image,
+                category: list[i].category,
+                price: list[i].price,
+                expire_date: list[i].expiration,
+                stock_amount: list[i].amount,
+                coupon: list[i].rate,
+                store_id: this.state.currentStore
+              });
+            }
+            
+            //BE Call: On products upload
+            const method = {
+              method: 'POST',
+              body: JSON.stringify(body)
+            };
+
+            let base = 'https://fuo-backend.herokuapp.com/product/upload/';
+            let id = this.state.session.businessId;
+
+            let url = base + id ;
+            fetch(url, method)
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(error => {
+              console.log('caught upload');
+              console.log(error);
             });
           }
-          
-          //BE Call: On products upload
-          const method = {
-            method: 'POST',
-            body: JSON.stringify(body)
-          };
-
-          let base = 'https://fuo-backend.herokuapp.com/product/upload/';
-          let id = this.state.session.businessId;
-
-          let url = base + id ;
-          fetch(url, method)
-          .then(res => res.json())
-          .then(data => console.log(data))
-          .catch(error => {
-            console.log('caught upload');
-            console.log(error);
-          });
         },
 
         addListing: (e) => {
@@ -323,7 +329,15 @@ Constructor is used for state design, modularized to pass as props
             expiration: '',
             idx: this.state.idx,
             remove: this.state.formControl.remove,
-            onChange: this.state.formControl.onChange
+            onChange: this.state.formControl.onChange,
+
+            linkError: '',
+            nameError: '',
+            amountError: '',
+            priceError: '',
+            discountError: '',
+            expirationError: '',
+
           }
           let newList = (<ListingForm data={newListing} key={this.state.key} action={this.state.formControl} focus={7}/>)
           listings.push(newListing);
@@ -361,7 +375,22 @@ Constructor is used for state design, modularized to pass as props
     };
   }
 
-
+  /** validation for all listings are filled in  */
+  validate = (list) => {
+    for (let i = 0; i < list.length; i++) {
+      if ( (list[i].image && !list[i].image.includes('.')) ||
+            (!list[i].name ) || 
+            (!list[i].amount || !Number(list[i].amount) ) ||
+            (!list[i].price || !Number(list[i].price) ) ||
+            (!list[i].rate) ||
+            (!list[i].expiration || new Date(list[i].expiration) < new Date().setDate(new Date().getDate() - 1)) 
+        ) {
+          alert('Please provide all required details.')
+          return false;
+        } 
+    }
+    return true;
+  };
 /* -----------------------------------------------------------------------------
 Assemble page, pass state values into props
 
