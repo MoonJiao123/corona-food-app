@@ -207,7 +207,7 @@ class SignUpCustomer2 extends React.Component {
                 this.state.firstName,
                 this.state.lastName,
                 this.state.email,
-                this.state.pass
+                this.state.password
             );
             //window.location.assign("/Customer");
 

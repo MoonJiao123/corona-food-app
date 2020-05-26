@@ -71,8 +71,10 @@ export default function MainLogInSignUp(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-    props.vid(newValue);
+    if(value !== newValue){
+      setValue(newValue);
+      props.vid(newValue);
+    }
   };
 
   //Define signup/login functions
@@ -85,6 +87,7 @@ export default function MainLogInSignUp(props) {
         mobile: phone,
         password: pass
       };
+      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/business/register', {
         method: 'POST',
@@ -93,18 +96,12 @@ export default function MainLogInSignUp(props) {
         'Content-Type': 'application/json'
         }
       })
-      .then(res => {
-          if (res.status === 200) {
-          res.json();
-          } else {
-          const error = new Error(res.error);
-          throw error;
-          }
-      })
-      .then(data => console.log(data))
+      .then(res => res.json())
+      .then(data => {alert("Success!")})
       .catch(err => {
-          console.log("caught");
+          console.log("caught b signup");
           console.log(err);
+          alert("Something went wrong...");
       });
     },
     
@@ -117,22 +114,17 @@ export default function MainLogInSignUp(props) {
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',
-        body: JSON.stringify(body),
         headers: {
         'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(body)
       })
-      .then(res => {
-          if (res.status === 200) {
-          this.props.history.push('/');
-          } else {
-          const error = new Error(res.error);
-          throw error;
-          }
-      })
+      .then(res => res.json())
+      .then(data => {alert("Success!")})
       .catch(err => {
-          console.log("caught");
+          console.log("caught c signup");
           console.log(err);
+          alert("Something went wrong...");
       });
     }
   }
@@ -146,21 +138,23 @@ export default function MainLogInSignUp(props) {
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/business/login', {
         method: 'POST',
-        body: JSON.stringify(body),
         headers: {
-        'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json'
+          },
+      body: JSON.stringify(body)
       })
-      .then(res => {
-          if (res.status === 200) {
-          this.props.history.push('/');
-          }
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        window.location.assign("http://localhost:3000/business#" + data.business_id);
       })
       .catch(err => {
-          console.log("caught");
+          console.log("caught b login");
           console.log(err);
+          alert("Something went wrong...");
       });
     },
+
     loginCustomer: (email, pass) => {
       let body = {
         email: email, 
@@ -169,22 +163,17 @@ export default function MainLogInSignUp(props) {
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/login', {
         method: 'POST',
-        body: JSON.stringify(body),
         headers: {
-        'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
       })
-      .then(res => {
-          if (res.status === 200) {
-          this.props.history.push('/');
-          } else {
-          const error = new Error(res.error);
-          throw error;
-          }
-      })
+      .then(res => res.json())
+      .then(data => console.log(data))
       .catch(err => {
-          console.log("caught");
+          console.log("caught c login");
           console.log(err);
+          alert("Something went wrong...");
       });
     }
   }

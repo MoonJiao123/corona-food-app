@@ -74,6 +74,13 @@ Override Highlight
   background: #92f8a0;
 }
 
+/* ---------------------------------------------------------------------
+Overflow
+--------------------------------------------------------------------- */
+body {
+  overflow-y: hidden;
+}
+
 /* puts Log In and Sign Up pages side by side */
 .main-display {
   display: flex;
@@ -119,9 +126,15 @@ Styles for the business dashboard right sidebar
   text-align: center;
   border-radius: 5px;
 }
+#locationInfo button.delete-location-button {
+  background-color: #cc3030;
+}
 
 #locationInfo-address {
   text-align: center;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding: 0 1%;
   font-size: 1.5em;
   width: 100%;
   margin: auto;
@@ -298,6 +311,7 @@ body {
   font-size: 0.9em;
   height: fit-content;
   align-items: center;
+  margin: 0;
 }
 .main-display .image-display {
   width: fit-content;
@@ -312,7 +326,7 @@ body {
 
 /* Styles for large screens */
 @media only screen and (min-width: 501px) {
-  .main-display {
+  #main-display {
     width: 100%;
     max-width: 1250px;
     height: 90vh;
@@ -325,7 +339,7 @@ body {
     justify-content: space-around;
     align-items: center;
   }
-  .main-display #welcome-video {
+  #main-display #welcome-video {
     width: 400px;
     height: 400px;
   }
@@ -620,12 +634,63 @@ Styles for the update listings form
   height: 1.7em;
   font-size: 1.1em;
   border-radius: 50%;
+  background-color: #ff5a5a;
 }
-.updatableListing .removeListing:hover, .updatableListing .updateFileWrap:hover {
+.updatableListing .removeListing:hover {
+  background-color: #ff9797;
+}
+.updatableListing .removeListing:active {
+  background-color: #a02b2b;
+}
+.updatableListing .updateFileWrap:hover {
   background-color: #1e6b1e;
 }
-.updatableListing .removeListing:active, .updatableListing .updateFileWrap:active {
+.updatableListing .updateFileWrap:active {
   background-color: #134413;
+}
+
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for status message
+--------------------------------------------------------------------- */
+#status {
+  position: absolute;
+  z-index: 10;
+  left: 35%;
+  width: 30vw;
+  padding: 1%;
+  border-radius: 15px;
+}
+#status h1 {
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+.good {
+  background-color: #67d367;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+.bad {
+  background-color: red;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+@keyframes status {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    bottom: -10%;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */

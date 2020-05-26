@@ -1,0 +1,45 @@
+/* ---------------------------------------------------------------------
+Contributors: Darien
+Styles for status message
+--------------------------------------------------------------------- */
+
+#status{
+  position: absolute;
+  z-index: 10;
+  left: 35%;
+  width: 30vw;
+  padding: 1%;
+  border-radius: 15px;
+
+  h1{
+    text-align: center;
+    width: 100%;
+    color: white;
+  }
+}
+
+.good{
+  background-color: $bg-green;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+.bad{
+  background-color: red;
+  bottom: -10px;
+  opacity: 0;
+  animation: status 1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 1 forwards;
+}
+
+@keyframes status{
+  0%{
+    opacity: 0;
+  }
+  25%{
+    opacity: 1;
+  }
+  100%{
+    bottom: -10%;
+  }
+}
