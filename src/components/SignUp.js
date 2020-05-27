@@ -12,8 +12,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Tabs, Tab, Typography, Box, Container, CssBaseline} 
 from '@material-ui/core';
-import SignUpCustomer from './SigUpCustomer';
-import SignUpBusiness from './SignUpBusiness';
 import SignUpCustomer2 from './SignUpCustomer2';
 import SignUpBusiness2 from './SignUpBusiness2';
 
