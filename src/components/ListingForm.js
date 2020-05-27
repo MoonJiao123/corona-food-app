@@ -169,6 +169,8 @@ ListingForm extends React.Component{
         case 6:
           this.exp.focus();
           break;
+        default:
+          break;
       }
     }
   }

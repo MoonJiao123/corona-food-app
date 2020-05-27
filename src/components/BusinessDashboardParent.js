@@ -42,7 +42,7 @@ Constructor is used for state design, modularized to pass as props
 
   
       // Props for LeftSideBar -------------------------------------------------
-      logout: () => {alert("logout")},
+      logout: () => {console.log(window); window.location.replace('localhost:3000');},
       companyName: '',
       totalLocations: '',
 
@@ -590,10 +590,6 @@ After Render
       this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
     });
 
-    //Set values for LeftSidebar
-    this.setState({
-      logout: () => alert("log out")
-    });
   }
 
 }
