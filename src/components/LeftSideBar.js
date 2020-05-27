@@ -6,6 +6,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from "@material-ui/core/Button";
+import {Link} from 'react-router-dom';
 
 const LeftSidebarDiv = styled.div`
     position: absolute; /* stay in place on scroll and position relative to view */
@@ -48,14 +49,16 @@ class SideNav extends React.Component {
               <CompanyName> {this.props.name} </CompanyName>
               <CompanyMission> {this.props.num} Locations </CompanyMission>
              <ButtonsDiv>
-             <Button
-                type="submit"
-                size={"small"}
-                variant="contained"
-                onClick={this.props.data}
-                >
-                Log Out
-            </Button>
+             <a href="landing.html">    
+                <Button
+                    type="submit"
+                    size={"small"}
+                    variant="contained"
+                    onClick={this.props.data}
+                    >
+                    Log Out
+                </Button>
+            </a>
             {"  "}
             <Button
                  type="submit"
