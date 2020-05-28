@@ -38,6 +38,7 @@ ListingForm extends React.Component{
     this.handleExpiration = this.handleExpiration.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.objectify = this.objectify.bind(this);
+    this.listingSubmit = this.listingSubmit.bind(this);
   }
 
   //event handlers
@@ -74,6 +75,12 @@ ListingForm extends React.Component{
     this.props.data.remove(this.props.data.idx);
   }
 
+  listingSubmit = (event) => {
+    if(event.keyCode == 13){
+      event.preventDefault();
+    }
+  }
+
   objectify = (field, value) => {
     let obj = {
       image: field==="img"?value:this.props.data.image,
@@ -94,10 +101,10 @@ ListingForm extends React.Component{
   //render
   render(){    
     return(
-      <form className="updatableListing">
+      <form className="updatableListing" onSubmit={this.listingSubmit}>
 
         {/** Image link */}
-        <TextField className="updateField" label="Img Link" type="url" value={this.props.data.image} onChange={this.handleImg} inputRef={input => this.img = input} helperText={this.props.data.linkError}/>
+        <TextField className="updateField" label="Img Link" type="url" value={this.props.data.image} onChange={this.handleImg} inputRef={input => this.img = input} helperText={this.props.data.linkError} onKeyDown={this.listingSubmit}/>
 
         {/** Dropdown selection for category */}
         <FormControl>
@@ -123,10 +130,10 @@ ListingForm extends React.Component{
         </FormControl>
 
         {/** Text inputs */}
-        <TextField className="updateField" label="Name" value={this.props.data.name} onChange={this.handleName} inputRef={input => this.nam = input} helperText={this.props.data.nameError}/>
-        <TextField className="updateField" label="Amount" value={this.props.data.amount} onChange={this.handleAmount} inputRef={input => this.amo = input} helperText= {this.props.data.amountError}/>
-        <TextField className="updateField" label="Price" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input} helperText= {this.props.data.priceError}/>
-        <TextField className="updateField" label="Discount" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input} helperText={this.props.data.discountError}/>
+        <TextField className="updateField" label="Name" value={this.props.data.name} onChange={this.handleName} inputRef={input => this.nam = input} helperText={this.props.data.nameError} onKeyDown={this.listingSubmit}/>
+        <TextField className="updateField" label="Amount" value={this.props.data.amount} onChange={this.handleAmount} inputRef={input => this.amo = input} helperText= {this.props.data.amountError} onKeyDown={this.listingSubmit}/>
+        <TextField className="updateField" label="Price" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input} helperText= {this.props.data.priceError} onKeyDown={this.listingSubmit}/>
+        <TextField className="updateField" label="Discount" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input} helperText={this.props.data.discountError} onKeyDown={this.listingSubmit}/>
 
         {/** Expiration Date input */}
         <TextField
