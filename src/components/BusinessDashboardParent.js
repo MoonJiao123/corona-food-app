@@ -281,7 +281,7 @@ Constructor is used for state design, modularized to pass as props
                 .then(res => res.json())
                 .then(data => {
                   this.setState({locations: data, locationBg: ''})
-                  this.setState({currentMessage: 'Success!', currentStatus:'good'});
+                  this.setState({currentMessage: 'Success!', currentStatus:'good', currentStore: ''});
                   this.setState({
                     right: {
                       address: 'No Selection',
@@ -437,7 +437,6 @@ Constructor is used for state design, modularized to pass as props
           //Repackage listings for HTTP request
           let list = JSON.parse(JSON.stringify(this.state.updateListings));
           if(!this.validate(list)){return false;}
-          this.setState({currentStatus:''});
 
           let body = [];
           let ids = [];
@@ -465,6 +464,7 @@ Constructor is used for state design, modularized to pass as props
 
           let base = 'https://fuo-backend.herokuapp.com/product/upsert/';
           let id = this.state.currentStore + '/';
+          this.setState({currentStatus:''});
           for(let i = 0 ; i < body.length; i++){
 
             let arg = ids[i];
@@ -527,6 +527,8 @@ Constructor is used for state design, modularized to pass as props
               });
             }
           }
+
+          this.state.update.closeForm();
         },
 
         addListing: (e) => {
@@ -683,7 +685,7 @@ After Render
 ----------------------------------------------------------------------------- */
   componentDidMount(){
     //Alert logins on small bad screen sizes
-    if(window.innerWidth / window.innerHeight < 1.7 || window.innerHeight < 760){
+    if(window.innerWidth / window.innerHeight < 1.3 || window.innerHeight < 720){
       alert("Layout has not been optimized for small screens. Please log in with a larger device.");
     }
 
