@@ -13,6 +13,21 @@ ListingForm extends React.Component{
   constructor(props){
     super(props);
 
+     /*
+    this.nameError = !this.props.data.name ? "Required" : "";
+    this.amountError = !this.props.data.amount || !Number(this.props.data.amount) ? "Required (numbers only)" : "";
+    this.priceError = !this.props.data.price || !Number(this.props.data.price) ? "Required (numbers only)" : "";
+    this.discountError = !this.props.data.rate ? "Required" : "";
+    this.expirationError = !this.props.data.expiration ? "Required" : "";
+     */
+
+    this.props.data.linkError = this.props.data.image && !this.props.data.image.includes('.') ? "Enter valid link" : "";
+    this.props.data.nameError = !this.props.data.name ? "Required" : "";
+    this.props.data.amountError = !this.props.data.amount || !Number(this.props.data.amount) ? "Required (numbers only)" : "";
+    this.props.data.priceError = !this.props.data.price || !Number(this.props.data.price) ? "Required (numbers only)" : "";
+    this.props.data.discountError = !this.props.data.rate ? "Required" : "";
+    this.props.data.expirationError = !this.props.data.expiration || new Date(this.props.data.expiration) < new Date().setDate(new Date().getDate() - 1) ? "Required (enter future date)" : "";
+
     //bindings
     this.handleImg = this.handleImg.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -26,7 +41,7 @@ ListingForm extends React.Component{
   }
 
   //event handlers
-  handleImg = (event) => {
+  handleImg = (event) =>   {
     this.props.data.onChange(this.props.data.idx, this.objectify("img", event.target.value), 0);
   }
 
@@ -82,7 +97,7 @@ ListingForm extends React.Component{
       <form className="updatableListing">
 
         {/** Image link */}
-        <TextField className="updateField" label="Img Link" value={this.props.data.image} onChange={this.handleImg} inputRef={input => this.img = input}/>
+        <TextField className="updateField" label="Img Link" type="url" value={this.props.data.image} onChange={this.handleImg} inputRef={input => this.img = input} helperText={this.props.data.linkError}/>
 
         {/** Dropdown selection for category */}
         <FormControl>
@@ -108,10 +123,10 @@ ListingForm extends React.Component{
         </FormControl>
 
         {/** Text inputs */}
-        <TextField className="updateField" label="Name" value={this.props.data.name} onChange={this.handleName} inputRef={input => this.nam = input}/>
-        <TextField className="updateField" label="Amount" value={this.props.data.amount} onChange={this.handleAmount} inputRef={input => this.amo = input}/>
-        <TextField className="updateField" label="Price" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input}/>
-        <TextField className="updateField" label="Discount" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input}/>
+        <TextField className="updateField" label="Name" value={this.props.data.name} onChange={this.handleName} inputRef={input => this.nam = input} helperText={this.props.data.nameError}/>
+        <TextField className="updateField" label="Amount" value={this.props.data.amount} onChange={this.handleAmount} inputRef={input => this.amo = input} helperText= {this.props.data.amountError}/>
+        <TextField className="updateField" label="Price" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input} helperText= {this.props.data.priceError}/>
+        <TextField className="updateField" label="Discount" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input} helperText={this.props.data.discountError}/>
 
         {/** Expiration Date input */}
         <TextField
@@ -124,6 +139,7 @@ ListingForm extends React.Component{
           }}
           onChange={this.handleExpiration}
           inputRef={input => this.exp = input}
+          helperText={this.props.data.expirationError}
         />
 
         {/** Remove button */}

@@ -75,11 +75,11 @@ class AddLocation extends React.Component{
       streetError = "Please enter a street";
     }
 
-    if (this.state.city.length < 2) {
+    if (this.state.city.length < 2 || !isNaN(this.state.city)) {
       cityError = "Invalid City";
     }
 
-    if (this.state.state.length < 2) {
+    if (this.state.state.length < 2 || !isNaN(this.state.state)) {
       stateError = "Invalid State";
     }
 

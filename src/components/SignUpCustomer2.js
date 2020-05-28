@@ -52,11 +52,19 @@ class SignUpCustomer2 extends React.Component {
             firstName: '',
             lastName: '',
             email: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: '',
             password: '',
             confirmPW: '',
             /** corrections errors of signup customer form */
             nameError: '',
             emailError: '',
+            addressError: '',
+            cityError: '',
+            stateError: '',
+            zipError: '',
             passwordError: '',
             confirmPWError: '',
         }
@@ -83,6 +91,34 @@ class SignUpCustomer2 extends React.Component {
         });
     };
 
+    /** sets address state */
+    handleAddress = address => event => {
+        this.setState({
+            [address]: event.target.value,
+        });
+    };
+
+    /** sets city state */
+    handleCity = city => event => {
+        this.setState({
+            [city]: event.target.value,
+        });
+    };
+
+    /** sets state state */
+    handleState = state => event => {
+        this.setState({
+            [state]: event.target.value,
+        });
+    };
+
+    /** sets zip state */
+    handleZip = zip => event => {
+        this.setState({
+            [zip]: event.target.value,
+        });
+    };
+
     /** sets password state */
     handlePassword = password => event => {
         this.setState({
@@ -101,6 +137,10 @@ class SignUpCustomer2 extends React.Component {
     validate = () => {
         let nameError= "";
         let emailError= "";
+        let addressError= "";
+        let cityError= "";
+        let stateError= "";
+        let zipError= "";
         let passwordError= "";
         let confirmPWError= "";
 
@@ -114,6 +154,26 @@ class SignUpCustomer2 extends React.Component {
             emailError= "Invalid email";
         }
 
+        // if entered street address is blank
+        if (!this.state.address) {
+            addressError = "Please enter a street";
+        }
+      
+        // if entered city is not valid
+        if (this.state.city.length < 2 || !isNaN(this.state.city)) {
+            cityError = "Invalid City";
+        }
+      
+        // if entered state is not valid
+        if (this.state.state.length < 2 || !isNaN(this.state.state)) {
+            stateError = "Invalid State";
+        }
+      
+        // if entered zip code is not valid
+        if (isNaN(this.state.zip) || this.state.zip.length < 5) {
+            zipError = "Invalid Zip Code";
+        }
+
         // if entered password does not reach min length requirement
         if (!this.state.password || this.state.password.length < 6 ) {
             passwordError= "Password should be atleast of length 6";
@@ -125,8 +185,10 @@ class SignUpCustomer2 extends React.Component {
         }
 
         // set validation false because name or email error
-        if (emailError || nameError || passwordError || confirmPWError) {
-            this.setState({emailError, nameError, passwordError, confirmPWError});
+        if (nameError || emailError || addressError || cityError ||
+            stateError || zipError ||  passwordError || confirmPWError) {
+            this.setState({nameError, emailError, addressError, cityError, 
+                stateError, zipError, passwordError, confirmPWError});
             return false; // return not valid
         }
 
@@ -250,6 +312,90 @@ class SignUpCustomer2 extends React.Component {
                     : null }
                 </Grid>
 
+                {/** textfield to enter street address */}
+                <Grid item xs={12}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="address"
+                        name="address"
+                        label="Street Address"
+                        autoComplete="address"
+                        value={this.state.address}
+                        onChange={this.handleAddress('address')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.addressError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.addressError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter city */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="city"
+                        name="city"
+                        label="City"
+                        autoComplete="city"
+                        value={this.state.city}
+                        onChange={this.handleCity('city')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.cityError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.cityError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter state */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="state"
+                        name="state"
+                        label="State"
+                        autoComplete="state"
+                        value={this.state.state}
+                        onChange={this.handleState('state')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.stateError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.stateError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter zip */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="zip"
+                        name="zip"
+                        label="Zip"
+                        autoComplete="zip"
+                        value={this.state.zip}
+                        onChange={this.handleZip('zip')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.zipError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.zipError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
                 {/** textfield to enter password */}
                 <Grid item xs={12}>
                     <CssTextField
@@ -270,7 +416,6 @@ class SignUpCustomer2 extends React.Component {
                     </FormHelperText> 
                     : null }
                 </Grid>
-
 
                 {/** textfield to enter password confirmation */}
                 <Grid item xs={12}>
