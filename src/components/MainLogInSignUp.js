@@ -142,10 +142,16 @@ export default function MainLogInSignUp(props) {
           },
       body: JSON.stringify(body)
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else 
+          throw new Error("bad login");
+      })
       .then(data => {
-        console.log(data);
-        window.location.assign("http://localhost:3000/business#" + data.business_id);
+        localStorage.setItem("fuo", data.token);
+        window.location.assign("http://localhost:3000/business");
       })
       .catch(err => {
           console.log("caught b login");

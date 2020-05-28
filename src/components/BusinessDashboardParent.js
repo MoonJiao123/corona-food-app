@@ -39,6 +39,65 @@ Constructor is used for state design, modularized to pass as props
       currentStore: '',
       currentMessage: 'Welcome!',
       currentStatus: 'good',
+      load: () => {
+        //BE Call: On page load
+        let base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
+        let id = this.state.session;
+        let url = base + id;
+        fetch(url)
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
+        .then(data => {
+            this.setState({locations: data, locationBg: ''});
+        })
+        .catch(error => {
+          console.log('caught load');
+          console.log(error);
+          this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
+        });
+
+        base = 'https://fuo-backend.herokuapp.com/business/numoflocations/';
+        url = base + this.state.session;
+        fetch(url)
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
+        .then(data => this.setState({totalLocations: data}))
+        .catch(error => {
+          console.log('caught numLocations');
+          console.log(error);
+          this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
+        });
+
+        base = 'https://fuo-backend.herokuapp.com/business/getbusinessname/';
+        url = base  + this.state.session;
+        fetch(url)
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
+        .then(data => this.setState({companyName: data.name}))
+        .catch(error => {
+          console.log('caught numLocations');
+          console.log(error);
+          this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
+        });
+      },
 
   
       // Props for LeftSideBar -------------------------------------------------
@@ -67,7 +126,14 @@ Constructor is used for state design, modularized to pass as props
           let id = this.state.session;
           let url = base + id;
           fetch(url)
-          .then(res => res.json())
+          .then(res => {
+            if( res.status === 200){
+              return res.json();
+            }
+            else{
+              throw new Error("bad loading");
+            }
+          })
           .then(data => {this.setState({locations: data, locationBg: ''})})
           .catch(error => {
             console.log('caught load');
@@ -83,12 +149,21 @@ Constructor is used for state design, modularized to pass as props
                     (loc.zip !== ''?' '+loc.zip:'');
 
           let url = base + id + arg;
-          fetch(url,{mode: 'cors'})
-          .then(res => res.json())
+          fetch(url)
+          .then(res => {
+            if(res.status === 200){
+              return res.json()
+            }
+            else{
+              throw new Error("bad search");
+            }
+          })
           .then(data => {
             this.setState({locations: data, locationBg: (data.length===0?'empty':'')});
           })
           .catch(error => {
+            console.log("caught search");
+            console.log(error);
             this.setState({locations: [], locationBg: 'empty'});
           });
         }
@@ -106,18 +181,24 @@ Constructor is used for state design, modularized to pass as props
           return
         }
         
-        console.log(sel);
         //BE Call: On store get
         let base = 'https://fuo-backend.herokuapp.com/product/printallproduct/';
         let id = sel.store_id;
         let url = base + id;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("Unable to get store");
+          }
+        })
         .then(data => {
           let currentList = [];
           for(let i = 0; i < data.length; i++){
             currentList.push({
-              image: data[i].product_image,
+              image: data[i].product_img,
               category: data[i].category,
               name: data[i].product_name,
               amount: data[i].stock_amount,
@@ -145,7 +226,7 @@ Constructor is used for state design, modularized to pass as props
           
         })
         .catch(error => {
-          console.log('caught');
+          console.log('caught store get');
           console.log(error);
           this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
         });
@@ -178,7 +259,14 @@ Constructor is used for state design, modularized to pass as props
           let url = base + id + arg;
           console.log(url);
           fetch(url, method)
-          .then(res => res.json())
+          .then(res => {
+            if( res.status === 200){
+              return res.json();
+            }
+            else{
+              throw new Error("Delete failed");
+            }
+          })
           .then(data => 
             {
               base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
@@ -221,14 +309,32 @@ Constructor is used for state design, modularized to pass as props
         submitNewLocation: (location) => {
           //BE Call: On location add
           this.setState({currentStatus:''});
-          const method = {method: 'POST'};
+          const method = {
+            method: 'POST',
+            headers:  {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              address: location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip,
+              name: location.name
+            })
+
+          };
           let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
-          let id = this.state.session + '/';
-          let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
-          let name = '/' + location.name;
-          let url = base + id + arg + name;
+          let id = this.state.session; // + '/';
+          //let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
+          //let name = '/' + location.name;
+          let url = base + id;// + arg + name;
+          console.log(url);
           fetch(url, method)
-          .then(res => res.json())
+          .then(res => {
+            if(res.status === 200){
+              return res.json();
+            }
+            else{
+              throw new Error('Add location failed');
+            }
+          })
           .then(data => {
             base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
             id = this.state.session;
@@ -236,7 +342,8 @@ Constructor is used for state design, modularized to pass as props
               fetch(url)
               .then(res => res.json())
               .then(data => {
-                this.setState({locations: data, locationBg: ''})
+                console.log(data);
+                this.setState({locations: data, locationBg: ''});
                 this.setState({currentMessage: 'Success!', currentStatus:'good'});
               })
               .catch(error => {
@@ -366,9 +473,17 @@ Constructor is used for state design, modularized to pass as props
             let arg = ids[i];
             let url = base + id + arg;
             method.body = JSON.stringify(body[i]);
+            console.log(body);
 
             fetch(url, method)
-            .then(res => res.json())
+            .then(res => {
+              if( res.status === 200){
+                return res.json();
+              }
+              else{
+                throw new Error("bad upload");
+              }
+            })
             .then(data => {
               this.state.refreshCurrent();
               this.setState({currentMessage: 'Success!', currentStatus:'good'});
@@ -382,7 +497,13 @@ Constructor is used for state design, modularized to pass as props
 
           //BE Call: On products delete
           list = JSON.parse(JSON.stringify(this.state.removeListings));
-          method = {method: 'DELETE'}
+          this.setState({removeListings: []});
+          method = {
+            method: 'DELETE',
+            headers:  {
+              'Content-Type': 'application/json'
+            },
+          }
           base = 'https://fuo-backend.herokuapp.com/product/delete/';
           id = this.state.currentStore + '/';
           let url = '';
@@ -390,7 +511,14 @@ Constructor is used for state design, modularized to pass as props
             if(list[i].product_id !== '0'){
               url = base + id + list[i].product_id;
               fetch(url, method)
-              .then(res => res.json())
+              .then(res => {
+                if( res.status === 200){
+                  return res.json();
+                }
+                else{
+                  throw new Error("Delete item failed");
+                }  
+              })
               .then(data => {
                 this.state.refreshCurrent();
                 this.setState({currentMessage: 'Success!', currentStatus:'good'});
@@ -459,7 +587,14 @@ Constructor is used for state design, modularized to pass as props
         let id = this.state.currentStore;
         let url = base + id;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("Refresh failed");
+          }
+        })
         .then(data => {
           let currentList = [];
           for(let i = 0; i < data.length; i++){
@@ -529,50 +664,29 @@ After Render
       alert("Layout has not been optimized for small screens.Please log in with a larger device.");
     }
 
-    //Get business ID
-    let session = window.location.hash.substring(1);
-    window.location.hash = '';
-    this.setState({session: session});
+    let body = {
+      token: localStorage.getItem("fuo")
+    };
 
-    //Renav if not authenticated
-    if(session === ''){
-      //window.location.assign('https://corona-food.herokuapp.com/');
-    }
+    fetch('https://fuo-backend.herokuapp.com/users/me/from/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          },
+      body: JSON.stringify(body)
+      })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({session: data.user.business_id});
+        this.state.load();
+      })
+      .catch(err => {
+          console.log("caught b login");
+          console.log(err);
+          window.location.replace('localhost:3000/');
+          alert("Something went wrong...");
 
-    //BE Call: On page load
-    let base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
-    let id = session;
-    let url = base + id;
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {this.setState({locations: data, locationBg: ''})})
-    .catch(error => {
-      console.log('caught load');
-      console.log(error);
-      this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-    });
-    
-    base = 'https://fuo-backend.herokuapp.com/business/numoflocations/';
-    url = base + id;
-    fetch(url)
-    .then(res => res.json())
-    .then(data => this.setState({totalLocations: data}))
-    .catch(error => {
-      console.log('caught numLocations');
-      console.log(error);
-      this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-    });
-
-    base = 'https://fuo-backend.herokuapp.com/business/getbusinessname/';
-    url = base + id;
-    fetch(url)
-    .then(res => res.json())
-    .then(data => this.setState({companyName: data.name}))
-    .catch(error => {
-      console.log('caught numLocations');
-      console.log(error);
-      this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-    });
+      });
 
   }
 
