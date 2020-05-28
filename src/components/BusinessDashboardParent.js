@@ -281,7 +281,7 @@ Constructor is used for state design, modularized to pass as props
                 .then(res => res.json())
                 .then(data => {
                   this.setState({locations: data, locationBg: ''})
-                  this.setState({currentMessage: 'Success!', currentStatus:'good'});
+                  this.setState({currentMessage: 'Success!', currentStatus:'good', currentStore: ''});
                   this.setState({
                     right: {
                       address: 'No Selection',
