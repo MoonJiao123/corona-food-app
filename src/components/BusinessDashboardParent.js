@@ -683,7 +683,7 @@ After Render
 ----------------------------------------------------------------------------- */
   componentDidMount(){
     //Alert logins on small bad screen sizes
-    if(window.innerWidth / window.innerHeight < 1.7 || window.innerHeight < 760){
+    if(window.innerWidth / window.innerHeight < 1.3 || window.innerHeight < 720){
       alert("Layout has not been optimized for small screens. Please log in with a larger device.");
     }
 
