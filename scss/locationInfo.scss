@@ -35,7 +35,13 @@ Styles for the business dashboard right sidebar
   }
 
   button.delete-location-button{
+    padding: 2%;
     background-color: rgb(204, 48, 48);
+    border-radius: 0;
+    width: 45%;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 5px;
   }
 }
 
