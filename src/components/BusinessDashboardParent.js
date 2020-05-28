@@ -1,5 +1,5 @@
 /** ----------------------------------------------------------------------------
-Contributors: Darien Tsai, Tabassum Alam (validation)
+Contributors: Darien Tsai, Tabassum Alam
 High level container for business dashboard components.
 ----------------------------------------------------------------------------- */
 import React from 'react';
@@ -101,7 +101,7 @@ Constructor is used for state design, modularized to pass as props
 
   
       // Props for LeftSideBar -------------------------------------------------
-      logout: () => {console.log(window); window.location.replace('localhost:3000');},
+      logout: () => {localStorage.clear();},
       companyName: '',
       totalLocations: '',
 
@@ -242,7 +242,12 @@ Constructor is used for state design, modularized to pass as props
 
       rightControls: {
         updateProducts: () => {
-          this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+          if(this.state.currentStore !== ''){
+            this.setState({updateClass: this.state.updateClass==="off"?"on":"off"});
+          }
+          else{
+            alert("No location selected");
+          }
         },
 
         deleteLocation: (e) => {
@@ -321,10 +326,8 @@ Constructor is used for state design, modularized to pass as props
 
           };
           let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
-          let id = this.state.session; // + '/';
-          //let arg = location.street + '.' + location.city + ',' +  location.state + ' ' + location.zip;
-          //let name = '/' + location.name;
-          let url = base + id;// + arg + name;
+          let id = this.state.session;
+          let url = base + id;
           console.log(url);
           fetch(url, method)
           .then(res => {
@@ -431,9 +434,10 @@ Constructor is used for state design, modularized to pass as props
 
       update: {
         submitUpdate: () => {
-          this.setState({currentStatus:''});
           //Repackage listings for HTTP request
           let list = JSON.parse(JSON.stringify(this.state.updateListings));
+          if(!this.validate(list)){return false;}
+          this.setState({currentStatus:''});
 
           let body = [];
           let ids = [];
@@ -593,14 +597,14 @@ Constructor is used for state design, modularized to pass as props
             return res.json();
           }
           else{
-            throw new Error("Refresh failed");
+            throw new Error("Failed to get new listings");
           }
         })
         .then(data => {
           let currentList = [];
           for(let i = 0; i < data.length; i++){
             currentList.push({
-              image: data[i].product_image,
+              image: data[i].product_img,
               category: data[i].category,
               name: data[i].product_name,
               amount: data[i].stock_amount,
@@ -631,6 +635,9 @@ Constructor is used for state design, modularized to pass as props
         });
       }
     };
+
+    //binding
+    this.validate = this.validate.bind(this);
   }
 
   /** validation for all listings are filled in  */
@@ -677,7 +684,7 @@ After Render
   componentDidMount(){
     //Alert logins on small bad screen sizes
     if(window.innerWidth / window.innerHeight < 1.7 || window.innerHeight < 760){
-      alert("Layout has not been optimized for small screens.Please log in with a larger device.");
+      alert("Layout has not been optimized for small screens. Please log in with a larger device.");
     }
 
     let body = {
@@ -691,7 +698,14 @@ After Render
           },
       body: JSON.stringify(body)
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else{
+          throw new Error('There is no session');
+        }
+      })
       .then(data => {
         this.setState({session: data.user.business_id});
         this.state.load();
@@ -699,11 +713,10 @@ After Render
       .catch(err => {
           console.log("caught b login");
           console.log(err);
-          window.location.replace('localhost:3000/');
-          alert("Something went wrong...");
-
+          this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
+          window.location.replace('localhost:3000');
+          window.location.assign('localhost:3000');
       });
-
   }
 
 }

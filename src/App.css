@@ -127,7 +127,13 @@ Styles for the business dashboard right sidebar
   border-radius: 5px;
 }
 #locationInfo button.delete-location-button {
+  padding: 2%;
   background-color: #cc3030;
+  border-radius: 0;
+  width: 45%;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 5px;
 }
 
 #locationInfo-address {
