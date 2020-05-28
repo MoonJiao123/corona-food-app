@@ -45,7 +45,14 @@ Constructor is used for state design, modularized to pass as props
         let id = this.state.session;
         let url = base + id;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
         .then(data => {
             this.setState({locations: data, locationBg: ''});
         })
@@ -58,7 +65,14 @@ Constructor is used for state design, modularized to pass as props
         base = 'https://fuo-backend.herokuapp.com/business/numoflocations/';
         url = base + this.state.session;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
         .then(data => this.setState({totalLocations: data}))
         .catch(error => {
           console.log('caught numLocations');
@@ -69,7 +83,14 @@ Constructor is used for state design, modularized to pass as props
         base = 'https://fuo-backend.herokuapp.com/business/getbusinessname/';
         url = base  + this.state.session;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("bad loading");
+          }
+        })
         .then(data => this.setState({companyName: data.name}))
         .catch(error => {
           console.log('caught numLocations');
@@ -105,7 +126,14 @@ Constructor is used for state design, modularized to pass as props
           let id = this.state.session;
           let url = base + id;
           fetch(url)
-          .then(res => res.json())
+          .then(res => {
+            if( res.status === 200){
+              return res.json();
+            }
+            else{
+              throw new Error("bad loading");
+            }
+          })
           .then(data => {this.setState({locations: data, locationBg: ''})})
           .catch(error => {
             console.log('caught load');
@@ -127,7 +155,7 @@ Constructor is used for state design, modularized to pass as props
               return res.json()
             }
             else{
-              throw ("bad search");
+              throw new Error("bad search");
             }
           })
           .then(data => {
@@ -158,7 +186,14 @@ Constructor is used for state design, modularized to pass as props
         let id = sel.store_id;
         let url = base + id;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("Unable to get store");
+          }
+        })
         .then(data => {
           let currentList = [];
           for(let i = 0; i < data.length; i++){
@@ -224,7 +259,14 @@ Constructor is used for state design, modularized to pass as props
           let url = base + id + arg;
           console.log(url);
           fetch(url, method)
-          .then(res => res.json())
+          .then(res => {
+            if( res.status === 200){
+              return res.json();
+            }
+            else{
+              throw new Error("Delete failed");
+            }
+          })
           .then(data => 
             {
               base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
@@ -290,7 +332,7 @@ Constructor is used for state design, modularized to pass as props
               return res.json();
             }
             else{
-              throw ('bad location input');
+              throw new Error('Add location failed');
             }
           })
           .then(data => {
@@ -434,7 +476,14 @@ Constructor is used for state design, modularized to pass as props
             console.log(body);
 
             fetch(url, method)
-            .then(res => res.json())
+            .then(res => {
+              if( res.status === 200){
+                return res.json();
+              }
+              else{
+                throw new Error("bad upload");
+              }
+            })
             .then(data => {
               this.state.refreshCurrent();
               this.setState({currentMessage: 'Success!', currentStatus:'good'});
@@ -462,7 +511,14 @@ Constructor is used for state design, modularized to pass as props
             if(list[i].product_id !== '0'){
               url = base + id + list[i].product_id;
               fetch(url, method)
-              .then(res => res.json())
+              .then(res => {
+                if( res.status === 200){
+                  return res.json();
+                }
+                else{
+                  throw new Error("Delete item failed");
+                }  
+              })
               .then(data => {
                 this.state.refreshCurrent();
                 this.setState({currentMessage: 'Success!', currentStatus:'good'});
@@ -531,7 +587,14 @@ Constructor is used for state design, modularized to pass as props
         let id = this.state.currentStore;
         let url = base + id;
         fetch(url)
-        .then(res => res.json())
+        .then(res => {
+          if( res.status === 200){
+            return res.json();
+          }
+          else{
+            throw new Error("Refresh failed");
+          }
+        })
         .then(data => {
           let currentList = [];
           for(let i = 0; i < data.length; i++){

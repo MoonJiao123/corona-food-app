@@ -147,7 +147,7 @@ export default function MainLogInSignUp(props) {
           return res.json()
         }
         else 
-          throw ("bad login");
+          throw new Error("bad login");
       })
       .then(data => {
         localStorage.setItem("fuo", data.token);
