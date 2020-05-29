@@ -95,16 +95,24 @@ export default function MainLogInSignUp(props) {
         'Content-Type': 'application/json'
         }
       })
-      .then(res => res.json())
-      .then(data => {alert("Success!")})
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else 
+          throw new Error("bad login");
+      })
+      .then(data => {
+        alert("Registered! You can log in now!")
+      })
       .catch(err => {
           console.log("caught b signup");
           console.log(err);
-          alert("Something went wrong...");
+          alert("Bad signup");
       });
     },
     
-    signupCustomer: (first, last, email, pass, street, city, state, zip) => {
+    signupCustomer: (email, pass, street, city, state, zip) => {
       let body = {
         account: 'customer',
         email: email, 
@@ -125,9 +133,12 @@ export default function MainLogInSignUp(props) {
         }
         else{
           throw new Error("Bad signup");
-        }
+        } 
       })
-      .then(data => {alert("Success!")})
+      .then(data => {
+        console.log(data);
+        alert("Registered! You can log in now!");
+      })
       .catch(err => {
           console.log("caught c signup");
           console.log(err);
@@ -182,7 +193,10 @@ export default function MainLogInSignUp(props) {
         body: JSON.stringify(body)
       })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        window.location.assign("http://localhost:3000/customer");
+      })
       .catch(err => {
           console.log("caught c login");
           console.log(err);

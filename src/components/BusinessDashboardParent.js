@@ -693,7 +693,7 @@ After Render
       token: localStorage.getItem("fuo")
     };
 
-    fetch('https://fuo-backend.herokuapp.com/users/me/from/token', {
+    fetch('https://fuo-backend.herokuapp.com/users/me/from/token/business', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
