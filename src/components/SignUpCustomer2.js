@@ -49,8 +49,6 @@ class SignUpCustomer2 extends React.Component {
 
         this.state = {
             /** states of the signup customer form */
-            firstName: '',
-            lastName: '',
             email: '',
             address: '',
             city: '',
@@ -59,8 +57,6 @@ class SignUpCustomer2 extends React.Component {
             password: '',
             confirmPW: '',
             /** corrections errors of signup customer form */
-            nameError: '',
-            emailError: '',
             addressError: '',
             cityError: '',
             stateError: '',
@@ -69,20 +65,6 @@ class SignUpCustomer2 extends React.Component {
             confirmPWError: '',
         }
     }
-
-    /** sets firstName state */
-    handleFirstName = firstName => event => {
-        this.setState({
-            [firstName]: event.target.value,
-        });
-    };
-
-    /** sets last name state */
-    handleLastName = lastName => event => {
-        this.setState({
-            [lastName]: event.target.value,
-        });
-    };
 
     /** sets email state */
     handleEmail = email => event => {
@@ -135,7 +117,6 @@ class SignUpCustomer2 extends React.Component {
 
     /** function to check if signup customer input is valid */
     validate = () => {
-        let nameError= "";
         let emailError= "";
         let addressError= "";
         let cityError= "";
@@ -143,11 +124,6 @@ class SignUpCustomer2 extends React.Component {
         let zipError= "";
         let passwordError= "";
         let confirmPWError= "";
-
-        // if first name or last name is empty
-        if (!this.state.firstName || !this.state.lastName) {
-            nameError= "Please enter both name fields"
-        }
 
         // if entered email does not include @ or . 
         if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
@@ -185,9 +161,9 @@ class SignUpCustomer2 extends React.Component {
         }
 
         // set validation false because name or email error
-        if (nameError || emailError || addressError || cityError ||
+        if ( emailError || addressError || cityError ||
             stateError || zipError ||  passwordError || confirmPWError) {
-            this.setState({nameError, emailError, addressError, cityError, 
+            this.setState({emailError, addressError, cityError, 
                 stateError, zipError, passwordError, confirmPWError});
             return false; // return not valid
         }
@@ -204,8 +180,6 @@ class SignUpCustomer2 extends React.Component {
         const isValid = this.validate();
         if (isValid) {
             this.props.action.signupCustomer(
-                this.state.firstName,
-                this.state.lastName,
                 this.state.email,
                 this.state.password,
                 this.state.address,
@@ -259,45 +233,10 @@ class SignUpCustomer2 extends React.Component {
             <form className={classes.form}  >
             <Grid container spacing={2}>
 
-                {/** textfield to enter first name */}
-                <Grid item xs={12} sm={6}>
-                    <CssTextField
-                        autoFocus
-                        required
-                        fullWidth
-                        id="fname"
-                        name="firstName"
-                        label="First Name"
-                        autoComplete="fname"
-                        value={this.state.firstName}
-                        onChange={this.handleFirstName('firstName')}
-                    />
-
-                    {/** text to indicate user did not input valid name */}
-                    {this.state.nameError ? 
-                    <FormHelperText style={{fontSize: 12, color: "red"}}>
-                        {this.state.nameError}
-                    </FormHelperText> 
-                    : null }
-                </Grid>
-
-                {/** textfield to enter last name */}
-                <Grid item xs={12} sm={6}>
-                    <CssTextField
-                        required
-                        fullWidth
-                        id="lastName"
-                        name="lastName"
-                        label="Last Name"
-                        autoComplete="lname"
-                        value={this.state.lastName}
-                        onChange={this.handleLastName('lastName')}
-                    />
-                </Grid>
-
                 {/** textfield to enter email address */}
                 <Grid item xs={12}>
                     <CssTextField
+                        autoFocus
                         required
                         fullWidth
                         id="email"
