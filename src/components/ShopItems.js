@@ -160,7 +160,6 @@ class ShopItems extends Component{
 const mapStateToProps = (state)=>{
     return {
         items: state.items,
-        shoppingItems: state.shoppingItems
     }
 }
 const mapDispatchToProps= (dispatch)=>{

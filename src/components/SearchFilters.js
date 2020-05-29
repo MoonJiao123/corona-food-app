@@ -1,32 +1,46 @@
-//Will have to fix later
+import React from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-<DropDownLi>
-                       <Dropbtn onClick={() => this.handleClick("DropDown")}>
-                                    Sort<SortIcon/>
-                       </Dropbtn>
-                       <DropDownContent>
-                          {" "}
-                          <SubA onClick={() => this.handleClick("Link1")}>Lowest Price</SubA>
-                          <SubA onClick={() => this.handleClick("Link2")}>Most Purchased</SubA>
-                          <SubA onClick={() => this.handleClick("Link3")}>Closest Expiration Date</SubA>
-                          <SubA onClick={() => this.handleClick("Link4")}>Closest Distance</SubA>
-                        </DropDownContent>
-            </DropDownLi>
-            <DropDownLi2>
-                       <Dropbtn onClick={() => this.handleClick("DropDown")}>
-                                    Filter<FilterListIcon/>
-                       </Dropbtn>
-                       <DropDownContent>
-                          {" "}
-                          <SubA onClick={() => this.handleClick("Link1")}>Meat</SubA>
-                          <SubA onClick={() => this.handleClick("Link2")}>Seafood</SubA>
-                          <SubA onClick={() => this.handleClick("Link3")}>Dairy</SubA>
-                          <SubA onClick={() => this.handleClick("Link4")}>Vegetables</SubA>
-                        </DropDownContent>
-            </DropDownLi2>
+class SearchFilters{
 
-            <PriceRange>
-                <PriceP>Price</PriceP>
-                <PriceInput placeholder="min" size="3"/>
-                <PriceInput placeholder="max" size="3"/>
-            </PriceRange>
+  render(){
+    return(
+      <div id="searchFilters">
+        <FormControl className="filter">
+          <InputLabel >Sort Mode</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={age}
+            onChange={handleChange}>
+            <MenuItem value={'Distance'}>Closest Distance</MenuItem>
+            <MenuItem value={'Price'}>Lowest Price</MenuItem>
+            <MenuItem value={'Expiration'}>Freshness</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl className="filter">
+          <InputLabel >Age</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={age}
+            onChange={handleChange}>
+            <MenuItem value={'None'}>None</MenuItem>
+            <MenuItem value={'Vegetable'}>Vegetable</MenuItem>
+            <MenuItem value={'Meat'}>Meat</MenuItem>
+            <MenuItem value={'Grain'}>Grain</MenuItem>
+            <MenuItem value={'Fruit'}>Fruit</MenuItem>
+            <MenuItem value={'Dairy'}>Dairy</MenuItem>
+            <MenuItem value={'Snack'}>Snack</MenuItem>
+          </Select>
+        </FormControl>
+
+
+      </div>);
+  }
+
+}
+
+export default SearchFilters;

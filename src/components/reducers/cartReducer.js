@@ -2,10 +2,9 @@ import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEAR
 
 const initState = {
     items: [],
-    shoppingItems: [],
     addedItems:[],
-    customer: '21', //hard coded
-    address: 'yes',
+    customer: '0', //hard coded
+    address: '',
     category: '',
     sort: '',
     low: '',
