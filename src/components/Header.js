@@ -36,7 +36,7 @@ export default function Header() {
         <AppBar position="static" style={{background: '#67d367'}}>
           <Toolbar>
             {/** title for the Header */}
-            <a href="landing.html"><ArrowBackIcon style={arrowStyles}/></a>
+            <a href="landing.html" id="accounts-back"><ArrowBackIcon style={arrowStyles}/></a>
             <h2 className={classes.title}>
               Log In / Sign Up
             </h2>

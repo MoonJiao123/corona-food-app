@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Tabs, Tab, Typography, Box, Container, CssBaseline } 
 from '@material-ui/core';
-import LogIn from './LogIn';
 import SignUp from './SignUp';
 import LogIn2 from './LogIn2';
 
@@ -96,20 +95,29 @@ export default function MainLogInSignUp(props) {
         'Content-Type': 'application/json'
         }
       })
-      .then(res => res.json())
-      .then(data => {alert("Success!")})
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else 
+          throw new Error("bad login");
+      })
+      .then(data => {
+        alert("Registered! You can log in now!")
+      })
       .catch(err => {
           console.log("caught b signup");
           console.log(err);
-          alert("Something went wrong...");
+          alert("Bad signup");
       });
     },
     
-    signupCustomer: (first, last, email, pass) => {
+    signupCustomer: (email, pass, street, city, state, zip) => {
       let body = {
         account: 'customer',
         email: email, 
-        password: pass
+        password: pass,
+        customer_user: street + '.' + city + ',' + state + ' ' + zip
       };
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
@@ -119,8 +127,18 @@ export default function MainLogInSignUp(props) {
         },
         body: JSON.stringify(body)
       })
-      .then(res => res.json())
-      .then(data => {alert("Success!")})
+      .then(res => {
+        if( res.status === 200){
+          return res.json();
+        }
+        else{
+          throw new Error("Bad signup");
+        } 
+      })
+      .then(data => {
+        console.log(data);
+        alert("Registered! You can log in now!");
+      })
       .catch(err => {
           console.log("caught c signup");
           console.log(err);
@@ -143,10 +161,16 @@ export default function MainLogInSignUp(props) {
           },
       body: JSON.stringify(body)
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else 
+          throw new Error("bad login");
+      })
       .then(data => {
-        console.log(data);
-        window.location.assign("http://localhost:3000/business#" + data.business_id);
+        localStorage.setItem("fuo", data.token);
+        window.location.assign("http://localhost:3000/business");
       })
       .catch(err => {
           console.log("caught b login");
@@ -169,7 +193,10 @@ export default function MainLogInSignUp(props) {
         body: JSON.stringify(body)
       })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        window.location.assign("http://localhost:3000/customer");
+      })
       .catch(err => {
           console.log("caught c login");
           console.log(err);

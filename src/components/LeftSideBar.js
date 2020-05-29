@@ -48,14 +48,14 @@ class SideNav extends React.Component {
               <CompanyName> {this.props.name} </CompanyName>
               <CompanyMission> {this.props.num} Locations </CompanyMission>
              <ButtonsDiv>
-             <Button
-                type="submit"
-                size={"small"}
-                variant="contained"
-                onClick={this.props.data}
-                >
-                Log Out
-            </Button>
+                <Button
+                    type="submit"
+                    size={"small"}
+                    variant="contained"
+                    onClick={this.props.data}
+                    >
+                    <a href="landing.html">Log Out</a>
+                </Button>
             {"  "}
             <Button
                  type="submit"

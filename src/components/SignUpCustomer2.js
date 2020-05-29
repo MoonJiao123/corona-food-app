@@ -49,37 +49,55 @@ class SignUpCustomer2 extends React.Component {
 
         this.state = {
             /** states of the signup customer form */
-            firstName: '',
-            lastName: '',
             email: '',
+            address: '',
+            city: '',
+            state: '',
+            zip: '',
             password: '',
             confirmPW: '',
             /** corrections errors of signup customer form */
-            nameError: '',
-            emailError: '',
+            addressError: '',
+            cityError: '',
+            stateError: '',
+            zipError: '',
             passwordError: '',
             confirmPWError: '',
         }
     }
 
-    /** sets firstName state */
-    handleFirstName = firstName => event => {
-        this.setState({
-            [firstName]: event.target.value,
-        });
-    };
-
-    /** sets last name state */
-    handleLastName = lastName => event => {
-        this.setState({
-            [lastName]: event.target.value,
-        });
-    };
-
     /** sets email state */
     handleEmail = email => event => {
         this.setState({
             [email]: event.target.value,
+        });
+    };
+
+    /** sets address state */
+    handleAddress = address => event => {
+        this.setState({
+            [address]: event.target.value,
+        });
+    };
+
+    /** sets city state */
+    handleCity = city => event => {
+        this.setState({
+            [city]: event.target.value,
+        });
+    };
+
+    /** sets state state */
+    handleState = state => event => {
+        this.setState({
+            [state]: event.target.value,
+        });
+    };
+
+    /** sets zip state */
+    handleZip = zip => event => {
+        this.setState({
+            [zip]: event.target.value,
         });
     };
 
@@ -99,19 +117,37 @@ class SignUpCustomer2 extends React.Component {
 
     /** function to check if signup customer input is valid */
     validate = () => {
-        let nameError= "";
         let emailError= "";
+        let addressError= "";
+        let cityError= "";
+        let stateError= "";
+        let zipError= "";
         let passwordError= "";
         let confirmPWError= "";
-
-        // if first name or last name is empty
-        if (!this.state.firstName || !this.state.lastName) {
-            nameError= "Please enter both name fields"
-        }
 
         // if entered email does not include @ or . 
         if (!this.state.email.includes('@') || !this.state.email.includes('.')) {
             emailError= "Invalid email";
+        }
+
+        // if entered street address is blank
+        if (!this.state.address) {
+            addressError = "Please enter a street";
+        }
+      
+        // if entered city is not valid
+        if (this.state.city.length < 2 || !isNaN(this.state.city)) {
+            cityError = "Invalid City";
+        }
+      
+        // if entered state is not valid
+        if (this.state.state.length < 2 || !isNaN(this.state.state)) {
+            stateError = "Invalid State";
+        }
+      
+        // if entered zip code is not valid
+        if (isNaN(this.state.zip) || this.state.zip.length < 5) {
+            zipError = "Invalid Zip Code";
         }
 
         // if entered password does not reach min length requirement
@@ -125,8 +161,10 @@ class SignUpCustomer2 extends React.Component {
         }
 
         // set validation false because name or email error
-        if (emailError || nameError || passwordError || confirmPWError) {
-            this.setState({emailError, nameError, passwordError, confirmPWError});
+        if ( emailError || addressError || cityError ||
+            stateError || zipError ||  passwordError || confirmPWError) {
+            this.setState({emailError, addressError, cityError, 
+                stateError, zipError, passwordError, confirmPWError});
             return false; // return not valid
         }
 
@@ -142,10 +180,12 @@ class SignUpCustomer2 extends React.Component {
         const isValid = this.validate();
         if (isValid) {
             this.props.action.signupCustomer(
-                this.state.firstName,
-                this.state.lastName,
                 this.state.email,
-                this.state.password
+                this.state.password,
+                this.state.address,
+                this.state.city,
+                this.state.state,
+                this.state.zip
             );
             //window.location.assign("/Customer");
 
@@ -193,45 +233,10 @@ class SignUpCustomer2 extends React.Component {
             <form className={classes.form}  >
             <Grid container spacing={2}>
 
-                {/** textfield to enter first name */}
-                <Grid item xs={12} sm={6}>
-                    <CssTextField
-                        autoFocus
-                        required
-                        fullWidth
-                        id="fname"
-                        name="firstName"
-                        label="First Name"
-                        autoComplete="fname"
-                        value={this.state.firstName}
-                        onChange={this.handleFirstName('firstName')}
-                    />
-
-                    {/** text to indicate user did not input valid name */}
-                    {this.state.nameError ? 
-                    <FormHelperText style={{fontSize: 12, color: "red"}}>
-                        {this.state.nameError}
-                    </FormHelperText> 
-                    : null }
-                </Grid>
-
-                {/** textfield to enter last name */}
-                <Grid item xs={12} sm={6}>
-                    <CssTextField
-                        required
-                        fullWidth
-                        id="lastName"
-                        name="lastName"
-                        label="Last Name"
-                        autoComplete="lname"
-                        value={this.state.lastName}
-                        onChange={this.handleLastName('lastName')}
-                    />
-                </Grid>
-
                 {/** textfield to enter email address */}
                 <Grid item xs={12}>
                     <CssTextField
+                        autoFocus
                         required
                         fullWidth
                         id="email"
@@ -248,6 +253,90 @@ class SignUpCustomer2 extends React.Component {
                         {this.state.emailError}
                     </FormHelperText> 
                     : null }
+                </Grid>
+
+                {/** textfield to enter street address */}
+                <Grid item xs={12}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="address"
+                        name="address"
+                        label="Street Address"
+                        autoComplete="address"
+                        value={this.state.address}
+                        onChange={this.handleAddress('address')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.addressError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.addressError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter city */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="city"
+                        name="city"
+                        label="City"
+                        autoComplete="city"
+                        value={this.state.city}
+                        onChange={this.handleCity('city')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.cityError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.cityError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter state */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="state"
+                        name="state"
+                        label="State"
+                        autoComplete="state"
+                        value={this.state.state}
+                        onChange={this.handleState('state')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.stateError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.stateError}
+                    </FormHelperText> 
+                    : null}
+                </Grid>
+
+                {/** textfield to enter zip */}
+                <Grid item xs={12} sm={4}>
+                    <CssTextField 
+                        required
+                        fullWidth
+                        id="zip"
+                        name="zip"
+                        label="Zip"
+                        autoComplete="zip"
+                        value={this.state.zip}
+                        onChange={this.handleZip('zip')}
+                    />
+
+                    {/** text to indicate uesr did not input valid address */}
+                    {this.state.zipError ?
+                    <FormHelperText style={{fontSize: 12, color: "red"}}>
+                        {this.state.zipError}
+                    </FormHelperText> 
+                    : null}
                 </Grid>
 
                 {/** textfield to enter password */}
@@ -270,7 +359,6 @@ class SignUpCustomer2 extends React.Component {
                     </FormHelperText> 
                     : null }
                 </Grid>
-
 
                 {/** textfield to enter password confirmation */}
                 <Grid item xs={12}>
@@ -299,6 +387,7 @@ class SignUpCustomer2 extends React.Component {
                 <Link to="/Customer" onClick={this.handleSubmit}
                 className="button"> 
                     <Button
+                        id="signup-customer"
                         type="submit"
                         fullWidth
                         variant="contained"
