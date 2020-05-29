@@ -44,6 +44,14 @@ a {
   display: block;
 }
 
+#root {
+  height: 100vh;
+}
+
+#customer {
+  height: 100%;
+}
+
 /* ---------------------------------------------------------------------
 Override Scrollbar
 --------------------------------------------------------------------- */
@@ -213,6 +221,15 @@ Contributors: Darien
 Styles shopping list and items
 --------------------------------------------------------------------- */
 /* Styles for parent */
+#shoppinglist-parent {
+  background-color: rgba(0, 0, 0, 0.432);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #shopping-list {
   position: absolute;
   left: 25%;
@@ -220,7 +237,7 @@ Styles shopping list and items
   z-index: 1;
   width: 50%;
   height: 65%;
-  background: #eeeeee;
+  background: white;
   border-radius: 10px;
 }
 #shopping-list button {
@@ -304,7 +321,11 @@ Styles shopping list and items
 }
 
 .shopping-list-item:hover {
-  background: white;
+  background: #eeeeee;
+}
+
+#display-none {
+  display: none;
 }
 
 /* Styles for small screens */

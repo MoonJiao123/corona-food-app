@@ -23,7 +23,8 @@ class CustomerDashboardParent extends React.Component {
 
     showShoppingList = () => {
         this.setState({show:true});
-        //
+
+        //BE Call get items
         let base = 'https://fuo-backend.herokuapp.com/cart/list/';
         let id = store.getState().customer;
         let url = base + id;
@@ -41,7 +42,10 @@ class CustomerDashboardParent extends React.Component {
             throw new Error('Could not get cart');
         }
       })
-      .then(data => console.log(data))
+      .then(data => {
+          //Set state here
+          console.log(data)
+        })
       .catch(err => {
           console.log("caught cart");
           console.log(err);
@@ -56,7 +60,7 @@ class CustomerDashboardParent extends React.Component {
     render () {
         console.log(store.getState());
         return (
-            <div>
+            <div id="customer">
                 <CustomerHeader handleClick={this.showShoppingList}/>
                 <ShopItems/>
                 <Cart show={this.state.show} handleClose={this.hideShoppingList}> </Cart>
@@ -70,6 +74,7 @@ class CustomerDashboardParent extends React.Component {
         };
         console.log(body);
       
+        //BE Call refresh
         fetch('https://fuo-backend.herokuapp.com/users/me/from/token/customer', {
             method: 'POST',
             headers: {

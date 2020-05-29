@@ -69,6 +69,7 @@ class CustomerHeader extends Component {
         return;
       }
 
+      //BE Call search
       let base = 'https://fuo-backend.herokuapp.com/product/';
       let id = store.getState().customer + '/';
       let arg = e.target.value + '/price_asc';

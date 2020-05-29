@@ -67,7 +67,34 @@ const AddToCartButton = styled.button`
 
 class ShopItems extends Component{
     handleClick = (id)=>{
-        this.props.addToCart(id);
+        //this.props.addToCart(id);
+        //BE Call add to cart
+        let base = 'https://fuo-backend.herokuapp.com/cart/add/';
+        let arg = store.getState().customer + '/';
+        let url = base + arg + id;
+        
+        fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(res => {
+        if(res.status === 200){
+            return res.json();
+        }
+        else{
+            throw new Error('Could not get cart');
+        }
+      })
+      .then(data => {
+          //Set state here
+          console.log(data)
+        })
+      .catch(err => {
+          console.log("caught cart");
+          console.log(err);
+      });
     }
 
     render () {
@@ -78,16 +105,16 @@ class ShopItems extends Component{
             (item) => {
                 return (
                     <Item>
-                        <Image src={item.img}/>
+                        <Image src={item.product_img}/>
                         <Description>
-                            <ItemName>{item.name}</ItemName>
+                            <ItemName>{item.product_name}</ItemName>
                             <h5>Good by: {item.exp}</h5>
-                            <h5>Quantity: {item.qnt}</h5>
+                            <h5>Quantity: {item.amount}</h5>
                         </Description>
 
                         <Price>
                             <h3>${item.price}</h3>
-                            <AddToCartButton onClick={()=>{this.handleClick(item.id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
+                            <AddToCartButton onClick={()=>{this.handleClick(item.product_id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
                         </Price>
                     </Item>
                 )
@@ -108,7 +135,6 @@ const mapStateToProps = (state)=>{
     }
 }
 const mapDispatchToProps= (dispatch)=>{
-
     return{
         addToCart: (id)=>{dispatch(addToCart(id))}
     }

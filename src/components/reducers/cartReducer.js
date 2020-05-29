@@ -1,22 +1,18 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../actions/cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM} from '../actions/cart-actions'
 
 const initState = {
     items: [
-        //{id:1,title:'Winter body', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:110,img:"https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg"},
-        {id: 1, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes", exp:"6/6/1998", qnt:"6",price:"99"},
-        {id: 2, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes2", exp:"6/6/1998", qnt:"6",price:"99"},
-        {id: 3, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes3", exp:"6/6/1998", qnt:"6",price:"99"},
-        {id: 4, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes4", exp:"6/6/1998", qnt:"6",price:"99"},
-        {id: 5, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes5", exp:"6/6/1998", qnt:"6",price:"99"},
+        {product_id: 1, product_img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", product_name: "Tomatoes", exp:"6/6/1998", amount:"6",price:"99"},
     ],
     addedItems:[],
-    total: 0,
     customer: '21', //hard coded
     address: 'yes',
     category: '',
     sort: '',
     low: '',
-    high: ''
+    high: '',
+    result_key: 1,
+    list_key: -1
 }
 const cartReducer= (state = initState,action)=>{
 
@@ -57,52 +53,6 @@ const cartReducer= (state = initState,action)=>{
             ...state,
             addedItems: new_items,
             total: newTotal
-        }
-    }
-    //INSIDE CART COMPONENT
-    if(action.type=== ADD_QUANTITY){
-        let addedItem = state.items.find(item=> item.id === action.id)
-        addedItem.quantity += 1
-        let newTotal = state.total + addedItem.price
-        return{
-            ...state,
-            total: newTotal
-        }
-    }
-    if(action.type=== SUB_QUANTITY){
-        let addedItem = state.items.find(item=> item.id === action.id)
-        //if the qt == 0 then it should be removed
-        if(addedItem.quantity === 1){
-            let new_items = state.addedItems.filter(item=>item.id !== action.id)
-            let newTotal = state.total - addedItem.price
-            return{
-                ...state,
-                addedItems: new_items,
-                total: newTotal
-            }
-        }
-        else {
-            addedItem.quantity -= 1
-            let newTotal = state.total - addedItem.price
-            return{
-                ...state,
-                total: newTotal
-            }
-        }
-
-    }
-
-    if(action.type=== ADD_SHIPPING){
-        return{
-            ...state,
-            total: state.total + 6
-        }
-    }
-
-    if(action.type=== 'SUB_SHIPPING'){
-        return{
-            ...state,
-            total: state.total - 6
         }
     }
 

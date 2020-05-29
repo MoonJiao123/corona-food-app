@@ -13,6 +13,32 @@ class Cart extends React.Component{
 
     handleRemove = (id)=>{
         this.props.removeItem(id);
+
+        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
+        let user = store.getState().customer_id + '/';
+        let url = base + user + id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if(res.status === 200){
+                return res.json()
+            }
+            else{
+                throw new Error('There is no session');
+            }
+        })
+        .then(data => {
+            console.log(data);
+            //set state for customer
+        })
+        .catch(err => {
+            console.log("caught clear");
+            console.log(err);
+        });
     }
 
     handleClear = () => {
@@ -50,8 +76,7 @@ class Cart extends React.Component{
                     <div className="shopping-list-item">
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
-                                <span className="shopping-list-item-icon">icon</span>
-                                {item.name}
+                                {item.product_name}
                             </p>
                             <p className="shopping-list-item-address">Address</p>
                             <p className="shopping-list-item-business">Business</p>
@@ -60,7 +85,7 @@ class Cart extends React.Component{
                         <div className="shopping-list-item-mid">
                             <div>
                                 <p className="shopping-list-price">${item.price}</p>
-                                <p className="shopping-list-discount">{item.quantity}</p>
+                                <p className="shopping-list-discount">{item.discount}</p>
                             </div>
                         </div>
 
@@ -77,16 +102,18 @@ class Cart extends React.Component{
         const items = null;
         let key = 0;
 
-        const showHideClassName = this.props.show ? "shopping-list" : "display-none";
+        const showHideClassName = this.props.show ? "shoppinglist-parent" : "display-none";
 
         //TODO: fill props
         return(
             <div id={showHideClassName}>
+            <div id="shopping-list">
                 <button id="close-shopping-list" onClick={this.props.handleClose}>X</button>
                 <div id="shopping-list-container">
                     {addedItems}
                 </div>
-                <button id="clear-shopping-list" onClick={null}>Clear</button>
+                <button id="clear-shopping-list" onClick={this.handleClear}>Clear</button>
+            </div>
             </div>
         );
     }
