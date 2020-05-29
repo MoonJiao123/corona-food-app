@@ -207,7 +207,11 @@ class SignUpCustomer2 extends React.Component {
                 this.state.firstName,
                 this.state.lastName,
                 this.state.email,
-                this.state.password
+                this.state.password,
+                this.state.address,
+                this.state.city,
+                this.state.state,
+                this.state.zip
             );
             //window.location.assign("/Customer");
 
@@ -444,6 +448,7 @@ class SignUpCustomer2 extends React.Component {
                 <Link to="/Customer" onClick={this.handleSubmit}
                 className="button"> 
                     <Button
+                        id="signup-customer"
                         type="submit"
                         fullWidth
                         variant="contained"
