@@ -111,4 +111,5 @@ const mapDispatchToProps= (dispatch)=>{
         addToCart: (id)=>{dispatch(addToCart(id))}
     }
 }
+
 export default connect(mapStateToProps,mapDispatchToProps)(ShopItems)
