@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import styled from 'styled-components';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import store from '../index';
-import ShoppingListItem from './ShoppingListItem';
 import {connect} from 'react-redux';
 import {addToCart} from './actions/cartActions';
 

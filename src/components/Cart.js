@@ -1,7 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import ShoppingListItem from './ShoppingListItem';
 import {removeItem, cartCleared} from './actions/cartActions'
 import store from '../index'
 
@@ -100,9 +98,6 @@ class Cart extends React.Component{
         ):(
             <p>Your cart is empty</p>
         )
-        // TODO map data to shopping list items, add keys
-        const items = null;
-        let key = 0;
 
         const showHideClassName = this.props.show ? "shoppinglist-parent" : "display-none";
 
