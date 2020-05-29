@@ -12,7 +12,12 @@ import ErrorPage from './components/ErrorPage';
 import BusinessDashboardParent from './components/BusinessDashboardParent';
 import CustomerDashboardParent from './components/CustomerDashboardParent';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import withAuth from './components/withAuth';
+
+import cartReducer from "./components/reducers/cartReducer"; //for customer
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+
+const store = createStore(cartReducer);
 
 /** creates routing to different pages */
 export const routing = (
@@ -31,6 +36,6 @@ export const routing = (
 
 /** render */
 ReactDOM.render(
-    routing,
+  <Provider store={store}> {routing} </Provider>,
   document.getElementById('root')
 ); 
