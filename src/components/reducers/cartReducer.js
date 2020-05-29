@@ -1,14 +1,14 @@
-import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED} from '../actions/cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED, SET_SORT, SET_CAT, SET_HI, SET_LOW } from '../actions/cart-actions'
 
 const initState = {
     items: [],
     addedItems:[],
     customer: '0', //hard coded
     address: '',
-    category: '',
-    sort: '',
-    low: '',
-    high: '',
+    category: 'None',
+    sort: 'Distance',
+    low: '0',
+    high: '1000',
 }
 const cartReducer= (state = initState,action)=>{
 
@@ -35,6 +35,22 @@ const cartReducer= (state = initState,action)=>{
 
     if(action.type === GET_LIST){
         return {...state, addedItems: action.list};
+    }
+
+    if(action.type === SET_SORT){
+        return {...state, sort: action.sort}
+    }
+
+    if(action.type === SET_CAT){
+        return {...state, category: action.cat}
+    }
+
+    if(action.type === SET_LOW){
+        return {...state, sort: action.low}
+    }
+
+    if(action.type === SET_HI){
+        return {...state, sort: action.hi}
     }
 
     else{
