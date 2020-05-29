@@ -4,16 +4,18 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 import {connect} from 'react-redux'
 import {addToCart} from './actions/cartActions'
+import store from '../index'
 
 const ItemsContainer = styled.div`
     width: 80%;
     height: 90%;
-    margin: 80px auto;
+    margin: 0 auto;
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 `
 const Item = styled.div`
     padding: 20px 30px;

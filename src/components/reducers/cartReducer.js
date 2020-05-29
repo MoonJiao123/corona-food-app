@@ -10,8 +10,13 @@ const initState = {
         {id: 5, img: "https://eatforum.org/content/uploads/2018/05/EAT_pasta_tomato_basil_2018_1200x675-900x675.jpg", name: "Tomatoes5", exp:"6/6/1998", qnt:"6",price:"99"},
     ],
     addedItems:[],
-    total: 0
-
+    total: 0,
+    customer: '21', //hard coded
+    address: 'yes',
+    category: '',
+    sort: '',
+    low: '',
+    high: ''
 }
 const cartReducer= (state = initState,action)=>{
 

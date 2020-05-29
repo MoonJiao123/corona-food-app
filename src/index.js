@@ -18,6 +18,7 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
 const store = createStore(cartReducer);
+export default store;
 
 /** creates routing to different pages */
 export const routing = (

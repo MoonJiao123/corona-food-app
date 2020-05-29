@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import Recipe from './Recipe' //cart total
 import ShoppingListItem from './ShoppingListItem';
-import { removeItem,addQuantity,subtractQuantity} from './actions/cartActions'
+import { removeItem} from './actions/cartActions'
+import store from '../index'
 
 /* ---------------------------------------------------------------------
 Component Object: will contain a list of user saved shopping items
@@ -14,13 +14,33 @@ class Cart extends React.Component{
     handleRemove = (id)=>{
         this.props.removeItem(id);
     }
-    //to add the quantity
-    handleAddQuantity = (id)=>{
-        this.props.addQuantity(id);
-    }
-    //to subtract from the quantity
-    handleSubtractQuantity = (id)=>{
-        this.props.subtractQuantity(id);
+
+    handleClear = () => {
+        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
+        let id = store.getState().customer_id;
+        let url = base + id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if(res.status === 200){
+                return res.json()
+            }
+            else{
+                throw new Error('There is no session');
+            }
+        })
+        .then(data => {
+            console.log(data);
+            //set state for customer
+        })
+        .catch(err => {
+            console.log("caught clear");
+            console.log(err);
+        });
     }
 
     render(){
@@ -30,7 +50,7 @@ class Cart extends React.Component{
                     <div className="shopping-list-item">
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
-                                <span className="shopping-list-item-icon">icon </span>
+                                <span className="shopping-list-item-icon">icon</span>
                                 {item.name}
                             </p>
                             <p className="shopping-list-item-address">Address</p>
@@ -45,8 +65,6 @@ class Cart extends React.Component{
                         </div>
 
                         <div className="shopping-list-item-right">
-                            <button onClick={()=>{this.handleAddQuantity(item.id)}}> up </button>
-                            <button onClick={()=>{this.handleSubtractQuantity(item.id)}}> down </button>
                             <button title="Remove" onClick={()=>{this.handleRemove(item.id)}}>X</button>
                         </div>
                     </div>
@@ -83,8 +101,6 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
     return{
         removeItem: (id)=>{dispatch(removeItem(id))},
-        addQuantity: (id)=>{dispatch(addQuantity(id))},
-        subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Cart)

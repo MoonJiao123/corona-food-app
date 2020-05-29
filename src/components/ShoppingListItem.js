@@ -18,7 +18,6 @@ Reusable list item: indidual user saved shopping items
 
         <div className="shopping-list-item-left">
           <p className="shopping-list-item-name">
-            <span className="shopping-list-item-icon">icon </span>
             Item name
           </p>
           <p className="shopping-list-item-address">Address</p>
