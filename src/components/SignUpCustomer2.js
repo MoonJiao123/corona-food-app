@@ -232,6 +232,7 @@ class SignUpCustomer2 extends React.Component {
                 {/** textfield to enter email address */}
                 <Grid item xs={12}>
                     <CssTextField
+                        autoFocus
                         required
                         fullWidth
                         id="email"
