@@ -10,6 +10,8 @@ import React from 'react';
 import CustomerHeader from './CustomerHeader'
 import ShopItems from './ShopItems'
 import Cart from './Cart'
+import {connect} from 'react-redux'
+import {refreshed, getList} from './actions/cartActions'
 import store from '../index'
 
 
@@ -44,7 +46,7 @@ class CustomerDashboardParent extends React.Component {
       })
       .then(data => {
           //Set state here
-          console.log(data)
+          this.props.getList(data);
         })
       .catch(err => {
           console.log("caught cart");
@@ -58,7 +60,6 @@ class CustomerDashboardParent extends React.Component {
     };
 
     render () {
-        console.log(store.getState());
         return (
             <div id="customer">
                 <CustomerHeader handleClick={this.showShoppingList}/>
@@ -72,7 +73,6 @@ class CustomerDashboardParent extends React.Component {
         let body = {
             token: localStorage.getItem("fuo")
         };
-        console.log(body);
       
         //BE Call refresh
         fetch('https://fuo-backend.herokuapp.com/users/me/from/token/customer', {
@@ -91,8 +91,7 @@ class CustomerDashboardParent extends React.Component {
             }
         })
         .then(data => {
-            console.log(data.user.customer_id);
-            //set state for customer
+            this.props.refreshed(data.user)
         })
         .catch(err => {
             console.log("caught c refresh");
@@ -103,5 +102,17 @@ class CustomerDashboardParent extends React.Component {
         });
     }
 }
-
-export default CustomerDashboardParent;
+const mapStateToProps = (state)=>{
+    return {
+        customer: state.customer,
+        address: state.address,
+        addedItems: state.addedItems
+    }
+}
+const mapDispatchToProps= (dispatch)=>{
+    return{
+        refreshed: (session)=>{dispatch(refreshed(session))},
+        getList: (list) => {dispatch(getList(list))}
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CustomerDashboardParent);

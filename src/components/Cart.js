@@ -2,18 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import ShoppingListItem from './ShoppingListItem';
-import { removeItem} from './actions/cartActions'
+import {removeItem, cartCleared} from './actions/cartActions'
 import store from '../index'
 
 /* ---------------------------------------------------------------------
 Component Object: will contain a list of user saved shopping items
 --------------------------------------------------------------------- */
-
+var list_key = 1;
 class Cart extends React.Component{
 
     handleRemove = (id)=>{
         this.props.removeItem(id);
 
+        //BE Call delete item
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
         let user = store.getState().customer_id + '/';
         let url = base + user + id;
@@ -32,16 +33,17 @@ class Cart extends React.Component{
             }
         })
         .then(data => {
-            console.log(data);
+            this.props.removeItem(data);
             //set state for customer
         })
         .catch(err => {
-            console.log("caught clear");
+            console.log("caught remove");
             console.log(err);
         });
     }
 
     handleClear = () => {
+        //BE Call clear cart
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
         let id = store.getState().customer_id;
         let url = base + id;
@@ -60,7 +62,7 @@ class Cart extends React.Component{
             }
         })
         .then(data => {
-            console.log(data);
+            this.props.cartCleared(data);
             //set state for customer
         })
         .catch(err => {
@@ -73,7 +75,7 @@ class Cart extends React.Component{
         let addedItems = this.props.items.length ? (
             this.props.items.map(item=> {
                 return (
-                    <div className="shopping-list-item">
+                    <div className="shopping-list-item" key={list_key++}>
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
                                 {item.product_name}
@@ -122,12 +124,12 @@ class Cart extends React.Component{
 const mapStateToProps = (state)=>{
     return{
         items: state.addedItems,
-        //addedItems: state.addedItems
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
-        removeItem: (id)=>{dispatch(removeItem(id))},
+        removeItem: (cart)=>{dispatch(removeItem(cart))},
+        cartCleared: (cart)=>{dispatch(cartCleared(cart))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Cart)

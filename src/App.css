@@ -339,6 +339,15 @@ Styles shopping list and items
     font-size: 0.7em;
   }
 }
+/* Styles for customer search results */
+.gDDUVC {
+  border-left: 5px solid white;
+}
+
+.gDDUVC:hover {
+  border-left: 5px solid #a2e2a2;
+}
+
 /* ---------------------------------------------------------------------
 Contributors: Darien
 Styles for the login/signup

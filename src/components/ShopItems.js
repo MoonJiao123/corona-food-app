@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-
-import {connect} from 'react-redux'
-import {addToCart} from './actions/cartActions'
-import store from '../index'
+import store from '../index';
+import ShoppingListItem from './ShoppingListItem';
+import {connect} from 'react-redux';
+import {addToCart} from './actions/cartActions';
 
 const ItemsContainer = styled.div`
     width: 80%;
@@ -64,10 +64,41 @@ const AddToCartButton = styled.button`
         color: white; 
     }
 `;
-
+var search_key = -1;
 class ShopItems extends Component{
+
+    handleRemove = (id)=>{
+        this.props.removeItem(id);
+
+        //BE Call delete item
+        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
+        let user = store.getState().customer_id + '/';
+        let url = base + user + id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if(res.status === 200){
+                return res.json()
+            }
+            else{
+                throw new Error('There is no session');
+            }
+        })
+        .then(data => {
+            this.props.removeItem(data);
+            //set state for customer
+        })
+        .catch(err => {
+            console.log("caught remove");
+            console.log(err);
+        });
+    }
+
     handleClick = (id)=>{
-        //this.props.addToCart(id);
         //BE Call add to cart
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
         let arg = store.getState().customer + '/';
@@ -87,9 +118,8 @@ class ShopItems extends Component{
             throw new Error('Could not get cart');
         }
       })
-      .then(data => {
-          //Set state here
-          console.log(data)
+      .then(data => {          
+            this.props.addToCart(data);
         })
       .catch(err => {
           console.log("caught cart");
@@ -98,13 +128,12 @@ class ShopItems extends Component{
     }
 
     render () {
-        console.log("Shop Items");
-        console.log(this.props);
         // individual item
         let items = this.props.items.map(
             (item) => {
+                
                 return (
-                    <Item>
+                    <Item key={search_key--}>
                         <Image src={item.product_img}/>
                         <Description>
                             <ItemName>{item.product_name}</ItemName>
@@ -131,12 +160,13 @@ class ShopItems extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        items: state.items
+        items: state.items,
+        shoppingItems: state.shoppingItems
     }
 }
 const mapDispatchToProps= (dispatch)=>{
     return{
-        addToCart: (id)=>{dispatch(addToCart(id))}
+        addToCart: (cart)=>{dispatch(addToCart(cart))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ShopItems)

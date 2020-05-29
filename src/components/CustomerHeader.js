@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import store from '../index'
+import {connect} from 'react-redux'
+import {searchedItem} from './actions/cartActions'
+
 
 const Header = styled.div`
     height: 70px;
@@ -87,7 +90,11 @@ class CustomerHeader extends Component {
           throw new Error("bad search");
         }
       })
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        console.log(this.props);
+        this.props.searchedItem(data);
+      })
       .catch(err => {
           console.log("caught search");
           console.log(err);
@@ -111,4 +118,15 @@ class CustomerHeader extends Component {
     );
     };
 }
-export default CustomerHeader;
+
+const mapStateToProps = (state)=>{
+  return {
+      items: state.items
+  }
+}
+const mapDispatchToProps= (dispatch)=>{
+  return{
+      searchedItem: (items)=>{dispatch(searchedItem(items))}
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(CustomerHeader);
