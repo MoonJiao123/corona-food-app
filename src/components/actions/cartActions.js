@@ -1,30 +1,43 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING} from './cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED} from './cart-actions'
 
-//add cart action
-export const addToCart= (id)=>{
+export const addToCart= (cart)=>{
     return{
         type: ADD_TO_CART,
-        id
+        cart
     }
 }
-//remove item action
-export const removeItem=(id)=>{
+
+export const removeItem=(cart)=>{
     return{
         type: REMOVE_ITEM,
-        id
+        cart
     }
 }
-//subtract qt action
-export const subtractQuantity=(id)=>{
+
+export const cartCleared=(cart)=>{
     return{
-        type: SUB_QUANTITY,
-        id
+        type: CART_CLEARED,
+        cart
     }
 }
-//add qt action
-export const addQuantity=(id)=>{
+
+export const searchedItem= (items) =>{
     return{
-        type: ADD_QUANTITY,
-        id
+        type: SEARCHED_ITEM,
+        items
+    }
+}
+
+export const refreshed = (session) =>{
+    return{
+        type: REFRESHED,
+        session
+    }
+}
+
+export const getList = (list) =>{
+    return{
+        type: GET_LIST,
+        list
     }
 }

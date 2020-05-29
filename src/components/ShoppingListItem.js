@@ -18,8 +18,7 @@ Reusable list item: indidual user saved shopping items
 
         <div className="shopping-list-item-left">
           <p className="shopping-list-item-name">
-            <span className="shopping-list-item-icon">icon </span>
-            Item name
+          {this.props.data.product_name}
           </p>
           <p className="shopping-list-item-address">Address</p>
           <p className="shopping-list-item-business">Business</p>
@@ -27,14 +26,14 @@ Reusable list item: indidual user saved shopping items
 
         <div className="shopping-list-item-mid">
           <div>
-            <p className="shopping-list-price">$3.00</p>
-            <p className="shopping-list-discount">-20%</p>
+            <p className="shopping-list-price">{this.props.data.price}</p>
+            <p className="shopping-list-discount">{this.props.data.discount}</p>
           </div>
           {/** TODO: Add generated coupon here */}
         </div>
 
         <div className="shopping-list-item-right">
-          <button title="Remove" onClick={null}>X</button>
+          <button title="Remove" onClick={this.props.remove(this.props.id)}>X</button>
         </div>
 
       </div>

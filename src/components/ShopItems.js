@@ -1,19 +1,20 @@
 import React,{Component} from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-
-import {connect} from 'react-redux'
-import {addToCart} from './actions/cartActions'
+import store from '../index';
+import {connect} from 'react-redux';
+import {addToCart} from './actions/cartActions';
 
 const ItemsContainer = styled.div`
     width: 80%;
     height: 90%;
-    margin: 80px auto;
+    margin: 0 auto;
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 `
 const Item = styled.div`
     padding: 20px 30px;
@@ -62,30 +63,86 @@ const AddToCartButton = styled.button`
         color: white; 
     }
 `;
-
+var search_key = -1;
 class ShopItems extends Component{
+
+    handleRemove = (id)=>{
+        this.props.removeItem(id);
+
+        //BE Call delete item
+        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
+        let user = store.getState().customer_id + '/';
+        let url = base + user + id;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+        })
+        .then(res => {
+            if(res.status === 200){
+                return res.json()
+            }
+            else{
+                throw new Error('There is no session');
+            }
+        })
+        .then(data => {
+            this.props.removeItem(data);
+            //set state for customer
+        })
+        .catch(err => {
+            console.log("caught remove");
+            console.log(err);
+        });
+    }
+
     handleClick = (id)=>{
-        this.props.addToCart(id);
+        //BE Call add to cart
+        let base = 'https://fuo-backend.herokuapp.com/cart/add/';
+        let arg = store.getState().customer + '/';
+        let url = base + arg + id;
+        
+        fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(res => {
+        if(res.status === 200){
+            return res.json();
+        }
+        else{
+            throw new Error('Could not get cart');
+        }
+      })
+      .then(data => {          
+            this.props.addToCart(data);
+        })
+      .catch(err => {
+          console.log("caught cart");
+          console.log(err);
+      });
     }
 
     render () {
-        console.log("Shop Items");
-        console.log(this.props);
         // individual item
         let items = this.props.items.map(
             (item) => {
+                
                 return (
-                    <Item>
-                        <Image src={item.img}/>
+                    <Item key={search_key--}>
+                        <Image src={item.product_img}/>
                         <Description>
-                            <ItemName>{item.name}</ItemName>
+                            <ItemName>{item.product_name}</ItemName>
                             <h5>Good by: {item.exp}</h5>
-                            <h5>Quantity: {item.qnt}</h5>
+                            <h5>Quantity: {item.amount}</h5>
                         </Description>
 
                         <Price>
                             <h3>${item.price}</h3>
-                            <AddToCartButton onClick={()=>{this.handleClick(item.id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
+                            <AddToCartButton onClick={()=>{this.handleClick(item.product_id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
                         </Price>
                     </Item>
                 )
@@ -102,13 +159,13 @@ class ShopItems extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        items: state.items
+        items: state.items,
+        shoppingItems: state.shoppingItems
     }
 }
 const mapDispatchToProps= (dispatch)=>{
-
     return{
-        addToCart: (id)=>{dispatch(addToCart(id))}
+        addToCart: (cart)=>{dispatch(addToCart(cart))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ShopItems)

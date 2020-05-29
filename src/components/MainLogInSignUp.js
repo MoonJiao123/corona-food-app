@@ -117,8 +117,9 @@ export default function MainLogInSignUp(props) {
         account: 'customer',
         email: email, 
         password: pass,
-        customer_user: street + '.' + city + ',' + state + ' ' + zip
+        address: street + '.' + city + ',' + state + ' ' + zip
       };
+      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',
@@ -192,9 +193,15 @@ export default function MainLogInSignUp(props) {
         },
         body: JSON.stringify(body)
       })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 200){
+          return res.json()
+        }
+        else 
+          throw new Error("bad login");
+      })
       .then(data => {
-        console.log(data);
+        localStorage.setItem("fuo", data.token);
         window.location.assign("http://localhost:3000/customer");
       })
       .catch(err => {

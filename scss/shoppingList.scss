@@ -4,6 +4,15 @@ Styles shopping list and items
 --------------------------------------------------------------------- */
 
 /* Styles for parent */
+#shoppinglist-parent{
+  background-color: rgba(0, 0, 0, 0.432);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #shopping-list{
   position: absolute;
   left: 25%;
@@ -11,7 +20,7 @@ Styles shopping list and items
   z-index: 1;
   width: 50%;
   height: 65%;
-  background: $bg-white;
+  background: white;
   border-radius: 10px;
 
   button{
@@ -108,7 +117,11 @@ Styles shopping list and items
 }
 
 .shopping-list-item:hover{
-  background: white;
+  background: $bg-white;
+}
+
+#display-none{
+  display: none;
 }
 
 /* Styles for small screens */
@@ -121,4 +134,15 @@ Styles shopping list and items
   left: 5%;
   font-size: 0.7em;
 }
+}
+
+
+/* Styles for customer search results */
+
+.gDDUVC{
+  border-left: 5px solid white;
+}
+
+.gDDUVC:hover{
+  border-left: 5px solid $bg-light-green;
 }
