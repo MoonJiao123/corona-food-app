@@ -2,8 +2,6 @@ import React from 'react';
 
 class Status extends React.Component{
 
-  
-
   render(){
     return(
       <div id="status" className={this.props.status}>
@@ -12,8 +10,5 @@ class Status extends React.Component{
     );
   }
 
-  onComponentDidUpdate(){
-    console.log("status update");
-  }
 }
 export default Status;

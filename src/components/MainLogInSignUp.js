@@ -116,7 +116,6 @@ export default function MainLogInSignUp(props) {
         password: pass,
         customer_location: street + '.' + city + ',' + state + ' ' + zip
       };
-      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',
@@ -134,7 +133,6 @@ export default function MainLogInSignUp(props) {
         } 
       })
       .then(data => {
-        console.log(data);
         alert("Registered! You can log in now!");
       })
       .catch(err => {

@@ -262,7 +262,6 @@ Constructor is used for state design, modularized to pass as props
           let arg = this.state.currentStore;
 
           let url = base + id + arg;
-          console.log(url);
           fetch(url, method)
           .then(res => {
             if( res.status === 200){
@@ -328,7 +327,6 @@ Constructor is used for state design, modularized to pass as props
           let base = 'https://fuo-backend.herokuapp.com/business/addlocation/';
           let id = this.state.session;
           let url = base + id;
-          console.log(url);
           fetch(url, method)
           .then(res => {
             if(res.status === 200){
@@ -345,7 +343,6 @@ Constructor is used for state design, modularized to pass as props
               fetch(url)
               .then(res => res.json())
               .then(data => {
-                console.log(data);
                 this.setState({locations: data, locationBg: ''});
                 this.setState({currentMessage: 'Success!', currentStatus:'good'});
               })
@@ -470,7 +467,6 @@ Constructor is used for state design, modularized to pass as props
             let arg = ids[i];
             let url = base + id + arg;
             method.body = JSON.stringify(body[i]);
-            console.log(body);
 
             fetch(url, method)
             .then(res => {
