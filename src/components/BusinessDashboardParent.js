@@ -648,7 +648,7 @@ Constructor is used for state design, modularized to pass as props
       if ( (list[i].image && !list[i].image.includes('.')) ||
             (!list[i].name ) || 
             (!list[i].amount || !Number(list[i].amount) ) ||
-            (!list[i].price || !Number(list[i].price) ) ||
+            (!list[i].price || !Number(list[i].price) || Number(list[i].price) > 1000) ||
             (!list[i].rate || !Number(list[i].rate)) ||
             (!list[i].expiration || new Date(list[i].expiration) < new Date().setDate(new Date().getDate() - 1)) 
         ) {

@@ -24,7 +24,7 @@ ListingForm extends React.Component{
     this.props.data.linkError = this.props.data.image && !this.props.data.image.includes('.') ? "Enter valid link" : "";
     this.props.data.nameError = !this.props.data.name ? "Required" : "";
     this.props.data.amountError = !this.props.data.amount || !Number(this.props.data.amount) ? "Required (numbers only)" : "";
-    this.props.data.priceError = !this.props.data.price || !Number(this.props.data.price) ? "Required (numbers only)" : "";
+    this.props.data.priceError = !this.props.data.price || !Number(this.props.data.price) || Number(this.props.data.price) > 1000 ? "Required (numbers < 1000 only)" : "";
     this.props.data.discountError = !this.props.data.rate || !Number(this.props.data.rate) ? "Required (numbers only)" : "";
     this.props.data.expirationError = !this.props.data.expiration || new Date(this.props.data.expiration) < new Date().setDate(new Date().getDate() - 1) ? "Required (enter future date)" : "";
 
