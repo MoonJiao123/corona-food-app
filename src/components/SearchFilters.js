@@ -7,7 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import store from '../index';
 import {setSort, setCat, setLow, setHi} from './actions/cartActions';
-import { FormHelperText } from '@material-ui/core';
 
 class SearchFilters extends React.Component{
 

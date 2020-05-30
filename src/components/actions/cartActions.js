@@ -1,22 +1,8 @@
-import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED,SET_SORT, SET_CAT, SET_HI, SET_LOW, SET_BG} from './cart-actions'
+import { ADD_TO_CART, SEARCHED_ITEM, REFRESHED, GET_LIST,SET_SORT, SET_CAT, SET_HI, SET_LOW, SET_BG} from './cart-actions'
 
 export const addToCart= (cart)=>{
     return{
         type: ADD_TO_CART,
-        cart
-    }
-}
-
-export const removeItem=(cart)=>{
-    return{
-        type: REMOVE_ITEM,
-        cart
-    }
-}
-
-export const cartCleared=(cart)=>{
-    return{
-        type: CART_CLEARED,
         cart
     }
 }

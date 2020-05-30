@@ -1,4 +1,4 @@
-import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED, SET_SORT, SET_CAT, SET_HI, SET_LOW, SET_BG } from '../actions/cart-actions'
+import { ADD_TO_CART, SEARCHED_ITEM, REFRESHED, GET_LIST, SET_SORT, SET_CAT, SET_HI, SET_LOW, SET_BG } from '../actions/cart-actions'
 
 const initState = {
     items: [],
@@ -17,14 +17,6 @@ const cartReducer= (state = initState,action)=>{
     //INSIDE HOME COMPONENT
     if(action.type === ADD_TO_CART){
         return {...state};
-    }
-
-    else if(action.type === REMOVE_ITEM){
-        return {...state, addItems: action.cart}
-    }
-
-    else if(action.type === CART_CLEARED){
-        return {...state, addItems: action.cart}
     }
 
     else if(action.type === SEARCHED_ITEM){

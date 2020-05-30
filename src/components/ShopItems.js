@@ -100,16 +100,16 @@ class ShopItems extends Component{
             product_id: id
         };
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
-        let arg = store.getState().customer;
-        let url = base + arg;
-        console.log(url);
+        let arg = store.getState().customer + '/';
+        let url = base + arg + id;
+        console.log(url);   
         console.log(body);
         fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
+        }
+        //body: JSON.stringify(body)
       })
       .then(res => {
         if(res.status === 200){
@@ -140,7 +140,7 @@ class ShopItems extends Component{
                         <Description>
                             <ItemName>{item.product_name}</ItemName>
                             <h5>Good by: {item.expire_date}</h5>
-                            <h5>Estimated Amount Left: {item.stock_amount}</h5>
+                            <h5>Original Amount: {item.stock_amount}</h5>
                         </Description>
 
                         <Price>

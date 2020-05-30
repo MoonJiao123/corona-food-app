@@ -49,7 +49,7 @@ class CustomerDashboardParent extends React.Component {
           console.log(data);
           let add = [];
           for(let i = 0; i < data.length; i ++){
-              add.push(Object.assign({}, data[i].product[0]));
+              add.push(Object.assign({}, data[i].product));
           }
           this.props.getList(add);
         })

@@ -70,6 +70,12 @@ class CustomerHeader extends Component {
       this.logout = this.logout.bind(this);
     }
 
+    keyPress = e => {
+      if(e.keyCode == 13){
+         this.handleSearch(e);
+      }
+   }
+
     handleSearch = e => {
       if(e.target.value === ''){
         return;
@@ -81,7 +87,7 @@ class CustomerHeader extends Component {
       let id = obj.customer + '/';
       let arg = obj.sort + '/' +
                 obj.category + '/' +
-                e.target.value + '/' +
+                e.target.value.trim().split(' ').join(';') + '/' +
                 (obj.low===''?'0':obj.low) + '/' +
                 (obj.high===''?'1000':obj.high);
       let url = base + id + arg;
@@ -120,7 +126,7 @@ class CustomerHeader extends Component {
     return (
       <Header>
             <Title>FUO</Title>
-            <SearchInput placeholder="Search Item" onChange={this.handleSearch}/>
+            <SearchInput placeholder="Search Item" /*onChange={this.handleSearch}*/ onKeyDown={this.keyPress}/>
             <CartButton type="button" onClick={this.props.handleClick}> <ShoppingCartIcon fontSize='large'/> </CartButton>
             <TextButton size={"small"} onClick={this.logout}> Log Out </TextButton>
       </Header>
