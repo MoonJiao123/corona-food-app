@@ -54,7 +54,7 @@ class SideNav extends React.Component {
                     variant="contained"
                     onClick={this.props.data}
                     >
-                    <a href="landing.html">Log Out</a>
+                    Log Out
                 </Button>
             {"  "}
             <Button

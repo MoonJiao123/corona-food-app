@@ -166,7 +166,7 @@ export default function MainLogInSignUp(props) {
       })
       .then(data => {
         localStorage.setItem("fuo", data.token);
-        window.location.assign("http://localhost:3000/business");
+        window.location.assign("https://corona-food.herokuapp.com/business");
       })
       .catch(err => {
           console.log("caught b login");
@@ -197,7 +197,7 @@ export default function MainLogInSignUp(props) {
       })
       .then(data => {
         localStorage.setItem("fuo", data.token);
-        window.location.assign("http://localhost:3000/customer");
+        window.location.assign("https://corona-food.herokuapp.com/customer");
       })
       .catch(err => {
           console.log("caught c login");

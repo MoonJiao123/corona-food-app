@@ -16,7 +16,6 @@ class Cart extends React.Component{
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
         let user = store.getState().customer + '/';
         let url = base + user + id;
-        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -32,12 +31,10 @@ class Cart extends React.Component{
             }
         })
         .then(data => {
-            console.log(data);
             let add = [];
             for(let i = 0; i < data.length; i ++){
                 add.push(Object.assign({}, data[i].product));
             }
-            console.log(add);
             //this.props.removeItem(add);
             this.props.getList(add);
         })
@@ -52,7 +49,6 @@ class Cart extends React.Component{
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
         let id = store.getState().customer;
         let url = base + id;
-        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {
