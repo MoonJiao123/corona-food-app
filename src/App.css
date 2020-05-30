@@ -1005,3 +1005,13 @@ div.empty {
   background-position: center;
   background-size: auto;
 }
+/* ---------------------------------------------------------------------
+Contributors: Tabassum Alam
+styles for error page 
+--------------------------------------------------------------------- */
+.error-page{
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 100px;
+  flex: auto;
+}
