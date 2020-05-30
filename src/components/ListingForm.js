@@ -122,6 +122,7 @@ ListingForm extends React.Component{
             <MenuItem value={"None"}>None</MenuItem>
             <MenuItem value={"Vegetable"}>Vegetable</MenuItem>
             <MenuItem value={"Meat"}>Meat</MenuItem>
+            <MenuItem value={"Seafood"}>Seafood</MenuItem>
             <MenuItem value={"Grain"}>Grain</MenuItem>
             <MenuItem value={"Fruit"}>Fruit</MenuItem>
             <MenuItem value={"Dairy"}>Dairy</MenuItem>

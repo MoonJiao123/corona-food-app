@@ -309,7 +309,8 @@ Styles shopping list and items
 }
 .shopping-list-item .shopping-list-discount {
   font-size: 1em;
-  color: #3f3f3f;
+  color: #888888;
+  text-decoration: line-through;
 }
 .shopping-list-item .shopping-list-item-mid {
   text-align: right;

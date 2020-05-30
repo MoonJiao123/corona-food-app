@@ -73,9 +73,10 @@ class CustomerHeader extends Component {
       }
 
       //BE Call search
+      let obj = store.getState();
       let base = 'https://fuo-backend.herokuapp.com/product/';
-      let id = store.getState().customer + '/';
-      let arg = e.target.value + '/price_asc';
+      let id = obj.customer + '/';
+      let arg = obj.sort + '/' + obj.category + '/' + e.target.value + '/' + obj.low + '/' + obj.high;
       let url = base + id + arg;
       fetch(url, {
         headers: {

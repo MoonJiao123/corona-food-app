@@ -3,7 +3,7 @@ import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEAR
 const initState = {
     items: [],
     addedItems:[],
-    customer: '0', //hard coded
+    customer: '21',
     address: '',
     category: 'None',
     sort: 'Distance',

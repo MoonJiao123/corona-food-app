@@ -1,4 +1,5 @@
 import React from 'react';
+import Barcode from 'react-barcode';
 import {connect} from 'react-redux';
 import {removeItem, cartCleared} from './actions/cartActions'
 import store from '../index'
@@ -74,6 +75,9 @@ class Cart extends React.Component{
             this.props.items.map(item=> {
                 return (
                     <div className="shopping-list-item" key={list_key++}>
+
+                        <Barcode value={item.coupon + "off"} />
+
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
                                 {item.product_name}
@@ -84,13 +88,13 @@ class Cart extends React.Component{
 
                         <div className="shopping-list-item-mid">
                             <div>
-                                <p className="shopping-list-price">${item.price}</p>
-                                <p className="shopping-list-discount">{item.discount}</p>
+                                <p className="shopping-list-price">${item.discounted_price}</p>
+                                <p className="shopping-list-discount">${item.price}</p>
                             </div>
                         </div>
 
                         <div className="shopping-list-item-right">
-                            <button title="Remove" onClick={()=>{this.handleRemove(item.id)}}>X</button>
+                            <button title="Remove" onClick={()=>{this.handleRemove(item.product_id)}}>X</button>
                         </div>
                     </div>
                 )
@@ -101,7 +105,6 @@ class Cart extends React.Component{
 
         const showHideClassName = this.props.show ? "shoppinglist-parent" : "display-none";
 
-        //TODO: fill props
         return(
             <div id={showHideClassName}>
             <div id="shopping-list">
