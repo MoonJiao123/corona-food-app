@@ -89,6 +89,7 @@ class CustomerDashboardParent extends React.Component {
             return res.json()
             }
             else{
+            window.location.assign('http://localhost:3000/');
             throw new Error('There is no session');
             }
         })

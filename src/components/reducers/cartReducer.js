@@ -46,11 +46,11 @@ const cartReducer= (state = initState,action)=>{
     }
 
     if(action.type === SET_LOW){
-        return {...state, sort: action.low}
+        return {...state, low: action.low}
     }
 
     if(action.type === SET_HI){
-        return {...state, sort: action.hi}
+        return {...state, high: action.hi}
     }
 
     else{

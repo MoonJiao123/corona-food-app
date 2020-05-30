@@ -33,7 +33,7 @@ class SearchFilters extends React.Component{
     return(
       <div id="searchFilters">
         <FormControl className="filter">
-          <InputLabel >Sort Mode</InputLabel>
+          <InputLabel >Sort</InputLabel>
           <Select
             value={this.props.sort}
             onChange={this.handleSort}>
@@ -58,8 +58,8 @@ class SearchFilters extends React.Component{
           </Select>
         </FormControl>
 
-        <TextField label="Min $" variant="outlined" onChange={this.handleMin}/>
-        <TextField label="Max $" variant="outlined" onChange={this.handleMax}/>
+        <TextField label="Min $" onChange={this.handleMin} className="filter"/>
+        <TextField label="Max $" onChange={this.handleMax} className="filter"/>
 
       </div>);
   }

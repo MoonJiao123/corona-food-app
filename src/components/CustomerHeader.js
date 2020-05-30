@@ -7,7 +7,7 @@ import {searchedItem} from './actions/cartActions';
 
 
 const Header = styled.div`
-    height: 70px;
+    height: 8%;
     width: 100%;
     color: white;
     background-color: #67d367;

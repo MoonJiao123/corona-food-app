@@ -261,16 +261,6 @@ render () {
                 </Button>
             </Link>
 
-            {/** allow users to retrieve password if forgotten */}
-            <Grid container>
-                <Grid item xs> 
-                    {/** link to resetting password */}
-                    <Link to="/ErrorPage" variant="p" style={{color: '#1401ee'}}>
-                    Forgot password?
-                    </Link>
-                </Grid>
-            </Grid>
-
       </form>
     </div>
   </Container>

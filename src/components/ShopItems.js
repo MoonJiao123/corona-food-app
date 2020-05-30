@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {addToCart} from './actions/cartActions';
 
 const ItemsContainer = styled.div`
-    width: 80%;
+    width: 60%;
     height: 90%;
     margin: 0 auto;
     background: #FFFFFF;

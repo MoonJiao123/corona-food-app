@@ -119,7 +119,6 @@ export default function MainLogInSignUp(props) {
         password: pass,
         address: street + '.' + city + ',' + state + ' ' + zip
       };
-      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',
