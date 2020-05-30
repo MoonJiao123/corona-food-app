@@ -79,7 +79,11 @@ class CustomerHeader extends Component {
       let obj = store.getState();
       let base = 'https://fuo-backend.herokuapp.com/product/';
       let id = obj.customer + '/';
-      let arg = obj.sort + '/' + obj.category + '/' + e.target.value + '/' + obj.low + '/' + obj.high;
+      let arg = obj.sort + '/' +
+                obj.category + '/' +
+                e.target.value + '/' +
+                (obj.low===''?'0':obj.low) + '/' +
+                (obj.high===''?'1000':obj.high);
       let url = base + id + arg;
       console.log(url);
       fetch(url, {
