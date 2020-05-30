@@ -30,7 +30,7 @@ class CustomerDashboardParent extends React.Component {
         let base = 'https://fuo-backend.herokuapp.com/cart/list/';
         let id = store.getState().customer;
         let url = base + id;
-        
+        console.log(url);
         fetch(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -50,7 +50,6 @@ class CustomerDashboardParent extends React.Component {
           let add = [];
           for(let i = 0; i < data.length; i ++){
               add.push(Object.assign({}, data[i].product[0]));
-              console.log(add);
           }
           this.props.getList(add);
         })

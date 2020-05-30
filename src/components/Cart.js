@@ -11,12 +11,12 @@ var list_key = 1;
 class Cart extends React.Component{
 
     handleRemove = (id)=>{
-        this.props.removeItem(id);
 
         //BE Call delete item
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
-        let user = store.getState().customer_id + '/';
+        let user = store.getState().customer + '/';
         let url = base + user + id;
+        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -32,6 +32,7 @@ class Cart extends React.Component{
             }
         })
         .then(data => {
+            console.log(data);
             this.props.removeItem(data);
             //set state for customer
         })
@@ -76,7 +77,7 @@ class Cart extends React.Component{
                 return (
                     <div className="shopping-list-item" key={list_key++}>
 
-                        <Barcode width="1" value={item.coupon + " off"} />
+                        <Barcode width={1} value={item.coupon + " off"} />
 
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">

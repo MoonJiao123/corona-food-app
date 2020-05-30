@@ -8,3 +8,4 @@ export const SET_SORT = 'SET_SORT';
 export const SET_CAT = 'SET_CAT';
 export const SET_LOW = 'SET_LOW';
 export const SET_HI = 'SET_HI';
+export const SET_BG = 'SET_BG';

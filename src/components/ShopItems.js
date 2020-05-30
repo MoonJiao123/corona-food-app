@@ -94,58 +94,33 @@ const AddToCartButton = styled.button`
 var search_key = -1;
 class ShopItems extends Component{
 
-    handleRemove = (id)=>{
-        this.props.removeItem(id);
-
-        //BE Call delete item
-        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
-        let user = store.getState().customer_id + '/';
-        let url = base + user + id;
-        fetch(url, {
-            method: 'DELETE',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-        })
-        .then(res => {
-            if(res.status === 200){
-                return res.json()
-            }
-            else{
-                throw new Error('There is no session');
-            }
-        })
-        .then(data => {
-            this.props.removeItem(data);
-            //set state for customer
-        })
-        .catch(err => {
-            console.log("caught remove");
-            console.log(err);
-        });
-    }
-
     handleClick = (id)=>{
         //BE Call add to cart
+        let body = {
+            product_id: id
+        };
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
-        let arg = store.getState().customer + '/';
-        let url = base + arg + id;
-        
+        let arg = store.getState().customer;
+        let url = base + arg;
+        console.log(url);
+        console.log(body);
         fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        body: JSON.stringify(body)
       })
       .then(res => {
         if(res.status === 200){
             return res.json();
         }
         else{
-            throw new Error('Could not get cart');
+            throw new Error('could not add to cart');
         }
       })
-      .then(data => {          
+      .then(data => {   
+            console.log(data);       
             this.props.addToCart(data);
         })
       .catch(err => {
@@ -178,7 +153,7 @@ class ShopItems extends Component{
 
         return (
             //item list
-            <ItemsContainer>
+            <ItemsContainer className={this.props.bg}>
                 {items}
             </ItemsContainer>
         );
@@ -188,6 +163,7 @@ class ShopItems extends Component{
 const mapStateToProps = (state)=>{
     return {
         items: state.items,
+        bg: state.bg
     }
 }
 const mapDispatchToProps= (dispatch)=>{

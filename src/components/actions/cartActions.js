@@ -1,4 +1,4 @@
-import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED,SET_SORT, SET_CAT, SET_HI, SET_LOW} from './cart-actions'
+import { ADD_TO_CART,REMOVE_ITEM, SEARCHED_ITEM, REFRESHED, GET_LIST, CART_CLEARED,SET_SORT, SET_CAT, SET_HI, SET_LOW, SET_BG} from './cart-actions'
 
 export const addToCart= (cart)=>{
     return{
@@ -67,5 +67,12 @@ export const setHi = (hi) =>{
     return{
         type: SET_HI,
         hi
+    }
+}
+
+export const setBg = (bg) =>{
+    return{
+        type: SET_BG,
+        bg
     }
 }

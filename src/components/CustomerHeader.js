@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import store from '../index';
 import {connect} from 'react-redux';
-import {searchedItem} from './actions/cartActions';
+import {searchedItem, setBg} from './actions/cartActions';
 
 
 const Header = styled.div`
@@ -98,6 +98,7 @@ class CustomerHeader extends Component {
       .then(data => {
         console.log(data)
         this.props.searchedItem(data);
+        this.props.setBg(data.length);
       })
       .catch(err => {
           console.log("caught search");
@@ -130,7 +131,8 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps= (dispatch)=>{
   return{
-      searchedItem: (items)=>{dispatch(searchedItem(items))}
+      searchedItem: (items)=>{dispatch(searchedItem(items))},
+      setBg: (bg)=>{dispatch(setBg(bg))}
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(CustomerHeader);
