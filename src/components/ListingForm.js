@@ -13,14 +13,6 @@ ListingForm extends React.Component{
   constructor(props){
     super(props);
 
-     /*
-    this.nameError = !this.props.data.name ? "Required" : "";
-    this.amountError = !this.props.data.amount || !Number(this.props.data.amount) ? "Required (numbers only)" : "";
-    this.priceError = !this.props.data.price || !Number(this.props.data.price) ? "Required (numbers only)" : "";
-    this.discountError = !this.props.data.rate ? "Required" : "";
-    this.expirationError = !this.props.data.expiration ? "Required" : "";
-     */
-
     this.props.data.linkError = this.props.data.image && !this.props.data.image.includes('.') ? "Enter valid link" : "";
     this.props.data.nameError = !this.props.data.name ? "Required" : "";
     this.props.data.amountError = !this.props.data.amount || !Number(this.props.data.amount) ? "Required (numbers only)" : "";

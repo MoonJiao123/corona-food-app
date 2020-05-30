@@ -6,8 +6,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import {connect} from 'react-redux';
 import {setSort, setCat, setLow, setHi} from './actions/cartActions';
+import { FormHelperText } from '@material-ui/core';
 
 class SearchFilters extends React.Component{
+
+  constructor(props) {
+    super(props);
+
+    this.state={
+      minError: '',
+      maxError: '',
+    }
+  }
 
   handleSort = (e) => {
     console.log(e.target.value);
@@ -21,12 +31,24 @@ class SearchFilters extends React.Component{
 
   handleMin = (e) =>{
     console.log(e.target.value);
-    this.props.setLow(e.target.value);
+    if (e.target.value && !Number(e.target.value)) {
+      this.setState({minError: "Numbers only"});
+    }
+    else {
+      this.setState({minError: ""});
+      this.props.setLow(e.target.value);
+    }
   }
 
   handleMax = (e) =>{
     console.log(e.target.value);
-    this.props.setHi(e.target.value);
+    if (e.target.value && !Number(e.target.value)) {
+      this.setState({maxError: "Numbers only"});
+    }
+    else {
+      this.setState({maxError: ""});
+      this.props.setHi(e.target.value);
+    }
   }
 
   render(){
@@ -58,8 +80,11 @@ class SearchFilters extends React.Component{
           </Select>
         </FormControl>
 
-        <TextField label="Min $" onChange={this.handleMin} className="filter"/>
-        <TextField label="Max $" onChange={this.handleMax} className="filter"/>
+        <TextField label="Min $" onChange={this.handleMin} className="filter"
+        helperText={this.state.minError}/>
+
+        <TextField label="Max $" onChange={this.handleMax} className="filter"
+        helperText={this.state.maxError}/>
 
       </div>);
   }
