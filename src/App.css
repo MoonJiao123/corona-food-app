@@ -233,10 +233,10 @@ Styles shopping list and items
 #shopping-list {
   position: absolute;
   left: 25%;
-  top: 15%;
+  top: 10%;
   z-index: 1;
   width: 50%;
-  height: 65%;
+  height: 80%;
   background: white;
   border-radius: 10px;
 }
@@ -269,6 +269,7 @@ Styles shopping list and items
   height: 95%;
   box-sizing: border-box;
   padding: 2%;
+  overflow-y: auto;
 }
 
 #clear-shopping-list {
@@ -309,7 +310,8 @@ Styles shopping list and items
 }
 .shopping-list-item .shopping-list-discount {
   font-size: 1em;
-  color: #3f3f3f;
+  color: #888888;
+  text-decoration: line-through;
 }
 .shopping-list-item .shopping-list-item-mid {
   text-align: right;
@@ -338,14 +340,33 @@ Styles shopping list and items
     left: 5%;
     font-size: 0.7em;
   }
+
+  .shopping-list-item {
+    flex-direction: column;
+    height: fit-content;
+    text-align: center;
+    padding: 1em 0;
+  }
+
+  .shopping-list-item div {
+    padding: 1.5% 0;
+  }
 }
 /* Styles for customer search results */
 .gDDUVC {
   border-left: 5px solid white;
+  height: fit-content;
 }
 
 .gDDUVC:hover {
   border-left: 5px solid #a2e2a2;
+}
+
+.fgWAjs {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  width: fit-content;
 }
 
 /* ---------------------------------------------------------------------
@@ -776,6 +797,13 @@ styles for customer search filters
   .MuiSelect-select.MuiSelect-select {
     color: white;
   }
+}
+/*Styles for customer search results*/
+div.empty {
+  background: url("media/error.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
 }
 
 /*# sourceMappingURL=App.css.map */

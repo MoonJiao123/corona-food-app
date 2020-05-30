@@ -37,3 +37,11 @@ styles for customer search filters
     color: white;
   }
 }
+
+/*Styles for customer search results*/
+div.empty{
+  background: url('media/error.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+}

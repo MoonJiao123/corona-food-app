@@ -1,4 +1,5 @@
 import React from 'react';
+import Barcode from 'react-barcode';
 import {connect} from 'react-redux';
 import {removeItem, cartCleared} from './actions/cartActions'
 import store from '../index'
@@ -10,12 +11,12 @@ var list_key = 1;
 class Cart extends React.Component{
 
     handleRemove = (id)=>{
-        this.props.removeItem(id);
 
         //BE Call delete item
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
-        let user = store.getState().customer_id + '/';
+        let user = store.getState().customer + '/';
         let url = base + user + id;
+        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -31,6 +32,7 @@ class Cart extends React.Component{
             }
         })
         .then(data => {
+            console.log(data);
             this.props.removeItem(data);
             //set state for customer
         })
@@ -74,6 +76,9 @@ class Cart extends React.Component{
             this.props.items.map(item=> {
                 return (
                     <div className="shopping-list-item" key={list_key++}>
+
+                        <Barcode width={1} value={item.coupon + " off"} />
+
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
                                 {item.product_name}
@@ -84,13 +89,13 @@ class Cart extends React.Component{
 
                         <div className="shopping-list-item-mid">
                             <div>
-                                <p className="shopping-list-price">${item.price}</p>
-                                <p className="shopping-list-discount">{item.discount}</p>
+                                <p className="shopping-list-price">${item.discounted_price}</p>
+                                <p className="shopping-list-discount">${item.price}</p>
                             </div>
                         </div>
 
                         <div className="shopping-list-item-right">
-                            <button title="Remove" onClick={()=>{this.handleRemove(item.id)}}>X</button>
+                            <button title="Remove" onClick={()=>{this.handleRemove(item.product_id)}}>X</button>
                         </div>
                     </div>
                 )
@@ -101,16 +106,15 @@ class Cart extends React.Component{
 
         const showHideClassName = this.props.show ? "shoppinglist-parent" : "display-none";
 
-        //TODO: fill props
         return(
             <div id={showHideClassName}>
-            <div id="shopping-list">
-                <button id="close-shopping-list" onClick={this.props.handleClose}>X</button>
-                <div id="shopping-list-container">
-                    {addedItems}
+                <div id="shopping-list">
+                    <button id="close-shopping-list" onClick={this.props.handleClose}>X</button>
+                    <div id="shopping-list-container">
+                        {addedItems}
+                    </div>
+                    <button id="clear-shopping-list" onClick={this.handleClear}>Clear</button>
                 </div>
-                <button id="clear-shopping-list" onClick={this.handleClear}>Clear</button>
-            </div>
             </div>
         );
     }

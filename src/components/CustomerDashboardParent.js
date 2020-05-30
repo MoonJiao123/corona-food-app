@@ -3,7 +3,7 @@
  * dashboard page. It renders all other subcomponents needed to 
  * display all information to the user approproately.
  * 
- * Contributors: Tabassum Alam, Thuyet Ta
+ * Contributors: Tabassum Alam, Thuyet Ta, Darien
  */
 
 import React from 'react';
@@ -30,7 +30,7 @@ class CustomerDashboardParent extends React.Component {
         let base = 'https://fuo-backend.herokuapp.com/cart/list/';
         let id = store.getState().customer;
         let url = base + id;
-        
+        console.log(url);
         fetch(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +46,12 @@ class CustomerDashboardParent extends React.Component {
       })
       .then(data => {
           //Set state here
-          this.props.getList(data);
+          console.log(data);
+          let add = [];
+          for(let i = 0; i < data.length; i ++){
+              add.push(Object.assign({}, data[i].product[0]));
+          }
+          this.props.getList(add);
         })
       .catch(err => {
           console.log("caught cart");
@@ -88,12 +93,11 @@ class CustomerDashboardParent extends React.Component {
             return res.json()
             }
             else{
-            window.location.assign('http://localhost:3000/');
+            //window.location.assign('http://localhost:3000/');
             throw new Error('There is no session');
             }
         })
         .then(data => {
-            console.log(data);
             this.props.refreshed(data.user)
         })
         .catch(err => {

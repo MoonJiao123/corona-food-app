@@ -12,52 +12,80 @@ const ItemsContainer = styled.div`
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
 `
+
 const Item = styled.div`
-    padding: 20px 30px;
-    height: 120px;
+    width: 100%;
+    height: 15%;
     display: flex;
-    position:relative;
-    &: nth-child(2n){
-        border-top:  1px solid #E1E8EE;
-        border-bottom:  1px solid #E1E8EE; 
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    box-sizing: border-box;
+    overflow: hidden;
+    &: hover {
+        border-left: 5px solid #73f073;
     }
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        height: 50%;
+        border-bottom: 2px solid gray;
+        text-align: center;
+
+        &: hover {
+            border-right: 5px solid #73f073;
+        }
+      }
 `
 
 const Image = styled.img`
-    margin-right: 60px;
-    max-width: 30%;
-    max-height:100%;
+    width: 13%;
+    @media (max-width: 800px) {
+        width: auto;
+        height: 30%;
+      }
 `
 const Description = styled.div`
-    padding-top: 10px;
-    margin-right: 60px;
-    width: 115px;
+    width: 50%;
+
+    @media (max-width: 800px) {
+        width: 90%;
+      }
 `
 const ItemName = styled.h3`
-    padding-bottom: 5px;
+    font-size: 1.5em;
+    text-overflow: ellipse
 `
 const Price = styled.div`
-    width: 83px;
-    padding-top: 15px;
-    font-size: 16px;
-    position: absolute;
-    left: 85%;
+    outline: none;
+    border: none;
+    padding: 1%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    algin-items: center;
+    width: 20%;
+
+    @media (max-width: 800px) {
+        width: 50%;
+        line-height: 2.5;
+      }
 `
 const AddToCartButton = styled.button`
     color: #67d367;
-    border-radius: 30px;
     border: none;
     outline: none;
+    width: 3em;
+    height: 3em;
+    padding: 2em;
     display: flex;
-    margin-top: 8px;
-    padding: 6px;
-    position: absolute;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 50%;
 
-    transition: fill 0.25s;
     &: hover {
         background-color: #67d367;
         color: white; 
@@ -66,58 +94,33 @@ const AddToCartButton = styled.button`
 var search_key = -1;
 class ShopItems extends Component{
 
-    handleRemove = (id)=>{
-        this.props.removeItem(id);
-
-        //BE Call delete item
-        let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
-        let user = store.getState().customer_id + '/';
-        let url = base + user + id;
-        fetch(url, {
-            method: 'DELETE',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-        })
-        .then(res => {
-            if(res.status === 200){
-                return res.json()
-            }
-            else{
-                throw new Error('There is no session');
-            }
-        })
-        .then(data => {
-            this.props.removeItem(data);
-            //set state for customer
-        })
-        .catch(err => {
-            console.log("caught remove");
-            console.log(err);
-        });
-    }
-
     handleClick = (id)=>{
         //BE Call add to cart
+        let body = {
+            product_id: id
+        };
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
-        let arg = store.getState().customer + '/';
-        let url = base + arg + id;
-        
+        let arg = store.getState().customer;
+        let url = base + arg;
+        console.log(url);
+        console.log(body);
         fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        body: JSON.stringify(body)
       })
       .then(res => {
         if(res.status === 200){
             return res.json();
         }
         else{
-            throw new Error('Could not get cart');
+            throw new Error('could not add to cart');
         }
       })
-      .then(data => {          
+      .then(data => {   
+            console.log(data);       
             this.props.addToCart(data);
         })
       .catch(err => {
@@ -136,12 +139,12 @@ class ShopItems extends Component{
                         <Image src={item.product_img}/>
                         <Description>
                             <ItemName>{item.product_name}</ItemName>
-                            <h5>Good by: {item.exp}</h5>
-                            <h5>Quantity: {item.amount}</h5>
+                            <h5>Good by: {item.expire_date}</h5>
+                            <h5>Estimated Amount Left: {item.stock_amount}</h5>
                         </Description>
 
                         <Price>
-                            <h3>${item.price}</h3>
+                            <h3>${item.discounted_price}</h3>
                             <AddToCartButton onClick={()=>{this.handleClick(item.product_id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
                         </Price>
                     </Item>
@@ -150,7 +153,7 @@ class ShopItems extends Component{
 
         return (
             //item list
-            <ItemsContainer>
+            <ItemsContainer className={this.props.bg}>
                 {items}
             </ItemsContainer>
         );
@@ -160,6 +163,7 @@ class ShopItems extends Component{
 const mapStateToProps = (state)=>{
     return {
         items: state.items,
+        bg: state.bg
     }
 }
 const mapDispatchToProps= (dispatch)=>{
