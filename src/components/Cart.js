@@ -76,7 +76,7 @@ class Cart extends React.Component{
                 return (
                     <div className="shopping-list-item" key={list_key++}>
 
-                        <Barcode value={item.coupon + "off"} />
+                        <Barcode width="1" value={item.coupon + " off"} />
 
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
@@ -107,13 +107,13 @@ class Cart extends React.Component{
 
         return(
             <div id={showHideClassName}>
-            <div id="shopping-list">
-                <button id="close-shopping-list" onClick={this.props.handleClose}>X</button>
-                <div id="shopping-list-container">
-                    {addedItems}
+                <div id="shopping-list">
+                    <button id="close-shopping-list" onClick={this.props.handleClose}>X</button>
+                    <div id="shopping-list-container">
+                        {addedItems}
+                    </div>
+                    <button id="clear-shopping-list" onClick={this.handleClear}>Clear</button>
                 </div>
-                <button id="clear-shopping-list" onClick={this.handleClear}>Clear</button>
-            </div>
             </div>
         );
     }

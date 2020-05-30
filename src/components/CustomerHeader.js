@@ -78,6 +78,7 @@ class CustomerHeader extends Component {
       let id = obj.customer + '/';
       let arg = obj.sort + '/' + obj.category + '/' + e.target.value + '/' + obj.low + '/' + obj.high;
       let url = base + id + arg;
+      console.log(url);
       fetch(url, {
         headers: {
           'Content-Type': 'application/json'
