@@ -10,6 +10,7 @@ import React from 'react';
 import CustomerHeader from './CustomerHeader'
 import ShopItems from './ShopItems'
 import Cart from './Cart'
+import SearchFilters from './SearchFilters';
 import {connect} from 'react-redux'
 import {refreshed, getList} from './actions/cartActions'
 import store from '../index'
@@ -63,6 +64,7 @@ class CustomerDashboardParent extends React.Component {
         return (
             <div id="customer">
                 <CustomerHeader handleClick={this.showShoppingList}/>
+                <SearchFilters/>
                 <ShopItems/>
                 <Cart show={this.state.show} handleClose={this.hideShoppingList}> </Cart>
             </div>
@@ -87,6 +89,7 @@ class CustomerDashboardParent extends React.Component {
             return res.json()
             }
             else{
+            window.location.assign('http://localhost:3000/');
             throw new Error('There is no session');
             }
         })

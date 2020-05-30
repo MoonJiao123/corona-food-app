@@ -743,5 +743,39 @@ Styles for status message
     bottom: -10%;
   }
 }
+/* ---------------------------------------------------------------------
+Contributors: Darien
+styles for customer search filters
+--------------------------------------------------------------------- */
+#searchFilters {
+  width: 5%;
+  height: 30%;
+  position: absolute;
+  top: 10%;
+  left: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#searchFilters .filter {
+  color: white;
+}
+#searchFilters .filter .MuiInput-underline:after {
+  border-bottom: 2px solid #a2e2a2;
+}
+#searchFilters .filter .Mui-focused {
+  color: #a2e2a2;
+}
+#searchFilters .filter .MuiInputLabel-animated {
+  white-space: nowrap;
+}
+
+/* Styles for small screens */
+@media only screen and (max-width: 650px) {
+  /* Styles for small screens */
+  .MuiSelect-select.MuiSelect-select {
+    color: white;
+  }
+}
 
 /*# sourceMappingURL=App.css.map */

@@ -705,6 +705,7 @@ After Render
           return res.json()
         }
         else{
+          window.location.assign('http://localhost:3000/');
           throw new Error('There is no session');
         }
       })
@@ -716,8 +717,6 @@ After Render
           console.log("caught b login");
           console.log(err);
           this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-          window.location.replace('localhost:3000');
-          window.location.assign('localhost:3000');
       });
   }
 

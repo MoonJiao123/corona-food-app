@@ -4,3 +4,7 @@ export const SEARCHED_ITEM = 'SEARCHED_ITEM';
 export const REFRESHED = 'REFRESHED';
 export const GET_LIST = 'GET_LIST';
 export const CART_CLEARED = 'CART_CLEARED';
+export const SET_SORT = 'SET_SORT';
+export const SET_CAT = 'SET_CAT';
+export const SET_LOW = 'SET_LOW';
+export const SET_HI = 'SET_HI';
