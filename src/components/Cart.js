@@ -1,7 +1,7 @@
 import React from 'react';
 import Barcode from 'react-barcode';
 import {connect} from 'react-redux';
-import {removeItem, cartCleared} from './actions/cartActions'
+import {getList} from './actions/cartActions'
 import store from '../index'
 
 /* ---------------------------------------------------------------------
@@ -33,8 +33,13 @@ class Cart extends React.Component{
         })
         .then(data => {
             console.log(data);
-            this.props.removeItem(data);
-            //set state for customer
+            let add = [];
+            for(let i = 0; i < data.length; i ++){
+                add.push(Object.assign({}, data[i].product));
+            }
+            console.log(add);
+            //this.props.removeItem(add);
+            this.props.getList(add);
         })
         .catch(err => {
             console.log("caught remove");
@@ -45,8 +50,9 @@ class Cart extends React.Component{
     handleClear = () => {
         //BE Call clear cart
         let base = 'https://fuo-backend.herokuapp.com/cart/delete/';
-        let id = store.getState().customer_id;
+        let id = store.getState().customer;
         let url = base + id;
+        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {
@@ -58,12 +64,12 @@ class Cart extends React.Component{
                 return res.json()
             }
             else{
-                throw new Error('There is no session');
+                throw new Error('Failed to clear');
             }
         })
         .then(data => {
-            this.props.cartCleared(data);
-            //set state for customer
+            //this.props.cartCleared(data);
+            this.props.getList(data);
         })
         .catch(err => {
             console.log("caught clear");
@@ -83,8 +89,8 @@ class Cart extends React.Component{
                             <p className="shopping-list-item-name">
                                 {item.product_name}
                             </p>
-                            <p className="shopping-list-item-address">Address</p>
-                            <p className="shopping-list-item-business">Business</p>
+                            <p className="shopping-list-item-address">{item.store_product.address}</p>
+                            <p className="shopping-list-item-business">{item.store_product.business.name}</p>
                         </div>
 
                         <div className="shopping-list-item-mid">
@@ -127,8 +133,7 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
-        removeItem: (cart)=>{dispatch(removeItem(cart))},
-        cartCleared: (cart)=>{dispatch(cartCleared(cart))}
+        getList: (list)=>{dispatch(getList(list))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Cart)
