@@ -355,10 +355,18 @@ Styles shopping list and items
 /* Styles for customer search results */
 .gDDUVC {
   border-left: 5px solid white;
+  height: fit-content;
 }
 
 .gDDUVC:hover {
   border-left: 5px solid #a2e2a2;
+}
+
+.fgWAjs {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  width: fit-content;
 }
 
 /* ---------------------------------------------------------------------

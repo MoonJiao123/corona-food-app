@@ -40,20 +40,23 @@ const CartButton = styled.button`
     outline: none;
     transition: fill 0.25s;
     &: hover {
-        color: #cccccc;
+        color: #dddddd;
     }
 `;
 
 const TextButton = styled.button`
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 10px;
+    padding: .3% .5%;
+    font-size: 1em;
+    width: 5em;
+    text-align: center;
+    border-radius: 5px;
     border: none;
     outline: none;
     background: white;
+    white-space: nowrap;
     &: hover {
             color: white;
-            background: black;
+            background: green;
     }
 `;
 
@@ -94,7 +97,6 @@ class CustomerHeader extends Component {
       })
       .then(data => {
         console.log(data)
-        console.log(this.props);
         this.props.searchedItem(data);
       })
       .catch(err => {
