@@ -649,7 +649,7 @@ Constructor is used for state design, modularized to pass as props
             (!list[i].name ) || 
             (!list[i].amount || !Number(list[i].amount) ) ||
             (!list[i].price || !Number(list[i].price) ) ||
-            (!list[i].rate) ||
+            (!list[i].rate || !Number(list[i].rate)) ||
             (!list[i].expiration || new Date(list[i].expiration) < new Date().setDate(new Date().getDate() - 1)) 
         ) {
           alert('Please provide all required details.')
