@@ -80,13 +80,11 @@ export default function MainLogInSignUp(props) {
   let signup = {
     signupBusiness: (name, email, phone, pass) => {
       let body = {
-        account: 'business',
         name: name,
         email: email, 
         mobile: phone,
         password: pass
       };
-      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/business/register', {
         method: 'POST',
@@ -114,11 +112,11 @@ export default function MainLogInSignUp(props) {
     
     signupCustomer: (email, pass, street, city, state, zip) => {
       let body = {
-        account: 'customer',
         email: email, 
         password: pass,
-        address: street + '.' + city + ',' + state + ' ' + zip
+        customer_location: street + '.' + city + ',' + state + ' ' + zip
       };
+      console.log(body);
       //fetch
       fetch('https://fuo-backend.herokuapp.com/users/customer/register', {
         method: 'POST',

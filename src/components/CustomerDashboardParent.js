@@ -15,7 +15,6 @@ import {connect} from 'react-redux'
 import {refreshed, getList} from './actions/cartActions'
 import store from '../index'
 
-
 class CustomerDashboardParent extends React.Component {
     constructor(props){
         super(props);
@@ -94,14 +93,12 @@ class CustomerDashboardParent extends React.Component {
             }
         })
         .then(data => {
+            console.log(data);
             this.props.refreshed(data.user)
         })
         .catch(err => {
             console.log("caught c refresh");
             console.log(err);
-            this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-            window.location.replace('localhost:3000');
-            window.location.assign('localhost:3000');
         });
     }
 }
