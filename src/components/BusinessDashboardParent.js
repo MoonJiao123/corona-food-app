@@ -705,7 +705,7 @@ After Render
           return res.json()
         }
         else{
-          window.location.assign('http://localhost:3000/');
+          //window.location.assign('http://localhost:3000/');
           throw new Error('There is no session');
         }
       })
