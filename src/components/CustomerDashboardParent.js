@@ -30,7 +30,6 @@ class CustomerDashboardParent extends React.Component {
         let base = 'https://fuo-backend.herokuapp.com/cart/list/';
         let id = store.getState().customer;
         let url = base + id;
-        console.log(url);
         fetch(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +45,6 @@ class CustomerDashboardParent extends React.Component {
       })
       .then(data => {
           //Set state here
-          console.log(data);
           let add = [];
           for(let i = 0; i < data.length; i ++){
               add.push(Object.assign({}, data[i].product));
@@ -93,7 +91,7 @@ class CustomerDashboardParent extends React.Component {
             return res.json()
             }
             else{
-            //window.location.assign('http://localhost:3000/');
+            window.location.assign('https://corona-food.herokuapp.com/');
             throw new Error('There is no session');
             }
         })

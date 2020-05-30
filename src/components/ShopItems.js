@@ -102,8 +102,6 @@ class ShopItems extends Component{
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
         let arg = store.getState().customer + '/';
         let url = base + arg + id;
-        console.log(url);   
-        console.log(body);
         fetch(url, {
         method: 'POST',
         headers: {
@@ -119,8 +117,7 @@ class ShopItems extends Component{
             throw new Error('could not add to cart');
         }
       })
-      .then(data => {   
-            console.log(data);       
+      .then(data => {        
             this.props.addToCart(data);
         })
       .catch(err => {

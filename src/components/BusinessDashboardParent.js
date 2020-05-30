@@ -101,7 +101,10 @@ Constructor is used for state design, modularized to pass as props
 
   
       // Props for LeftSideBar -------------------------------------------------
-      logout: () => {localStorage.clear();},
+      logout: () => {
+        localStorage.clear();
+        window.location.assign('https://corona-food.herokuapp.com/landing.html');
+      },
       companyName: '',
       totalLocations: '',
 
@@ -701,7 +704,7 @@ After Render
           return res.json()
         }
         else{
-          window.location.assign('http://localhost:3000/');
+          window.location.assign('https://corona-food.herokuapp.com/');
           throw new Error('There is no session');
         }
       })
