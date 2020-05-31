@@ -96,9 +96,6 @@ class ShopItems extends Component{
 
     handleClick = (id)=>{
         //BE Call add to cart
-        let body = {
-            product_id: id
-        };
         let base = 'https://fuo-backend.herokuapp.com/cart/add/';
         let arg = store.getState().customer + '/';
         let url = base + arg + id;

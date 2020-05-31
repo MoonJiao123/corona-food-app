@@ -9,7 +9,7 @@ export default function ErrorPage () {
             <h1> Oops ... looks like something went wrong .... </h1>
 
 
-            <img src={error_graphic} width={500} height= {500} 
+            <img src={error_graphic} alt="Not Found" width={500} height= {500} 
             style={{display: 'block', margin: 'auto'}}/>
 
             <h4> Take me back to the </h4>
