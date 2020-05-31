@@ -48,7 +48,7 @@ Styles shopping list and items
   height: 3em;
   border-radius: 50%;
   padding: 1%;
-
+  background-color: $button-green;
 }
 
 #shopping-list-container{
@@ -114,6 +114,15 @@ Styles shopping list and items
     width: 3em;
     height: 3em;
     border-radius: 50%;
+    background-color: rgb(255, 90, 90);
+  }
+
+  .shopping-list-item-right button:hover{
+    background-color: rgb(255, 151, 151);
+  }
+
+  .shopping-list-item-right button:active{
+    background-color: rgb(160, 43, 43);
   }
 
 }
