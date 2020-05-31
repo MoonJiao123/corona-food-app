@@ -369,16 +369,16 @@ Styles shopping list and items
 .shopping-list-item .shopping-list-item-mid {
   text-align: right;
 }
-.shopping-list-item .shopping-list-item-right button {
+.shopping-list-item #shopping-list .shopping-list-item-right button {
   width: 3em;
   height: 3em;
   border-radius: 50%;
   background-color: #ff5a5a;
 }
-.shopping-list-item .shopping-list-item-right button:hover {
+.shopping-list-item #shopping-list .shopping-list-item-right button:hover {
   background-color: #ff9797;
 }
-.shopping-list-item .shopping-list-item-right button:active {
+.shopping-list-item #shopping-list .shopping-list-item-right button:active {
   background-color: #a02b2b;
 }
 
