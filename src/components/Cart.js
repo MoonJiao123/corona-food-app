@@ -79,7 +79,7 @@ class Cart extends React.Component{
                 return (
                     <div className="shopping-list-item" key={list_key++}>
 
-                        <Barcode width={1} value={item.coupon + " off"} />
+                        <Barcode width={1} value={item.coupon + "% off"} />
 
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
@@ -91,7 +91,7 @@ class Cart extends React.Component{
 
                         <div className="shopping-list-item-mid">
                             <div>
-                                <p className="shopping-list-price">${item.discounted_price}</p>
+                                <p className="shopping-list-price">${item.discounted_price.toFixed(2)}</p>
                                 <p className="shopping-list-discount">${item.price}</p>
                             </div>
                         </div>

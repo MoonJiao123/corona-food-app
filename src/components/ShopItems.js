@@ -138,7 +138,7 @@ class ShopItems extends Component{
                         </Description>
 
                         <Price>
-                            <h3>${item.discounted_price}</h3>
+                            <h3>${item.discounted_price.toFixed(2)}</h3>
                             <AddToCartButton onClick={()=>{this.handleClick(item.product_id)}}> <AddShoppingCartIcon fontSize={'large'}/> </AddToCartButton>
                         </Price>
                     </Item>
