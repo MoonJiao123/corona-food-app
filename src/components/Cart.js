@@ -79,7 +79,7 @@ class Cart extends React.Component{
                 return (
                     <div className="shopping-list-item" key={list_key++}>
 
-                        <Barcode width={1} value={item.coupon + " off"} />
+                        <Barcode width={1} value={item.coupon + "% off"} />
 
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
@@ -97,7 +97,7 @@ class Cart extends React.Component{
                         </div>
 
                         <div className="shopping-list-item-right">
-                            <button title="Remove" onClick={()=>{this.handleRemove(item.product_id)}}>X</button>
+                            <button title="Remove" onClick={()=>{this.handleRemove(item.product_id)}}>-</button>
                         </div>
                     </div>
                 )

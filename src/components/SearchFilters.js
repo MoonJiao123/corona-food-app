@@ -28,8 +28,12 @@ class SearchFilters extends React.Component{
   }
 
   handleMin = (e) =>{
-    if (!Number(e.target.value) && e.target.value) {
+
+    if (!Number(e.target.value) && e.target.value !== '') {
       this.setState({minError: "Numbers only"});
+    }
+    else if((e.target.value ===''?0:Number(e.target.value)) > store.getState().high){
+      this.setState({minError: "Too high"});
     }
     else {
       this.setState({minError: ""});
@@ -38,8 +42,11 @@ class SearchFilters extends React.Component{
   }
 
   handleMax = (e) =>{
-    if (!Number(e.target.value) && e.target.value) {
+    if (!Number(e.target.value) && e.target.value !== '') {
       this.setState({maxError: "Numbers only"});
+    }
+    else if((e.target.value ==''?1000:Number(e.target.value)) < store.getState().low){
+      this.setState({minError: "Too low"});
     }
     else {
       this.setState({maxError: ""});
