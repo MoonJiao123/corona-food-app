@@ -283,7 +283,7 @@ Constructor is used for state design, modularized to pass as props
               this.setState({
                 right: {
                   address: this.state.right.address,
-                  totalProducts: this.state.right.totalProducts,
+                  totalProducts: 0,
                   productsList: []
                 },
                 updateListings: [],
