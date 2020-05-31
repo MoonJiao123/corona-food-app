@@ -91,7 +91,7 @@ class CustomerDashboardParent extends React.Component {
             return res.json()
             }
             else{
-            //window.location.assign('https://corona-food.herokuapp.com/');
+            window.location.assign('https://corona-food.herokuapp.com/');
             throw new Error('There is no session');
             }
         })
