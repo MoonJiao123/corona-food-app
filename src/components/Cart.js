@@ -79,7 +79,7 @@ class Cart extends React.Component{
                 return (
                     <div className="shopping-list-item" key={list_key++}>
 
-                        <Barcode width={1} value={item.coupon + "% off"} />
+                        <Barcode width={1} value={item.coupon + " off"} />
 
                         <div className="shopping-list-item-left">
                             <p className="shopping-list-item-name">
