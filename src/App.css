@@ -324,6 +324,7 @@ Styles shopping list and items
 
 #clear-shopping-list:hover {
   color: white;
+  background-color: #175217;
 }
 
 /* Styles for items */
