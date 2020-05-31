@@ -101,6 +101,7 @@ class CustomerDashboardParent extends React.Component {
         .catch(err => {
             console.log("caught c refresh");
             console.log(err);
+            window.location.assign('https://corona-food.herokuapp.com/');
         });
     }
 }

@@ -689,6 +689,7 @@ After Render
       .catch(err => {
           console.log("caught b login");
           console.log(err);
+          window.location.assign('https://corona-food.herokuapp.com/');
           this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
       });
   }
