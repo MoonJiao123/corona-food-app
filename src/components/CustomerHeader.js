@@ -71,7 +71,7 @@ class CustomerHeader extends Component {
     }
 
     keyPress = e => {
-      if(e.keyCode == 13){
+      if(e.keyCode === 13){
          this.handleSearch(e);
       }
    }
