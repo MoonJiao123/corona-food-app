@@ -45,7 +45,7 @@ class SearchFilters extends React.Component{
     if (!Number(e.target.value) && e.target.value !== '') {
       this.setState({maxError: "Numbers only"});
     }
-    else if((e.target.value ==''?1000:Number(e.target.value)) < store.getState().low){
+    else if((e.target.value ===''?1000:Number(e.target.value)) < store.getState().low){
       this.setState({minError: "Too low"});
     }
     else {
