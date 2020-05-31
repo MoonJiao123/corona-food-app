@@ -279,7 +279,16 @@ Constructor is used for state design, modularized to pass as props
               base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
               id = this.state.session;
               url = base + id;
-               this.state.load();
+              this.state.load();
+              this.setState({
+                right: {
+                  address: this.state.right.address,
+                  totalProducts: this.state.right.totalProducts,
+                  productsList: []
+                },
+                updateListings: [],
+                list: []
+              });
             }
           )
           .catch(error => {
