@@ -279,24 +279,7 @@ Constructor is used for state design, modularized to pass as props
               base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
               id = this.state.session;
               url = base + id;
-                fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                  this.setState({locations: data, locationBg: ''})
-                  this.setState({currentMessage: 'Success!', currentStatus:'good', currentStore: ''});
-                  this.setState({
-                    right: {
-                      address: 'No Selection',
-                      totalProducts: 0,
-                      productsList: []
-                    }
-                  });
-                })
-                .catch(error => {
-                  console.log('caught load');
-                  console.log(error);
-                  this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-              });
+               this.state.load();
             }
           )
           .catch(error => {
@@ -343,16 +326,7 @@ Constructor is used for state design, modularized to pass as props
             base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
             id = this.state.session;
             url = base + id;
-              fetch(url)
-              .then(res => res.json())
-              .then(data => {
-                this.setState({locations: data, locationBg: ''});
-                this.setState({currentMessage: 'Success!', currentStatus:'good'});
-              })
-              .catch(error => {
-                console.log('caught load');
-                console.log(error);
-            });  
+            this.state.load();
             }
           )
           .catch(error => {
