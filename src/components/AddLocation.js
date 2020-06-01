@@ -75,15 +75,15 @@ class AddLocation extends React.Component{
       streetError = "Please enter a street";
     }
 
-    if (this.state.city.length < 2 || !isNaN(this.state.city)) {
+    if (this.state.city.length < 2 || Number(this.state.city)) {
       cityError = "Invalid City";
     }
 
-    if (this.state.state.length < 2 || !isNaN(this.state.state)) {
+    if (this.state.state.length < 2 || Number(this.state.state)) {
       stateError = "Invalid State";
     }
 
-    if (isNaN(this.state.zip) || this.state.zip.length < 5) {
+    if (!Number(this.state.zip) || this.state.zip.length < 5) {
       zipError = "Invalid Zip Code";
     }
 
