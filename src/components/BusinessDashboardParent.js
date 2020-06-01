@@ -37,7 +37,7 @@ Constructor is used for state design, modularized to pass as props
       currentLocation: '',
       session: '',
       currentStore: '',
-      currentMessage: 'Welcome!',
+      currentMessage: 'Success!',
       currentStatus: 'good',
       load: () => {
         //BE Call: On page load
@@ -287,7 +287,9 @@ Constructor is used for state design, modularized to pass as props
                   productsList: []
                 },
                 updateListings: [],
-                list: []
+                list: [],
+                currentStatus: 'good',
+                currentMessage: 'Success!'
               });
             }
           )
@@ -336,6 +338,7 @@ Constructor is used for state design, modularized to pass as props
             id = this.state.session;
             url = base + id;
             this.state.load();
+            this.setState({currentMessage: 'Success!', currentStatus:'good'})
             }
           )
           .catch(error => {
