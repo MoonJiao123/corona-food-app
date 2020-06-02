@@ -14,7 +14,6 @@ class SearchFilters extends React.Component{
     super(props);
 
     this.state={
-      minError: '',
       maxError: '',
     }
   }
@@ -27,32 +26,9 @@ class SearchFilters extends React.Component{
     this.props.setCat(e.target.value);
   }
 
-  handleMin = (e) =>{
-    console.log();
-    if (!Number(e.target.value) && e.target.value !== '' && e.nativeEvent.data !== '0') {
-      this.setState({minError: "Numbers only"});
-    }
-    else if((Number(e.target.value)) > store.getState().high){
-      this.setState({minError: "Too high"});
-    }
-    else if(e.nativeEvent.data === '0' && e.target.value ===''){
-      this.props.setLow('0');
-    }
-    else {
-      this.setState({minError: ""});
-      this.props.setLow(e.target.value);
-    }
-  }
-
   handleMax = (e) =>{
     if (!Number(e.target.value) && e.target.value !== '') {
       this.setState({maxError: "Numbers only"});
-    }
-    else if((e.target.value ===''?1000:Number(e.target.value)) < store.getState().low){
-      this.setState({maxError: "Too low"});
-    }
-    else if(e.nativeEvent.data === '0' && e.target.value ===''){
-      this.props.setHi('0');
     }
     else {
       this.setState({maxError: ""});
@@ -89,9 +65,6 @@ class SearchFilters extends React.Component{
             <MenuItem value={'Snack'}>Snack</MenuItem>
           </Select>
         </FormControl>
-
-        <TextField label="Min $" onChange={this.handleMin} className="filter"
-        value={store.getState().low} helperText={this.state.minError}/>
 
         <TextField label="Max $" onChange={this.handleMax} className="filter"
         value={store.getState().high} helperText={this.state.maxError}/>

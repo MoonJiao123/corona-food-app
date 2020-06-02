@@ -87,8 +87,7 @@ class CustomerHeader extends Component {
       let id = obj.customer + '/';
       let arg = obj.sort + '/' +
                 obj.category + '/' +
-                e.target.value.trim().split(' ').join(';') + '/' +
-                (obj.low===''?'0':obj.low) + '/' +
+                e.target.value.trim().split(' ').join(';') + '/0/' +
                 (obj.high===''?'1000':obj.high);
       let url = base + id + arg;
       console.log(url);

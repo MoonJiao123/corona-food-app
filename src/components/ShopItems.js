@@ -127,7 +127,6 @@ class ShopItems extends Component{
         // individual item
         let items = this.props.items.map(
             (item) => {
-                
                 return (
                     <Item key={search_key--}>
                         <Image src={item.product_img}/>
@@ -135,7 +134,7 @@ class ShopItems extends Component{
                             <ItemName>{item.product_name}</ItemName>
                             <h5>Good by: {item.expire_date}</h5>
                             <h5>Original Amount: {item.stock_amount}</h5>
-                            <h5>Miles: {item.distance.toFixed(2)}</h5>
+                            <h5>Miles: {item.distance}</h5>
                         </Description>
 
                         <Price>
