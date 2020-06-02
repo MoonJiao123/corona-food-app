@@ -256,7 +256,6 @@ Constructor is used for state design, modularized to pass as props
         deleteLocation: (e) => {
 
           //BE Call: On location Delete
-          //Then: Select another location to display or display empty
           const method = {method: 'DELETE'};
           let base = 'https://fuo-backend.herokuapp.com/business/deletelocation/';
           let id = this.state.session + '/';
@@ -265,39 +264,45 @@ Constructor is used for state design, modularized to pass as props
           let arg = this.state.currentStore;
 
           let url = base + id + arg;
-          fetch(url, method)
-          .then(res => {
-            if( res.status === 200){
-              return res.json();
-            }
-            else{
-              throw new Error("Delete failed");
-            }
-          })
-          .then(data => 
-            {
-              base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
-              id = this.state.session;
-              url = base + id;
-              this.state.load();
-              this.setState({
-                right: {
-                  address: "No Selection",
-                  totalProducts: 0,
-                  productsList: []
-                },
-                updateListings: [],
-                list: [],
-                currentStatus: 'good',
-                currentMessage: 'Success!'
-              });
-            }
-          )
-          .catch(error => {
-            console.log('caught delete');
-            console.log(error);
-            this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
-          });
+          if( this.state.currentStore!==''){
+            fetch(url, method)
+            .then(res => {
+              if( res.status === 200){
+                return res.json();
+              }
+              else{
+                throw new Error("Delete failed");
+              }
+            })
+            .then(data => 
+              {
+                base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
+                id = this.state.session;
+                url = base + id;
+                this.state.load();
+                this.setState({
+                  currentStore: '',
+                  right: {
+                    address: "No Selection",
+                    totalProducts: 0,
+                    productsList: []
+                  },
+                  updateListings: [],
+                  list: [],
+                  currentStatus: 'good',
+                  currentMessage: 'Success!'
+                });
+              }
+            )
+            .catch(error => {
+              console.log('caught delete');
+              console.log(error);
+              this.setState({currentMessage: 'Something went wrong...', currentStatus:'bad'});
+            });
+          }
+          else{
+            alert("No location selected");
+          }
 
 
         },
@@ -675,7 +680,7 @@ After Render
     }
 
     let body = {
-      token: localStorage.getItem("fuo")
+      token: localStorage.getItem("fuo-b")
     };
 
     fetch('https://fuo-backend.herokuapp.com/users/me/from/token/business', {

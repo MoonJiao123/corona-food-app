@@ -3,7 +3,7 @@ import { ADD_TO_CART, SEARCHED_ITEM, REFRESHED, GET_LIST, SET_SORT, SET_CAT, SET
 const initState = {
     items: [],
     addedItems:[],
-    customer: '',
+    customer: '21',
     address: '',
     category: 'None',
     sort: 'Distance',

@@ -28,12 +28,15 @@ class SearchFilters extends React.Component{
   }
 
   handleMin = (e) =>{
-
-    if (!Number(e.target.value) && e.target.value !== '') {
+    console.log();
+    if (!Number(e.target.value) && e.target.value !== '' && e.nativeEvent.data !== '0') {
       this.setState({minError: "Numbers only"});
     }
-    else if((e.target.value ===''?0:Number(e.target.value)) > store.getState().high){
+    else if((Number(e.target.value)) > store.getState().high){
       this.setState({minError: "Too high"});
+    }
+    else if(e.nativeEvent.data === '0' && e.target.value ===''){
+      this.props.setLow('0');
     }
     else {
       this.setState({minError: ""});
@@ -46,7 +49,10 @@ class SearchFilters extends React.Component{
       this.setState({maxError: "Numbers only"});
     }
     else if((e.target.value ===''?1000:Number(e.target.value)) < store.getState().low){
-      this.setState({minError: "Too low"});
+      this.setState({maxError: "Too low"});
+    }
+    else if(e.nativeEvent.data === '0' && e.target.value ===''){
+      this.props.setHi('0');
     }
     else {
       this.setState({maxError: ""});

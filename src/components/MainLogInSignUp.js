@@ -165,7 +165,7 @@ export default function MainLogInSignUp(props) {
           throw new Error("bad login");
       })
       .then(data => {
-        localStorage.setItem("fuo", data.token);
+        localStorage.setItem("fuo-b", data.token);
         window.location.assign("https://corona-food.herokuapp.com/business");
       })
       .catch(err => {
@@ -196,7 +196,7 @@ export default function MainLogInSignUp(props) {
           throw new Error("bad login");
       })
       .then(data => {
-        localStorage.setItem("fuo", data.token);
+        localStorage.setItem("fuo-c", data.token);
         window.location.assign("https://corona-food.herokuapp.com/customer");
       })
       .catch(err => {

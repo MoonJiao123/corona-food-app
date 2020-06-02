@@ -125,8 +125,8 @@ ListingForm extends React.Component{
         {/** Text inputs */}
         <TextField className="updateField" label="Name" value={this.props.data.name} onChange={this.handleName} inputRef={input => this.nam = input} helperText={this.props.data.nameError} onKeyDown={this.listingSubmit}/>
         <TextField className="updateField" label="Amount" value={this.props.data.amount} onChange={this.handleAmount} inputRef={input => this.amo = input} helperText= {this.props.data.amountError} onKeyDown={this.listingSubmit}/>
-        <TextField className="updateField" label="Price" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input} helperText= {this.props.data.priceError} onKeyDown={this.listingSubmit}/>
-        <TextField className="updateField" label="Max Percent Off" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input} helperText={this.props.data.discountError} onKeyDown={this.listingSubmit}/>
+        <TextField className="updateField" label="Price ($)" value={this.props.data.price} onChange={this.handlePrice} inputRef={input => this.pri = input} helperText= {this.props.data.priceError} onKeyDown={this.listingSubmit}/>
+        <TextField className="updateField" label="Percent Off (%)" value={this.props.data.rate} onChange={this.handleDiscount} inputRef={input => this.dis = input} helperText={this.props.data.discountError} onKeyDown={this.listingSubmit}/>
 
         {/** Expiration Date input */}
         <TextField

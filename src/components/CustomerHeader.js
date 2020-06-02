@@ -91,6 +91,7 @@ class CustomerHeader extends Component {
                 (obj.low===''?'0':obj.low) + '/' +
                 (obj.high===''?'1000':obj.high);
       let url = base + id + arg;
+      console.log(url);
       fetch(url, {
         headers: {
           'Content-Type': 'application/json'
@@ -105,6 +106,7 @@ class CustomerHeader extends Component {
         }
       })
       .then(data => {
+        console.log(data);
         this.props.searchedItem(data);
         this.props.setBg(data.length);
       })

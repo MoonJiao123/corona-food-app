@@ -75,7 +75,7 @@ class CustomerDashboardParent extends React.Component {
 
     componentDidMount(){
         let body = {
-            token: localStorage.getItem("fuo")
+            token: localStorage.getItem("fuo-c")
         };
       
         //BE Call refresh
