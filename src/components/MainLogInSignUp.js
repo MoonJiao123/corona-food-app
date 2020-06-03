@@ -171,7 +171,7 @@ export default function MainLogInSignUp(props) {
       .catch(err => {
           console.log("caught b login");
           console.log(err);
-          alert("Something went wrong...");
+          alert("Bad Login Credentials");
       });
     },
 
