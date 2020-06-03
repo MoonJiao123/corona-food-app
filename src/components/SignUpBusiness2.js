@@ -117,7 +117,7 @@ class SignUpBusiness2 extends React.Component {
 
         // if entered password does not reach min length requirement
         if (!this.state.password || this.state.password.length < 6 ) {
-            passwordError= "Password should be atleast of length 6";
+            passwordError= "Password should be at least of length 6";
         }
 
         // if password and confirm password are not the same
