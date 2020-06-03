@@ -138,7 +138,7 @@ export default function MainLogInSignUp(props) {
       .catch(err => {
           console.log("caught c signup");
           console.log(err);
-          alert("Something went wrong...");
+          alert("Bad signup");
       });
     }
   }
