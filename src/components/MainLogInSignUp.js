@@ -76,8 +76,10 @@ export default function MainLogInSignUp(props) {
     }
   };
 
-  //Define signup/login functions
+  // Define signup/login functions
   let signup = {
+
+    // Sign up as a business
     signupBusiness: (name, email, phone, pass) => {
       let body = {
         name: name,
@@ -110,6 +112,7 @@ export default function MainLogInSignUp(props) {
       });
     },
     
+    // Sign up as a customer
     signupCustomer: (email, pass, street, city, state, zip) => {
       let body = {
         email: email, 
@@ -144,6 +147,7 @@ export default function MainLogInSignUp(props) {
   }
 
   let login = {
+    // Log in as a business
     loginBusiness: (email, pass) => {
       let body = {
         email: email, 
@@ -175,6 +179,7 @@ export default function MainLogInSignUp(props) {
       });
     },
 
+    // Log in as a customer
     loginCustomer: (email, pass) => {
       let body = {
         email: email, 
