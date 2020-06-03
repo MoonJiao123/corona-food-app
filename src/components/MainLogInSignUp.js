@@ -189,6 +189,7 @@ export default function MainLogInSignUp(props) {
         body: JSON.stringify(body)
       })
       .then(res => {
+        console.log(res);
         if(res.status === 200){
           return res.json()
         }
@@ -202,7 +203,7 @@ export default function MainLogInSignUp(props) {
       .catch(err => {
           console.log("caught c login");
           console.log(err);
-          alert("Something went wrong...");
+          alert("Bad Login Credentials");
       });
     }
   }

@@ -13,39 +13,18 @@ export default function LocationSearchBar(props) {
 
     // Maintain state for current values
     const [street, changeStreet] = useState('');
-    const [city, changeCity] = useState('');
-    const [state, changeState] = useState('');
-    const [zip, changeZip] = useState('');
 
     // Search function on field change
-    function search(idx, value){
-        // Prepare the search array
-        let search = [street, city, state, zip];
-        search[idx] = value;
+    function search(value){
 
         // Call parent search method
-        props.action(search);
+        props.action(value);
     }
 
     // Handlers: Each handler calls after state change
     const handleStreet = (e) => {
         changeStreet(e.target.value);
-        search(0, e.target.value);
-    }
-
-    const handleCity = (e) => {
-        changeCity(e.target.value);
-        search(1, e.target.value);
-    }
-
-    const handleState = (e) => {
-        changeState(e.target.value);
-        search(2, e.target.value);
-    }
-
-    const handleZip = (e) => {
-        changeZip(e.target.value);
-        search(3, e.target.value);
+        search(e.target.value);
     }
 
     // Return component to render
@@ -53,14 +32,11 @@ export default function LocationSearchBar(props) {
         <div id="location-search-wrapper">
 
             {/**Search bar title */}
-            <p>Search by</p>
+            <p>Search Location</p>
 
             {/**Contains all text fields */}
             <div id="location-search">
-                <TextField label="Street" className="search-input" onChange={handleStreet}/>
-                <TextField label="City" className="search-input" onChange={handleCity}/>
-                <TextField label="State" className="search-input" onChange={handleState}/>
-                <TextField label="Zip" className="search-input" onChange={handleZip}/>
+                <TextField label="Address" className="search-input" onChange={handleStreet}/>
             </div>
         </div>
     );

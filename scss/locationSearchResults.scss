@@ -17,13 +17,14 @@ Styles for location search  and results
 }
 
 #location-search{
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
 }
 
 .search-input{
-  width: 25%;
+  width: 100%;
 
   input{
     width: 100%;

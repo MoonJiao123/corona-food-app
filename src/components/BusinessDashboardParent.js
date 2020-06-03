@@ -115,16 +115,8 @@ Constructor is used for state design, modularized to pass as props
 
       // Props for LocationSearchBar -------------------------------------------
       search: (e) => {
-        //pack e array into object for HTTP request
-        let loc = {
-          street: e[0],
-          city: e[1],
-          state: e[2],
-          zip: e[3]
-        }
 
-        //BE Call: On location search
-        if(loc.street === '' && loc.city === '' && loc.state === '' && loc.zip === ''){
+        if(e === ''){
           let base = 'https://fuo-backend.herokuapp.com/business/printalllocation/';
           let id = this.state.session;
           let url = base + id;
@@ -146,12 +138,10 @@ Constructor is used for state design, modularized to pass as props
         else{
           let base = 'https://fuo-backend.herokuapp.com/business/searchlocation/';
           let id = this.state.session + '/';
-          let arg = loc.street +
-                    (loc.city !== ''?('.'+loc.city):'') +
-                    (loc.state !== ''?','+loc.state:'') +
-                    (loc.zip !== ''?' '+loc.zip:'');
+          let arg = e;
 
           let url = base + id + arg;
+          console.log(url);
           fetch(url)
           .then(res => {
             if(res.status === 200){
