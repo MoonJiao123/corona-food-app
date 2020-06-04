@@ -23,7 +23,7 @@ Maybe run ``npm i`` again for good measure.
 
 To start the app locally, run ``npm start`` in the directory that contains ``package.json`` in a terminal shell.
 
-
+View the web application in a browser through ``localhost:3000``.
 
 
 ## Contributing
